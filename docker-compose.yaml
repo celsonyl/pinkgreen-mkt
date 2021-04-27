@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:10.5
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=pinkgreen_mkt
+      - POSTGRES_USER=local
+      - POSTGRES_PASSWORD=local
+      - MAX_CONNECTIONS=300
