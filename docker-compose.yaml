@@ -3,7 +3,7 @@ version: '3.5'
 services:
   postgres:
     container_name: postgres
-    image: postgres:10.5
+    image: postgres:13.2
     ports:
       - "5432:5432"
     environment:
