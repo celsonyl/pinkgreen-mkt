@@ -2,7 +2,9 @@ package br.com.pinkgreen.mkt.usecase;
 
 
 import br.com.pinkgreen.mkt.domain.OrderDomain;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CheckoutOrderUseCase {
     // TODO - Consultar catalogo para validar dados do produto recebido -> futuro
     // TODO - Validar customerId recebido (se customerId existe na base) -> futuro
