@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
+import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.translator.CheckoutRequestMapperImpl;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
@@ -23,10 +24,5 @@ public class OrderController {
         OrderDomain orderDomain = new CheckoutRequestMapperImpl().checkoutRequestToCheckout(orderRequest);
         checkoutOrderUseCase.execute(orderDomain);
         return null;
-    }
-
-    public static class CheckoutOrderResponse {
-        private String customerId;
-        private String orderId;
     }
 }
