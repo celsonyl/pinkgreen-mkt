@@ -19,7 +19,7 @@ public class OrderDomain {
     private CustomerDomain customer;
     private ShippingDataDomain shippingData;
     private List<ProductDomain> productList;
-    private PaymentDomain payment;
+    private PaymentDomain paymentData;
     private Instant createdAt;
     private Instant updatedAt;
 }

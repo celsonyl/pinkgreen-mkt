@@ -21,4 +21,7 @@ public class OrderRequest {
 
     @NotNull
     private List<ProductRequest> productList;
+
+    @NotNull
+    private PaymentRequest paymentData;
 }
