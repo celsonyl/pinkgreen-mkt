@@ -5,15 +5,15 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
-public class Checkout {
+public class CustomerDomain {
+
+    private String id;
     private String name;
     private String lastname;
     private String document;
     private String email;
-    private Address shippingAddress;
-    private Address paymentAddress;
     private String phone;
 }
