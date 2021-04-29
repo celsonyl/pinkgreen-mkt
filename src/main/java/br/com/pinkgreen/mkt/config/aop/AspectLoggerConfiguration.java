@@ -20,9 +20,9 @@ public class AspectLoggerConfiguration {
         Class clazz = jointPoint.getTarget().getClass();
         Logger logger = LoggerFactory.getLogger(clazz);
         try {
-            logger.info("[START ] {}", clazz);
+            logger.info("[START] {}", clazz);
             Object retVal = jointPoint.proceed();
-            logger.info("[END   ] {}", clazz);
+            logger.info("[END] {}", clazz);
             return retVal;
         } catch (Exception e) {
             logger.error("[ERROR] {}", e.getMessage(), e);
