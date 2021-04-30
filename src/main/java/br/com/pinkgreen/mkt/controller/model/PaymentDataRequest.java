@@ -1,10 +1,11 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -12,21 +13,15 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode
-public class OrderRequest {
+public class PaymentDataRequest {
+
+    @NotNull
+    private PaymentMethod paymentMethod;
+
+    @NotNull
+    private Map<String, String> paymentMethodProperties;
 
     @Valid
     @NotNull
-    private CustomerRequest customerData;
-
-    @Valid
-    @NotNull
-    private ShippingDataRequest shippingData;
-
-    @Valid
-    @NotNull
-    private List<ProductRequest> productList;
-
-    @Valid
-    @NotNull
-    private PaymentDataRequest paymentData;
+    private AddressRequest paymentAddress;
 }

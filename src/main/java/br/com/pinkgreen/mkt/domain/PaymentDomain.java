@@ -1,6 +1,9 @@
 package br.com.pinkgreen.mkt.domain;
 
+import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import lombok.*;
+
+import java.util.Map;
 
 @Getter
 @Setter
@@ -10,9 +13,8 @@ import lombok.*;
 @EqualsAndHashCode
 public class PaymentDomain {
 
-    private Double subtotal;
-    private Integer installmentsNumber;
-    private Float installmentsValue;
-    private String creditCardLastForDigits;
+    private Double amount;
+    private PaymentMethod paymentMethod;
+    private Map<String, String> paymentMethodProperties;
     private AddressDomain paymentAddress;
 }

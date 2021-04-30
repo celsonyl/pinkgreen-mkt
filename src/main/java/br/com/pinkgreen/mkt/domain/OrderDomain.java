@@ -16,7 +16,7 @@ public class OrderDomain {
 
     private String id;
     private OrderStatus status;
-    private CustomerDomain customer;
+    private CustomerDomain customerData;
     private ShippingDataDomain shippingData;
     private List<ProductDomain> productList;
     private PaymentDomain paymentData;

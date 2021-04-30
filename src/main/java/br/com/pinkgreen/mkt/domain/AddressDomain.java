@@ -14,6 +14,7 @@ public class AddressDomain {
     private String state;
     private String country;
     private String neighborhood;
+    private String street;
     private String zipcode;
     private String complement;
     private String number;

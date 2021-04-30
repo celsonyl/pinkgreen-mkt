@@ -12,5 +12,5 @@ public class ShippingDataDomain {
 
     private Double freightPrice;
     private Integer deliveryDays;
-    private AddressDomain addressDomain;
+    private AddressDomain address;
 }

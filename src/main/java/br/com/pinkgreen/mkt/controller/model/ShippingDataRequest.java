@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.controller.model;
 
 import lombok.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -19,7 +20,8 @@ public class ShippingDataRequest {
     @PositiveOrZero
     private Integer deliveryDays;
 
+    @Valid
     @NotNull
-    private AddressRequest addressDomain;
+    private AddressRequest address;
 
 }
