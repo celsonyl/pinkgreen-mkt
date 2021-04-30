@@ -29,7 +29,12 @@ public class OrderController {
     public ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest) {
         log.info("[CONTROLLER] Receiving new order request");
         OrderDomain orderDomain = new OrderRequestMapperImpl().orderRequestToOrder(orderRequest);
-        checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
-        return ResponseEntity.ok().body(CheckoutOrderResponse.builder().build());
+        OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
+        return ResponseEntity.ok().body(CheckoutOrderResponse
+                .builder()
+                .orderId(orderCreated.getId())
+                .customerId(orderCreated.getCustomerData().getId())
+                .build());
     }
 }
+
