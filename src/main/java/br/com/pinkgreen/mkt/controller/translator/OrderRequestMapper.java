@@ -5,9 +5,9 @@ import br.com.pinkgreen.mkt.domain.OrderDomain;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface CheckoutRequestMapper {
+public interface OrderRequestMapper {
 
-    OrderDomain checkoutRequestToCheckout(OrderRequest orderRequest);
-    OrderRequest checkoutToCheckoutRequest(OrderDomain orderDomain);
+    OrderDomain orderRequestToOrder(OrderRequest orderRequest);
+    OrderRequest orderToOrderRequest(OrderDomain orderDomain);
 
 }
