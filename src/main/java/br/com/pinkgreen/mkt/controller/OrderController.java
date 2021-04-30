@@ -2,10 +2,11 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
-import br.com.pinkgreen.mkt.controller.translator.CheckoutRequestMapperImpl;
+import br.com.pinkgreen.mkt.controller.translator.OrderRequestMapperImpl;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Component
 @RestController
 @RequestMapping("/order")
@@ -25,8 +27,9 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest) {
-        OrderDomain orderDomain = new CheckoutRequestMapperImpl().checkoutRequestToCheckout(orderRequest);
-        checkoutOrderUseCase.execute(orderDomain);
+        log.info("[CONTROLLER] Receiving new order request");
+        OrderDomain orderDomain = new OrderRequestMapperImpl().orderRequestToOrder(orderRequest);
+        checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
         return ResponseEntity.ok().body(CheckoutOrderResponse.builder().build());
     }
 }

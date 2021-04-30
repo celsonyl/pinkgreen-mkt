@@ -2,18 +2,18 @@ package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity(name = "product")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ProductDatabase {
+public class ProductDatabase implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String sku;
+    private String name;
+    private Double price;
+    private Integer quantity;
 }

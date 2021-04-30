@@ -2,9 +2,6 @@ package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
 import lombok.*;
 
-import javax.persistence.*;
-
-@Entity(name = "customer")
 @Getter
 @Setter
 @Builder
@@ -13,7 +10,10 @@ import javax.persistence.*;
 @EqualsAndHashCode
 public class CustomerDatabase {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
+    private String name;
+    private String lastname;
+    private String document;
+    private String email;
+    private String phone;
 }
