@@ -24,7 +24,7 @@ public class OrderDatabase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // TODO - Salvar este enum como texto em banco, esta sendo salvo com um número
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @Type(type = "jsonb")
@@ -35,7 +35,6 @@ public class OrderDatabase {
     @Column(columnDefinition = "jsonb")
     private ShippingDataDatabase shippingData;
 
-    // TODO - Ajustar atributo 'productList' para salvar como JsonB, esta dando problemas :/
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private List<ProductDatabase> productList;
