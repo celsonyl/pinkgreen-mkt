@@ -26,7 +26,6 @@ public class CheckoutOrderUseCase {
         OrderDomain order = checkoutOrderGateway.execute(orderDomain);
         // TODO - Postar pedido criado em uma fila no rabbit como payload o orderId e um header com o status de ORDER_CREATED
 
-        // TODO - Retornar OrderDomain com orderId preenchido
         return order;
     }
 
