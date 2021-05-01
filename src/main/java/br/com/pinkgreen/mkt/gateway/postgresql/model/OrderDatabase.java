@@ -39,7 +39,9 @@ public class OrderDatabase {
     @Column(columnDefinition = "jsonb")
     private List<ProductDatabase> productList;
 
-    // TODO - Persistir informações de pagamento (somente não persistir campo paymentMethodProperties)
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private PaymentDatabase paymentData;
 
     private Instant createdAt;
     private Instant updatedAt;
