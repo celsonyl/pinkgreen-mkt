@@ -15,10 +15,7 @@ import java.util.Map;
 @EqualsAndHashCode
 public class PaymentDataRequest {
 
-    @NotNull
     private PaymentMethod paymentMethod;
-
-    @NotNull
     private Map<String, String> paymentMethodProperties;
 
     @Valid

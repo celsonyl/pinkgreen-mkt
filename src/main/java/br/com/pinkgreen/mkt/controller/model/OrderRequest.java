@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.controller.annotation.ValidPaymentData;
 import lombok.*;
 
 import javax.validation.Valid;
@@ -27,6 +28,6 @@ public class OrderRequest {
     private List<ProductRequest> productList;
 
     @Valid
-    @NotNull
+    @ValidPaymentData(message = "propriedades invalidas")
     private PaymentDataRequest paymentData;
 }
