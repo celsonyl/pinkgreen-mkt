@@ -12,3 +12,17 @@ spring:
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        process-order-payment-output:
+          destination: process-order-payment
+        output:
+          destination: simple-message
+        input:
+          destination: simple-message

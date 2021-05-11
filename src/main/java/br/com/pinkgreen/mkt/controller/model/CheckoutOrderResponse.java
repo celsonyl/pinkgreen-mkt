@@ -11,4 +11,5 @@ import lombok.*;
 public class CheckoutOrderResponse {
     private String customerId;
     private String orderId;
+    private String message;
 }

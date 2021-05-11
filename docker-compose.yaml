@@ -11,3 +11,9 @@ services:
       - POSTGRES_USER=local
       - POSTGRES_PASSWORD=local
       - MAX_CONNECTIONS=300
+  rabbitmq:
+    image: rabbitmq:3.6.9-management
+    container_name: rabbitmq_pinkgreen_mkt
+    ports:
+      - 5672:5672
+      - 15672:15672

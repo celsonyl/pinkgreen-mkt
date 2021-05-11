@@ -4,6 +4,7 @@ import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.PaymentDomain;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.gateway.CheckoutOrderGateway;
+import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,16 +17,16 @@ import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.ORDER_CREATED;
 public class CheckoutOrderUseCase {
     // TODO - Consultar catalogo para validar dados do produto recebido
     // TODO - Validar customerId recebido (se customerId existe na base)
+    // TODO - Criptografar campos no 'paymentMethodProperties' caso o pagamento seja por cartão
 
     private final CheckoutOrderGateway checkoutOrderGateway;
+    private final PublishOrderToProcessPayment publishOrderToProcessPayment;
 
     public OrderDomain execute(OrderDomain orderDomain, PaymentDomain paymentDomain) {
-        // TODO - Criptografar campos no 'paymentMethodProperties' caso o pagamento seja por cartão
         setOrderStatusAndCalculateAmount(orderDomain);
-
         OrderDomain order = checkoutOrderGateway.execute(orderDomain);
-        // TODO - Postar pedido criado em uma fila no rabbit como payload o orderId e um header com o status de ORDER_CREATED
 
+        publishOrderToProcessPayment.publish(order, paymentDomain);
         return order;
     }
 
@@ -35,6 +36,6 @@ public class CheckoutOrderUseCase {
     }
 
     private Double calcOrderAmount(List<ProductDomain> productDomainList) {
-        return productDomainList.stream().reduce(0.00, (aaa, element) -> aaa + element.getPrice(), Double::sum);
+        return productDomainList.stream().reduce(0.00, (subtotal, element) -> subtotal + element.getPrice(), Double::sum);
     }
 }
