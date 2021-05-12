@@ -1,4 +1,4 @@
-package br.com.pinkgreen.mkt.gateway.rabbitmq;
+package br.com.pinkgreen.mkt.gateway.rabbitmq.source;
 
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;

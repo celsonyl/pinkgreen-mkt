@@ -4,6 +4,7 @@ import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.PaymentDomain;
 import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
 import br.com.pinkgreen.mkt.gateway.rabbitmq.model.ProcessOrderPaymentMessage;
+import br.com.pinkgreen.mkt.gateway.rabbitmq.source.ProcessOrderPaymentSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.integration.support.MessageBuilder;

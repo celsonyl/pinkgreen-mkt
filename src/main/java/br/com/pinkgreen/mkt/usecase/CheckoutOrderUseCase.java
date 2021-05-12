@@ -18,6 +18,7 @@ public class CheckoutOrderUseCase {
     // TODO - Consultar catalogo para validar dados do produto recebido
     // TODO - Validar customerId recebido (se customerId existe na base)
     // TODO - Criptografar campos no 'paymentMethodProperties' caso o pagamento seja por cartão
+    // TODO - Ajustar test unitario
 
     private final CheckoutOrderGateway checkoutOrderGateway;
     private final PublishOrderToProcessPayment publishOrderToProcessPayment;

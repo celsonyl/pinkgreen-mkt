@@ -22,7 +22,5 @@ spring:
       bindings:
         process-order-payment-output:
           destination: process-order-payment
-        output:
-          destination: simple-message
-        input:
-          destination: simple-message
+        process-order-payment-input:
+          destination: process-order-payment

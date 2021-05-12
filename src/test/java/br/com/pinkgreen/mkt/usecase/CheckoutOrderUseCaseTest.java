@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.usecase;
 import br.com.pinkgreen.mkt.domain.*;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import br.com.pinkgreen.mkt.gateway.CheckoutOrderGateway;
+import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +22,8 @@ class CheckoutOrderUseCaseTest {
 
     private final ArgumentCaptor<OrderDomain> orderDomainArgument = forClass(OrderDomain.class);
     private final CheckoutOrderGateway checkoutOrderGateway = mock(CheckoutOrderGateway.class);
-    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(checkoutOrderGateway);
+    private final PublishOrderToProcessPayment publishOrderToProcessPayment = mock(PublishOrderToProcessPayment.class);
+    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(checkoutOrderGateway,publishOrderToProcessPayment);
 
     @Test
     void shouldCheckoutOrderSuccessfully() {
