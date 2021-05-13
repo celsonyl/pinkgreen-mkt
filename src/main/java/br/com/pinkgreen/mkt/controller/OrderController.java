@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Slf4j
@@ -26,6 +27,7 @@ public class OrderController {
     private final CheckoutOrderUseCase checkoutOrderUseCase;
 
     @PostMapping
+    @RolesAllowed("user")
     public ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest) {
         log.info("[CONTROLLER] Receiving new order request");
         var orderDomain = new OrderRequestMapperImpl().orderRequestToOrder(orderRequest);

@@ -24,3 +24,11 @@ spring:
           destination: process-order-payment
         process-order-payment-input:
           destination: process-order-payment
+keycloak:
+  realm: Pinkgreen-mkt
+  auth-server-url: http://localhost:8180/auth
+  ssl-required: external
+  resource: pinkgreen-backend
+  credentials.secret: e0f06a0c-ce45-44d4-ac54-78395b715ffb
+  use-resource-role-mappings: true
+  bearer-only: true
