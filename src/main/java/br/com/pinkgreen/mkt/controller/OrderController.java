@@ -10,25 +10,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
-import javax.validation.Valid;
 
 @Slf4j
 @Component
 @RestController
 @RequestMapping("/order")
 @RequiredArgsConstructor
-public class OrderController {
+public class OrderController implements OrderControllerApi {
 
     private final CheckoutOrderUseCase checkoutOrderUseCase;
 
+    @Override
     @PostMapping
     @RolesAllowed("user")
-    public ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<CheckoutOrderResponse> checkout(OrderRequest orderRequest) {
         log.info("[CONTROLLER] Receiving new order request");
         var orderDomain = new OrderRequestMapperImpl().orderRequestToOrder(orderRequest);
         OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
