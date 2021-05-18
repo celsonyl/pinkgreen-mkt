@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.pinkgreen</groupId>
-    <artifactId>pinkgreen.mkt</artifactId>
+    <artifactId>pinkgreen-mkt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>PinkGreen MarketPlace Plataform</name>
+    <name>PinkGreen MarketPlace Platform</name>
     <description>PinkGreen MarketPlace Application</description>
     <properties>
         <java.version>11</java.version>
