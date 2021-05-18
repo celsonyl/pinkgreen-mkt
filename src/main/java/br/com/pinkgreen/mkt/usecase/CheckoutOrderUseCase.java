@@ -16,7 +16,6 @@ import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.ORDER_CREATED;
 @RequiredArgsConstructor
 public class CheckoutOrderUseCase {
     // TODO - Consultar catalogo para validar dados do produto recebido
-    // TODO - Validar customerId recebido (se customerId existe na base)
     // TODO - Criptografar campos no 'paymentMethodProperties' caso o pagamento seja por cartão
 
     private final CheckoutOrderGateway checkoutOrderGateway;
