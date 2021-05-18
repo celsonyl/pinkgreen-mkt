@@ -17,3 +17,14 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+  # RUN:
+  # docker run -d --name keycloak_pinkgreen_mkt -p 8180:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:13.0.0
+  # TODO: Tentar resolver este compose usando estes modelos que existem: https://github.com/keycloak/keycloak-containers/tree/master/docker-compose-examples
+#  keycloak:
+#    container_name: keycloak_pinkgreen_mkt
+#    image: quay.io/keycloak/keycloak:13.0.0
+#    environment:
+#      - KEYCLOAK_USER=admin
+#      - KEYCLOAK_PASSWORD=admin
+#    ports:
+#      - 8180:8080

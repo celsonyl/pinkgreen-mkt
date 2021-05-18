@@ -21,4 +21,12 @@ public class ResourceExceptionHandler {
         }
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
     }
+
+    @ExceptionHandler(InvalidCustomerIdException.class)
+    public ResponseEntity<StandardError> invalidCustomerId(HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(StandardError.builder()
+                .message("CustomerId inválido")
+                .path(request.getRequestURI())
+                .build());
+    }
 }
