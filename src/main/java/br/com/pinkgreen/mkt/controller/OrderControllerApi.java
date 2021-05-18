@@ -22,7 +22,8 @@ public interface OrderControllerApi {
             @ApiResponse(code = 200, message = "Sua compra foi recebida e será processada assincronamente"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest);
 }

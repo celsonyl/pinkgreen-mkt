@@ -21,6 +21,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("br.com.pinkgreen.mkt.controller"))
                 .paths(PathSelectors.any())
                 .build()
+                .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo());
     }
 
