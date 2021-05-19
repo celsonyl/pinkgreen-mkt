@@ -44,6 +44,11 @@ public class AddressRequest {
     @ApiModelProperty(value = "CEP de entrega", required = true, example = "13480-180")
     private String zipcode;
 
+    @NotBlank(message = "Street must not be blank")
+    @Length(min = 2, max = 60, message = "Street must have between 2 and 60 characters")
+    @ApiModelProperty(value = "Rua de entrega", required = true, example = "R. Boa Morte")
+    private String street;
+
     @NotNull
     @Length(max = 100, message = "Complement must have between 2 and 100 characters")
     @ApiModelProperty(value = "Complemento do endereço", required = true, example = "AP 190")

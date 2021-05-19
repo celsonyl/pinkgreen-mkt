@@ -1,10 +1,7 @@
 spring:
-  jpa:
-    database: POSTGRESQL
-    hibernate:
-      ddl-auto: create
-  database:
-    driverClassName: org.postgresql.Driver
+#    hibernate:
+#      ddl-auto: create
+#    show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/pinkgreen_mkt
     username: local
@@ -22,8 +19,11 @@ spring:
       bindings:
         process-order-payment-output:
           destination: process-order-payment
+          group: internal.process-order-payment
         process-order-payment-input:
           destination: process-order-payment
+          group: internal.process-order-payment
+
 keycloak:
   realm: Pinkgreen-mkt
   auth-server-url: http://localhost:8180/auth
