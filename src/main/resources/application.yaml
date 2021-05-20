@@ -16,13 +16,18 @@ spring:
     password: guest
   cloud:
     stream:
+      rabbit:
+        bindings:
+          process-order-payment-output:
+            producer.routing-key-expression: '"process-order-payment"'
+          process-order-payment-input:
+            consumer.bindingRoutingKey: process-order-payment
       bindings:
         process-order-payment-output:
-          destination: process-order-payment
-          group: internal.process-order-payment
+          destination: order_events
         process-order-payment-input:
-          destination: process-order-payment
-          group: internal.process-order-payment
+          destination: order_events
+          group: process-order-payment.pinkgreen
 
 keycloak:
   realm: Pinkgreen-mkt
