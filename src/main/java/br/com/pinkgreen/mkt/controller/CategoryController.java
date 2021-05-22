@@ -5,6 +5,7 @@ import br.com.pinkgreen.mkt.controller.translator.ProductCategoryRequestMapperIm
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.usecase.CreateProductCategoryUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllCategoriesUseCase;
+import br.com.pinkgreen.mkt.usecase.GetCategoryByIdUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -26,6 +28,7 @@ public class CategoryController implements CategoryControllerApi {
 
     private final CreateProductCategoryUseCase productCategoryUseCase;
     private final GetAllCategoriesUseCase getAllCategoriesUseCase;
+    private final GetCategoryByIdUseCase getCategoryByIdUseCase;
 
     @Override
     @PostMapping
@@ -43,5 +46,12 @@ public class CategoryController implements CategoryControllerApi {
     public ResponseEntity<List<CategoryRequest>> listCategories(){
         List<CategoryRequest> categoryRequestList = getAllCategoriesUseCase.listCategories();
         return ResponseEntity.ok().body(categoryRequestList);
+    }
+
+    @Override
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryDomain> findById(@PathVariable Integer id){
+        CategoryDomain categoryDomain = getCategoryByIdUseCase.findById(id);
+        return ResponseEntity.ok().body(categoryDomain);
     }
 }

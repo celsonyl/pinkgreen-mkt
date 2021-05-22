@@ -29,4 +29,11 @@ public class ResourceExceptionHandler {
                 .path(request.getRequestURI())
                 .build());
     }
+
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException error,HttpServletRequest request){
+        StandardError standardError = new StandardError(error.getMessage(),request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
+    }
+
 }
