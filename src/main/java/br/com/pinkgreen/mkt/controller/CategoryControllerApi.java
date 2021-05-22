@@ -2,7 +2,6 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
-import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,9 +29,6 @@ public interface CategoryControllerApi {
 
 
     @ApiOperation(value = "Lista todas Categorias")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
-    })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),
@@ -45,9 +41,6 @@ public interface CategoryControllerApi {
 
 
     @ApiOperation(value = "Procura uma Categoria por id")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
-    })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),

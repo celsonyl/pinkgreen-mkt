@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ public class CategoryController implements CategoryControllerApi {
 
     @Override
     @PostMapping
+    @RolesAllowed("admin")
     public ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
         var categoryDomain = new CategoryRequestMapperImpl().categoryRequestToDomain(categoryRequest);
 
