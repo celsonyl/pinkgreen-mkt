@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProductCategoryDomain {
+public class CategoryDomain {
 
     private String id;
     private String name;

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderDatabase, Integer> {
 
-    @Query(value = "SELECT * FROM order_database WHERE customer_data ->> 'id' = :customerId", nativeQuery = true)
+    @Query(value = "SELECT * FROM orders WHERE customer_data ->> 'id' = :customerId", nativeQuery = true)
     List<OrderDatabase> findAllOrdersByCustomerId(@Param("customerId") String customerId);
 }

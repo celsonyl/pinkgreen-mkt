@@ -2,7 +2,7 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import br.com.pinkgreen.mkt.controller.translator.ProductCategoryRequestMapperImpl;
-import br.com.pinkgreen.mkt.domain.ProductCategoryDomain;
+import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.usecase.CreateProductCategoryUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllCategoriesUseCase;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +28,11 @@ public class CategoryController implements CategoryControllerApi {
     private final GetAllCategoriesUseCase getAllCategoriesUseCase;
 
     @Override
-    @PostMapping(value = "/create")
+    @PostMapping
     public ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
         var categoryDomain = new ProductCategoryRequestMapperImpl().categoryRequestToDomain(categoryRequest);
 
-        ProductCategoryDomain productCategoryDomain = productCategoryUseCase.execute(categoryDomain);
+        CategoryDomain productCategoryDomain = productCategoryUseCase.execute(categoryDomain);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productCategoryDomain.getId()).toUri();
         return ResponseEntity.created(uri).build();

@@ -1,8 +1,8 @@
 package br.com.pinkgreen.mkt.gateway;
 
-import br.com.pinkgreen.mkt.domain.ProductCategoryDomain;
+import br.com.pinkgreen.mkt.domain.CategoryDomain;
 
 public interface CreateProductCategoryGateway {
 
-    ProductCategoryDomain execute(ProductCategoryDomain productCategoryDomain);
+    CategoryDomain execute(CategoryDomain categoryDomain);
 }

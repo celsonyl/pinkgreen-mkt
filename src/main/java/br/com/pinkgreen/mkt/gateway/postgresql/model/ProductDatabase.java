@@ -24,7 +24,7 @@ public class ProductDatabase {
 
     @ManyToOne
     @JoinColumn(name = "product_brand_id")
-    private ProductBrandDatabase brand;
+    private BrandDatabase brand;
 
     // Pensando ainda hmm, compilo os atributos na aplicação?
 //    @Type(type = "jsonb")

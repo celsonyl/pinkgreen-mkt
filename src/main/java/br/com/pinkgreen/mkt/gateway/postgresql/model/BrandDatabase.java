@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ProductBrandDatabase {
+public class BrandDatabase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
