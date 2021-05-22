@@ -1,11 +1,14 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.BrandRequest;
+import br.com.pinkgreen.mkt.controller.model.BrandResponse;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public interface BrandControllerApi {
@@ -22,4 +25,24 @@ public interface BrandControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<Void> createBrand(@Valid @RequestBody BrandRequest brandRequest);
+
+    @ApiOperation(value = "Lista todas as marcas")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<List<BrandResponse>> getAllBrands();
+
+    @ApiOperation(value = "Procura uma marca por id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<BrandResponse> findById(@PathVariable Integer id);
 }

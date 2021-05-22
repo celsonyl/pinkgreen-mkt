@@ -13,8 +13,8 @@ public class GetCategoryByIdUseCase {
 
     private final GetCaregoryByIdCatewayImpl getCaregoryByIdCateway;
 
-    public CategoryDomain findById(Integer id){
+    public CategoryDomain findById(Integer id) {
         return getCaregoryByIdCateway.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada :"+id));
+                .orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada: " + id));
     }
 }

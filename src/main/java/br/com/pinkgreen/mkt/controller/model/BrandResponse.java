@@ -2,9 +2,6 @@ package br.com.pinkgreen.mkt.controller.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -12,10 +9,11 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class BrandRequest {
+public class BrandResponse {
 
-    @NotBlank(message = "Field not be null or blank")
-    @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
+    @ApiModelProperty(value = "ID da marca", required = true, example = "1000258")
+    private Integer id;
+
     @ApiModelProperty(value = "Nome da marca", required = true, example = "Samsung")
     private String name;
 }
