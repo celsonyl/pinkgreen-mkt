@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "product_brand")
 @Getter
 @Setter
 @Builder

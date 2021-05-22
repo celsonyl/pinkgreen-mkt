@@ -1,14 +1,15 @@
-package br.com.pinkgreen.mkt.gateway.postgresql.translator;
+package br.com.pinkgreen.mkt.controller.translator;
 
+import br.com.pinkgreen.mkt.controller.model.ProductCategoryRequest;
 import br.com.pinkgreen.mkt.domain.ProductCategoryDomain;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductCategoryDatabase;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface ProductCategoryDatabaseMapper {
+public interface ProductCategoryRequestMapper {
 
-    ProductCategoryDomain categoryDatabaseToDomain(ProductCategoryDatabase productCategoryDatabase);
+    ProductCategoryDomain categoryRequestToDomain(ProductCategoryRequest productCategoryRequest);
 
-    ProductCategoryDatabase categoryDomainToDatabase(ProductCategoryDomain productCategoryDomain);
+    ProductCategoryRequest categoryDomainToRequest(ProductCategoryDomain productCategoryDomain);
 
 }

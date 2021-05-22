@@ -25,6 +25,7 @@ public interface OrderControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
+    @SuppressWarnings("unused")
     ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest, HttpServletRequest request);
 
 
@@ -39,5 +40,6 @@ public interface OrderControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
+    @SuppressWarnings("unused")
     ResponseEntity<List<OrderResponse>> getOrdersByCustomerId(@ApiParam(value = "ID do cliente", required = true, example = "1f508dc081fd6db15d1d9056e457cd3f") @PathVariable String customerId, HttpServletRequest request);
 }

@@ -12,7 +12,7 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
 
-@Entity
+@Entity(name = "orders")
 @Getter
 @Setter
 @Builder
