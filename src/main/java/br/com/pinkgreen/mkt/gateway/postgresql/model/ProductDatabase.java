@@ -31,7 +31,6 @@ public class ProductDatabase {
 //    @Column(columnDefinition = "jsonb")
 //    private List<ProductAttributesDomain> productAttributes;
 
-//     como atribuir mais de uma categoria para um produto?
     @ManyToMany
     @JoinTable(
             name = "product_categories",
