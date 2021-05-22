@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,5 +22,5 @@ public class ProductCategoryDatabase {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
-    private List<ProductDatabase> products;
+    private List<ProductDatabase> products = new ArrayList<>();
 }

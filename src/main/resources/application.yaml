@@ -1,7 +1,8 @@
 spring:
-#    hibernate:
-#      ddl-auto: create
-#    show-sql: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/pinkgreen_mkt
     username: local
@@ -34,6 +35,6 @@ keycloak:
   auth-server-url: http://localhost:8180/auth
   ssl-required: external
   resource: pinkgreen-backend
-  credentials.secret: 97ada388-bb95-49d8-b2c2-e94be8852fdd
+  credentials.secret: 6c816309-8d9c-4fff-9157-d7aa34eb8b26
   use-resource-role-mappings: true
   bearer-only: true

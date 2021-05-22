@@ -2,13 +2,13 @@ package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
 import br.com.pinkgreen.mkt.domain.SkuAttributesDomain;
 import br.com.pinkgreen.mkt.domain.SkuPriceDomain;
-import br.com.pinkgreen.mkt.domain.ProductAttributesDomain;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,7 +27,6 @@ public class ProductSkuDatabase {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    // Product ID
     private ProductDatabase product;
 
     private String sku;
@@ -46,6 +45,6 @@ public class ProductSkuDatabase {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private List<SkuAttributesDomain> skuAttributes;
+    private List<SkuAttributesDomain> skuAttributes = new ArrayList<>();
 
 }

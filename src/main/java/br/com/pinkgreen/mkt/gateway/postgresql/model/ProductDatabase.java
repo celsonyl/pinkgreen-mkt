@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class ProductDatabase {
     private Boolean active;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "product_brand_id")
     private ProductBrandDatabase brand;
 
     // Pensando ainda hmm, compilo os atributos na aplicação?
@@ -37,5 +38,5 @@ public class ProductDatabase {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<ProductCategoryDatabase> categories;
+    private List<ProductCategoryDatabase> categories = new ArrayList<>();
 }
