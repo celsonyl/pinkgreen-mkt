@@ -37,7 +37,10 @@ public class ProductSkuDatabase {
     private Float length;
     private Float weight;
     private String mainImageUrl;
-    private String urlImages;
+
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private List<String> urlImages;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
