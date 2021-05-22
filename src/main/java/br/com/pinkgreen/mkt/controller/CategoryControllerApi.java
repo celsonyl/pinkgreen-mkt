@@ -1,6 +1,7 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
+import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @SuppressWarnings("unused")
 public interface CategoryControllerApi {
@@ -41,7 +41,7 @@ public interface CategoryControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<List<CategoryRequest>> listCategories();
+    ResponseEntity<List<CategoryResponse>> listCategories();
 
 
     @ApiOperation(value = "Procura uma Categoria por id")
@@ -57,5 +57,5 @@ public interface CategoryControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<CategoryDomain> findById(@PathVariable Integer id);
+    ResponseEntity<CategoryResponse> findById(@PathVariable Integer id);
 }

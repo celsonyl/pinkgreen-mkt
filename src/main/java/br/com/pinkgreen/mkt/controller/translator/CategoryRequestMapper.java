@@ -5,7 +5,7 @@ import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface ProductCategoryRequestMapper {
+public interface CategoryRequestMapper {
 
     CategoryDomain categoryRequestToDomain(CategoryRequest categoryRequest);
 
