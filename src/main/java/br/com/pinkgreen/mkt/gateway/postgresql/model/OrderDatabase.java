@@ -1,5 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
+import br.com.pinkgreen.mkt.domain.CustomerDomain;
+import br.com.pinkgreen.mkt.domain.ShippingDataDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
@@ -29,15 +31,15 @@ public class OrderDatabase {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private CustomerDatabase customerData;
+    private CustomerDomain customerData;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private ShippingDataDatabase shippingData;
+    private ShippingDataDomain shippingData;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private List<ProductDatabase> productList;
+    private List<OrderProductDatabase> productList;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
