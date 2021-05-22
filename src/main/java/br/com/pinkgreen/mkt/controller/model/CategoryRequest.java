@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class CategoryRequest {
 
+    private Integer id;
+
     @NotBlank(message = "Field not be null or blank")
     @Length(min = 2,max = 50,message = "Name must have between 2 and 50 characters")
     private String name;

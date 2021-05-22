@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface GetAllCategoriesGateway {
 
-    List<CategoryRequest> findAll();
+    List<CategoryRequest> listCategories();
 }
