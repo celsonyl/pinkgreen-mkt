@@ -1,6 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
-import br.com.pinkgreen.mkt.controller.model.ProductCategoryRequest;
+import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,5 +21,5 @@ public interface CategoryControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> createCategory(@Valid @RequestBody ProductCategoryRequest productCategoryRequest);
+    ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest);
 }

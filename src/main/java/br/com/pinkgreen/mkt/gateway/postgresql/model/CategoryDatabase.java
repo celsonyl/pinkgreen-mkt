@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ProductCategoryDatabase {
+public class CategoryDatabase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

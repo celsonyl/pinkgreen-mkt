@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductCategoryRequest {
+public class CategoryRequest {
 
     @NotBlank(message = "Field not be null or blank")
     @Length(min = 2,max = 50,message = "Name must have between 2 and 50 characters")

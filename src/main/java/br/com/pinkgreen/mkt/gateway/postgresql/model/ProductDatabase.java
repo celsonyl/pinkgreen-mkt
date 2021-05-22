@@ -37,5 +37,5 @@ public class ProductDatabase {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<ProductCategoryDatabase> categories = new ArrayList<>();
+    private List<CategoryDatabase> categories = new ArrayList<>();
 }

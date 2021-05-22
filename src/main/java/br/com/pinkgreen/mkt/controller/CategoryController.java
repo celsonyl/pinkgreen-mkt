@@ -1,6 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
-import br.com.pinkgreen.mkt.controller.model.ProductCategoryRequest;
+import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import br.com.pinkgreen.mkt.controller.translator.ProductCategoryRequestMapperImpl;
 import br.com.pinkgreen.mkt.domain.ProductCategoryDomain;
 import br.com.pinkgreen.mkt.usecase.CreateProductCategoryUseCase;
@@ -30,8 +30,8 @@ public class CategoryController implements CategoryControllerApi {
     @Override
     @PostMapping(value = "/create")
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createCategory(@Valid @RequestBody ProductCategoryRequest productCategoryRequest) {
-        var categoryDomain = new ProductCategoryRequestMapperImpl().categoryRequestToDomain(productCategoryRequest);
+    public ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
+        var categoryDomain = new ProductCategoryRequestMapperImpl().categoryRequestToDomain(categoryRequest);
 
         ProductCategoryDomain productCategoryDomain = productCategoryUseCase.execute(categoryDomain);
 

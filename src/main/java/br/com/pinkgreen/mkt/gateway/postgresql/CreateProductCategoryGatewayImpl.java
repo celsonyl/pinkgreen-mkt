@@ -2,8 +2,8 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.ProductCategoryDomain;
 import br.com.pinkgreen.mkt.gateway.CreateProductCategoryGateway;
-import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductCategoryDatabase;
-import br.com.pinkgreen.mkt.gateway.postgresql.translator.ProductCategoryDatabaseMapperImpl;
+import br.com.pinkgreen.mkt.gateway.postgresql.model.CategoryDatabase;
+import br.com.pinkgreen.mkt.gateway.postgresql.translator.CategoryDatabaseMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CreateProductCategoryGatewayImpl implements CreateProductCategoryGateway {
 
-    private final ProductCategoryRepository productCategoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public ProductCategoryDomain execute(ProductCategoryDomain productCategoryDomain) {
-        ProductCategoryDatabaseMapperImpl categoryDatabaseMapper = new ProductCategoryDatabaseMapperImpl();
+        CategoryDatabaseMapperImpl categoryDatabaseMapper = new CategoryDatabaseMapperImpl();
 
-        ProductCategoryDatabase productCategoryDatabase = categoryDatabaseMapper.categoryDomainToDatabase(productCategoryDomain);
-        return categoryDatabaseMapper.categoryDatabaseToDomain(productCategoryRepository.save(productCategoryDatabase));
+        CategoryDatabase categoryDatabase = categoryDatabaseMapper.categoryDomainToDatabase(productCategoryDomain);
+        return categoryDatabaseMapper.categoryDatabaseToDomain(categoryRepository.save(categoryDatabase));
     }
 }
