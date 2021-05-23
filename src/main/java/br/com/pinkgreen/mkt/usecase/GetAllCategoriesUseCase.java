@@ -1,6 +1,5 @@
 package br.com.pinkgreen.mkt.usecase;
 
-import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.gateway.GetAllCategoriesGateway;
 import lombok.RequiredArgsConstructor;

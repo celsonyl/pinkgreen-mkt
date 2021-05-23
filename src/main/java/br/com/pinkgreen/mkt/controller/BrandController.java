@@ -2,9 +2,8 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.BrandRequest;
 import br.com.pinkgreen.mkt.controller.model.BrandResponse;
-import br.com.pinkgreen.mkt.controller.translator.BrandRequestMapperImpl;
-import br.com.pinkgreen.mkt.controller.translator.BrandResponseMapperImpl;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
+import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateBrandUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllBrandsUseCase;
 import br.com.pinkgreen.mkt.usecase.GetBrandByIdUseCase;
@@ -37,7 +36,7 @@ public class BrandController implements BrandControllerApi {
     @PostMapping
     @RolesAllowed("admin")
     public ResponseEntity<Void> createBrand(BrandRequest brandRequest) {
-        var brandDomain = new BrandRequestMapperImpl().brandRequestToDomain(brandRequest);
+        var brandDomain = new BrandMapperImpl().brandRequestToDomain(brandRequest);
 
         var productBrandDomain = createBrandUseCase.execute(brandDomain);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productBrandDomain.getId()).toUri();
@@ -51,7 +50,7 @@ public class BrandController implements BrandControllerApi {
         List<BrandDomain> brandDomains = getAllBrandsUseCase.execute();
 
         return ResponseEntity.ok(brandDomains.stream()
-                .map(new BrandResponseMapperImpl()::brandDomainToResponse)
+                .map(new BrandMapperImpl()::brandDomainToResponse)
                 .collect(Collectors.toList()));
     }
 
@@ -59,6 +58,6 @@ public class BrandController implements BrandControllerApi {
     @GetMapping("/{id}")
     public ResponseEntity<BrandResponse> findById(Integer id) {
         var brandDomain = getBrandByIdUseCase.execute(id);
-        return ResponseEntity.ok(new BrandResponseMapperImpl().brandDomainToResponse(brandDomain));
+        return ResponseEntity.ok(new BrandMapperImpl().brandDomainToResponse(brandDomain));
     }
 }

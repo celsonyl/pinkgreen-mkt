@@ -3,7 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
 import br.com.pinkgreen.mkt.gateway.GetAllBrandsGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.BrandDatabase;
-import br.com.pinkgreen.mkt.gateway.postgresql.translator.BrandDatabaseMapperImpl;
+import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class GetAllBrandsGatewayImpl implements GetAllBrandsGateway {
     public List<BrandDomain> execute() {
         List<BrandDatabase> brandDatabases = brandRepository.findAll();
         return brandDatabases.stream()
-                .map(new BrandDatabaseMapperImpl()::brandDatabaseToDomain)
+                .map(new BrandMapperImpl()::brandDatabaseToDomain)
                 .collect(Collectors.toList());
     }
 }

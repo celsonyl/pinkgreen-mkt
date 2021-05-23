@@ -2,8 +2,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.gateway.CheckoutOrderGateway;
-import br.com.pinkgreen.mkt.gateway.postgresql.model.OrderDatabase;
-import br.com.pinkgreen.mkt.gateway.postgresql.translator.OrderDatabaseMapperImpl;
+import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +16,8 @@ public class CheckoutOrderGatewayImpl implements CheckoutOrderGateway {
 
     @Override
     public OrderDomain execute(OrderDomain orderDomain) {
-        OrderDatabaseMapperImpl orderDatabaseMapper = new OrderDatabaseMapperImpl();
-        OrderDatabase orderDatabase = orderDatabaseMapper.orderToOrderDatabase(orderDomain);
+        var orderDatabaseMapper = new OrderMapperImpl();
+        var orderDatabase = orderDatabaseMapper.orderToOrderDatabase(orderDomain);
 
         orderDatabase.setCreatedAt(Instant.now());
 

@@ -4,9 +4,8 @@ import br.com.pinkgreen.mkt.controller.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
-import br.com.pinkgreen.mkt.controller.translator.OrderRequestMapperImpl;
-import br.com.pinkgreen.mkt.controller.translator.OrderResponseMapperImpl;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +44,7 @@ public class OrderController implements OrderControllerApi {
 
         getCustomerIdAndValidate((KeycloakAuthenticationToken) request.getUserPrincipal(), customerId);
 
-        var orderDomain = new OrderRequestMapperImpl().orderRequestToOrder(orderRequest);
+        var orderDomain = new OrderMapperImpl().orderRequestToOrder(orderRequest);
         OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
         return ResponseEntity.ok().body(CheckoutOrderResponse.builder()
                 .orderId(orderCreated.getId())
@@ -63,7 +62,7 @@ public class OrderController implements OrderControllerApi {
 
         List<OrderDomain> orders = getAllOrdersByCustomerIdUseCase.execute(customerId);
 
-        List<OrderResponse> orderResponses = orders.stream().map(new OrderResponseMapperImpl()::orderToOrderResponse).collect(Collectors.toList());
+        List<OrderResponse> orderResponses = orders.stream().map(new OrderMapperImpl()::orderToOrderResponse).collect(Collectors.toList());
 
         return ResponseEntity.ok(orderResponses);
     }

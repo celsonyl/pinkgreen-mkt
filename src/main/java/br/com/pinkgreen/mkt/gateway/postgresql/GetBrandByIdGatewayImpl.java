@@ -3,7 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
 import br.com.pinkgreen.mkt.gateway.GetBrandByIdGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.BrandDatabase;
-import br.com.pinkgreen.mkt.gateway.postgresql.translator.BrandDatabaseMapperImpl;
+import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +22,6 @@ public class GetBrandByIdGatewayImpl implements GetBrandByIdGateway {
             return Optional.empty();
         }
 
-        return Optional.of(new BrandDatabaseMapperImpl().brandDatabaseToDomain(brandDatabase.get()));
+        return Optional.of(new BrandMapperImpl().brandDatabaseToDomain(brandDatabase.get()));
     }
 }

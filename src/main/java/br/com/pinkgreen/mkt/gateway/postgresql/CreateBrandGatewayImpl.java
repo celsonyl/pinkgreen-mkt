@@ -2,7 +2,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.BrandDomain;
 import br.com.pinkgreen.mkt.gateway.CreateBrandGateway;
-import br.com.pinkgreen.mkt.gateway.postgresql.translator.BrandDatabaseMapperImpl;
+import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class CreateBrandGatewayImpl implements CreateBrandGateway {
 
     @Override
     public BrandDomain execute(BrandDomain brandDomain) {
-        var brandDatabaseMapper = new BrandDatabaseMapperImpl();
+        var brandDatabaseMapper = new BrandMapperImpl();
 
         var brandDatabase = brandRepository.save(brandDatabaseMapper.brandDomainToDatabase(brandDomain));
         return brandDatabaseMapper.brandDatabaseToDomain(brandDatabase);
