@@ -82,14 +82,14 @@ class CheckoutOrderUseCaseTest {
                 .address(addressDomain)
                 .build();
 
-        ProductDomain productDomain = ProductDomain.builder()
+        ProductOrderDomain productOrderDomain = ProductOrderDomain.builder()
                 .name("Samsung Galaxy S21 Cinza")
                 .price(3859.00)
                 .quantity(1000)
                 .sku("888888888")
                 .build();
 
-        ProductDomain productDomain2 = ProductDomain.builder()
+        ProductOrderDomain productOrderDomain2 = ProductOrderDomain.builder()
                 .name("Apple iPhone 12 Roxo")
                 .price(5207.00)
                 .quantity(1000)
@@ -99,7 +99,7 @@ class CheckoutOrderUseCaseTest {
         return OrderDomain.builder()
                 .customerData(customerDomain)
                 .shippingData(shippingDataDomain)
-                .productList(Arrays.asList(productDomain, productDomain2))
+                .productList(Arrays.asList(productOrderDomain, productOrderDomain2))
                 .paymentData(getPaymentByPaymentMethod(addressDomain, PaymentMethod.CREDIT_CARD))
                 .build();
     }
@@ -132,14 +132,14 @@ class CheckoutOrderUseCaseTest {
                 .address(addressDomain)
                 .build();
 
-        ProductDomain productDomain = ProductDomain.builder()
+        ProductOrderDomain productOrderDomain = ProductOrderDomain.builder()
                 .name("Samsung Galaxy S21 Cinza")
                 .price(3859.00)
                 .quantity(1000)
                 .sku("888888888")
                 .build();
 
-        ProductDomain productDomain2 = ProductDomain.builder()
+        ProductOrderDomain productOrderDomain2 = ProductOrderDomain.builder()
                 .name("Apple iPhone 12 Roxo")
                 .price(5207.00)
                 .quantity(1000)
@@ -157,7 +157,7 @@ class CheckoutOrderUseCaseTest {
                 .customerData(customerDomain)
                 .status(ORDER_CREATED)
                 .shippingData(shippingDataDomain)
-                .productList(Arrays.asList(productDomain, productDomain2))
+                .productList(Arrays.asList(productOrderDomain, productOrderDomain2))
                 .paymentData(paymentDomain)
                 .createdAt(Instant.now())
                 .updatedAt(Instant.now())

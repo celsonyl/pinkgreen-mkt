@@ -2,7 +2,7 @@ package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.PaymentDomain;
-import br.com.pinkgreen.mkt.domain.ProductDomain;
+import br.com.pinkgreen.mkt.domain.ProductOrderDomain;
 import br.com.pinkgreen.mkt.gateway.CheckoutOrderGateway;
 import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class CheckoutOrderUseCase {
         orderDomain.getPaymentData().setAmount(calcOrderAmount(orderDomain.getProductList()));
     }
 
-    private Double calcOrderAmount(List<ProductDomain> productDomainList) {
-        return productDomainList.stream().reduce(0.00, (subtotal, element) -> subtotal + element.getPrice(), Double::sum);
+    private Double calcOrderAmount(List<ProductOrderDomain> productOrderDomainList) {
+        return productOrderDomainList.stream().reduce(0.00, (subtotal, element) -> subtotal + element.getPrice(), Double::sum);
     }
 }

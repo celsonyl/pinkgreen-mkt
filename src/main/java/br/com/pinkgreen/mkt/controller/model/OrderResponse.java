@@ -25,7 +25,7 @@ public class OrderResponse {
 
     private ShippingDataResponse shippingData;
 
-    private List<ProductResponse> productList;
+    private List<ProductOrderResponse> productList;
 
     private PaymentDataResponse paymentData;
 

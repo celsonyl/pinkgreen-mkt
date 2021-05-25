@@ -11,15 +11,18 @@ import lombok.*;
 @EqualsAndHashCode
 public class ProductResponse {
 
-    @ApiModelProperty(value = "SKU do produto", required = true, example = "888888888")
-    private String sku;
+    @ApiModelProperty(value = "Id do produto", required = true, example = "1")
+    private Integer id;
 
     @ApiModelProperty(value = "Nome do produto", required = true, example = "Samsung Galaxy S21 Cinza")
     private String name;
 
-    @ApiModelProperty(value = "Preço do produto", required = true, example = "3859.90")
-    private Double price;
+    @ApiModelProperty(value = "Preço do produto", required = true, example = "1250.90")
+    private double price;
 
-    @ApiModelProperty(value = "Quantidade do estoque do produto", required = true, example = "1000")
-    private Integer quantity;
+    @ApiModelProperty(value = "Estado do produto", required = true, example = "Esgotado")
+    private boolean active;
+
+    private Integer brandResponse;
+
 }

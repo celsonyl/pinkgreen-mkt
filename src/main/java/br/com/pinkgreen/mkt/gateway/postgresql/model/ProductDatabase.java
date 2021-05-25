@@ -22,7 +22,7 @@ public class ProductDatabase {
     private Double price;
     private Boolean active;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "product_brand_id")
     private BrandDatabase brand;
 

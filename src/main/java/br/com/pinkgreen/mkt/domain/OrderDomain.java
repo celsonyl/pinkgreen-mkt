@@ -18,7 +18,7 @@ public class OrderDomain {
     private OrderStatus status;
     private CustomerDomain customerData;
     private ShippingDataDomain shippingData;
-    private List<ProductDomain> productList;
+    private List<ProductOrderDomain> productList;
     private PaymentDomain paymentData;
     private Instant createdAt;
     private Instant updatedAt;

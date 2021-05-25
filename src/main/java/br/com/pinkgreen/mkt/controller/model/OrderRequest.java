@@ -29,7 +29,7 @@ public class OrderRequest {
     @Valid
     @NotNull
     @ApiModelProperty(value = "Lista de produtos que serão comprados pelo cliente")
-    private List<ProductRequest> productList;
+    private List<ProductOrderRequest> productList;
 
     @Valid
     @ValidPaymentData(message = "propriedades invalidas")
