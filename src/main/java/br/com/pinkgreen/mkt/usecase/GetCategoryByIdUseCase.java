@@ -1,6 +1,6 @@
 package br.com.pinkgreen.mkt.usecase;
 
-import br.com.pinkgreen.mkt.controller.exception.ObjectNotFoundException;
+import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.gateway.postgresql.GetCaregoryByIdCatewayImpl;
 import lombok.RequiredArgsConstructor;

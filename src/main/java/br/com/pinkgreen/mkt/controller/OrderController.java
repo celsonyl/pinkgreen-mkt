@@ -1,6 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
-import br.com.pinkgreen.mkt.controller.exception.InvalidCustomerIdException;
+import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;

@@ -1,4 +1,4 @@
-package br.com.pinkgreen.mkt.controller.exception;
+package br.com.pinkgreen.mkt.domain.exception;
 
 public class ObjectNotFoundException extends RuntimeException{
 
