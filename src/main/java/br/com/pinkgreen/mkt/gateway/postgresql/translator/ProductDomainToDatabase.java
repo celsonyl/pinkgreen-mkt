@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.translator;
 
+import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.domain.ProductDomain;

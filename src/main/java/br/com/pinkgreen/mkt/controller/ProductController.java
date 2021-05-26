@@ -2,10 +2,12 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
+import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateProductUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllProductsUseCase;
 import br.com.pinkgreen.mkt.usecase.GetProductByIdUseCase;
+import br.com.pinkgreen.mkt.usecase.UpdateProductUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,7 @@ public class ProductController implements ProductControllerApi {
     private final GetProductByIdUseCase getProductByIdUseCase;
     private final CreateProductUseCase createProductUseCase;
     private final GetAllProductsUseCase getAllProductsUseCase;
+    private final UpdateProductUseCase updateProductUseCase;
 
     @Override
     @GetMapping("/{id}")
@@ -55,5 +58,19 @@ public class ProductController implements ProductControllerApi {
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productCreateDomain.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @Override
+    @PutMapping("/{id}")
+    @RolesAllowed("admin")
+    public ResponseEntity<Void> updateProduct(@Valid @RequestBody ProductUpdateRequest productUpdateRequest, @PathVariable Integer id) {
+        var productUpdate = getProductByIdUseCase.findById(id);
+        var productDomain = new ProductMapperImpl().productUpdateRequestToDomain(productUpdateRequest);
+        productDomain.setId(id);
+        productDomain.setBrand(productUpdate.getBrand());
+        productDomain.setCategories(productUpdate.getCategories());
+
+        updateProductUseCase.updateProduct(productDomain);
+        return ResponseEntity.noContent().build();
     }
 }
