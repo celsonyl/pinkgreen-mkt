@@ -28,6 +28,6 @@ public class ProductResponse {
     @ApiModelProperty(value = "Marca do produto", required = true, example = "{ \"id\": 1, \"name\": \"Samsung\" }")
     private BrandResponse brand;
 
-    @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\" }, { \"id\": \"2\" } ]")
+    @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\", \"name\": \"Eletronicos\" }, { \"id\": \"2\", \"name\": \"Celulares e smartphones\" } ]")
     private List<CategoryResponse> categories;
 }
