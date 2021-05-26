@@ -18,7 +18,7 @@ public class PublishOrderToProcessPaymentRabbitImpl implements PublishOrderToPro
     private final ProcessOrderPaymentSource processOrderPaymentSource;
 
     public void publish(OrderDomain orderDomain, PaymentDomain paymentDomain) {
-        ProcessOrderPaymentMessage processOrderPaymentMessage = ProcessOrderPaymentMessage.builder()
+        var processOrderPaymentMessage = ProcessOrderPaymentMessage.builder()
                 .orderId(orderDomain.getId())
                 .paymentDomain(paymentDomain)
                 .build();
