@@ -1,7 +1,8 @@
 package br.com.pinkgreen.mkt.domain;
 
-import br.com.pinkgreen.mkt.controller.model.BrandRequest;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,5 +15,6 @@ public class ProductDomain {
     private String name;
     private Double price;
     private boolean active;
-    private BrandRequest brand;
+    private BrandDomain brand;
+    private List<CategoryDomain> categories;
 }

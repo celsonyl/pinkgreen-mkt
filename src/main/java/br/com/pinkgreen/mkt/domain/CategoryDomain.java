@@ -9,8 +9,7 @@ import lombok.*;
 @Builder
 public class CategoryDomain {
 
-    private String id;
+    private Integer id;
     private String name;
-
 
 }

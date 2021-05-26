@@ -3,6 +3,8 @@ package br.com.pinkgreen.mkt.controller.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -20,9 +22,12 @@ public class ProductResponse {
     @ApiModelProperty(value = "Preço do produto", required = true, example = "1250.90")
     private double price;
 
-    @ApiModelProperty(value = "Estado do produto", required = true, example = "Esgotado")
+    @ApiModelProperty(value = "Estado do produto", required = true, example = "true")
     private boolean active;
 
-    private Integer brandResponse;
+    @ApiModelProperty(value = "Marca do produto", required = true, example = "{ \"id\": 1, \"name\": \"Samsung\" }")
+    private BrandResponse brand;
 
+    @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\" }, { \"id\": \"2\" } ]")
+    private List<CategoryResponse> categories;
 }

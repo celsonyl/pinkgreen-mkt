@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
@@ -25,8 +26,7 @@ public class ProductController implements ProductControllerApi {
     private final CreateProductUseCase createProductUseCase;
 
     @Override
-    @RequestMapping(value = "/{id}")
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> findById(@PathVariable Integer id) {
         var productDomain = getProductByIdUseCase.findById(id);
         return ResponseEntity.ok().body(new ProductMapperImpl().productDomainToResponse(productDomain));
@@ -34,6 +34,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @PostMapping
+    @RolesAllowed("admin")
     public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductRequest productRequest) {
         var productDomain = new ProductMapperImpl().productRequestToDomain(productRequest);
 

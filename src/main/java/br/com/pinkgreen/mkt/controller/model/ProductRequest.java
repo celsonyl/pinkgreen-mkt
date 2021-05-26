@@ -5,9 +5,11 @@ import jdk.jfr.BooleanFlag;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,8 +20,8 @@ import javax.validation.constraints.PositiveOrZero;
 public class ProductRequest {
 
     @NotBlank(message = "Field not be null or blank")
-    @Length(min = 2,max = 50,message = "Name must have between 2 and 50 characters")
-    @ApiModelProperty(value = "Nome do Produto", required = true, example = "Tv")
+    @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
+    @ApiModelProperty(value = "Nome do Produto", required = true, example = "Samsung Galaxy S21 Cinza")
     private String name;
 
     @PositiveOrZero
@@ -32,5 +34,33 @@ public class ProductRequest {
     private boolean active;
 
     @NotNull(message = "Field not be null")
+    @Valid
     private BrandRequest brand;
+
+    @NotNull
+    @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\" }, { \"id\": \"2\" } ]")
+    @Valid
+    private List<CategoryRequest> categories;
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class BrandRequest {
+        @NotNull
+        @ApiModelProperty(value = "ID da marca", required = true, example = "1000258")
+        private Integer id;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class CategoryRequest {
+        @NotNull
+        @ApiModelProperty(value = "ID da categoria", required = true, example = "1000258")
+        private Integer id;
+    }
 }

@@ -3,7 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.gateway.GetProductByIdGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductDatabase;
-import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
+import br.com.pinkgreen.mkt.gateway.postgresql.translator.ProductDomainToDatabase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ public class GetProductByIdGatewayImpl implements GetProductByIdGateway {
 
     @Override
     public Optional<ProductDomain> findById(Integer id) {
-        var productMapper = new ProductMapperImpl();
+        var productMapper = new ProductDomainToDatabase();
 
         Optional<ProductDatabase> productDatabase = productRepository.findById(id);
         if (productDatabase.isEmpty()) {

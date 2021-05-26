@@ -2,8 +2,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.gateway.CreateProductGateway;
-import br.com.pinkgreen.mkt.translator.ProductMapper;
-import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
+import br.com.pinkgreen.mkt.gateway.postgresql.translator.ProductDomainToDatabase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ public class CreateProductGatewayImpl implements CreateProductGateway {
 
     @Override
     public ProductDomain execute(ProductDomain productDomain) {
-        ProductMapper productMapper = new ProductMapperImpl();
+        var productMapper = new ProductDomainToDatabase();
 
         var productDatabase = productRepository.save(productMapper.productDomainToDatabase(productDomain));
         return productMapper.productDatabaseToDomain(productDatabase);

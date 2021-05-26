@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 public class CategoryRequest {
 
     @NotBlank(message = "Field not be null or blank")
-    @Length(min = 2,max = 50,message = "Name must have between 2 and 50 characters")
+    @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
     @ApiModelProperty(value = "Nome da categoria", required = true, example = "Celulares e Smartphones")
     private String name;
 }

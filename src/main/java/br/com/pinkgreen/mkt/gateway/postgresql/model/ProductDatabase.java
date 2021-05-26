@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class ProductDatabase {
     private Double price;
     private Boolean active;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "product_brand_id")
     private BrandDatabase brand;
 
@@ -32,6 +33,7 @@ public class ProductDatabase {
 //    private List<ProductAttributesDomain> productAttributes;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "product_categories",
             joinColumns = @JoinColumn(name = "product_id"),
