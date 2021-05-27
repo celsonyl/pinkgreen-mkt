@@ -1,7 +1,7 @@
 package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.ProductDomain;
-import br.com.pinkgreen.mkt.gateway.postgresql.UpdateProductGatewayImpl;
+import br.com.pinkgreen.mkt.gateway.UpdateProductGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +9,30 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UpdateProductUseCase {
 
-    private final UpdateProductGatewayImpl updateProductGateway;
+    private final GetProductByIdUseCase getProductByIdUseCase;
+    private final UpdateProductGateway updateProductGateway;
 
-    public ProductDomain updateProduct(ProductDomain productDomain) {
-        return updateProductGateway.updateProduct(productDomain);
+    public ProductDomain updateProduct(Integer id, ProductDomain productUpdate) {
+        ProductDomain productDB = getProductByIdUseCase.findById(id);
+
+        populateProductDB(productUpdate, productDB);
+
+        return updateProductGateway.updateProduct(productDB);
+    }
+
+    private ProductDomain populateProductDB(ProductDomain productUpdate, ProductDomain productDB) {
+        if (productUpdate.getName() != null) {
+            productDB.setName(productUpdate.getName());
+        }
+
+        if (productUpdate.getPrice() != null) {
+            productDB.setPrice(productUpdate.getPrice());
+        }
+
+        if (productUpdate.getActive() != null) {
+            productDB.setActive(productUpdate.getActive());
+        }
+
+        return productDB;
     }
 }

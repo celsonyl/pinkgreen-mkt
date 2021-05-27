@@ -60,5 +60,5 @@ public interface ProductControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> updateProduct(@Valid @RequestBody ProductUpdateRequest productUpdateRequest, @PathVariable Integer id);
+    ResponseEntity<Void> updateProduct(@PathVariable Integer id, @Valid @RequestBody ProductUpdateRequest productUpdateRequest);
 }

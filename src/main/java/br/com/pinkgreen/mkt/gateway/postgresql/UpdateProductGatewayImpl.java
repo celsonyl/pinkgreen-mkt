@@ -19,14 +19,7 @@ public class UpdateProductGatewayImpl implements br.com.pinkgreen.mkt.gateway.Up
         ProductMapper productMapper = new ProductMapperImpl();
         var convert = productMapper.productDomainToDatabase(productDomain);
 
-        ProductDatabase updateProduct = productRepository.save(ProductDatabase.builder()
-        .id(convert.getId())
-        .name(convert.getName())
-        .price(convert.getPrice())
-        .active(convert.getActive())
-        .brand(convert.getBrand())
-        .categories(convert.getCategories())
-        .build());
+        ProductDatabase updateProduct = productRepository.save(convert);
 
         return productMapper.productDatabaseToDomain(updateProduct);
     }

@@ -31,7 +31,7 @@ public class ProductRequest {
 
     @NotNull(message = "Field not be null")
     @BooleanFlag
-    private boolean active;
+    private Boolean active;
 
     @NotNull(message = "Field not be null")
     @Valid

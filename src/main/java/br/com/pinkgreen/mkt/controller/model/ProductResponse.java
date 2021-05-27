@@ -23,7 +23,7 @@ public class ProductResponse {
     private double price;
 
     @ApiModelProperty(value = "Estado do produto", required = true, example = "true")
-    private boolean active;
+    private Boolean active;
 
     @ApiModelProperty(value = "Marca do produto", required = true, example = "{ \"id\": 1, \"name\": \"Samsung\" }")
     private BrandResponse brand;

@@ -1,6 +1,5 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.translator;
 
-import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
@@ -30,7 +29,7 @@ public class ProductDomainToDatabase {
                 .price(productDomain.getPrice())
                 .brand(brandDatabase)
                 .categories(categories)
-                .active(productDomain.isActive()).build();
+                .active(productDomain.getActive()).build();
     }
 
     public ProductDomain productDatabaseToDomain(ProductDatabase productDatabase) {

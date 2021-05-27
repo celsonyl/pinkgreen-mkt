@@ -63,14 +63,10 @@ public class ProductController implements ProductControllerApi {
     @Override
     @PutMapping("/{id}")
     @RolesAllowed("admin")
-    public ResponseEntity<Void> updateProduct(@Valid @RequestBody ProductUpdateRequest productUpdateRequest, @PathVariable Integer id) {
-        var productUpdate = getProductByIdUseCase.findById(id);
+    public ResponseEntity<Void> updateProduct(@PathVariable Integer id, @Valid @RequestBody ProductUpdateRequest productUpdateRequest) {
         var productDomain = new ProductMapperImpl().productUpdateRequestToDomain(productUpdateRequest);
-        productDomain.setId(id);
-        productDomain.setBrand(productUpdate.getBrand());
-        productDomain.setCategories(productUpdate.getCategories());
 
-        updateProductUseCase.updateProduct(productDomain);
+        updateProductUseCase.updateProduct(id, productDomain);
         return ResponseEntity.noContent().build();
     }
 }

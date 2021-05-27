@@ -14,7 +14,7 @@ public class ProductDomain {
     private Integer id;
     private String name;
     private Double price;
-    private boolean active;
+    private Boolean active;
     private BrandDomain brand;
     private List<CategoryDomain> categories;
 }
