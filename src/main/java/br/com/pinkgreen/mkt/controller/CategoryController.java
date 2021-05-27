@@ -11,11 +11,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +35,7 @@ public class CategoryController implements CategoryControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest) {
         var categoryDomain = new CategoryMapperImpl().categoryRequestToDomain(categoryRequest);
 
         var productCategoryDomain = productCategoryUseCase.execute(categoryDomain);
@@ -53,7 +55,7 @@ public class CategoryController implements CategoryControllerApi {
 
     @Override
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoryResponse> findById(@PathVariable Integer id) {
+    public ResponseEntity<CategoryResponse> findById(Integer id) {
         var categoryDomain = getCategoryByIdUseCase.findById(id);
         return ResponseEntity.ok().body(new CategoryMapperImpl().categoryDomainToResponse(categoryDomain));
     }

@@ -32,10 +32,10 @@ public class ProductSkuDatabase {
     private String sku;
     private String name;
     private Integer stockQuantity;
-    private Float height;
-    private Float width;
-    private Float length;
-    private Float weight;
+    private Double height;
+    private Double width;
+    private Double length;
+    private Double weight;
     private String mainImageUrl;
 
     @Type(type = "jsonb")

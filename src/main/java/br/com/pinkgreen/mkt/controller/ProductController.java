@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +33,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> findById(@PathVariable Integer id) {
+    public ResponseEntity<ProductResponse> findById(Integer id) {
         var productDomain = getProductByIdUseCase.findById(id);
         return ResponseEntity.ok().body(new ProductMapperImpl().productDomainToResponse(productDomain));
     }
@@ -51,7 +50,7 @@ public class ProductController implements ProductControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductRequest productRequest) {
+    public ResponseEntity<Void> createProduct(ProductRequest productRequest) {
         var productDomain = new ProductMapperImpl().productRequestToDomain(productRequest);
 
         var productCreateDomain = createProductUseCase.execute(productDomain);
@@ -63,7 +62,7 @@ public class ProductController implements ProductControllerApi {
     @Override
     @PutMapping("/{id}")
     @RolesAllowed("admin")
-    public ResponseEntity<Void> updateProduct(@PathVariable Integer id, @Valid @RequestBody ProductUpdateRequest productUpdateRequest) {
+    public ResponseEntity<Void> updateProduct(Integer id, ProductUpdateRequest productUpdateRequest) {
         var productDomain = new ProductMapperImpl().productUpdateRequestToDomain(productUpdateRequest);
 
         updateProductUseCase.updateProduct(id, productDomain);

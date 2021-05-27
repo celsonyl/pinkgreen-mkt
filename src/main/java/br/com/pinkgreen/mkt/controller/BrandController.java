@@ -53,7 +53,7 @@ public class BrandController implements BrandControllerApi {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<BrandResponse> findById(@PathVariable Integer id) {
+    public ResponseEntity<BrandResponse> findById(Integer id) {
         var brandDomain = getBrandByIdUseCase.execute(id);
         return ResponseEntity.ok(new BrandMapperImpl().brandDomainToResponse(brandDomain));
     }
