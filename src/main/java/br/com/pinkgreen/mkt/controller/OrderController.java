@@ -1,10 +1,10 @@
 package br.com.pinkgreen.mkt.controller;
 
-import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
@@ -16,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +24,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-@RestController
-@RequestMapping("/order")
 @RequiredArgsConstructor
 public class OrderController implements OrderControllerApi {
 

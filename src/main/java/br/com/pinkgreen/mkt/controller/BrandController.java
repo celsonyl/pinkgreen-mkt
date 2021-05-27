@@ -20,9 +20,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-@RestController
 @RequiredArgsConstructor
-@RequestMapping("/brand")
 public class BrandController implements BrandControllerApi {
 
     private final CreateBrandUseCase createBrandUseCase;

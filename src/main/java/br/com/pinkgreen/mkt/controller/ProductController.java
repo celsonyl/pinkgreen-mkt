@@ -19,11 +19,9 @@ import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
 @Component
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping(value = "/product")
 public class ProductController implements ProductControllerApi {
 
     private final GetProductByIdUseCase getProductByIdUseCase;
