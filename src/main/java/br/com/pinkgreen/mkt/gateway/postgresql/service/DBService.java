@@ -16,9 +16,9 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class DBService {
 
-    private BrandRepository brandRepository;
-    private CategoryRepository categoryRepository;
-    private ProductRepository productRepository;
+    private final BrandRepository brandRepository;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     public void instantiateTestDB() {
         var brand1 = new BrandDatabase(null, "Naike");
