@@ -11,7 +11,6 @@ import javax.validation.Valid;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping(value = "/sku")
 public interface SkuControllerApi {
 
     @ApiOperation(value = "Criação de SKU")

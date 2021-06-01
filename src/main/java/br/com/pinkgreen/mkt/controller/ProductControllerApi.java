@@ -15,7 +15,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping(value = "/product")
 public interface ProductControllerApi {
 
     @ApiOperation(value = "Procura um produto por id")

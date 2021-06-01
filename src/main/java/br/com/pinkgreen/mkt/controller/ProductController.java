@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping(value = "/product")
 public class ProductController implements ProductControllerApi {
 
     private final GetProductByIdUseCase getProductByIdUseCase;

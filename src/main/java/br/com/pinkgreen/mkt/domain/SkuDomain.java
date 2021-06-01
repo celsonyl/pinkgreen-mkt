@@ -1,4 +1,5 @@
-package br.com.pinkgreen.mkt.controller.model;
+package br.com.pinkgreen.mkt.domain;
+
 
 import lombok.*;
 
@@ -6,13 +7,13 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
 @EqualsAndHashCode
-@Builder
-public class SkuRequest {
-
-    private ProductRequest product;
+@NoArgsConstructor
+public class SkuDomain {
+    private Integer id;
+    private ProductDomain product;
     private String sku;
     private String name;
     private Integer stockQuantity;
@@ -22,6 +23,6 @@ public class SkuRequest {
     private Double weight;
     private String mainImageUrl;
     private List<String> urlImages;
-    private SkuPriceRequest price;
-    private List<SkuAttributesRequest> skuAttributes;
+    private SkuPriceDomain price;
+    private List<SkuAttributesDomain> skuAttributes;
 }

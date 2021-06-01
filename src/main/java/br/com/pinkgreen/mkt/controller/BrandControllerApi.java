@@ -14,7 +14,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("/brand")
 public interface BrandControllerApi {
 
     @ApiOperation(value = "Criar marca de Produto")

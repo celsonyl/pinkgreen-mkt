@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class ProductSkuDatabase {
+public class SkuDatabase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

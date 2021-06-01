@@ -14,7 +14,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("/category")
 public interface CategoryControllerApi {
 
     @ApiOperation(value = "Criar Categoria de Produto")

@@ -23,4 +23,9 @@ public class CategoryDatabase {
 
     @ManyToMany(mappedBy = "categories")
     private List<ProductDatabase> products = new ArrayList<>();
+
+    public CategoryDatabase(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

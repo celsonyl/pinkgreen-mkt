@@ -16,7 +16,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("/order")
 public interface OrderControllerApi {
 
     @ApiOperation(value = "Criação de pedido")
