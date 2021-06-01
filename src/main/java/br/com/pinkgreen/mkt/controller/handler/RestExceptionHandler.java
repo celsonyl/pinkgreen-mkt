@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.controller.handler;
 
 import br.com.pinkgreen.mkt.controller.handler.model.StandardError;
 import br.com.pinkgreen.mkt.controller.handler.model.ValidationError;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,15 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException error,HttpServletRequest request){
-        var standardError = new StandardError(error.getMessage(),request.getRequestURI());
+    public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException error, HttpServletRequest request) {
+        var standardError = new StandardError(error.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
+    }
+
+    @ExceptionHandler(DataIntegrityException.class)
+    public ResponseEntity<StandardError> dataIntegrityException(DataIntegrityException e, HttpServletRequest request) {
+        var standardError = new StandardError(e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(standardError);
     }
 
 }

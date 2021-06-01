@@ -1,6 +1,7 @@
 package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.SkuDomain;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.gateway.postgresql.CreateSkuProductGatewayImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ public class CreateSkuProductUseCase {
 
     private final CreateSkuProductGatewayImpl createSkuProductGateway;
 
-    public SkuDomain execute(SkuDomain skuDomain){
+    public SkuDomain execute(SkuDomain skuDomain) throws DataIntegrityException {
         return createSkuProductGateway.execute(skuDomain);
     }
 }

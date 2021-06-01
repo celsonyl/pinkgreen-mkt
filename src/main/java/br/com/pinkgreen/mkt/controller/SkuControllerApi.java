@@ -1,10 +1,10 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.SkuRequest;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -24,5 +24,5 @@ public interface SkuControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> createSku(@Valid @RequestBody SkuRequest skuRequest);
+    ResponseEntity<Void> createSku(@Valid @RequestBody SkuRequest skuRequest) throws DataIntegrityException;
 }
