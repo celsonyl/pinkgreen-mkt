@@ -1,24 +1,21 @@
 package br.com.pinkgreen.mkt.config;
 
 import br.com.pinkgreen.mkt.gateway.postgresql.service.DBService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.text.ParseException;
-
 @Configuration
+@RequiredArgsConstructor
 public class DBconfig {
 
-    @Autowired
-    private DBService dbService;
-
     @Value("${spring.jpa.hibernate.ddl-auto}")
-    private String strategy;
+    private final String strategy;
+    private final DBService dbService;
 
     @Bean
-    public boolean instantiateDatabase() throws ParseException {
+    public boolean instantiateDatabase() {
         if (!"create".equals(strategy))
             return false;
 

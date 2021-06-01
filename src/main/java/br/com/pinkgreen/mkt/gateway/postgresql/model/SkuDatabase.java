@@ -29,7 +29,9 @@ public class SkuDatabase implements Serializable {
     @JoinColumn(name = "product_id")
     private ProductDatabase product;
 
+    @Column(unique = true)
     private String sku;
+
     private String name;
     private Integer stockQuantity;
     private Double height;

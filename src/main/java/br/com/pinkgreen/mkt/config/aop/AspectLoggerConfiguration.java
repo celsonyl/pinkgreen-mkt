@@ -10,6 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Aspect
 @Configuration
 @EnableAspectJAutoProxy
+@SuppressWarnings("java:S2139")
 public class AspectLoggerConfiguration {
 
     @Around("execution(* br.com.pinkgreen.mkt.controller.*.*(..))" +

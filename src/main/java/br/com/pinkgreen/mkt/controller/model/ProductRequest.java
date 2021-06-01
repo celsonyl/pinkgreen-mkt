@@ -50,7 +50,7 @@ public class ProductRequest implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class BrandRequest {
+    public static class BrandRequest implements Serializable {
         @NotNull
         @ApiModelProperty(value = "ID da marca", required = true, example = "1000258")
         private Integer id;
@@ -61,7 +61,7 @@ public class ProductRequest implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class CategoryRequest {
+    public static class CategoryRequest implements Serializable {
         @NotNull
         @ApiModelProperty(value = "ID da categoria", required = true, example = "1000258")
         private Integer id;

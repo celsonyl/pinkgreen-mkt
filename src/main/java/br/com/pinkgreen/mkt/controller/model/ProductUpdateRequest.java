@@ -5,8 +5,6 @@ import jdk.jfr.BooleanFlag;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 
