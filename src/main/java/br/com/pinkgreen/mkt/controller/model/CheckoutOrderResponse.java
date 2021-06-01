@@ -3,13 +3,15 @@ package br.com.pinkgreen.mkt.controller.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class CheckoutOrderResponse {
+public class CheckoutOrderResponse implements Serializable {
 
     @ApiModelProperty(value = "ID do cliente", example = "1f508dc081fd6db15d1d9056e457cd3f")
     private String customerId;

@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class ProductRequest {
+public class ProductRequest implements Serializable {
 
     private Integer id;
 

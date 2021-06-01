@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.domain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class OrderDomain {
+public class OrderDomain implements Serializable {
 
     private String id;
     private OrderStatus status;

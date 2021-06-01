@@ -3,13 +3,15 @@ package br.com.pinkgreen.mkt.controller.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class ProductOrderResponse {
+public class ProductOrderResponse implements Serializable {
 
     @ApiModelProperty(value = "SKU do produto", required = true, example = "888888888")
     private String sku;

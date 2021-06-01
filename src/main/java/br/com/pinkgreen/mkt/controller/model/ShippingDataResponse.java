@@ -3,13 +3,15 @@ package br.com.pinkgreen.mkt.controller.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class ShippingDataResponse {
+public class ShippingDataResponse implements Serializable {
 
     @ApiModelProperty(value = "Preço da taxa de frete", required = true, example = "18.90")
     private Double freightPrice;

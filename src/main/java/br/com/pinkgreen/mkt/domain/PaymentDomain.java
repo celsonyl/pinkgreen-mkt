@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.domain;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @Getter
@@ -11,7 +12,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class PaymentDomain {
+public class PaymentDomain implements Serializable {
 
     private Double amount;
     private PaymentMethod paymentMethod;

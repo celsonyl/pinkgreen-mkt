@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.controller.model;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -10,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class SkuRequest {
+public class SkuRequest implements Serializable {
 
     private ProductRequest product;
     private String sku;

@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class BrandRequest {
+public class BrandRequest implements Serializable {
 
     @NotBlank(message = "Field not be null or blank")
     @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")

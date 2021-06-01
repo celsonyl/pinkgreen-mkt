@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Map;
 
 @Getter
@@ -14,7 +15,7 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode
-public class PaymentDataRequest {
+public class PaymentDataRequest implements Serializable {
 
     private PaymentMethod paymentMethod;
 

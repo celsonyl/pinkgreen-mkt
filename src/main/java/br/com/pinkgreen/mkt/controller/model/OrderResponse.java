@@ -4,6 +4,7 @@ import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class OrderResponse {
+public class OrderResponse implements Serializable {
 
     @ApiModelProperty(value = "Número do pedido", example = "1036920")
     private String id;

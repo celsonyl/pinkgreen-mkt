@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.domain;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -9,7 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ProductAttributesDomain {
+public class ProductAttributesDomain implements Serializable {
     private String label;
     private String type;
     private List<String> values;

@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import javax.validation.constraints.PositiveOrZero;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ProductOrderRequest {
+public class ProductOrderRequest implements Serializable {
 
     @NotBlank
     @ApiModelProperty(value = "SKU do produto", required = true, example = "888888888")

@@ -6,6 +6,7 @@ import lombok.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import javax.validation.constraints.PositiveOrZero;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ShippingDataRequest {
+public class ShippingDataRequest implements Serializable {
 
     @PositiveOrZero
     @ApiModelProperty(value = "Preço da taxa de frete", required = true, example = "18.90")

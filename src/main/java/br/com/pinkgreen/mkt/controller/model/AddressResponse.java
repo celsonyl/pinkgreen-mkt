@@ -3,13 +3,15 @@ package br.com.pinkgreen.mkt.controller.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class AddressResponse {
+public class AddressResponse implements Serializable {
 
     @ApiModelProperty(value = "Cidade de entrega", required = true, example = "Limeira")
     private String city;

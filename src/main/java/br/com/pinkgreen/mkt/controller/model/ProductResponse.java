@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.controller.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class ProductResponse {
+public class ProductResponse implements Serializable {
 
     @ApiModelProperty(value = "Id do produto", required = true, example = "1")
     private Integer id;

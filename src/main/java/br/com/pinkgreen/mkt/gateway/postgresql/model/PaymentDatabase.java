@@ -4,13 +4,15 @@ import br.com.pinkgreen.mkt.domain.AddressDomain;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class PaymentDatabase {
+public class PaymentDatabase implements Serializable {
 
     private Double amount;
     private PaymentMethod paymentMethod;

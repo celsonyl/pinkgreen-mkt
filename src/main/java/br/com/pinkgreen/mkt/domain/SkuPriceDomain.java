@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.domain;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 @Getter
@@ -9,7 +10,7 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode
-public class SkuPriceDomain {
+public class SkuPriceDomain implements Serializable {
 
     private Double listPrice;
     private Double salePrice;
