@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "product_sku")
@@ -48,6 +47,6 @@ public class SkuDatabase {
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private List<SkuAttributesDomain> skuAttributes = new ArrayList<>();
+    private List<SkuAttributesDomain> skuAttributes;
 
 }
