@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.translator;
 
+import br.com.pinkgreen.mkt.controller.model.SkuByProductIdResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuRequest;
 import br.com.pinkgreen.mkt.controller.model.SkuResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuUpdateRequest;
@@ -19,5 +20,7 @@ public interface SkuProductMapper {
     SkuResponse skuDomainToResponse(SkuDomain skuDomain);
 
     SkuDomain skuUpdateRequestToDomain(SkuUpdateRequest skuUpdateRequest);
+
+    SkuByProductIdResponse skuDomainToSkuByProductIdResponse(SkuDomain skuDomain);
 
 }
