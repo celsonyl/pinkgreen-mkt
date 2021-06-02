@@ -1,5 +1,4 @@
-package br.com.pinkgreen.mkt.domain;
-
+package br.com.pinkgreen.mkt.controller.model;
 
 import lombok.*;
 
@@ -8,13 +7,11 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
+@Builder
 @EqualsAndHashCode
-@NoArgsConstructor
-public class SkuDomain implements Serializable {
-    private Integer id;
-    private ProductDomain product;
+public class SkuResponse implements Serializable {
+
     private String skuCode;
     private String name;
     private Integer stockQuantity;
@@ -24,6 +21,8 @@ public class SkuDomain implements Serializable {
     private Double weight;
     private String mainImageUrl;
     private List<String> urlImages;
-    private SkuPriceDomain price;
-    private List<SkuAttributesDomain> skuAttributes;
+    private SkuPriceResponse price;
+    private List<SkuAttributesResponse> skuAttributes;
+    private ProductResponse product;
+
 }

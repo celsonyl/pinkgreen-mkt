@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -15,6 +16,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryRequest implements Serializable {
+
+    @NotNull
+    @ApiModelProperty(value = "ID da categoria", required = true, example = "1000258")
+    private Integer id;
 
     @NotBlank(message = "Field not be null or blank")
     @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")

@@ -44,26 +44,5 @@ public class ProductRequest implements Serializable {
     @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\" }, { \"id\": \"2\" } ]")
     @Valid
     private List<CategoryRequest> categories;
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class BrandRequest implements Serializable {
-        @NotNull
-        @ApiModelProperty(value = "ID da marca", required = true, example = "1000258")
-        private Integer id;
-    }
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class CategoryRequest implements Serializable {
-        @NotNull
-        @ApiModelProperty(value = "ID da categoria", required = true, example = "1000258")
-        private Integer id;
-    }
+    
 }

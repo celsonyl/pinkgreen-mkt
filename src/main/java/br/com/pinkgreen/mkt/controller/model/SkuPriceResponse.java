@@ -10,21 +10,21 @@ import java.time.Instant;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
+@Builder
 @EqualsAndHashCode
-public class SkuPriceRequest implements Serializable {
+public class SkuPriceResponse implements Serializable {
 
     @PositiveOrZero
     private Double listPrice;
     @PositiveOrZero
     private Double salePrice;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT-3")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Instant startDate;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT-3")
     private Instant endDate;
 }

@@ -21,7 +21,7 @@ public class CreateSkuProductGatewayImpl implements CreateSkuProductGateway {
             var skuDatabase = skuRepository.save(skuMapper.skuDomainToDatabase(skuDomain));
             return skuMapper.skuDatabaseToDomain(skuDatabase);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Sku "+ skuDomain.getSku() + " já existe", e);
+            throw new DataIntegrityException("Sku "+ skuDomain.getSkuCode() + " já existe", e);
         }
     }
 }

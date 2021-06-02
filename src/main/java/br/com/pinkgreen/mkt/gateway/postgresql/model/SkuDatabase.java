@@ -30,7 +30,7 @@ public class SkuDatabase implements Serializable {
     private ProductDatabase product;
 
     @Column(unique = true)
-    private String sku;
+    private String skuCode;
 
     private String name;
     private Integer stockQuantity;
