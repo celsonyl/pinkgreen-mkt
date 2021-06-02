@@ -20,7 +20,7 @@ public class UpdateProductUseCase {
         return updateProductGateway.updateProduct(productDB);
     }
 
-    private ProductDomain populateProductDB(ProductDomain productUpdate, ProductDomain productDB) {
+    private void populateProductDB(ProductDomain productUpdate, ProductDomain productDB) {
         if (productUpdate.getName() != null) {
             productDB.setName(productUpdate.getName());
         }
@@ -32,7 +32,5 @@ public class UpdateProductUseCase {
         if (productUpdate.getActive() != null) {
             productDB.setActive(productUpdate.getActive());
         }
-
-        return productDB;
     }
 }

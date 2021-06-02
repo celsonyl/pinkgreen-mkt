@@ -1,7 +1,9 @@
 package br.com.pinkgreen.mkt.controller;
 
+import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.controller.model.SkuRequest;
 import br.com.pinkgreen.mkt.controller.model.SkuResponse;
+import br.com.pinkgreen.mkt.controller.model.SkuUpdateRequest;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -41,4 +43,15 @@ public interface SkuControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<SkuResponse> findSku(@PathVariable String code);
+
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "SKU Criado"),
+            @ApiResponse(code = 204, message = "No Content"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<Void> updateSku(@PathVariable String code, @Valid @RequestBody SkuUpdateRequest skuUpdateRequest);
 }

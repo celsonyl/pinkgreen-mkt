@@ -2,7 +2,7 @@ package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.SkuDomain;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
-import br.com.pinkgreen.mkt.gateway.postgresql.GetSkuBySkuCodeImpl;
+import br.com.pinkgreen.mkt.gateway.postgresql.GetSkuBySkuCodeGatewayImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class GetSkuBySkuCodeUseCase {
 
-    private final GetSkuBySkuCodeImpl getSkuBySkuCode;
+    private final GetSkuBySkuCodeGatewayImpl getSkuBySkuCode;
 
     public SkuDomain getSkuBySkuCode(String code) {
         return getSkuBySkuCode.getSkuBySkuCode(code)
