@@ -4,10 +4,12 @@ services:
   postgres:
     container_name: postgres_pinkgreen_mkt
     image: postgres:13.2
+    volumes:
+      - ./psql:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=pinkgreen_mkt
+      - POSTGRES_MULTIPLE_DATABASES=pinkgreen_mkt,keycloak
       - POSTGRES_USER=local
       - POSTGRES_PASSWORD=local
       - MAX_CONNECTIONS=300
@@ -17,14 +19,22 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
-  # RUN:
-  # docker run -d --name keycloak_pinkgreen_mkt -p 8180:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:13.0.0
-  # TODO: Tentar resolver este compose usando estes modelos que existem: https://github.com/keycloak/keycloak-containers/tree/master/docker-compose-examples
-#  keycloak:
-#    container_name: keycloak_pinkgreen_mkt
-#    image: quay.io/keycloak/keycloak:13.0.0
-#    environment:
-#      - KEYCLOAK_USER=admin
-#      - KEYCLOAK_PASSWORD=admin
-#    ports:
-#      - 8180:8080
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak_pinkgreen_mkt
+    volumes:
+      - ./imports:/opt/jboss/keycloak/imports
+    environment:
+      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: local
+      DB_SCHEMA: public
+      DB_PASSWORD: local
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - 8181:8080
+    depends_on:
+      - postgres

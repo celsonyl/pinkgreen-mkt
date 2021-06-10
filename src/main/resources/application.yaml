@@ -38,9 +38,9 @@ spring:
 
 keycloak:
   realm: Pinkgreen-mkt
-  auth-server-url: http://localhost:8180/auth
+  auth-server-url: http://localhost:8181/auth
   ssl-required: external
   resource: pinkgreen-backend
-  credentials.secret: 6c816309-8d9c-4fff-9157-d7aa34eb8b26
+  credentials.secret: 4c1d2c2c-1bad-4b4d-8880-8f45c0e86279
   use-resource-role-mappings: true
   bearer-only: true
