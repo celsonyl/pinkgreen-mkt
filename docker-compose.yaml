@@ -27,7 +27,7 @@ services:
     networks:
       - pinkgreen-network
   keycloak:
-    image: quay.io/keycloak/keycloak:latest
+    image: quay.io/keycloak/keycloak:13.0.0
     container_name: keycloak_pinkgreen_mkt
     volumes:
       - ./imports:/opt/jboss/keycloak/imports
