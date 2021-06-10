@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -16,7 +15,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class BrandRequest implements Serializable {
 
-    @NotNull
     @ApiModelProperty(value = "ID da marca", required = true, example = "1000258")
     private Integer id;
 

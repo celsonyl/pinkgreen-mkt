@@ -19,4 +19,3 @@ keycloak:
   realm: Pinkgreen-mkt
   auth-server-url: http://localhost:8080/auth
   resource: pinkgreen-backend
-  credentials.secret: 4c1d2c2c-1bad-4b4d-8880-8f45c0e86279
