@@ -17,7 +17,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class CategoryRequest implements Serializable {
 
-    @NotNull
     @ApiModelProperty(value = "ID da categoria", required = true, example = "1000258")
     private Integer id;
 

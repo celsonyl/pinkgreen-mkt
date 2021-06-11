@@ -37,12 +37,10 @@ public class ProductRequest implements Serializable {
     private Boolean active;
 
     @NotNull(message = "Field not be null")
-    @Valid
     private BrandRequest brand;
 
     @NotNull
     @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\" }, { \"id\": \"2\" } ]")
-    @Valid
     private List<CategoryRequest> categories;
     
 }
