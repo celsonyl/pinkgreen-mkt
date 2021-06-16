@@ -2,7 +2,7 @@ package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.*;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
-import br.com.pinkgreen.mkt.gateway.CheckoutOrderGateway;
+import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
 import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -23,18 +23,19 @@ class CheckoutOrderUseCaseTest {
     private final ArgumentCaptor<OrderDomain> orderDomainArgument = forClass(OrderDomain.class);
     private final ArgumentCaptor<OrderDomain> publishOrderDomainArgument = forClass(OrderDomain.class);
     private final ArgumentCaptor<PaymentDomain> publishPaymentDomainArgument = forClass(PaymentDomain.class);
-    private final CheckoutOrderGateway checkoutOrderGateway = mock(CheckoutOrderGateway.class);
+    private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase = mock(GetSkuBySkuCodeUseCase.class);
+    private final SaveOrderGateway saveOrderGateway = mock(SaveOrderGateway.class);
     private final PublishOrderToProcessPayment publishOrderToProcessPayment = mock(PublishOrderToProcessPayment.class);
-    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(checkoutOrderGateway, publishOrderToProcessPayment);
+    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(getSkuBySkuCodeUseCase, saveOrderGateway, publishOrderToProcessPayment);
 
     @Test
     void shouldCheckoutOrderSuccessfully() {
         OrderDomain orderDomain = getOrder();
-        when(checkoutOrderGateway.execute(any())).thenReturn(getPersistedOrder());
+        when(saveOrderGateway.execute(any())).thenReturn(getPersistedOrder());
 
         checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
 
-        verify(checkoutOrderGateway).execute(orderDomainArgument.capture());
+        verify(saveOrderGateway).execute(orderDomainArgument.capture());
         verify(publishOrderToProcessPayment, times(1)).publish(publishOrderDomainArgument.capture(), publishPaymentDomainArgument.capture());
 
         OrderDomain orderDomainArgumentValue = orderDomainArgument.getValue();

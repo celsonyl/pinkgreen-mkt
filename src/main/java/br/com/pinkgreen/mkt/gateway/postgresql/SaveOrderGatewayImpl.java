@@ -1,7 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.OrderDomain;
-import br.com.pinkgreen.mkt.gateway.CheckoutOrderGateway;
+import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
 import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import java.time.Instant;
 
 @Component
 @RequiredArgsConstructor
-public class CheckoutOrderGatewayImpl implements CheckoutOrderGateway {
+public class SaveOrderGatewayImpl implements SaveOrderGateway {
 
     private final OrderRepository orderRepository;
 

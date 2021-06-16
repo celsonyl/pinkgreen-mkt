@@ -68,7 +68,7 @@ public class DBService {
         var endDate = LocalDateTime.parse("00:00 AM, Fri 06/18/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
 
         var iphone12ProMax128 = new SkuDatabase(
-                null, iphone12ProMax, "MGD93BZ/A",
+                null, iphone12ProMax, "MGD93BZA",
                 "Dourado, com Tela de 6,7”, 5G, 128 GB e Câmera Tripla de 12MP",
                 10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
                 new SkuPriceDomain(9495.36, 4500.98, startDate, endDate),
