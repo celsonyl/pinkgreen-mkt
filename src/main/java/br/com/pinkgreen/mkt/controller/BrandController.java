@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.model.BrandRequest;
 import br.com.pinkgreen.mkt.controller.model.BrandResponse;
+import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
 import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateBrandUseCase;
@@ -51,9 +52,22 @@ public class BrandController implements BrandControllerApi {
     }
 
     @Override
+    @GetMapping("/search")
+    public ResponseEntity<List<BrandResponse>> brandSearch(String text) {
+        text = URL.decodeParam(text);
+        List<BrandDomain> searchBrand = getAllBrandsUseCase.searchBrand(text);
+
+        return ResponseEntity.ok(searchBrand.stream()
+                .map(new BrandMapperImpl()::brandDomainToResponse)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<BrandResponse> findById(Integer id) {
         var brandDomain = getBrandByIdUseCase.execute(id);
         return ResponseEntity.ok(new BrandMapperImpl().brandDomainToResponse(brandDomain));
     }
+
+
 }

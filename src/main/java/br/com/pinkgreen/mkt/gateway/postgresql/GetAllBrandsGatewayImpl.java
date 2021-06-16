@@ -23,4 +23,12 @@ public class GetAllBrandsGatewayImpl implements GetAllBrandsGateway {
                 .map(new BrandMapperImpl()::brandDatabaseToDomain)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<BrandDomain> searchBrand(String text) {
+        List<BrandDatabase> searchBrands = brandRepository.findByNameStartingWithIgnoreCase(text);
+        return searchBrands.stream()
+                .map(new BrandMapperImpl()::brandDatabaseToDomain)
+                .collect(Collectors.toList());
+    }
 }
