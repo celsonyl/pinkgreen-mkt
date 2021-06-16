@@ -84,16 +84,16 @@ class CheckoutOrderUseCaseTest {
 
         ProductOrderDomain productOrderDomain = ProductOrderDomain.builder()
                 .name("Samsung Galaxy S21 Cinza")
-                .price(3859.00)
-                .quantity(1000)
-                .sku("888888888")
+                .price(new SkuPriceDomain(3859.00, 0.00, null, null))
+                .stockQuantity(1000)
+                .skuCode("888888888")
                 .build();
 
         ProductOrderDomain productOrderDomain2 = ProductOrderDomain.builder()
                 .name("Apple iPhone 12 Roxo")
-                .price(5207.00)
-                .quantity(1000)
-                .sku("99999999")
+                .price(new SkuPriceDomain(5207.00, 0.00, null, null))
+                .stockQuantity(1000)
+                .skuCode("99999999")
                 .build();
 
         return OrderDomain.builder()
@@ -132,18 +132,20 @@ class CheckoutOrderUseCaseTest {
                 .address(addressDomain)
                 .build();
 
+
         ProductOrderDomain productOrderDomain = ProductOrderDomain.builder()
                 .name("Samsung Galaxy S21 Cinza")
-                .price(3859.00)
-                .quantity(1000)
-                .sku("888888888")
+                .price(new SkuPriceDomain(3859.00, 0.00, null, null))
+                .stockQuantity(1000)
+                .skuCode("888888888")
                 .build();
+
 
         ProductOrderDomain productOrderDomain2 = ProductOrderDomain.builder()
                 .name("Apple iPhone 12 Roxo")
-                .price(5207.00)
-                .quantity(1000)
-                .sku("99999999")
+                .price(new SkuPriceDomain(5207.00, 0.00, null, null))
+                .stockQuantity(1000)
+                .skuCode("99999999")
                 .build();
 
         PaymentDomain paymentDomain = PaymentDomain.builder()

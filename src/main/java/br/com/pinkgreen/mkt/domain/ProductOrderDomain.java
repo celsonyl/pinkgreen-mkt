@@ -12,8 +12,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class ProductOrderDomain implements Serializable {
 
-    private String sku;
+    private String skuCode;
     private String name;
-    private Double price;
-    private Integer quantity;
+    private SkuPriceDomain price;
+    private Integer stockQuantity;
 }

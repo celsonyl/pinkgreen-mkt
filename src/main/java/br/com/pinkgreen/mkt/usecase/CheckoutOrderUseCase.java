@@ -35,6 +35,6 @@ public class CheckoutOrderUseCase {
     }
 
     private Double calcOrderAmount(List<ProductOrderDomain> productOrderDomainList) {
-        return productOrderDomainList.stream().reduce(0.00, (subtotal, element) -> subtotal + element.getPrice(), Double::sum);
+        return productOrderDomainList.stream().reduce(0.00, (subtotal, element) -> subtotal + element.getPrice().getListPrice(), Double::sum);
     }
 }

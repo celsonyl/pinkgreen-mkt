@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.Instant;
@@ -17,7 +16,6 @@ import java.time.Instant;
 @EqualsAndHashCode
 public class SkuPriceRequest implements Serializable {
 
-    @NotNull
     @PositiveOrZero
     @ApiModelProperty(value = "Preço do SKU", required = true, example = "199.99")
     private Double listPrice;
