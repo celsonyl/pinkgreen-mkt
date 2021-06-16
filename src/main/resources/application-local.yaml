@@ -1,6 +1,6 @@
 spring:
   jpa:
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: create-drop
     show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/pinkgreen_mkt
@@ -19,3 +19,4 @@ keycloak:
   realm: Pinkgreen-mkt
   auth-server-url: http://localhost:8080/auth
   resource: pinkgreen-backend
+  credentials.secret: cb6f474d-5a8a-44f7-b659-34e0fa8f95a0

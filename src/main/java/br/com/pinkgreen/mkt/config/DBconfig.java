@@ -18,8 +18,9 @@ public class DBconfig {
 
     @Bean
     public boolean instantiateDatabase() {
-        if (!"create".equals(strategy))
+        if (!"create".equals(strategy) && !"create-drop".equals(strategy)) {
             return false;
+        }
 
         dbService.instantiateTestDB();
         return true;
