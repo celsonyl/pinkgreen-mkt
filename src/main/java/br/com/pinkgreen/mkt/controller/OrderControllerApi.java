@@ -30,7 +30,6 @@ public interface OrderControllerApi {
     })
     ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest, HttpServletRequest request);
 
-
     @ApiOperation(value = "Retorna todos os pedidos de um cliente")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")

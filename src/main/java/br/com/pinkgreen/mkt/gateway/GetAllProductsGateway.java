@@ -7,4 +7,6 @@ import java.util.List;
 public interface GetAllProductsGateway {
 
     List<ProductDomain> execute();
+
+    List<ProductDomain> searchProduct(String text);
 }

@@ -68,6 +68,4 @@ public class BrandController implements BrandControllerApi {
         var brandDomain = getBrandByIdUseCase.execute(id);
         return ResponseEntity.ok(new BrandMapperImpl().brandDomainToResponse(brandDomain));
     }
-
-
 }

@@ -49,7 +49,7 @@ public interface BrandControllerApi {
     })
     ResponseEntity<BrandResponse> findById(@PathVariable Integer id);
 
-    @ApiOperation(value = "Busca por nome da marca")
+    @ApiOperation(value = "Consulta marca")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),

@@ -3,6 +3,8 @@ package br.com.pinkgreen.mkt.controller;
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
+import br.com.pinkgreen.mkt.controller.util.URL;
+import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateProductUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllProductsUseCase;
@@ -42,6 +44,16 @@ public class ProductController implements ProductControllerApi {
     public ResponseEntity<List<ProductResponse>> listProducts() {
         var productsDomain = getAllProductsUseCase.execute();
         return ResponseEntity.ok().body(productsDomain.stream()
+                .map(new ProductMapperImpl()::productDomainToResponse)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponse>> searchProduct(String text) {
+        text = URL.decodeParam(text);
+        List<ProductDomain> searchProduct = getAllProductsUseCase.searchProduct(text);
+        return ResponseEntity.ok(searchProduct.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
     }

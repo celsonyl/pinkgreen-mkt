@@ -16,4 +16,8 @@ public class GetAllProductsUseCase {
     public List<ProductDomain> execute() {
         return getAllProductsGateway.execute();
     }
+
+    public List<ProductDomain> searchProduct(String text) {
+        return getAllProductsGateway.searchProduct(text);
+    }
 }

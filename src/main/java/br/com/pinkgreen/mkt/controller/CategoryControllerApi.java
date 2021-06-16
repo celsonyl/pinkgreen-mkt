@@ -29,7 +29,6 @@ public interface CategoryControllerApi {
     })
     ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest);
 
-
     @ApiOperation(value = "Lista todas Categorias")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!"),
@@ -40,7 +39,6 @@ public interface CategoryControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<List<CategoryResponse>> listCategories();
-
 
     @ApiOperation(value = "Procura uma Categoria por id")
     @ApiResponses(value = {

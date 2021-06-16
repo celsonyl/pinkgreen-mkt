@@ -31,7 +31,6 @@ public interface SkuControllerApi {
     })
     ResponseEntity<Void> createSku(@Valid @RequestBody SkuRequest skuRequest) throws DataIntegrityException;
 
-
     @ApiOperation(value = "Procurando SKU by code")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "SKU Criado"),
@@ -41,7 +40,6 @@ public interface SkuControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<SkuResponse> findSku(@PathVariable String code);
-
 
     @ApiOperation(value = "Atualizar SKU por code")
     @ApiImplicitParams({
