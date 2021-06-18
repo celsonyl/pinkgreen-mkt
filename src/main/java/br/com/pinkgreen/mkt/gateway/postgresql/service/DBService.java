@@ -45,7 +45,7 @@ public class DBService {
         categoryRepository.saveAll(Arrays.asList(informatica, eletrodomesticos, celularesSmartphones));
 
         var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, acer, Collections.singletonList(informatica));
-        var samsungBook = new ProductDatabase(null, "Samsung Book", 3181.55, true, samsung, Collections.singletonList(informatica));
+        var samsungBook = new ProductDatabase(null, "Notebook Samsung Book", 3181.55, true, samsung, Collections.singletonList(informatica));
         var samsungGalaxyA11 = new ProductDatabase(null, "Samsung Galaxy A11", 999.00, true, samsung, Collections.singletonList(celularesSmartphones));
         var iphone12ProMax = new ProductDatabase(null, "iPhone 12 Pro Max", 9495.36, true, apple, Collections.singletonList(celularesSmartphones));
         var microOndas = new ProductDatabase(null, "Micro-ondas", 659.00, true, electrolux, Collections.singletonList(eletrodomesticos));
@@ -76,6 +76,14 @@ public class DBService {
                 Collections.emptyList()
         );
 
-        skuRepository.saveAll(Arrays.asList(aspire5Sku, iphone12ProMax128));
+        var samsungBookI3core258GB = new SkuDatabase(
+                null, samsungBook, "NP550XDA-KT3BR",
+                "Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10",
+                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                new SkuPriceDomain(4299.00, 3181.55, Instant.now().minusSeconds(86400), Instant.now().plusSeconds(86400)),
+                Collections.emptyList()
+        );
+
+        skuRepository.saveAll(Arrays.asList(aspire5Sku, iphone12ProMax128, samsungBookI3core258GB));
     }
 }
