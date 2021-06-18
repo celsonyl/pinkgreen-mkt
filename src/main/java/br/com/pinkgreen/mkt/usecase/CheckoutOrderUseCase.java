@@ -25,7 +25,7 @@ public class CheckoutOrderUseCase {
     private final PublishOrderToProcessPayment publishOrderToProcessPayment;
 
     public OrderDomain execute(OrderDomain orderDomain, PaymentDomain paymentDomain) throws CouldNotCheckoutOrderException {
-        validateReceivedSkus(orderDomain.getProductList());
+        validateReceivedSkus(orderDomain);
         setOrderStatusAndCalculateAmount(orderDomain);
         OrderDomain order = saveOrderGateway.execute(orderDomain);
 
@@ -51,7 +51,8 @@ public class CheckoutOrderUseCase {
         return skuPriceDomain.getListPrice();
     }
 
-    private void validateReceivedSkus(List<ProductOrderDomain> productOrderDomains) throws CouldNotCheckoutOrderException {
+    private void validateReceivedSkus(OrderDomain orderDomain) throws CouldNotCheckoutOrderException {
+        var productOrderDomains = orderDomain.getProductList();
         var skuDomainsDB = productOrderDomains.stream()
                 .map(element -> getSkuBySkuCodeUseCase.getSkuBySkuCode(element.getSkuCode()))
                 .collect(Collectors.toList());
@@ -64,6 +65,16 @@ public class CheckoutOrderUseCase {
         if (validProducts.size() != skuDomainsDB.size()) {
             throw new CouldNotCheckoutOrderException("Erro no checkout!");
         }
+        overrideProductList(orderDomain, skuDomainsDB);
+    }
+
+    private void overrideProductList(OrderDomain orderDomain, List<SkuDomain> skuDomainsDB) {
+        orderDomain.setProductList(skuDomainsDB.stream().map(skuDomain -> ProductOrderDomain.builder()
+                .skuCode(skuDomain.getSkuCode())
+                .name(skuDomain.getName())
+                .price(skuDomain.getPrice())
+                .stockQuantity(skuDomain.getStockQuantity())
+                .build()).collect(Collectors.toList()));
     }
 
     private boolean validateProductPrice(SkuPriceDomain receivedPrice, SkuPriceDomain databasePrice) {

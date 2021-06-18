@@ -59,6 +59,8 @@ class CheckoutOrderUseCaseTest {
         assertEquals("21/05/2000", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("birthday"));
         assertEquals("+55 19 99999-9999", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("phone"));
         assertEquals("test@test.com.br", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("email"));
+        assertEquals("Samsung Galaxy S21 Cinza", orderDomainArgument.getValue().getProductList().get(0).getName());
+        assertEquals("Apple iPhone 12 Roxo", orderDomainArgument.getValue().getProductList().get(1).getName());
     }
 
     @Test
@@ -102,7 +104,7 @@ class CheckoutOrderUseCaseTest {
                 .build();
 
         ProductOrderDomain productOrderDomain = ProductOrderDomain.builder()
-                .name("Samsung Galaxy S21 Cinza")
+                .name("Sobrescreva o nome!")
                 .price(new SkuPriceDomain(3859.00, 0.00, Instant.MIN, Instant.MIN))
                 .stockQuantity(1000)
                 .skuCode("888888888")
