@@ -2,8 +2,9 @@ package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.*;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
-import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
+import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
 import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
+import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,12 +15,15 @@ import java.util.HashMap;
 
 import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.ORDER_CREATED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentCaptor.forClass;
 import static org.mockito.Mockito.*;
 
 @AutoConfigureMockMvc
 class CheckoutOrderUseCaseTest {
 
+    public static final Instant START_DATE = Instant.now().minusSeconds(86400);
+    public static final Instant END_DATE = Instant.now().plusSeconds(86400);
     private final ArgumentCaptor<OrderDomain> orderDomainArgument = forClass(OrderDomain.class);
     private final ArgumentCaptor<OrderDomain> publishOrderDomainArgument = forClass(OrderDomain.class);
     private final ArgumentCaptor<PaymentDomain> publishPaymentDomainArgument = forClass(PaymentDomain.class);
@@ -29,8 +33,10 @@ class CheckoutOrderUseCaseTest {
     private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(getSkuBySkuCodeUseCase, saveOrderGateway, publishOrderToProcessPayment);
 
     @Test
-    void shouldCheckoutOrderSuccessfully() {
+    void shouldCheckoutOrderSuccessfully() throws CouldNotCheckoutOrderException {
         OrderDomain orderDomain = getOrder();
+        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("888888888")).thenReturn(getSku("888888888", false));
+        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", false));
         when(saveOrderGateway.execute(any())).thenReturn(getPersistedOrder());
 
         checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
@@ -44,7 +50,7 @@ class CheckoutOrderUseCaseTest {
 
         assertEquals("1234", publishOrderDomainArgumentValue.getId());
         assertEquals(ORDER_CREATED, orderDomainArgumentValue.getStatus());
-        assertEquals(9066.00, orderDomainArgumentValue.getPaymentData().getAmount());
+        assertEquals(3870.00, orderDomainArgumentValue.getPaymentData().getAmount());
         assertEquals("1111222233334444", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("cardNumber"));
         assertEquals("123", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("cvv"));
         assertEquals("01/22", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("validationDate"));
@@ -53,6 +59,18 @@ class CheckoutOrderUseCaseTest {
         assertEquals("21/05/2000", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("birthday"));
         assertEquals("+55 19 99999-9999", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("phone"));
         assertEquals("test@test.com.br", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("email"));
+    }
+
+    @Test
+    void shouldThrowCouldNotCheckoutOrderException() {
+        OrderDomain orderDomain = getOrder();
+        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("888888888")).thenReturn(getSku("888888888", false));
+        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", true));
+
+        CouldNotCheckoutOrderException couldNotCheckoutOrderException = assertThrows(CouldNotCheckoutOrderException.class,
+                () -> checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData()));
+
+        assertEquals("Erro no checkout!", couldNotCheckoutOrderException.getMessage());
     }
 
     public OrderDomain getOrder() {
@@ -85,16 +103,16 @@ class CheckoutOrderUseCaseTest {
 
         ProductOrderDomain productOrderDomain = ProductOrderDomain.builder()
                 .name("Samsung Galaxy S21 Cinza")
-                .price(new SkuPriceDomain(3859.00, 0.00, null, null))
+                .price(new SkuPriceDomain(3859.00, 0.00, Instant.MIN, Instant.MIN))
                 .stockQuantity(1000)
                 .skuCode("888888888")
                 .build();
 
         ProductOrderDomain productOrderDomain2 = ProductOrderDomain.builder()
                 .name("Apple iPhone 12 Roxo")
-                .price(new SkuPriceDomain(5207.00, 0.00, null, null))
+                .price(new SkuPriceDomain(5207.00, 11.00, START_DATE, END_DATE))
                 .stockQuantity(1000)
-                .skuCode("99999999")
+                .skuCode("999999999")
                 .build();
 
         return OrderDomain.builder()
@@ -136,7 +154,7 @@ class CheckoutOrderUseCaseTest {
 
         ProductOrderDomain productOrderDomain = ProductOrderDomain.builder()
                 .name("Samsung Galaxy S21 Cinza")
-                .price(new SkuPriceDomain(3859.00, 0.00, null, null))
+                .price(new SkuPriceDomain(3859.00, 0.00, Instant.MIN, Instant.MIN))
                 .stockQuantity(1000)
                 .skuCode("888888888")
                 .build();
@@ -144,9 +162,9 @@ class CheckoutOrderUseCaseTest {
 
         ProductOrderDomain productOrderDomain2 = ProductOrderDomain.builder()
                 .name("Apple iPhone 12 Roxo")
-                .price(new SkuPriceDomain(5207.00, 0.00, null, null))
+                .price(new SkuPriceDomain(5207.00, 11.00, START_DATE, END_DATE))
                 .stockQuantity(1000)
-                .skuCode("99999999")
+                .skuCode("999999999")
                 .build();
 
         PaymentDomain paymentDomain = PaymentDomain.builder()
@@ -193,6 +211,36 @@ class CheckoutOrderUseCaseTest {
                 .paymentAddress(addressDomain)
                 .paymentMethod(paymentMethod)
                 .paymentMethodProperties(paymentMethodProperties)
+                .build();
+    }
+
+    public SkuDomain getSku(String sku, boolean divergentPrice) {
+        String name = "Test";
+        SkuPriceDomain skuPriceDomain = new SkuPriceDomain(10.00, 10.00, Instant.MIN, Instant.MIN);
+        if ("888888888".equals(sku)) {
+            name = "Samsung Galaxy S21 Cinza";
+            skuPriceDomain = new SkuPriceDomain(!divergentPrice ? 3859.00 : 500.00, 0.00, Instant.MIN, Instant.MIN);
+        }
+
+        if ("999999999".equals(sku)) {
+            name = "Apple iPhone 12 Roxo";
+            skuPriceDomain = new SkuPriceDomain(!divergentPrice ? 5207.00 : 500.00, 11.00, START_DATE, END_DATE);
+        }
+
+        return SkuDomain.builder()
+                .id(1)
+                .product(null)
+                .skuCode(sku)
+                .name(name)
+                .stockQuantity(10)
+                .height(10.00)
+                .width(10.00)
+                .length(10.00)
+                .weight(10.00)
+                .mainImageUrl("test")
+                .urlImages(Arrays.asList("test", "test", "test"))
+                .price(skuPriceDomain)
+                .skuAttributes(null)
                 .build();
     }
 }

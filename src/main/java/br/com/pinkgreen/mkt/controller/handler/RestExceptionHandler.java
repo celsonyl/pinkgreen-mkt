@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.controller.handler;
 
 import br.com.pinkgreen.mkt.controller.handler.model.StandardError;
 import br.com.pinkgreen.mkt.controller.handler.model.ValidationError;
+import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
@@ -47,4 +48,9 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(standardError);
     }
 
+    @ExceptionHandler(CouldNotCheckoutOrderException.class)
+    public ResponseEntity<StandardError> couldNotCheckoutOrderException(CouldNotCheckoutOrderException e, HttpServletRequest request) {
+        var standardError = new StandardError(e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(standardError);
+    }
 }

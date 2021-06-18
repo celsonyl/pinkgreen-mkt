@@ -8,12 +8,23 @@ import java.time.Instant;
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @EqualsAndHashCode
 public class SkuPriceDomain implements Serializable {
 
     private Double listPrice;
     private Double salePrice;
-    private Instant startDate;
-    private Instant endDate;
+    private Instant startDate = Instant.MIN;
+    private Instant endDate = Instant.MIN;
+
+    public SkuPriceDomain(Double listPrice, Double salePrice, Instant startDate, Instant endDate) {
+        this.listPrice = listPrice;
+        this.salePrice = salePrice;
+
+        if (startDate != null) {
+            this.startDate = startDate;
+        }
+        if (endDate != null) {
+            this.endDate = endDate;
+        }
+    }
 }

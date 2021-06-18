@@ -13,6 +13,7 @@ import br.com.pinkgreen.mkt.gateway.postgresql.model.SkuDatabase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -56,7 +57,7 @@ public class DBService {
                 "A515-54-57EN",
                 "Intel Core i5 - 8GB 256GB SSD 15,6” Full HD LED Windows 10",
                 10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
-                new SkuPriceDomain(3704.05, 0.00, null, null),
+                new SkuPriceDomain(3704.05, 0.00, Instant.MIN, Instant.MIN),
                 Arrays.asList(
                         new SkuAttributesDomain("Memória RAM", "memory", "8GB"),
                         new SkuAttributesDomain("Capacidade do SSD", "ssd", "256GB de armazenamento SSD NVMe x4"),
