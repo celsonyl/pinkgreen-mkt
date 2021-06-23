@@ -21,5 +21,5 @@ public class RequestCardPaymentModel implements Serializable {
     private String phone;
     private String email;
     private Double amount;
-    private AddressDomain addressDomain;
+    private AddressDomain paymentAddress;
 }
