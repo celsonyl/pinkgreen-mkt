@@ -5,7 +5,7 @@ import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 
 public interface RequestPaymentStrategy {
 
-    void execute(PaymentDomain paymentDomain);
+    void execute(String orderId, PaymentDomain paymentDomain);
 
     boolean supports(PaymentMethod paymentMethod);
 }

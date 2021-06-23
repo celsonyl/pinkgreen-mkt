@@ -20,3 +20,6 @@ keycloak:
   auth-server-url: http://localhost:8080/auth
   resource: pinkgreen-backend
   credentials.secret: cb6f474d-5a8a-44f7-b659-34e0fa8f95a0
+
+payment:
+  url: http://localhost:4000

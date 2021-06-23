@@ -2,6 +2,8 @@ package br.com.pinkgreen.mkt.usecase.factory.strategies;
 
 import br.com.pinkgreen.mkt.domain.PaymentDomain;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
+import br.com.pinkgreen.mkt.gateway.RequestCardPaymentGateway;
+import br.com.pinkgreen.mkt.usecase.FindOrderByIdUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,8 +11,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class RequestPaymentCardStrategy implements RequestPaymentStrategy {
 
+    private final RequestCardPaymentGateway requestCardPaymentGateway;
+    private final FindOrderByIdUseCase findOrderByIdUseCase;
+
     @Override
-    public void execute(PaymentDomain paymentDomain) {
+    public void execute(String orderId, PaymentDomain paymentDomain) {
+        var orderDomain = findOrderByIdUseCase.execute(orderId);
+        orderDomain.setPaymentData(paymentDomain);
+        requestCardPaymentGateway.execute(orderDomain);
 
     }
 
