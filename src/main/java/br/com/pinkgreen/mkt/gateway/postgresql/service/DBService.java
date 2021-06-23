@@ -52,12 +52,15 @@ public class DBService {
         var fogao = new ProductDatabase(null, "Fogão de Piso 4 Bocas", 433.52, true, esmaltec, Collections.singletonList(eletrodomesticos));
         productRepository.saveAll(Arrays.asList(aspire5, samsungBook, samsungGalaxyA11, iphone12ProMax, microOndas, fogao));
 
+        var startDate = LocalDateTime.parse("00:00 AM, Tue 06/15/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
+        var endDate = LocalDateTime.parse("00:00 AM, Fri 06/18/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
+
         var aspire5Sku = new SkuDatabase(null,
                 aspire5,
                 "A515-54-57EN",
                 "Intel Core i5 - 8GB 256GB SSD 15,6” Full HD LED Windows 10",
                 10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
-                new SkuPriceDomain(3704.05, 0.00, Instant.MIN, Instant.MIN),
+                new SkuPriceDomain(3704.05, 0.00, startDate, startDate),
                 Arrays.asList(
                         new SkuAttributesDomain("Memória RAM", "memory", "8GB"),
                         new SkuAttributesDomain("Capacidade do SSD", "ssd", "256GB de armazenamento SSD NVMe x4"),
@@ -65,8 +68,14 @@ public class DBService {
                 )
         );
 
-        var startDate = LocalDateTime.parse("00:00 AM, Tue 06/15/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
-        var endDate = LocalDateTime.parse("00:00 AM, Fri 06/18/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
+        var fogaoEsmaltec = new SkuDatabase(null,
+                fogao,
+                "1589663525",
+                "Fogão de Piso 4 Bocas",
+                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                new SkuPriceDomain(433.52, 0.00, null, null),
+                Collections.emptyList()
+        );
 
         var iphone12ProMax128 = new SkuDatabase(
                 null, iphone12ProMax, "MGD93BZA",
@@ -84,6 +93,6 @@ public class DBService {
                 Collections.emptyList()
         );
 
-        skuRepository.saveAll(Arrays.asList(aspire5Sku, iphone12ProMax128, samsungBookI3core258GB));
+        skuRepository.saveAll(Arrays.asList(aspire5Sku, iphone12ProMax128, samsungBookI3core258GB, fogaoEsmaltec));
     }
 }

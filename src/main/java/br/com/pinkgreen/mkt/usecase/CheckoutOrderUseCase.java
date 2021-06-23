@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.ORDER_CREATED;
@@ -57,11 +56,6 @@ public class CheckoutOrderUseCase {
         var skuDomainsDB = productOrderDomains.stream()
                 .map(element -> getSkuBySkuCodeUseCase.getSkuBySkuCode(element.getSkuCode()))
                 .collect(Collectors.toList());
-
-//        Set<ProductOrderDomain> list = productOrderDomains.stream()
-//                .distinct()
-//                .filter(skuDomainsDB::contains)
-//                .collect(Collectors.toSet());
 
         var validProducts = productOrderDomains.stream().filter(productOrderDomain -> skuDomainsDB.stream()
                 .anyMatch(skuDomain -> validateProductPrice(productOrderDomain.getPrice(), skuDomain.getPrice())
