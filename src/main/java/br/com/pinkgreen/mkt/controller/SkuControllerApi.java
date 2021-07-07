@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,7 +30,7 @@ public interface SkuControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> createSku(@Valid @RequestBody SkuRequest skuRequest) throws DataIntegrityException;
+    ResponseEntity<Void> createSku(@Valid @RequestBody SkuRequest skuRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException;
 
     @ApiOperation(value = "Procurando SKU by code")
     @ApiResponses(value = {

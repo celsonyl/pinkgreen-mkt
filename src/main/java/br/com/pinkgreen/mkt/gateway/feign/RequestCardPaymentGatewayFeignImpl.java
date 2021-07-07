@@ -26,7 +26,7 @@ public class RequestCardPaymentGatewayFeignImpl implements RequestCardPaymentGat
                 .ownerName(map.get("ownerName"))
                 .phone(map.get("phone"))
                 .email(map.get("email"))
-                .addressDomain(orderDomain.getPaymentData().getPaymentAddress())
+                .paymentAddress(orderDomain.getPaymentData().getPaymentAddress())
                 .amount(orderDomain.getPaymentData().getAmount())
                 .build();
 

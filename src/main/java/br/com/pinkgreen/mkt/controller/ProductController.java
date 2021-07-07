@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -61,11 +62,11 @@ public class ProductController implements ProductControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createProduct(ProductRequest productRequest) {
+    public ResponseEntity<Void> createProduct(ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
         var productDomain = new ProductMapperImpl().productRequestToDomain(productRequest);
 
         var productCreateDomain = createProductUseCase.execute(productDomain);
-        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productCreateDomain.getId()).toUri();
+        var uri = uriComponentsBuilder.path("product/{id}").buildAndExpand(productCreateDomain.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }

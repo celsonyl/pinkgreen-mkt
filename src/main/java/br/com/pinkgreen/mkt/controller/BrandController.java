@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -32,11 +33,11 @@ public class BrandController implements BrandControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createBrand(BrandRequest brandRequest) {
+    public ResponseEntity<Void> createBrand(BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) {
         var brandDomain = new BrandMapperImpl().brandRequestToDomain(brandRequest);
 
         var productBrandDomain = createBrandUseCase.execute(brandDomain);
-        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productBrandDomain.getId()).toUri();
+        var uri = uriComponentsBuilder.path("brand/{id}").buildAndExpand(productBrandDomain.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }

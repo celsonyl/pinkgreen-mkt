@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -33,12 +34,12 @@ public class CategoryController implements CategoryControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest) {
+    public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) {
         var categoryDomain = new CategoryMapperImpl().categoryRequestToDomain(categoryRequest);
 
         var productCategoryDomain = productCategoryUseCase.execute(categoryDomain);
 
-        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productCategoryDomain.getId()).toUri();
+        var uri = uriComponentsBuilder.path("category/{id}").buildAndExpand(productCategoryDomain.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
