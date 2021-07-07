@@ -5,6 +5,7 @@ import br.com.pinkgreen.mkt.domain.ShippingDataDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "orders")
 @Getter
@@ -19,7 +21,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class OrderDatabase implements Serializable {
 
@@ -48,4 +49,18 @@ public class OrderDatabase implements Serializable {
 
     private Instant createdAt;
     private Instant updatedAt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        OrderDatabase that = (OrderDatabase) o;
+
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1960981007;
+    }
 }

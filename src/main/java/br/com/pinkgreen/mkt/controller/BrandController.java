@@ -4,6 +4,7 @@ import br.com.pinkgreen.mkt.controller.model.BrandRequest;
 import br.com.pinkgreen.mkt.controller.model.BrandResponse;
 import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateBrandUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllBrandsUseCase;
@@ -33,7 +34,7 @@ public class BrandController implements BrandControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createBrand(BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<Void> createBrand(BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var brandDomain = new BrandMapperImpl().brandRequestToDomain(brandRequest);
 
         var productBrandDomain = createBrandUseCase.execute(brandDomain);

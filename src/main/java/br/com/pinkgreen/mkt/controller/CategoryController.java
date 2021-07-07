@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.controller;
 import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.translator.CategoryMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateProductCategoryUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllCategoriesUseCase;
@@ -34,7 +35,7 @@ public class CategoryController implements CategoryControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var categoryDomain = new CategoryMapperImpl().categoryRequestToDomain(categoryRequest);
 
         var productCategoryDomain = productCategoryUseCase.execute(categoryDomain);

@@ -1,6 +1,5 @@
 package br.com.pinkgreen.mkt.controller.model;
 
-import br.com.pinkgreen.mkt.controller.annotation.BrandInsertData;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -14,7 +13,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@BrandInsertData
 public class BrandRequest implements Serializable {
 
     @ApiModelProperty(value = "ID da marca", required = true, example = "1000258")

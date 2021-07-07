@@ -4,12 +4,14 @@ import br.com.pinkgreen.mkt.domain.SkuAttributesDomain;
 import br.com.pinkgreen.mkt.domain.SkuPriceDomain;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(name = "product_sku")
 @Getter
@@ -17,7 +19,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class SkuDatabase implements Serializable {
 
@@ -52,4 +53,17 @@ public class SkuDatabase implements Serializable {
     @Column(columnDefinition = "jsonb")
     private List<SkuAttributesDomain> skuAttributes;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        SkuDatabase that = (SkuDatabase) o;
+
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 263293707;
+    }
 }

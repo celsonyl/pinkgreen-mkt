@@ -29,7 +29,7 @@ public interface BrandControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> createBrand(@Valid @RequestBody BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder);
+    ResponseEntity<Void> createBrand(@Valid @RequestBody BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException;
 
     @ApiOperation(value = "Lista todas as marcas")
     @ApiResponses(value = {
