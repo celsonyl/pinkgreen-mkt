@@ -2,7 +2,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
-import br.com.pinkgreen.mkt.gateway.CreateProductCategoryGateway;
+import br.com.pinkgreen.mkt.gateway.CreateCategoryGateway;
 import br.com.pinkgreen.mkt.translator.CategoryMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CreateProductCategoryGatewayImpl implements CreateProductCategoryGateway {
+public class CreateCategoryGatewayImpl implements CreateCategoryGateway {
 
     private final CategoryRepository categoryRepository;
 

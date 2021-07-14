@@ -23,7 +23,6 @@ public interface BrandControllerApi {
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Marca criada com sucesso!"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
@@ -33,7 +32,7 @@ public interface BrandControllerApi {
 
     @ApiOperation(value = "Lista todas as marcas")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
@@ -43,7 +42,7 @@ public interface BrandControllerApi {
 
     @ApiOperation(value = "Procura uma marca por id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
@@ -53,7 +52,7 @@ public interface BrandControllerApi {
 
     @ApiOperation(value = "Consulta marca")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),

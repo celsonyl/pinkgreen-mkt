@@ -5,7 +5,7 @@ import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.translator.CategoryMapperImpl;
-import br.com.pinkgreen.mkt.usecase.CreateProductCategoryUseCase;
+import br.com.pinkgreen.mkt.usecase.CreateCategoryUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllCategoriesUseCase;
 import br.com.pinkgreen.mkt.usecase.GetCategoryByIdUseCase;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
@@ -28,7 +27,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/category")
 public class CategoryController implements CategoryControllerApi {
 
-    private final CreateProductCategoryUseCase productCategoryUseCase;
+    private final CreateCategoryUseCase productCategoryUseCase;
     private final GetAllCategoriesUseCase getAllCategoriesUseCase;
     private final GetCategoryByIdUseCase getCategoryByIdUseCase;
 

@@ -17,12 +17,11 @@ import java.util.List;
 @RestController
 public interface CategoryControllerApi {
 
-    @ApiOperation(value = "Criar Categoria de Produto")
+    @ApiOperation(value = "Cria uma Categoria de Produto")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Categoria criada com sucesso!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
@@ -33,7 +32,7 @@ public interface CategoryControllerApi {
 
     @ApiOperation(value = "Lista todas Categorias")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
@@ -44,7 +43,7 @@ public interface CategoryControllerApi {
 
     @ApiOperation(value = "Procura uma Categoria por id")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),

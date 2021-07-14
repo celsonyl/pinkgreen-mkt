@@ -24,7 +24,7 @@ public interface SkuControllerApi {
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "SKU Criado"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
@@ -34,7 +34,6 @@ public interface SkuControllerApi {
 
     @ApiOperation(value = "Procurando SKU by code")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "SKU Criado"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
@@ -47,7 +46,6 @@ public interface SkuControllerApi {
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "SKU Criado"),
             @ApiResponse(code = 204, message = "No Content"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
@@ -58,7 +56,7 @@ public interface SkuControllerApi {
 
     @ApiOperation(value = "Procurando todos os SKUs de um produto")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK!"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
