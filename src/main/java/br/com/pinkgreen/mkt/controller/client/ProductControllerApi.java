@@ -1,4 +1,4 @@
-package br.com.pinkgreen.mkt.controller;
+package br.com.pinkgreen.mkt.controller.client;
 
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;

@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.gateway.CreateBrandGateway;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.BrandRepository;
 import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;

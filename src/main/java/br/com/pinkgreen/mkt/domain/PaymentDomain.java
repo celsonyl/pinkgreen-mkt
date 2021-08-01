@@ -14,6 +14,7 @@ import java.util.Map;
 @EqualsAndHashCode
 public class PaymentDomain implements Serializable {
 
+    private String paymentId;
     private Double amount;
     private PaymentMethod paymentMethod;
     private Map<String, String> paymentMethodProperties;

@@ -18,8 +18,10 @@ public class RequestPaymentCardStrategy implements RequestPaymentStrategy {
     public void execute(String orderId, PaymentDomain paymentDomain) {
         var orderDomain = findOrderByIdUseCase.execute(orderId);
         orderDomain.setPaymentData(paymentDomain);
-        requestCardPaymentGateway.execute(orderDomain);
 
+        var paymentId = requestCardPaymentGateway.execute(orderDomain);
+        orderDomain.getPaymentData().setPaymentId(paymentId);
+        // TODO: SALVAR PAYMENTID E ATUALIZAR STATUS DO PEDIDO PARA AWAITING_PAYMENT_CONFIRM
     }
 
     @Override

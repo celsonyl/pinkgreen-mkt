@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.gateway.CreateCategoryGateway;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.CategoryRepository;
 import br.com.pinkgreen.mkt.translator.CategoryMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;

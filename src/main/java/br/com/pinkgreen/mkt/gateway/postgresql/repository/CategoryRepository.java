@@ -1,4 +1,4 @@
-package br.com.pinkgreen.mkt.gateway.postgresql;
+package br.com.pinkgreen.mkt.gateway.postgresql.repository;
 
 import br.com.pinkgreen.mkt.gateway.postgresql.model.CategoryDatabase;
 import org.springframework.data.jpa.repository.JpaRepository;

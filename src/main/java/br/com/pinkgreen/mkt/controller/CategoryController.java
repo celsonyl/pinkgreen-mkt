@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
+import br.com.pinkgreen.mkt.controller.client.CategoryControllerApi;
 import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;

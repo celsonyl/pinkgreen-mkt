@@ -1,12 +1,13 @@
-package br.com.pinkgreen.mkt.controller;
+package br.com.pinkgreen.mkt.controller.client;
 
-import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
-import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
+import br.com.pinkgreen.mkt.controller.model.BrandRequest;
+import br.com.pinkgreen.mkt.controller.model.BrandResponse;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,41 +16,47 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-public interface CategoryControllerApi {
+public interface BrandControllerApi {
 
-    @ApiOperation(value = "Cria uma Categoria de Produto")
+    @ApiOperation(value = "Criar marca de Produto")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
     @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Requisição mal formatada"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException;
+    ResponseEntity<Void> createBrand(@Valid @RequestBody BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException;
 
-    @ApiOperation(value = "Lista todas Categorias")
+    @ApiOperation(value = "Lista todas as marcas")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
-            @ApiResponse(code = 400, message = "Requisição mal formatada"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<List<CategoryResponse>> listCategories();
+    ResponseEntity<List<BrandResponse>> getAllBrands();
 
-    @ApiOperation(value = "Procura uma Categoria por id")
+    @ApiOperation(value = "Procura uma marca por id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
-            @ApiResponse(code = 400, message = "Requisição mal formatada"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 404, message = "Categoria não existe"),
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<CategoryResponse> findById(@PathVariable Integer id);
+    ResponseEntity<BrandResponse> findById(@PathVariable Integer id);
+
+    @ApiOperation(value = "Consulta marca")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<List<BrandResponse>> brandSearch(@RequestParam(value = "text",defaultValue = "") String text);
 }

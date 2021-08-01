@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.OrderRepository;
 import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

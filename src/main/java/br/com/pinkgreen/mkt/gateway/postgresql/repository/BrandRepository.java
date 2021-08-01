@@ -1,7 +1,6 @@
-package br.com.pinkgreen.mkt.gateway.postgresql;
+package br.com.pinkgreen.mkt.gateway.postgresql.repository;
 
 import br.com.pinkgreen.mkt.gateway.postgresql.model.BrandDatabase;
-import br.com.pinkgreen.mkt.gateway.postgresql.model.SkuDatabase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

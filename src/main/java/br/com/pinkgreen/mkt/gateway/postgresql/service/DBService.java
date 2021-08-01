@@ -2,10 +2,10 @@ package br.com.pinkgreen.mkt.gateway.postgresql.service;
 
 import br.com.pinkgreen.mkt.domain.SkuAttributesDomain;
 import br.com.pinkgreen.mkt.domain.SkuPriceDomain;
-import br.com.pinkgreen.mkt.gateway.postgresql.BrandRepository;
-import br.com.pinkgreen.mkt.gateway.postgresql.CategoryRepository;
-import br.com.pinkgreen.mkt.gateway.postgresql.ProductRepository;
-import br.com.pinkgreen.mkt.gateway.postgresql.SkuRepository;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.BrandRepository;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.CategoryRepository;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.ProductRepository;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.SkuRepository;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.BrandDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.CategoryDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductDatabase;
