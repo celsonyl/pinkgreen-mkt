@@ -7,15 +7,15 @@ import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
-import br.com.pinkgreen.mkt.usecase.CreateProductUseCase;
-import br.com.pinkgreen.mkt.usecase.GetAllProductsUseCase;
-import br.com.pinkgreen.mkt.usecase.GetProductByIdUseCase;
-import br.com.pinkgreen.mkt.usecase.UpdateProductUseCase;
+import br.com.pinkgreen.mkt.usecase.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
@@ -32,6 +32,7 @@ public class ProductController implements ProductControllerApi {
     private final CreateProductUseCase createProductUseCase;
     private final GetAllProductsUseCase getAllProductsUseCase;
     private final UpdateProductUseCase updateProductUseCase;
+    private final GetProductByCategoryIdUseCase getProductByCategoryIdUseCase;
 
     @Override
     @GetMapping("/{id}")
@@ -55,6 +56,15 @@ public class ProductController implements ProductControllerApi {
         text = URL.decodeParam(text);
         List<ProductDomain> searchProduct = getAllProductsUseCase.searchProduct(text);
         return ResponseEntity.ok(searchProduct.stream()
+                .map(new ProductMapperImpl()::productDomainToResponse)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<ProductResponse>> findByCategoryId(Integer id) {
+        var products = getProductByCategoryIdUseCase.execute(id);
+        return ResponseEntity.ok(products.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
     }
