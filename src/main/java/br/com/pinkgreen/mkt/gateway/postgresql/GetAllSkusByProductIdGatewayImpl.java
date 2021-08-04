@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 import br.com.pinkgreen.mkt.domain.SkuDomain;
 import br.com.pinkgreen.mkt.gateway.GetAllSkusByProductIdGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.SkuDatabase;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.SkuRepository;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

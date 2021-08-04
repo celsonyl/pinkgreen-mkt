@@ -1,9 +1,11 @@
 package br.com.pinkgreen.mkt.controller;
 
+import br.com.pinkgreen.mkt.controller.client.BrandControllerApi;
 import br.com.pinkgreen.mkt.controller.model.BrandRequest;
 import br.com.pinkgreen.mkt.controller.model.BrandResponse;
 import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.BrandDomain;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateBrandUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllBrandsUseCase;
@@ -13,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -32,11 +34,11 @@ public class BrandController implements BrandControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createBrand(BrandRequest brandRequest) {
+    public ResponseEntity<Void> createBrand(BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var brandDomain = new BrandMapperImpl().brandRequestToDomain(brandRequest);
 
         var productBrandDomain = createBrandUseCase.execute(brandDomain);
-        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(productBrandDomain.getId()).toUri();
+        var uri = uriComponentsBuilder.path("brand/{id}").buildAndExpand(productBrandDomain.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }

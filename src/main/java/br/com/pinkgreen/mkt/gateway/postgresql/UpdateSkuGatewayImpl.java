@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.SkuDomain;
 import br.com.pinkgreen.mkt.gateway.UpdateSkuGateway;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.SkuRepository;
 import br.com.pinkgreen.mkt.translator.SkuProductMapper;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import lombok.RequiredArgsConstructor;

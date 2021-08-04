@@ -12,7 +12,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_MULTIPLE_DATABASES: pinkgreen_mkt,keycloak
+      POSTGRES_MULTIPLE_DATABASES: pinkgreen_mkt,keycloak,pinkgreen_mocks
       POSTGRES_USER: local
       POSTGRES_PASSWORD: local
       MAX_CONNECTIONS: 300

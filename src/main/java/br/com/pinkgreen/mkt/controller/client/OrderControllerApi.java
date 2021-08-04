@@ -1,4 +1,4 @@
-package br.com.pinkgreen.mkt.controller;
+package br.com.pinkgreen.mkt.controller.client;
 
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
@@ -35,7 +35,7 @@ public interface OrderControllerApi {
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Lista de todas as compras registradas deste cliente"),
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida"),
             @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 422, message = "Erro de validação"),

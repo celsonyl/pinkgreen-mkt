@@ -14,6 +14,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class PaymentDatabase implements Serializable {
 
+    private String paymentId;
     private Double amount;
     private PaymentMethod paymentMethod;
     private AddressDomain paymentAddress;

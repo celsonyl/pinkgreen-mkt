@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
+import br.com.pinkgreen.mkt.controller.client.OrderControllerApi;
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;

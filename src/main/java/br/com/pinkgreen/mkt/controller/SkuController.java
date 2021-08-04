@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
+import br.com.pinkgreen.mkt.controller.client.SkuControllerApi;
 import br.com.pinkgreen.mkt.controller.model.SkuByProductIdResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuRequest;
 import br.com.pinkgreen.mkt.controller.model.SkuResponse;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -39,10 +40,10 @@ public class SkuController implements SkuControllerApi {
     @Override
     @PostMapping
     @RolesAllowed("admin")
-    public ResponseEntity<Void> createSku(SkuRequest skuRequest) throws DataIntegrityException {
+    public ResponseEntity<Void> createSku(SkuRequest skuRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var skuDomain = new SkuProductMapperImpl().skuRequestToDomain(skuRequest);
         var createSku = createSkuProductUseCase.execute(skuDomain);
-        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createSku.getSkuCode()).toUri();
+        var uri = uriComponentsBuilder.path("sku/{id}").buildAndExpand(createSku.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

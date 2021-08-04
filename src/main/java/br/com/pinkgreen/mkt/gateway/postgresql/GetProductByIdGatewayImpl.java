@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.gateway.GetProductByIdGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductDatabase;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.ProductRepository;
 import br.com.pinkgreen.mkt.gateway.postgresql.translator.ProductDomainToDatabase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

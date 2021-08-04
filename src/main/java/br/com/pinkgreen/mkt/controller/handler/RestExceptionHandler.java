@@ -2,12 +2,10 @@ package br.com.pinkgreen.mkt.controller.handler;
 
 import br.com.pinkgreen.mkt.controller.handler.model.StandardError;
 import br.com.pinkgreen.mkt.controller.handler.model.ValidationError;
-import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
-import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
-import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
-import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
+import br.com.pinkgreen.mkt.domain.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -52,5 +50,13 @@ public class RestExceptionHandler {
     public ResponseEntity<StandardError> couldNotCheckoutOrderException(CouldNotCheckoutOrderException e, HttpServletRequest request) {
         var standardError = new StandardError(e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(standardError);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<StandardError> accessDenied(AccessDeniedException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(StandardError.builder()
+                .message("Você não possui autorização para acessar isso!")
+                .path(request.getRequestURI())
+                .build());
     }
 }

@@ -11,10 +11,12 @@ import java.time.Instant;
 @EqualsAndHashCode
 public class SkuPriceDomain implements Serializable {
 
+    private static final Instant NOW = Instant.now();
+
     private Double listPrice;
     private Double salePrice;
-    private Instant startDate = Instant.MIN;
-    private Instant endDate = Instant.MIN;
+    private Instant startDate = NOW;
+    private Instant endDate = NOW;
 
     public SkuPriceDomain(Double listPrice, Double salePrice, Instant startDate, Instant endDate) {
         this.listPrice = listPrice;
