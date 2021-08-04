@@ -12,10 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
@@ -36,6 +33,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<ProductResponse> findById(Integer id) {
         var productDomain = getProductByIdUseCase.findById(id);
         return ResponseEntity.ok().body(new ProductMapperImpl().productDomainToResponse(productDomain));
@@ -43,6 +41,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> listProducts() {
         var productsDomain = getAllProductsUseCase.execute();
         return ResponseEntity.ok().body(productsDomain.stream()
@@ -52,6 +51,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @GetMapping("/search")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> searchProduct(String text) {
         text = URL.decodeParam(text);
         List<ProductDomain> searchProduct = getAllProductsUseCase.searchProduct(text);
@@ -62,6 +62,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @GetMapping("/category/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> findByCategoryId(Integer id) {
         var products = getProductByCategoryIdUseCase.execute(id);
         return ResponseEntity.ok(products.stream()

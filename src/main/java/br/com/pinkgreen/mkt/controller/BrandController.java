@@ -45,6 +45,7 @@ public class BrandController implements BrandControllerApi {
 
     @Override
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<BrandResponse>> getAllBrands() {
         List<BrandDomain> brandDomains = getAllBrandsUseCase.execute();
 
@@ -55,6 +56,7 @@ public class BrandController implements BrandControllerApi {
 
     @Override
     @GetMapping("/search")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<BrandResponse>> brandSearch(String text) {
         text = URL.decodeParam(text);
         List<BrandDomain> searchBrand = getAllBrandsUseCase.searchBrand(text);
@@ -66,6 +68,7 @@ public class BrandController implements BrandControllerApi {
 
     @Override
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<BrandResponse> findById(Integer id) {
         var brandDomain = getBrandByIdUseCase.execute(id);
         return ResponseEntity.ok(new BrandMapperImpl().brandDomainToResponse(brandDomain));

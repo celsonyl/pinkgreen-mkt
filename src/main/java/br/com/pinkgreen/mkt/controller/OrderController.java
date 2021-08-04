@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ public class OrderController implements OrderControllerApi {
     @SneakyThrows
     @PostMapping
     @RolesAllowed("user")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<CheckoutOrderResponse> checkout(OrderRequest orderRequest, HttpServletRequest request) {
         log.info("[CONTROLLER] Receiving new order request");
         String customerId = orderRequest.getCustomerData().getId();
@@ -56,6 +58,7 @@ public class OrderController implements OrderControllerApi {
     @SneakyThrows
     @GetMapping("/{customerId}")
     @RolesAllowed("user")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getOrdersByCustomerId(String customerId, HttpServletRequest request) {
         getCustomerIdAndValidate((KeycloakAuthenticationToken) request.getUserPrincipal(), customerId);
 

@@ -16,10 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
@@ -49,6 +46,7 @@ public class SkuController implements SkuControllerApi {
 
     @Override
     @GetMapping(value = "/{code}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<SkuResponse> findSku(String code) {
         var skuMapper = new SkuProductMapperImpl();
         var skuDomain = getSkuBySkuCodeUseCase.getSkuBySkuCode(code);
@@ -69,6 +67,7 @@ public class SkuController implements SkuControllerApi {
 
     @Override
     @GetMapping(value = "/product_skus/{productId}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<SkuByProductIdResponse>> findAllSkuByProductId(Integer productId) {
         var skuMapper = new SkuProductMapperImpl();
 

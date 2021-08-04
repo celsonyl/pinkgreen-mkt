@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,7 @@ public class CategoryController implements CategoryControllerApi {
 
     @Override
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<CategoryResponse>> listCategories() {
         List<CategoryDomain> categoryDomainList = getAllCategoriesUseCase.listCategories();
         return ResponseEntity.ok().body(categoryDomainList.stream()
@@ -55,6 +57,7 @@ public class CategoryController implements CategoryControllerApi {
 
     @Override
     @GetMapping(value = "/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<CategoryResponse> findById(Integer id) {
         var categoryDomain = getCategoryByIdUseCase.findById(id);
         return ResponseEntity.ok().body(new CategoryMapperImpl().categoryDomainToResponse(categoryDomain));
