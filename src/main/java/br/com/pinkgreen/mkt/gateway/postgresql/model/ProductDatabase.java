@@ -24,6 +24,7 @@ public class ProductDatabase implements Serializable {
     private String name;
     private Double price;
     private Boolean active;
+    private String mainImageUrl;
 
     @ManyToOne
     @JoinColumn(name = "product_brand_id")

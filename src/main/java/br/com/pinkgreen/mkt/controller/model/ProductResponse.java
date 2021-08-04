@@ -26,6 +26,9 @@ public class ProductResponse implements Serializable {
     @ApiModelProperty(value = "Estado do produto", required = true, example = "true")
     private Boolean active;
 
+    @ApiModelProperty(value = "Imagem do produto", example = "https://imageDomain/path.extension")
+    private String mainImageUrl;
+
     @ApiModelProperty(value = "Marca do produto", required = true, example = "{ \"id\": 1, \"name\": \"Samsung\" }")
     private BrandResponse brand;
 

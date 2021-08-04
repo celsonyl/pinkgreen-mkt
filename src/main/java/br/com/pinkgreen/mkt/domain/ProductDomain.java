@@ -16,6 +16,7 @@ public class ProductDomain implements Serializable {
     private String name;
     private Double price;
     private Boolean active;
+    private String mainImageUrl;
     private BrandDomain brand;
     private List<CategoryDomain> categories;
 }

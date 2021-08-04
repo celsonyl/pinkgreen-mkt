@@ -44,12 +44,12 @@ public class DBService {
         var celularesSmartphones = new CategoryDatabase(null, "Celulares e smartphones");
         categoryRepository.saveAll(Arrays.asList(informatica, eletrodomesticos, celularesSmartphones));
 
-        var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, acer, Collections.singletonList(informatica));
-        var samsungBook = new ProductDatabase(null, "Notebook Samsung Book", 3181.55, true, samsung, Collections.singletonList(informatica));
-        var samsungGalaxyA11 = new ProductDatabase(null, "Samsung Galaxy A11", 999.00, true, samsung, Collections.singletonList(celularesSmartphones));
-        var iphone12ProMax = new ProductDatabase(null, "iPhone 12 Pro Max", 9495.36, true, apple, Collections.singletonList(celularesSmartphones));
-        var microOndas = new ProductDatabase(null, "Micro-ondas", 659.00, true, electrolux, Collections.singletonList(eletrodomesticos));
-        var fogao = new ProductDatabase(null, "Fogão de Piso 4 Bocas", 433.52, true, esmaltec, Collections.singletonList(eletrodomesticos));
+        var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, URLIMAGE, acer, Collections.singletonList(informatica));
+        var samsungBook = new ProductDatabase(null, "Notebook Samsung Book", 3181.55, true, URLIMAGE, samsung, Collections.singletonList(informatica));
+        var samsungGalaxyA11 = new ProductDatabase(null, "Samsung Galaxy A11", 999.00, true, URLIMAGE, samsung, Collections.singletonList(celularesSmartphones));
+        var iphone12ProMax = new ProductDatabase(null, "iPhone 12 Pro Max", 9495.36, true, "https://i.imgur.com/m6VyNEE.jpg", apple, Collections.singletonList(celularesSmartphones));
+        var microOndas = new ProductDatabase(null, "Micro-ondas", 659.00, true, URLIMAGE, electrolux, Collections.singletonList(eletrodomesticos));
+        var fogao = new ProductDatabase(null, "Fogão de Piso 4 Bocas", 433.52, true, URLIMAGE, esmaltec, Collections.singletonList(eletrodomesticos));
         productRepository.saveAll(Arrays.asList(aspire5, samsungBook, samsungGalaxyA11, iphone12ProMax, microOndas, fogao));
 
         var startDate = LocalDateTime.parse("00:00 AM, Tue 06/15/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
@@ -80,7 +80,7 @@ public class DBService {
         var iphone12ProMax128 = new SkuDatabase(
                 null, iphone12ProMax, "MGD93BZA",
                 "Dourado, com Tela de 6,7”, 5G, 128 GB e Câmera Tripla de 12MP",
-                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/m6VyNEE.jpg", Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
                 new SkuPriceDomain(9495.36, 4500.98, startDate, endDate),
                 Collections.emptyList()
         );
