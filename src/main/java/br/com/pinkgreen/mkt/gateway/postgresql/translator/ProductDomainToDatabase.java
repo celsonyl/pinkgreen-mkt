@@ -52,6 +52,7 @@ public class ProductDomainToDatabase {
                 .active(productDatabase.getActive())
                 .brand(brandDomain)
                 .categories(categories)
+                .mainImageUrl(productDatabase.getMainImageUrl())
                 .build();
     }
 }
