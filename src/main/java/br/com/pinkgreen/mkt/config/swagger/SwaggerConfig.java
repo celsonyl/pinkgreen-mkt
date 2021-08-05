@@ -31,7 +31,7 @@ public class SwaggerConfig {
                 .build()
                 .useDefaultResponseMessages(false)
                 .globalResponseMessage(RequestMethod.POST, Collections.singletonList(m201))
-                .produces(Collections.singleton("application/xml"))
+                .produces(Collections.singleton("application/json"))
                 .apiInfo(apiInfo());
     }
 
