@@ -23,4 +23,8 @@ public class CategoryRequest implements Serializable {
     @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
     @ApiModelProperty(value = "Nome da categoria", required = true, example = "Celulares e Smartphones")
     private String name;
+
+    @NotBlank(message = "Field not be null or blank")
+    @ApiModelProperty(value = "Imagem da categoria", required = true, example = "https://imageDomain/path.extension")
+    private String image;
 }

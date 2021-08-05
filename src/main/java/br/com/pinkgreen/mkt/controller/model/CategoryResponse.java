@@ -19,4 +19,7 @@ public class CategoryResponse implements Serializable {
 
     @ApiModelProperty(value = "Nome da categoria", required = true, example = "Celulares e Smartphones")
     private String name;
+
+    @ApiModelProperty(value = "Imagem da categoria", required = true, example = "https://imageDomain/path.extension")
+    private String image;
 }

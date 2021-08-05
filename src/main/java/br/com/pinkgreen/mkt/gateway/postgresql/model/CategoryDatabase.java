@@ -24,12 +24,15 @@ public class CategoryDatabase implements Serializable {
     @Column(unique = true)
     private String name;
 
+    private String image;
+
     @ManyToMany(mappedBy = "categories")
     private List<ProductDatabase> products = new ArrayList<>();
 
-    public CategoryDatabase(Integer id, String name) {
+    public CategoryDatabase(Integer id, String name, String image) {
         this.id = id;
         this.name = name;
+        this.image = image;
     }
 
     @Override

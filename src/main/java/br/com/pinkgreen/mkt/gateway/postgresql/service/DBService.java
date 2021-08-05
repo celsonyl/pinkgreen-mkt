@@ -39,9 +39,9 @@ public class DBService {
         var esmaltec = new BrandDatabase(null, "Esmaltec");
         brandRepository.saveAll(Arrays.asList(acer, samsung, apple, electrolux, esmaltec));
 
-        var informatica = new CategoryDatabase(null, "Informatica");
-        var eletrodomesticos = new CategoryDatabase(null, "Eletrodomésticos");
-        var celularesSmartphones = new CategoryDatabase(null, "Celulares e smartphones");
+        var informatica = new CategoryDatabase(null, "Informatica", URLIMAGE);
+        var eletrodomesticos = new CategoryDatabase(null, "Eletrodomésticos", URLIMAGE);
+        var celularesSmartphones = new CategoryDatabase(null, "Celulares e smartphones", URLIMAGE);
         categoryRepository.saveAll(Arrays.asList(informatica, eletrodomesticos, celularesSmartphones));
 
         var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, URLIMAGE, acer, Collections.singletonList(informatica));
