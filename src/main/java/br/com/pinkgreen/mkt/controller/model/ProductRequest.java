@@ -38,6 +38,9 @@ public class ProductRequest implements Serializable {
     @NotNull(message = "Field not be null")
     private BrandRequest brand;
 
+    @ApiModelProperty(value = "Imagem do produto", required = true, example = "https://imageDomain/path.extension")
+    private String mainImageUrl;
+
     @NotNull
     @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\" }, { \"id\": \"2\" } ]")
     private List<CategoryRequest> categories;

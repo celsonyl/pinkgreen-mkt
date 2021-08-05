@@ -25,7 +25,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class DBService {
 
-    public static final String URLIMAGE = "https://imgur.com/c20GJPz";
+    public static final String URLIMAGE = "https://imgur.com/c20GJPz.gif";
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
