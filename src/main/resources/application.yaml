@@ -12,23 +12,26 @@ spring:
     username: ${RABBITMQ_USER}
     password: ${RABBITMQ_PASSWORD}
   cloud:
-    function.definition: processOrderPaymentSupplier;processOrderPaymentConsumer
+    function.definition: publishOrderStatusEvent;processOrderPaymentConsumer
     stream:
       rabbit.bindings:
-        processOrderPaymentSupplier-out-0:
-          producer.routing-key-expression: '"process-order-payment"'
+        publishOrderStatusEvent-out-0:
+          producer.exchangeType: headers
         processOrderPaymentConsumer-in-0:
-          consumer.bindingRoutingKey: process-order-payment
+          consumer:
+            exchangeType: headers
+            queueBindingArguments:
+              ORDER_STATUS: ORDER_CREATED
       bindings:
-        processOrderPaymentSupplier-out-0:
-          destination: order_events
+        publishOrderStatusEvent-out-0:
+          destination: order
           binder: rabbit
           contentType: application/json
         processOrderPaymentConsumer-in-0:
-          destination: order_events
+          destination: order
           binder: rabbit
           contentType: application/json
-          group: process-order-payment.pinkgreen
+          group: created.pinkgreen
 
 keycloak:
   realm: ${KEYCLOAK_REALM}

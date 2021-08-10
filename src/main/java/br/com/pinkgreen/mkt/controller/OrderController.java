@@ -46,7 +46,7 @@ public class OrderController implements OrderControllerApi {
         getCustomerIdAndValidate((KeycloakAuthenticationToken) request.getUserPrincipal(), customerId);
 
         var orderDomain = new OrderMapperImpl().orderRequestToOrder(orderRequest);
-        OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
+        OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain);
         return ResponseEntity.ok().body(CheckoutOrderResponse.builder()
                 .orderId(orderCreated.getId())
                 .customerId(orderCreated.getCustomerData().getId())

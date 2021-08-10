@@ -3,7 +3,7 @@ package br.com.pinkgreen.mkt.usecase;
 import br.com.pinkgreen.mkt.domain.*;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
-import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
+import br.com.pinkgreen.mkt.gateway.PublishOrderStatusEvent;
 import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -26,11 +26,10 @@ class CheckoutOrderUseCaseTest {
     public static final Instant END_DATE = Instant.now().plusSeconds(86400);
     private final ArgumentCaptor<OrderDomain> orderDomainArgument = forClass(OrderDomain.class);
     private final ArgumentCaptor<OrderDomain> publishOrderDomainArgument = forClass(OrderDomain.class);
-    private final ArgumentCaptor<PaymentDomain> publishPaymentDomainArgument = forClass(PaymentDomain.class);
     private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase = mock(GetSkuBySkuCodeUseCase.class);
     private final SaveOrderGateway saveOrderGateway = mock(SaveOrderGateway.class);
-    private final PublishOrderToProcessPayment publishOrderToProcessPayment = mock(PublishOrderToProcessPayment.class);
-    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(getSkuBySkuCodeUseCase, saveOrderGateway, publishOrderToProcessPayment);
+    private final PublishOrderStatusEvent publishOrderStatusEvent = mock(PublishOrderStatusEvent.class);
+    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(getSkuBySkuCodeUseCase, saveOrderGateway, publishOrderStatusEvent);
 
     @Test
     void shouldCheckoutOrderSuccessfully() throws CouldNotCheckoutOrderException {
@@ -39,14 +38,14 @@ class CheckoutOrderUseCaseTest {
         when(getSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", false));
         when(saveOrderGateway.execute(any())).thenReturn(getPersistedOrder());
 
-        checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData());
+        checkoutOrderUseCase.execute(orderDomain);
 
         verify(saveOrderGateway).execute(orderDomainArgument.capture());
-        verify(publishOrderToProcessPayment, times(1)).publish(publishOrderDomainArgument.capture(), publishPaymentDomainArgument.capture());
+        verify(publishOrderStatusEvent, times(1)).publish(publishOrderDomainArgument.capture());
 
         OrderDomain orderDomainArgumentValue = orderDomainArgument.getValue();
         OrderDomain publishOrderDomainArgumentValue = publishOrderDomainArgument.getValue();
-        PaymentDomain publishPaymentDomainArgumentValue = publishPaymentDomainArgument.getValue();
+        PaymentDomain publishPaymentDomainArgumentValue = publishOrderDomainArgumentValue.getPaymentData();
 
         assertEquals("1234", publishOrderDomainArgumentValue.getId());
         assertEquals(ORDER_CREATED, orderDomainArgumentValue.getStatus());
@@ -70,7 +69,7 @@ class CheckoutOrderUseCaseTest {
         when(getSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", true));
 
         CouldNotCheckoutOrderException couldNotCheckoutOrderException = assertThrows(CouldNotCheckoutOrderException.class,
-                () -> checkoutOrderUseCase.execute(orderDomain, orderDomain.getPaymentData()));
+                () -> checkoutOrderUseCase.execute(orderDomain));
 
         assertEquals("Erro no checkout!", couldNotCheckoutOrderException.getMessage());
     }

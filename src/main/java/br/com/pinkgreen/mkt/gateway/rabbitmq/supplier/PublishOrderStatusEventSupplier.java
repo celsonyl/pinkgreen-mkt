@@ -10,12 +10,12 @@ import java.util.function.Supplier;
 
 @Component
 @Slf4j
-public class PublishOrderToProcessPaymentSupplier {
+public class PublishOrderStatusEventSupplier {
 
-    public static final String OUTPUT = "processOrderPaymentSupplier-out-0";
+    public static final String OUTPUT = "publishOrderStatusEvent-out-0";
 
     @Bean
-    public Supplier<Message<ProcessOrderPaymentMessage>> processOrderPaymentSupplier() {
+    public Supplier<Message<ProcessOrderPaymentMessage>> publishOrderStatusEvent() {
         return () -> null;
     }
 }

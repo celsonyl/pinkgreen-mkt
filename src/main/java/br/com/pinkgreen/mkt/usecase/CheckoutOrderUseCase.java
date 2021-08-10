@@ -1,8 +1,11 @@
 package br.com.pinkgreen.mkt.usecase;
 
-import br.com.pinkgreen.mkt.domain.*;
+import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.domain.ProductOrderDomain;
+import br.com.pinkgreen.mkt.domain.SkuDomain;
+import br.com.pinkgreen.mkt.domain.SkuPriceDomain;
 import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
-import br.com.pinkgreen.mkt.gateway.PublishOrderToProcessPayment;
+import br.com.pinkgreen.mkt.gateway.PublishOrderStatusEvent;
 import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,14 +25,14 @@ public class CheckoutOrderUseCase {
 
     private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase;
     private final SaveOrderGateway saveOrderGateway;
-    private final PublishOrderToProcessPayment publishOrderToProcessPayment;
+    private final PublishOrderStatusEvent publishOrderStatusEvent;
 
-    public OrderDomain execute(OrderDomain orderDomain, PaymentDomain paymentDomain) throws CouldNotCheckoutOrderException {
+    public OrderDomain execute(OrderDomain orderDomain) throws CouldNotCheckoutOrderException {
         validateReceivedSkus(orderDomain);
         setOrderStatusAndCalculateAmount(orderDomain);
         OrderDomain order = saveOrderGateway.execute(orderDomain);
 
-        publishOrderToProcessPayment.publish(order, paymentDomain);
+        publishOrderStatusEvent.publish(order);
         return order;
     }
 
@@ -58,8 +61,8 @@ public class CheckoutOrderUseCase {
                 .collect(Collectors.toList());
 
         var validProducts = productOrderDomains.stream().filter(productOrderDomain -> skuDomainsDB.stream()
-                .anyMatch(skuDomain -> validateProductPrice(productOrderDomain.getPrice(), skuDomain.getPrice())
-                        && skuDomain.getSkuCode().equals(productOrderDomain.getSkuCode())))
+                        .anyMatch(skuDomain -> validateProductPrice(productOrderDomain.getPrice(), skuDomain.getPrice())
+                                && skuDomain.getSkuCode().equals(productOrderDomain.getSkuCode())))
                 .collect(Collectors.toList());
 
         if (validProducts.size() != skuDomainsDB.size()) {
