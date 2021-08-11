@@ -22,6 +22,7 @@ public class GetAllProductsGatewayImpl implements GetAllProductsGateway {
     public List<ProductDomain> execute() {
         var productDatabases = productRepository.findAll();
         return productDatabases.stream()
+                .filter(ProductDatabase::getActive)
                 .map(new ProductDomainToDatabase()::productDatabaseToDomain)
                 .collect(Collectors.toList());
     }
@@ -30,6 +31,7 @@ public class GetAllProductsGatewayImpl implements GetAllProductsGateway {
     public List<ProductDomain> searchProduct(String text) {
         List<ProductDatabase> searchProducts = productRepository.findByNameContainsIgnoreCase(text);
         return searchProducts.stream()
+                .filter(ProductDatabase::getActive)
                 .map(new ProductMapperImpl()::productDatabaseToDomain)
                 .collect(Collectors.toList());
     }
