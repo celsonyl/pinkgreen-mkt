@@ -58,7 +58,7 @@ public class DBService {
         var aspire5Sku = new SkuDatabase(null,
                 aspire5,
                 "A515-54-57EN",
-                "Intel Core i5 - 8GB 256GB SSD 15,6” Full HD LED Windows 10",
+                "Notebook Aspire 5 - Intel Core i5 - 8GB 256GB SSD 15,6” Full HD LED Windows 10",
                 10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
                 new SkuPriceDomain(3704.05, 0.00, startDate, startDate),
                 Arrays.asList(
@@ -71,7 +71,7 @@ public class DBService {
         var fogaoEsmaltec = new SkuDatabase(null,
                 fogao,
                 "1589663525",
-                "Fogão de Piso 4 Bocas",
+                "Fogão de Piso 4 Bocas Esmaltec",
                 10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
                 new SkuPriceDomain(433.52, 0.00, null, null),
                 Collections.emptyList()
@@ -79,7 +79,7 @@ public class DBService {
 
         var iphone12ProMax128 = new SkuDatabase(
                 null, iphone12ProMax, "MGD93BZA",
-                "Dourado, com Tela de 6,7”, 5G, 128 GB e Câmera Tripla de 12MP",
+                "iPhone 12 Pro Max Dourado, com Tela de 6,7”, 5G, 128 GB e Câmera Tripla de 12MP",
                 10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/m6VyNEE.jpg", Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
                 new SkuPriceDomain(9495.36, 4500.98, startDate, endDate),
                 Collections.emptyList()
@@ -87,7 +87,7 @@ public class DBService {
 
         var samsungBookI3core258GB = new SkuDatabase(
                 null, samsungBook, "NP550XDA-KT3BR",
-                "Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10",
+                "Notebook Samsung Book - Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10",
                 10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
                 new SkuPriceDomain(4299.00, 3181.55, Instant.now().minusSeconds(86400), Instant.now().plusSeconds(86400)),
                 Collections.emptyList()
