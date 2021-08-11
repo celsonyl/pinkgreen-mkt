@@ -32,6 +32,8 @@ public class CheckoutOrderUseCase {
         setOrderStatusAndCalculateAmount(orderDomain);
         OrderDomain order = saveOrderGateway.execute(orderDomain);
 
+        order.setPaymentData(orderDomain.getPaymentData());
+
         publishOrderStatusEvent.publish(order);
         return order;
     }
