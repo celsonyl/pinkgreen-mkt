@@ -7,8 +7,6 @@ import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
-
 @Component
 @RequiredArgsConstructor
 public class SaveOrderGatewayImpl implements SaveOrderGateway {
@@ -19,9 +17,6 @@ public class SaveOrderGatewayImpl implements SaveOrderGateway {
     public OrderDomain execute(OrderDomain orderDomain) {
         var orderDatabaseMapper = new OrderMapperImpl();
         var orderDatabase = orderDatabaseMapper.orderToOrderDatabase(orderDomain);
-
-        orderDatabase.setCreatedAt(Instant.now());
-
         return orderDatabaseMapper.orderDatabaseToOrder(orderRepository.save(orderDatabase));
     }
 }

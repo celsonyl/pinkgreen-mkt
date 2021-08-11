@@ -21,7 +21,6 @@ import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.ORDER_CREATED;
 @Component
 @RequiredArgsConstructor
 public class CheckoutOrderUseCase {
-    // TODO - Criptografar campos no 'paymentMethodProperties' caso o pagamento seja por cartão
 
     private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase;
     private final SaveOrderGateway saveOrderGateway;
@@ -30,6 +29,8 @@ public class CheckoutOrderUseCase {
     public OrderDomain execute(OrderDomain orderDomain) throws CouldNotCheckoutOrderException {
         validateReceivedSkus(orderDomain);
         setOrderStatusAndCalculateAmount(orderDomain);
+        orderDomain.setCreatedAt(Instant.now());
+
         OrderDomain order = saveOrderGateway.execute(orderDomain);
 
         order.setPaymentData(orderDomain.getPaymentData());

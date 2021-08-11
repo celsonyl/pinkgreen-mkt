@@ -12,7 +12,7 @@ spring:
     username: ${RABBITMQ_USER}
     password: ${RABBITMQ_PASSWORD}
   cloud:
-    function.definition: publishOrderStatusEvent;processOrderPaymentConsumer
+    function.definition: publishOrderStatusEvent;processOrderPaymentConsumer;paymentConfirmedConsumer
     stream:
       rabbit.bindings:
         publishOrderStatusEvent-out-0:
@@ -22,6 +22,11 @@ spring:
             exchangeType: headers
             queueBindingArguments:
               ORDER_STATUS: ORDER_CREATED
+        paymentConfirmedConsumer-in-0:
+          consumer:
+            exchangeType: headers
+            queueBindingArguments:
+              STATUS: PAYMENT_CONFIRMED
       bindings:
         publishOrderStatusEvent-out-0:
           destination: order
@@ -32,6 +37,11 @@ spring:
           binder: rabbit
           contentType: application/json
           group: created.pinkgreen
+        paymentConfirmedConsumer-in-0:
+          destination: payment
+          binder: rabbit
+          contentType: application/json
+          group: confirmed.pinkgreen
 
 keycloak:
   realm: ${KEYCLOAK_REALM}
