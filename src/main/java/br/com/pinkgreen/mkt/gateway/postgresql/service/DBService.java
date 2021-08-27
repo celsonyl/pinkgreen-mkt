@@ -40,7 +40,8 @@ public class DBService {
         var apple = new BrandDatabase(null, "Apple");
         var electrolux = new BrandDatabase(null, "Electrolux");
         var esmaltec = new BrandDatabase(null, "Esmaltec");
-        brandRepository.saveAll(Arrays.asList(acer, samsung, apple, electrolux, esmaltec));
+        var xaiomi = new BrandDatabase(null, "Xaiomi");
+        brandRepository.saveAll(Arrays.asList(acer, samsung, apple, electrolux, esmaltec, xaiomi));
 
         var informatica = new CategoryDatabase(null, "Informatica", URLIMAGE);
         var eletrodomesticos = new CategoryDatabase(null, "Eletrodomésticos", URLIMAGE);
@@ -49,14 +50,14 @@ public class DBService {
 
         var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, URLIMAGE, acer, Collections.singletonList(informatica));
         var galaxy10e = new ProductDatabase(null, "Galaxy S10e", 2400.00, true, URLIMAGE, samsung, Collections.singletonList(informatica));
-        var xaiomimI9 = new ProductDatabase(null, "Xaiomi Mi9", 1400.00, true, URLIMAGE, acer, Collections.singletonList(informatica));
+        var xaiomimI9 = new ProductDatabase(null, "Xaiomi Mi9", 1400.00, true, URLIMAGE, xaiomi, Collections.singletonList(informatica));
         var tvSamsung = new ProductDatabase(null, "TV S41", 3000.00, true, URLIMAGE, samsung, Collections.singletonList(informatica));
         var samsungBook = new ProductDatabase(null, "Notebook Samsung Book", 3181.55, true, URLIMAGE, samsung, Collections.singletonList(informatica));
         var samsungGalaxyA11 = new ProductDatabase(null, "Samsung Galaxy A11", 999.00, true, URLIMAGE, samsung, Collections.singletonList(celularesSmartphones));
         var iphone12ProMax = new ProductDatabase(null, "iPhone 12 Pro Max", 9495.36, true, "https://i.imgur.com/m6VyNEE.jpg", apple, Collections.singletonList(celularesSmartphones));
         var microOndas = new ProductDatabase(null, "Micro-ondas", 659.00, true, URLIMAGE, electrolux, Collections.singletonList(eletrodomesticos));
         var fogao = new ProductDatabase(null, "Fogão de Piso 4 Bocas", 433.52, true, URLIMAGE, esmaltec, Collections.singletonList(eletrodomesticos));
-        productRepository.saveAll(Arrays.asList(aspire5, samsungBook, samsungGalaxyA11, iphone12ProMax, microOndas, fogao, galaxy10e, tvSamsung));
+        productRepository.saveAll(Arrays.asList(aspire5, samsungBook, samsungGalaxyA11, iphone12ProMax, microOndas, fogao, galaxy10e, tvSamsung, xaiomimI9));
 
         var startDate = LocalDateTime.parse("00:00 AM, Tue 06/15/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
         var endDate = LocalDateTime.parse("00:00 AM, Fri 06/18/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
