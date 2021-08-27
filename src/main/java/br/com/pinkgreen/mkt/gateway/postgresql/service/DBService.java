@@ -48,12 +48,15 @@ public class DBService {
         categoryRepository.saveAll(Arrays.asList(informatica, eletrodomesticos, celularesSmartphones));
 
         var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, URLIMAGE, acer, Collections.singletonList(informatica));
+        var galaxy10e = new ProductDatabase(null, "Galaxy S10e", 2400.00, true, URLIMAGE, samsung, Collections.singletonList(informatica));
+        var xaiomimI9 = new ProductDatabase(null, "Xaiomi Mi9", 1400.00, true, URLIMAGE, acer, Collections.singletonList(informatica));
+        var tvSamsung = new ProductDatabase(null, "TV S41", 3000.00, true, URLIMAGE, samsung, Collections.singletonList(informatica));
         var samsungBook = new ProductDatabase(null, "Notebook Samsung Book", 3181.55, true, URLIMAGE, samsung, Collections.singletonList(informatica));
         var samsungGalaxyA11 = new ProductDatabase(null, "Samsung Galaxy A11", 999.00, true, URLIMAGE, samsung, Collections.singletonList(celularesSmartphones));
         var iphone12ProMax = new ProductDatabase(null, "iPhone 12 Pro Max", 9495.36, true, "https://i.imgur.com/m6VyNEE.jpg", apple, Collections.singletonList(celularesSmartphones));
         var microOndas = new ProductDatabase(null, "Micro-ondas", 659.00, true, URLIMAGE, electrolux, Collections.singletonList(eletrodomesticos));
         var fogao = new ProductDatabase(null, "Fogão de Piso 4 Bocas", 433.52, true, URLIMAGE, esmaltec, Collections.singletonList(eletrodomesticos));
-        productRepository.saveAll(Arrays.asList(aspire5, samsungBook, samsungGalaxyA11, iphone12ProMax, microOndas, fogao));
+        productRepository.saveAll(Arrays.asList(aspire5, samsungBook, samsungGalaxyA11, iphone12ProMax, microOndas, fogao, galaxy10e, tvSamsung));
 
         var startDate = LocalDateTime.parse("00:00 AM, Tue 06/15/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
         var endDate = LocalDateTime.parse("00:00 AM, Fri 06/18/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
@@ -96,6 +99,41 @@ public class DBService {
                         new SkuAttributesDomain(SO, "os", "Windows 10 Home 64-bit")
                 )
         );
+        var tvSam = new SkuDatabase(null,
+                tvSamsung,
+                "AFRQF5-DWW-12EN",
+                "Smart TV 50” Crystal 4K Samsung 50AU7700 - Wi-Fi Bluetooth HDR Alexa Built in 3 HDMI 1 USB",
+                5, 100.00, 50.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                new SkuPriceDomain(3704.05, 0.00, startDate, startDate),
+                Arrays.asList(
+                        new SkuAttributesDomain("Memória RAM", "memory", "2GB"),
+                        new SkuAttributesDomain("Capacidade do SSD", "ssd", "20GB de armazenamento SSD NVMe x4"),
+                        new SkuAttributesDomain("Sistema operacional", "os", "Alexa Build")
+                )
+        );
+        var galaxyS10e = new SkuDatabase(null,
+                galaxy10e,
+                "B125-B7-EF2N",
+                "Galaxy S10e - 128GB Tela 15,6” Full HD LED",
+                5, 12.00, 19.00, 9.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                new SkuPriceDomain(2709.09, 0.00, startDate, startDate),
+                Arrays.asList(
+                        new SkuAttributesDomain("Memória RAM", "memory", "6GB"),
+                        new SkuAttributesDomain("Capacidade de Armazenamento", "HD", "256GB de armazenamento")
+                )
+        );
+
+        var xaiomiMI9 = new SkuDatabase(null,
+                xaiomimI9,
+                "CD12-H7-24FDF",
+                "Xaiomi Mi9 - 64GB Tela 12,6” Quad HD LED",
+                20, 12.00, 20.00, 9.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                new SkuPriceDomain(1200.00, 0.00, startDate, startDate),
+                Arrays.asList(
+                        new SkuAttributesDomain("Memória RAM", "memory", "8GB"),
+                        new SkuAttributesDomain("Capacidade de Armazenamento", "HD", "128GB de armazenamento")
+                )
+        );
 
         var fogaoEsmaltec = new SkuDatabase(null,
                 fogao,
@@ -121,7 +159,7 @@ public class DBService {
                 new SkuPriceDomain(4299.00, 3181.55, Instant.now().minusSeconds(86400), Instant.now().plusSeconds(86400)),
                 Collections.emptyList()
         );
-
-        skuRepository.saveAll(Arrays.asList(aspire5SkuI3, aspire5SkuI5, aspire5SkuI7, iphone12ProMax128, samsungBookI3core258GB, fogaoEsmaltec));
+        skuRepository.saveAll(Arrays.asList(aspire5SkuI3, aspire5SkuI5, aspire5SkuI7, iphone12ProMax128, samsungBookI3core258GB,
+                fogaoEsmaltec, xaiomiMI9, galaxyS10e, tvSam));
     }
 }

@@ -27,7 +27,9 @@ public class ProductRequest implements Serializable {
     private String name;
 
     @PositiveOrZero
+
     @NotNull(message = "Field not be null")
+
     @ApiModelProperty(value = "Preço do produto", required = true, example = "2500")
     private Double price;
 
