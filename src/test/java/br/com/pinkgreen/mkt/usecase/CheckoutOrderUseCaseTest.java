@@ -49,7 +49,7 @@ class CheckoutOrderUseCaseTest {
 
         assertEquals("1234", publishOrderDomainArgumentValue.getId());
         assertEquals(ORDER_CREATED, orderDomainArgumentValue.getStatus());
-        assertEquals(3870.00, orderDomainArgumentValue.getPaymentData().getAmount());
+        assertEquals(7729.00, orderDomainArgumentValue.getPaymentData().getAmount());
         assertEquals("1111222233334444", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("cardNumber"));
         assertEquals("123", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("cvv"));
         assertEquals("01/22", publishPaymentDomainArgumentValue.getPaymentMethodProperties().get("validationDate"));
@@ -107,6 +107,7 @@ class CheckoutOrderUseCaseTest {
                 .price(new SkuPriceDomain(3859.00, 0.00, Instant.MIN, Instant.MIN))
                 .stockQuantity(1000)
                 .skuCode("888888888")
+                .quantity(2)
                 .build();
 
         ProductOrderDomain productOrderDomain2 = ProductOrderDomain.builder()
@@ -114,6 +115,7 @@ class CheckoutOrderUseCaseTest {
                 .price(new SkuPriceDomain(5207.00, 11.00, START_DATE, END_DATE))
                 .stockQuantity(1000)
                 .skuCode("999999999")
+                .quantity(1)
                 .build();
 
         return OrderDomain.builder()

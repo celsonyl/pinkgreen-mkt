@@ -26,6 +26,7 @@ public class CheckoutOrderUseCase {
     private final SaveOrderGateway saveOrderGateway;
     private final PublishOrderStatusEvent publishOrderStatusEvent;
 
+    // TODO: validar estoque dos produtos no carrinho ao fazer checkout
     public OrderDomain execute(OrderDomain orderDomain) throws CouldNotCheckoutOrderException {
         validateReceivedSkus(orderDomain);
         setOrderStatusAndCalculateAmount(orderDomain);
@@ -45,7 +46,12 @@ public class CheckoutOrderUseCase {
     }
 
     private Double calcOrderAmount(List<ProductOrderDomain> productOrderDomainList) {
-        return productOrderDomainList.stream().reduce(0.00, (subtotal, element) -> subtotal + getActivePrice(element.getPrice()), Double::sum);
+        return productOrderDomainList.stream()
+                .reduce(0.00, this::calcProductAmount, Double::sum);
+    }
+
+    private Double calcProductAmount(Double subtotal, ProductOrderDomain element) {
+        return subtotal + getActivePrice(element.getPrice()) * element.getQuantity();
     }
 
     private Double getActivePrice(SkuPriceDomain skuPriceDomain) {
@@ -75,12 +81,18 @@ public class CheckoutOrderUseCase {
     }
 
     private void overrideProductList(OrderDomain orderDomain, List<SkuDomain> skuDomainsDB) {
-        orderDomain.setProductList(skuDomainsDB.stream().map(skuDomain -> ProductOrderDomain.builder()
-                .skuCode(skuDomain.getSkuCode())
-                .name(skuDomain.getName())
-                .price(skuDomain.getPrice())
-                .stockQuantity(skuDomain.getStockQuantity())
-                .build()).collect(Collectors.toList()));
+        var skus = skuDomainsDB.stream().collect(Collectors.toMap(SkuDomain::getSkuCode, skuDomain -> skuDomain));
+        var updatedProductList = orderDomain.getProductList().stream().map(product -> {
+            var skuDomain = skus.get(product.getSkuCode());
+            return ProductOrderDomain.builder()
+                    .skuCode(skuDomain.getSkuCode())
+                    .name(skuDomain.getName())
+                    .price(skuDomain.getPrice())
+                    .stockQuantity(skuDomain.getStockQuantity())
+                    .quantity(product.getQuantity())
+                    .build();
+        }).collect(Collectors.toList());
+        orderDomain.setProductList(updatedProductList);
     }
 
     private boolean validateProductPrice(SkuPriceDomain receivedPrice, SkuPriceDomain databasePrice) {

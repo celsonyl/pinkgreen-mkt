@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 
@@ -33,6 +34,7 @@ public class ProductOrderRequest implements Serializable {
     @ApiModelProperty(value = "Quantidade em estoque", required = true, example = "17")
     private Integer stockQuantity;
 
+    @NotNull(message = "Product quantities must not be null")
     @PositiveOrZero
     @ApiModelProperty(value = "Quantidade de itens deste produto", required = true, example = "2")
     private Integer quantity;
