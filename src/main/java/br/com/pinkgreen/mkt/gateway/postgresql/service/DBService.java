@@ -2,14 +2,14 @@ package br.com.pinkgreen.mkt.gateway.postgresql.service;
 
 import br.com.pinkgreen.mkt.domain.SkuAttributesDomain;
 import br.com.pinkgreen.mkt.domain.SkuPriceDomain;
-import br.com.pinkgreen.mkt.gateway.postgresql.repository.BrandRepository;
-import br.com.pinkgreen.mkt.gateway.postgresql.repository.CategoryRepository;
-import br.com.pinkgreen.mkt.gateway.postgresql.repository.ProductRepository;
-import br.com.pinkgreen.mkt.gateway.postgresql.repository.SkuRepository;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.BrandDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.CategoryDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.SkuDatabase;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.BrandRepository;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.CategoryRepository;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.ProductRepository;
+import br.com.pinkgreen.mkt.gateway.postgresql.repository.SkuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +26,9 @@ import java.util.Locale;
 public class DBService {
 
     public static final String URLIMAGE = "https://imgur.com/c20GJPz.gif";
+    public static final String RAM = "Memória RAM";
+    public static final String SSD = "Capacidade do SSD";
+    public static final String SO = "Sistema operacional";
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
@@ -55,16 +58,42 @@ public class DBService {
         var startDate = LocalDateTime.parse("00:00 AM, Tue 06/15/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
         var endDate = LocalDateTime.parse("00:00 AM, Fri 06/18/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
 
-        var aspire5Sku = new SkuDatabase(null,
+        var aspire5SkuI5 = new SkuDatabase(null,
                 aspire5,
                 "A515-54-57EN",
                 "Notebook Aspire 5 - Intel Core i5 - 8GB 256GB SSD 15,6” Full HD LED Windows 10",
                 10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
                 new SkuPriceDomain(3704.05, 0.00, startDate, startDate),
                 Arrays.asList(
-                        new SkuAttributesDomain("Memória RAM", "memory", "8GB"),
-                        new SkuAttributesDomain("Capacidade do SSD", "ssd", "256GB de armazenamento SSD NVMe x4"),
-                        new SkuAttributesDomain("Sistema operacional", "os", "Windows 10 Home 64-bit")
+                        new SkuAttributesDomain(RAM, "memory", "8GB"),
+                        new SkuAttributesDomain(SSD, "ssd", "256GB de armazenamento SSD NVMe x4"),
+                        new SkuAttributesDomain(SO, "os", "Windows 10 Home 64-bit")
+                )
+        );
+
+        var aspire5SkuI7 = new SkuDatabase(null,
+                aspire5,
+                "A517-54-57EN",
+                "Notebook Aspire 5 - Intel Core i7 - 16GB 480GB SSD 15,6” Full HD LED Windows 10",
+                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                new SkuPriceDomain(3904.05, 2556.89, LocalDateTime.now().minusDays(2).toInstant(ZoneOffset.of("-03:00")), LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.of("-03:00"))),
+                Arrays.asList(
+                        new SkuAttributesDomain(RAM, "memory", "16GB"),
+                        new SkuAttributesDomain(SSD, "ssd", "480GB de armazenamento SSD NVMe x4"),
+                        new SkuAttributesDomain(SO, "os", "Windows 10 Home 64-bit")
+                )
+        );
+
+        var aspire5SkuI3 = new SkuDatabase(null,
+                aspire5,
+                "A513-54-57EN",
+                "Notebook Aspire 5 - Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10",
+                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                new SkuPriceDomain(3004.85, 1458.32, LocalDateTime.now().minusDays(2).toInstant(ZoneOffset.of("-03:00")), LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.of("-03:00"))),
+                Arrays.asList(
+                        new SkuAttributesDomain(RAM, "memory", "4GB"),
+                        new SkuAttributesDomain(SSD, "ssd", "256GB de armazenamento SSD NVMe x4"),
+                        new SkuAttributesDomain(SO, "os", "Windows 10 Home 64-bit")
                 )
         );
 
@@ -93,6 +122,6 @@ public class DBService {
                 Collections.emptyList()
         );
 
-        skuRepository.saveAll(Arrays.asList(aspire5Sku, iphone12ProMax128, samsungBookI3core258GB, fogaoEsmaltec));
+        skuRepository.saveAll(Arrays.asList(aspire5SkuI3, aspire5SkuI5, aspire5SkuI7, iphone12ProMax128, samsungBookI3core258GB, fogaoEsmaltec));
     }
 }
