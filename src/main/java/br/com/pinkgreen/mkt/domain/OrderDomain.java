@@ -23,4 +23,8 @@ public class OrderDomain implements Serializable {
     private PaymentDomain paymentData;
     private Instant createdAt;
     private Instant updatedAt;
+
+    public void setUpdatedAt() {
+        this.updatedAt = Instant.now();
+    }
 }

@@ -17,4 +17,5 @@ public class OrderProductDatabase implements Serializable {
     private String name;
     private SkuPriceDomain price;
     private Integer stockQuantity;
+    private Integer quantity;
 }

@@ -20,7 +20,7 @@ public class GetSkuBySkuCodeGatewayImpl implements GetSkuBySkuCodeGateway {
     @Override
     public Optional<SkuDomain> getSkuBySkuCode(String code) {
         SkuProductMapper skuMapper = new SkuProductMapperImpl();
-        Optional<SkuDatabase> skuDatabase = skuRepository.findSkuDatabaseByName(code);
+        Optional<SkuDatabase> skuDatabase = skuRepository.findSkuByCode(code);
 
         if (skuDatabase.isEmpty()) {
             return Optional.empty();

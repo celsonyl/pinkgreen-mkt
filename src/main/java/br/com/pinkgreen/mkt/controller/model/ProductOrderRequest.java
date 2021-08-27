@@ -33,4 +33,8 @@ public class ProductOrderRequest implements Serializable {
     @ApiModelProperty(value = "Quantidade em estoque", required = true, example = "17")
     private Integer stockQuantity;
 
+    @PositiveOrZero
+    @ApiModelProperty(value = "Quantidade de itens deste produto", required = true, example = "2")
+    private Integer quantity;
+
 }
