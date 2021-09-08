@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.repository;
 
+import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.OrderDatabase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +18,6 @@ public interface OrderRepository extends JpaRepository<OrderDatabase, Integer> {
 
     @Query(value = "SELECT * FROM orders WHERE payment_data ->> 'paymentId' = :paymentId", nativeQuery = true)
     Optional<OrderDatabase> findOrderByPaymentId(@Param("paymentId") String paymentId);
+
+    List<OrderDatabase> findAllOrdersByStatus(OrderStatus orderStatus);
 }

@@ -9,6 +9,7 @@ import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
+import br.com.pinkgreen.mkt.usecase.GetAllOrdersReadyToShipUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,7 @@ public class OrderController implements OrderControllerApi {
 
     private final CheckoutOrderUseCase checkoutOrderUseCase;
     private final GetAllOrdersByCustomerIdUseCase getAllOrdersByCustomerIdUseCase;
+    private final GetAllOrdersReadyToShipUseCase getAllOrdersReadyToShipUseCase;
 
     @Override
     @SneakyThrows
@@ -69,6 +71,17 @@ public class OrderController implements OrderControllerApi {
         return ResponseEntity.ok(orderResponses);
     }
 
+    @Override
+    @SneakyThrows
+    @GetMapping("/ready-to-ship")
+    @RolesAllowed("admin")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<OrderResponse>> getOrdersReadyToShip() {
+        var orders = getAllOrdersReadyToShipUseCase.execute();
+        return ResponseEntity.ok(orders.stream()
+                .map(new OrderMapperImpl()::orderToOrderResponse)
+                .collect(Collectors.toList()));
+    }
 
     private void getCustomerIdAndValidate(KeycloakAuthenticationToken keycloakAuthenticationToken, String customerId) throws InvalidCustomerIdException {
         String tokenCustomerId = keycloakAuthenticationToken.getAccount().getKeycloakSecurityContext().getToken().getSubject();
