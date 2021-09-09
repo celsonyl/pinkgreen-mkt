@@ -13,7 +13,6 @@ public class PinkGreenMarketPlacePlataformApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PinkGreenMarketPlacePlataformApplication.class, args);
-        System.out.println("oii");
     }
 
 }
