@@ -21,7 +21,6 @@ public class VerifyAndReserveProductStockUseCase {
         var isReserved = reserveSkuGateway.execute(orderDomain.getProductList());
 
         if (isReserved) {
-            // TODO: disparar pedido para entrega
             updateAndPublishOrderEvent.execute(orderDomain.getId(), OrderStatus.ORDER_STOCK_RESERVED);
         } else {
             // TODO: cancelar pagamento e compra

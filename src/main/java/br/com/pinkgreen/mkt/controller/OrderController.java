@@ -5,21 +5,20 @@ import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersReadyToShipUseCase;
+import br.com.pinkgreen.mkt.usecase.UpdateAndPublishOrderEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +34,7 @@ public class OrderController implements OrderControllerApi {
     private final CheckoutOrderUseCase checkoutOrderUseCase;
     private final GetAllOrdersByCustomerIdUseCase getAllOrdersByCustomerIdUseCase;
     private final GetAllOrdersReadyToShipUseCase getAllOrdersReadyToShipUseCase;
+    private final UpdateAndPublishOrderEvent updateAndPublishOrderEvent;
 
     @Override
     @SneakyThrows
@@ -81,6 +81,15 @@ public class OrderController implements OrderControllerApi {
         return ResponseEntity.ok(orders.stream()
                 .map(new OrderMapperImpl()::orderToOrderResponse)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    @PatchMapping("/{orderId}/update/{orderStatus}")
+    @RolesAllowed("admin")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Void> updateOrderStatus(String orderId, OrderStatus orderStatus) {
+        updateAndPublishOrderEvent.execute(orderId, orderStatus);
+        return ResponseEntity.noContent().build();
     }
 
     private void getCustomerIdAndValidate(KeycloakAuthenticationToken keycloakAuthenticationToken, String customerId) throws InvalidCustomerIdException {

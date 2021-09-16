@@ -2,7 +2,11 @@ package br.com.pinkgreen.mkt.controller.handler;
 
 import br.com.pinkgreen.mkt.controller.handler.model.StandardError;
 import br.com.pinkgreen.mkt.controller.handler.model.ValidationError;
-import br.com.pinkgreen.mkt.domain.exception.*;
+import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
+import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
+import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
+import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -56,6 +60,14 @@ public class RestExceptionHandler {
     public ResponseEntity<StandardError> accessDenied(AccessDeniedException e, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(StandardError.builder()
                 .message("Você não possui autorização para acessar isso!")
+                .path(request.getRequestURI())
+                .build());
+    }
+
+    @ExceptionHandler(InvalidStatusTransitionException.class)
+    public ResponseEntity<StandardError> invalidOrderStatusTransition(InvalidStatusTransitionException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(StandardError.builder()
+                .message("Transição de status inválida!")
                 .path(request.getRequestURI())
                 .build());
     }

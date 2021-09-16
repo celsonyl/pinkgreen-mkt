@@ -3,7 +3,8 @@ package br.com.pinkgreen.mkt.controller.client;
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
-import br.com.pinkgreen.mkt.gateway.postgresql.model.OrderDatabase;
+import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
+import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,4 +57,17 @@ public interface OrderControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<List<OrderResponse>> getOrdersReadyToShip();
+
+    @ApiOperation(value = "Atualização de status de pedido")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Indica que a requisição foi bem sucedida"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<Void> updateOrderStatus(@PathVariable String orderId, @PathVariable OrderStatus orderStatus) throws InvalidStatusTransitionException;
 }
