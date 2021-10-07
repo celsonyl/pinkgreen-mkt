@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 public class SkuResponse implements Serializable {
-
+    private Integer id;
     private String skuCode;
     private String name;
     private Integer stockQuantity;
@@ -24,5 +24,6 @@ public class SkuResponse implements Serializable {
     private SkuPriceResponse price;
     private List<SkuAttributesResponse> skuAttributes;
     private ProductResponse product;
+    private List<RelatedSkusResponse> relatedSkus;
 
 }

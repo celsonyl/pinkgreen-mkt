@@ -30,11 +30,6 @@ public class ProductDatabase implements Serializable {
     @JoinColumn(name = "product_brand_id")
     private BrandDatabase brand;
 
-    // Pensando ainda hmm, compilo os atributos na aplicação?
-//    @Type(type = "jsonb")
-//    @Column(columnDefinition = "jsonb")
-//    private List<ProductAttributesDomain> productAttributes;
-
     @ManyToMany
     @JsonIgnore
     @JoinTable(
