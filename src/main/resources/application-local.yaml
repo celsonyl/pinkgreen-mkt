@@ -1,7 +1,9 @@
 spring:
-  jpa:
-    hibernate.ddl-auto: create-drop
-    show-sql: true
+  jpa.show-sql: true
+  flyway:
+    url: jdbc:postgresql://localhost:5432/pinkgreen_mkt
+    user: local
+    password: local
   datasource:
     url: jdbc:postgresql://localhost:5432/pinkgreen_mkt
     username: local
