@@ -23,8 +23,9 @@ public class VerifyAndReserveProductStockUseCase {
         if (isReserved) {
             updateAndPublishOrderEvent.execute(orderDomain.getId(), OrderStatus.ORDER_STOCK_RESERVED);
         } else {
-            // TODO: cancelar pagamento e compra
+            // TODO: cancelar pagamento
             updateAndPublishOrderEvent.execute(orderDomain.getId(), OrderStatus.ORDER_STOCK_FAILED);
+            updateAndPublishOrderEvent.execute(orderDomain.getId(), OrderStatus.ORDER_CANCELED);
         }
     }
 }
