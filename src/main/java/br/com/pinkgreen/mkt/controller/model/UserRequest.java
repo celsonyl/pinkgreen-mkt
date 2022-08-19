@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
+    public static final String PASSWORD_REGEX = "^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$";
     public static final String PHONE_REGEX = "^((?:\\+)[0-9]{2}\\s?(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4})$";
 
     @NotBlank(message = "Name must not be blank")
@@ -47,4 +48,9 @@ public class UserRequest {
     @NotNull(message = "Birthday must not be null")
     @ApiModelProperty(value = "Data de nascimento do cliente", required = true, example = "2002-08-11")
     private LocalDate birthday;
+
+    @NotBlank(message = "Invalid password")
+    @Pattern(regexp = PASSWORD_REGEX, message = "Invalid password")
+    @ApiModelProperty(value = "Senha da conta do cliente", required = true, example = "SenhaF0rt3@2022")
+    private String password;
 }
