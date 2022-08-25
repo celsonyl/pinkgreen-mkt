@@ -18,4 +18,7 @@ public class BrandResponse implements Serializable {
 
     @ApiModelProperty(value = "Nome da marca", required = true, example = "Samsung")
     private String name;
+
+    @ApiModelProperty(value = "Imagem da marca", required = true, example = "https://imageDomain/path.extension")
+    private String brandImage;
 }

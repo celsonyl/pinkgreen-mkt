@@ -14,4 +14,5 @@ public class BrandDomain implements Serializable {
 
     private Integer id;
     private String name;
+    private String brandImage;
 }
