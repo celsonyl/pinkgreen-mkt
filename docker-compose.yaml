@@ -12,7 +12,6 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_MULTIPLE_DATABASES: pinkgreen_mkt,keycloak,pinkgreen_mocks
       POSTGRES_USER: local
       POSTGRES_PASSWORD: local
       MAX_CONNECTIONS: 300
@@ -47,26 +46,3 @@ services:
       - pinkgreen-network
     depends_on:
       - postgres
-  pinkgreen_mkt_app:
-    image: pinkgreen_mkt:latest
-    container_name: pinkgreen_mkt
-    environment:
-      POSTGRES_URL: jdbc:postgresql://postgres_pinkgreen_mkt:5432/pinkgreen_mkt
-      POSTGRES_USER: local
-      POSTGRES_PASSWORD: local
-      RABBITMQ_HOST: rabbitmq_pinkgreen_mkt
-      RABBITMQ_PORT: 5672
-      RABBITMQ_USER: guest
-      RABBITMQ_PASSWORD: guest
-      KEYCLOAK_REALM: Pinkgreen-mkt
-      KEYCLOAK_URL: http://keycloak_pinkgreen_mkt:8080/auth
-      KEYCLOAK_CLIENT: pinkgreen-backend
-      KEYCLOAK_SECRET: d8d98cff-30aa-435a-abf6-8ed0037da732
-    ports:
-      - 8181:8181
-    networks:
-      - pinkgreen-network
-    depends_on:
-      - postgres
-      - rabbitmq
-      - keycloak

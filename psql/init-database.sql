@@ -1,0 +1,8 @@
+CREATE DATABASE pinkgreen_mkt;
+GRANT ALL PRIVILEGES ON DATABASE pinkgreen_mkt TO local;
+
+CREATE DATABASE keycloak;
+GRANT ALL PRIVILEGES ON DATABASE keycloak TO local;
+
+CREATE DATABASE pinkgreen_mocks;
+GRANT ALL PRIVILEGES ON DATABASE pinkgreen_mocks TO local;
