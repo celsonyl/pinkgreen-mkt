@@ -1,0 +1,40 @@
+INSERT INTO product_brand (name, brand_image) VALUES ('Acer', 'https://imgur.com/6wTcxmU');
+INSERT INTO product_brand (name, brand_image) VALUES ('Apple', 'https://imgur.com/JdtpxX9');
+INSERT INTO product_brand (name, brand_image) VALUES ('Samsung', 'https://imgur.com/OkgdSou');
+INSERT INTO product_brand (name, brand_image) VALUES ('Electrolux', 'https://imgur.com/FNvvjre');
+INSERT INTO product_brand (name, brand_image) VALUES ('Esmaltec', 'https://imgur.com/xrv55JQ');
+INSERT INTO product_brand (name, brand_image) VALUES ('Xiaomi', 'https://imgur.com/7N2QBR1');
+
+INSERT INTO product_category (name, image) VALUES ('Informatica', 'https://imgur.com/PchRPP7');
+INSERT INTO product_category (name, image) VALUES ('Eletrodomésticos', 'https://imgur.com/Ye8Ecvoo');
+INSERT INTO product_category (name, image) VALUES ('Celulares e smartphones', 'https://imgur.com/m6VyNEE');
+
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('Notebook Aspire 5', 3704.05, true, 'https://imgur.com/PchRPP7', 1);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('Galaxy S10e', 2400.00, true, 'https://imgur.com/dkR4vDn', 3);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('Xiaomi MI 9', 1400.00, true, 'https://imgur.com/Bcme7Vy', 6);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('TV Samsung 50"', 3000.00, true, 'https://imgur.com/QiBNHzb', 3);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('Notebook Samsung Book', 3181.55, true, 'https://imgur.com/fzo9SWr', 3);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('Samsung Galaxy A11', 999.00, true, 'https://imgur.com/b6XTUFP', 3);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('iPhone 12 Pro Max', 9495.36, true, 'https://imgur.com/m6VyNEE', 2);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('Micro-ondas', 659.00, true, 'https://imgur.com/Ye8Ecvo', 4);
+INSERT INTO product (name, price, active, main_image_url, product_brand_id) VALUES ('Fogão de Piso 4 Bocas', 433.52, true, 'https://imgur.com/2dmMfQp', 5);
+
+INSERT INTO product_categories (product_id, category_id) VALUES (1, 1);
+INSERT INTO product_categories (product_id, category_id) VALUES (2, 3);
+INSERT INTO product_categories (product_id, category_id) VALUES (3, 3);
+INSERT INTO product_categories (product_id, category_id) VALUES (4, 2);
+INSERT INTO product_categories (product_id, category_id) VALUES (5, 1);
+INSERT INTO product_categories (product_id, category_id) VALUES (6, 3);
+INSERT INTO product_categories (product_id, category_id) VALUES (7, 3);
+INSERT INTO product_categories (product_id, category_id) VALUES (8, 2);
+INSERT INTO product_categories (product_id, category_id) VALUES (9, 2);
+
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (1, 10, 10, 'https://imgur.com/PchRPP7', 'Notebook Aspire 5 - Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10','{"endDate": 1661996659.2356095, "listPrice": 3004.85, "salePrice": 1458.32, "startDate": 1661219059.2356095}', '[{"type": "memory", "label": "Memória RAM", "value": "4GB"}, {"type": "ssd", "label": "Capacidade do SSD", "value": "256GB de armazenamento SSD NVMe x4"}, {"type": "os", "label": "Sistema operacional", "value": "Windows 10 Home 64-bit"}]', 'A513-54-57EN', 10, '[]', 10, 10);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (1, 10, 10, 'https://imgur.com/PchRPP7', 'Notebook Aspire 5 - Intel Core i5 - 8GB 256GB SSD 15,6” Full HD LED Windows 10', '{"endDate": 1623726000, "listPrice": 3704.05, "salePrice": 0.0, "startDate": 1623726000}', '[{"type": "memory", "label": "Memória RAM", "value": "8GB"}, {"type": "ssd", "label": "Capacidade do SSD", "value": "256GB de armazenamento SSD NVMe x4"}, {"type": "os", "label": "Sistema operacional", "value": "Windows 10 Home 64-bit"}]', 'A515-54-57EN', 10, '[]', 10, 10);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (1, 10, 10, 'https://imgur.com/PchRPP7', 'Notebook Aspire 5 - Intel Core i7 - 16GB 480GB SSD 15,6” Full HD LED Windows 10', '{"endDate": 1661996659.2356095, "listPrice": 3904.05, "salePrice": 2556.89, "startDate": 1661219059.2356095}', '[{"type": "memory", "label": "Memória RAM", "value": "16GB"}, {"type": "ssd", "label": "Capacidade do SSD", "value": "480GB de armazenamento SSD NVMe x4"}, {"type": "os", "label": "Sistema operacional", "value": "Windows 10 Home 64-bit"}]' , 'A517-54-57EN', 10, '[]', 10, 10);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (2, 12, 9, 'https://imgur.com/dkR4vDn', 'Galaxy S10e - 128GB Tela 15,6” Full HD LED','{"endDate": 1623726000, "listPrice": 2709.09, "salePrice": 0.0, "startDate": 1623726000}', '[{"type": "memory", "label": "Memória RAM", "value": "6GB"}, {"type": "HD", "label": "Capacidade de Armazenamento", "value": "256GB de armazenamento"}]','B125-B7-EF2N', 5, '[]', 10, 19);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (3, 12, 9, 'https://imgur.com/Bcme7Vy', 'Xiaomi Mi9 - 64GB Tela 12,6” Quad HD LED', '{ "endDate": 1623726000, "listPrice": 1200.0, "salePrice": 0.0, "startDate": 1623726000 }', '[{"type": "memory", "label": "Memória RAM", "value": "8GB"}, {"type": "HD", "label": "Capacidade de Armazenamento", "value": "128GB de armazenamento"}]', 'CD12-H7-24FDF', 20, '[]', 10, 20);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (4, 100, 10, 'https://imgur.com/QiBNHzb', 'Smart TV 50” Crystal 4K Samsung 50AU7700 - Wi-Fi Bluetooth HDR Alexa Built in 3 HDMI 1 USB', '{ "endDate": 1623726000, "listPrice": 3704.05, "salePrice": 0.0, "startDate": 1623726000 }','[{"type": "memory", "label": "Memória RAM", "value": "2GB"}, {"type": "ssd", "label": "Capacidade do SSD", "value": "20GB de armazenamento SSD NVMe x4"}, {"type": "os", "label": "Sistema operacional", "value": "Alexa Build"}]', 'AFRQF5-DWW-12EN', 5, '[]', 10, 50);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (5, 10, 10, 'https://imgur.com/PchRPP7', 'Notebook Samsung Book - Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10', '{"endDate": 1661478259.2366135, "listPrice": 4299.0, "salePrice": 3181.55, "startDate": 1661305459.2366135}', '[]' , 'NP550XDA-KT3BR', 10, '[]', 10, 10);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (7, 10, 10, 'https://imgur.com/m6VyNEE', 'iPhone 12 Pro Max Dourado, com Tela de 6,7”, 5G, 128 GB e Câmera Tripla de 12MP', '{"endDate": 1623985200, "listPrice": 9495.36, "salePrice": 4500.98, "startDate": 1623726000}', '[]', 'MGD93BZA', 10, '[]', 10, 10);
+INSERT INTO product_sku (product_id, height, length, main_image_url, name, price, sku_attributes, sku_code, stock_quantity, url_images, weight, width) VALUES (9, 10, 10, 'https://imgur.com/2dmMfQp', 'Fogão de Piso 4 Bocas Esmaltec', '{"endDate": 1661391855.383617, "listPrice": 433.52, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', '1589663525', 10, '[]', 10, 10);

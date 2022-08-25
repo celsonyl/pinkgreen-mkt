@@ -36,12 +36,14 @@ public class ProductDomainToDatabase {
         var brandDomain = BrandDomain.builder()
                 .id(productDatabase.getBrand().getId())
                 .name(productDatabase.getBrand().getName())
+                .brandImage(productDatabase.getBrand().getBrandImage())
                 .build();
 
         var categories = productDatabase.getCategories().stream().map(element ->
                 CategoryDomain.builder()
                         .id(element.getId())
                         .name(element.getName())
+                        .image(element.getImage())
                         .build()
         ).collect(Collectors.toList());
 
