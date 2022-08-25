@@ -19,6 +19,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -26,6 +27,7 @@ import java.util.Locale;
 public class DBService {
 
     public static final String URLIMAGE = "https://imgur.com/c20GJPz.gif";
+
     public static final String RAM = "Memória RAM";
     public static final String SSD = "Capacidade do SSD";
     public static final String SO = "Sistema operacional";
@@ -35,28 +37,29 @@ public class DBService {
     private final SkuRepository skuRepository;
 
     public void instantiateTestDB() {
-        var acer = new BrandDatabase(null, "Acer");
-        var samsung = new BrandDatabase(null, "Samsung");
-        var apple = new BrandDatabase(null, "Apple");
-        var electrolux = new BrandDatabase(null, "Electrolux");
-        var esmaltec = new BrandDatabase(null, "Esmaltec");
-        var xaiomi = new BrandDatabase(null, "Xaiomi");
+
+        var acer = new BrandDatabase(null, "Acer", "https://iclinformatica.com.br/wp-content/uploads/2018/01/acer-png-acer-logo-png-1744.png");
+        var samsung = new BrandDatabase(null, "Samsung", "https://i.imgur.com/OkgdSou.png");
+        var apple = new BrandDatabase(null, "Apple", "https://cdn.discordapp.com/attachments/814120506746994720/1012147594912346142/unknown.png");
+        var electrolux = new BrandDatabase(null, "Electrolux", "https://i.imgur.com/FNvvjre.png");
+        var esmaltec = new BrandDatabase(null, "Esmaltec", "https://i.imgur.com/xrv55JQ.png");
+        var xaiomi = new BrandDatabase(null, "Xaiomi", "https://i.imgur.com/7N2QBR1.png");
         brandRepository.saveAll(Arrays.asList(acer, samsung, apple, electrolux, esmaltec, xaiomi));
 
-        var informatica = new CategoryDatabase(null, "Informatica", URLIMAGE);
-        var eletrodomesticos = new CategoryDatabase(null, "Eletrodomésticos", URLIMAGE);
-        var celularesSmartphones = new CategoryDatabase(null, "Celulares e smartphones", URLIMAGE);
+        var informatica = new CategoryDatabase(null, "Informatica", "https://i.imgur.com/PchRPP7.png");
+        var eletrodomesticos = new CategoryDatabase(null, "Eletrodomésticos", "https://imgur.com/Ye8Ecvoo");
+        var celularesSmartphones = new CategoryDatabase(null, "Celulares e smartphones", "https://i.imgur.com/m6VyNEE.jpeg");
         categoryRepository.saveAll(Arrays.asList(informatica, eletrodomesticos, celularesSmartphones));
 
-        var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, URLIMAGE, acer, Collections.singletonList(informatica));
-        var galaxy10e = new ProductDatabase(null, "Galaxy S10e", 2400.00, true, URLIMAGE, samsung, Collections.singletonList(informatica));
-        var xaiomimI9 = new ProductDatabase(null, "Xaiomi Mi9", 1400.00, true, URLIMAGE, xaiomi, Collections.singletonList(informatica));
-        var tvSamsung = new ProductDatabase(null, "TV S41", 3000.00, true, URLIMAGE, samsung, Collections.singletonList(informatica));
-        var samsungBook = new ProductDatabase(null, "Notebook Samsung Book", 3181.55, true, URLIMAGE, samsung, Collections.singletonList(informatica));
-        var samsungGalaxyA11 = new ProductDatabase(null, "Samsung Galaxy A11", 999.00, true, URLIMAGE, samsung, Collections.singletonList(celularesSmartphones));
-        var iphone12ProMax = new ProductDatabase(null, "iPhone 12 Pro Max", 9495.36, true, "https://i.imgur.com/m6VyNEE.jpg", apple, Collections.singletonList(celularesSmartphones));
-        var microOndas = new ProductDatabase(null, "Micro-ondas", 659.00, true, URLIMAGE, electrolux, Collections.singletonList(eletrodomesticos));
-        var fogao = new ProductDatabase(null, "Fogão de Piso 4 Bocas", 433.52, true, URLIMAGE, esmaltec, Collections.singletonList(eletrodomesticos));
+        var aspire5 = new ProductDatabase(null, "Notebook Aspire 5", 3704.05, true, "https://i.imgur.com/PchRPP7.png", acer, Collections.singletonList(informatica));
+        var galaxy10e = new ProductDatabase(null, "Galaxy S10e", 2400.00, true, "https://imgur.com/dkR4vDn", samsung, Collections.singletonList(informatica));
+        var xaiomimI9 = new ProductDatabase(null, "Xaiomi Mi9", 1400.00, true, "https://imgur.com/Bcme7Vy", xaiomi, Collections.singletonList(informatica));
+        var tvSamsung = new ProductDatabase(null, "TV S41", 3000.00, true, "https://i.imgur.com/QiBNHzb.png", samsung, Collections.singletonList(informatica));
+        var samsungBook = new ProductDatabase(null, "Notebook Samsung Book", 3181.55, true, "https://i.imgur.com/fzo9SWr.jpg", samsung, Collections.singletonList(informatica));
+        var samsungGalaxyA11 = new ProductDatabase(null, "Samsung Galaxy A11", 999.00, true, "https://imgur.com/b6XTUFP", samsung, Collections.singletonList(celularesSmartphones));
+        var iphone12ProMax = new ProductDatabase(null, "iPhone 12 Pro Max", 9495.36, true, "https://i.imgur.com/m6VyNEE.jpeg", apple, Collections.singletonList(celularesSmartphones));
+        var microOndas = new ProductDatabase(null, "Micro-ondas", 659.00, true, "https://imgur.com/Ye8Ecvo", electrolux, Collections.singletonList(eletrodomesticos));
+        var fogao = new ProductDatabase(null, "Fogão de Piso 4 Bocas", 433.52, true, "https://i.imgur.com/2dmMfQp.jpg", esmaltec, Collections.singletonList(eletrodomesticos));
         productRepository.saveAll(Arrays.asList(aspire5, samsungBook, samsungGalaxyA11, iphone12ProMax, microOndas, fogao, galaxy10e, tvSamsung, xaiomimI9));
 
         var startDate = LocalDateTime.parse("00:00 AM, Tue 06/15/2021", DateTimeFormatter.ofPattern("hh:mm a, EEE M/d/uuuu", Locale.US)).toInstant(ZoneOffset.of("-03:00"));
@@ -66,7 +69,8 @@ public class DBService {
                 aspire5,
                 "A515-54-57EN",
                 "Notebook Aspire 5 - Intel Core i5 - 8GB 256GB SSD 15,6” Full HD LED Windows 10",
-                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/PchRPP7.png",
+                List.of(),
                 new SkuPriceDomain(3704.05, 0.00, startDate, startDate),
                 Arrays.asList(
                         new SkuAttributesDomain(RAM, "memory", "8GB"),
@@ -79,7 +83,8 @@ public class DBService {
                 aspire5,
                 "A517-54-57EN",
                 "Notebook Aspire 5 - Intel Core i7 - 16GB 480GB SSD 15,6” Full HD LED Windows 10",
-                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/PchRPP7.png",
+                List.of(),
                 new SkuPriceDomain(3904.05, 2556.89, LocalDateTime.now().minusDays(2).toInstant(ZoneOffset.of("-03:00")), LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.of("-03:00"))),
                 Arrays.asList(
                         new SkuAttributesDomain(RAM, "memory", "16GB"),
@@ -92,7 +97,8 @@ public class DBService {
                 aspire5,
                 "A513-54-57EN",
                 "Notebook Aspire 5 - Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10",
-                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/PchRPP7.png",
+                List.of(),
                 new SkuPriceDomain(3004.85, 1458.32, LocalDateTime.now().minusDays(2).toInstant(ZoneOffset.of("-03:00")), LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.of("-03:00"))),
                 Arrays.asList(
                         new SkuAttributesDomain(RAM, "memory", "4GB"),
@@ -104,7 +110,8 @@ public class DBService {
                 tvSamsung,
                 "AFRQF5-DWW-12EN",
                 "Smart TV 50” Crystal 4K Samsung 50AU7700 - Wi-Fi Bluetooth HDR Alexa Built in 3 HDMI 1 USB",
-                5, 100.00, 50.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                5, 100.00, 50.00, 10.00, 10.00, "https://i.imgur.com/QiBNHzb.png",
+                List.of(),
                 new SkuPriceDomain(3704.05, 0.00, startDate, startDate),
                 Arrays.asList(
                         new SkuAttributesDomain("Memória RAM", "memory", "2GB"),
@@ -116,7 +123,8 @@ public class DBService {
                 galaxy10e,
                 "B125-B7-EF2N",
                 "Galaxy S10e - 128GB Tela 15,6” Full HD LED",
-                5, 12.00, 19.00, 9.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                5, 12.00, 19.00, 9.00, 10.00, "https://imgur.com/dkR4vDn",
+                List.of(),
                 new SkuPriceDomain(2709.09, 0.00, startDate, startDate),
                 Arrays.asList(
                         new SkuAttributesDomain("Memória RAM", "memory", "6GB"),
@@ -128,7 +136,8 @@ public class DBService {
                 xaiomimI9,
                 "CD12-H7-24FDF",
                 "Xaiomi Mi9 - 64GB Tela 12,6” Quad HD LED",
-                20, 12.00, 20.00, 9.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                20, 12.00, 20.00, 9.00, 10.00, "https://imgur.com/Bcme7Vy",
+                List.of(),
                 new SkuPriceDomain(1200.00, 0.00, startDate, startDate),
                 Arrays.asList(
                         new SkuAttributesDomain("Memória RAM", "memory", "8GB"),
@@ -140,7 +149,8 @@ public class DBService {
                 fogao,
                 "1589663525",
                 "Fogão de Piso 4 Bocas Esmaltec",
-                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/2dmMfQp.jpg",
+                List.of(),
                 new SkuPriceDomain(433.52, 0.00, null, null),
                 Collections.emptyList()
         );
@@ -148,7 +158,8 @@ public class DBService {
         var iphone12ProMax128 = new SkuDatabase(
                 null, iphone12ProMax, "MGD93BZA",
                 "iPhone 12 Pro Max Dourado, com Tela de 6,7”, 5G, 128 GB e Câmera Tripla de 12MP",
-                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/m6VyNEE.jpg", Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/m6VyNEE.jpg",
+                List.of(),
                 new SkuPriceDomain(9495.36, 4500.98, startDate, endDate),
                 Collections.emptyList()
         );
@@ -156,7 +167,8 @@ public class DBService {
         var samsungBookI3core258GB = new SkuDatabase(
                 null, samsungBook, "NP550XDA-KT3BR",
                 "Notebook Samsung Book - Intel Core i3 - 4GB 256GB SSD 15,6” Full HD LED Windows 10",
-                10, 10.00, 10.00, 10.00, 10.00, URLIMAGE, Arrays.asList(URLIMAGE, URLIMAGE, URLIMAGE),
+                10, 10.00, 10.00, 10.00, 10.00, "https://i.imgur.com/PchRPP7.png",
+                List.of(),
                 new SkuPriceDomain(4299.00, 3181.55, Instant.now().minusSeconds(86400), Instant.now().plusSeconds(86400)),
                 Collections.emptyList()
         );

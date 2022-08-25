@@ -22,6 +22,8 @@ public class BrandDatabase implements Serializable {
     @Column(unique = true)
     private String name;
 
+     private String brandImage;
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
