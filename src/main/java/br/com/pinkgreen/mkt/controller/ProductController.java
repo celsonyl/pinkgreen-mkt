@@ -30,6 +30,7 @@ public class ProductController implements ProductControllerApi {
     private final GetAllProductsUseCase getAllProductsUseCase;
     private final UpdateProductUseCase updateProductUseCase;
     private final GetProductByCategoryIdUseCase getProductByCategoryIdUseCase;
+    private final GetAllProductsByBrandIdUseCase getAllProductsByBrandIdUseCase;
 
     @Override
     @GetMapping("/{id}")
@@ -66,6 +67,16 @@ public class ProductController implements ProductControllerApi {
     public ResponseEntity<List<ProductResponse>> findByCategoryId(Integer id) {
         var products = getProductByCategoryIdUseCase.execute(id);
         return ResponseEntity.ok(products.stream()
+                .map(new ProductMapperImpl()::productDomainToResponse)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    @GetMapping("/brand/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<ProductResponse>> listProductsByBrandId(Integer id) {
+        var productsDomain = getAllProductsByBrandIdUseCase.execute(id);
+        return ResponseEntity.ok().body(productsDomain.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
     }

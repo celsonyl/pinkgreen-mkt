@@ -86,4 +86,13 @@ public interface ProductControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<List<ProductResponse>> findByCategoryId(@PathVariable Integer id);
+
+    @ApiOperation(value = "Lista todos os produtos pelo ID da Marca")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
+            @ApiResponse(code = 400, message = "Requisição mal formatada"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<List<ProductResponse>> listProductsByBrandId(@PathVariable Integer id);
 }
