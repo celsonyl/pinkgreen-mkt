@@ -26,10 +26,10 @@ services:
     networks:
       - pinkgreen-network
   keycloak:
-    image: quay.io/keycloak/keycloak:13.0.0
+    build:
+      context: .
+      dockerfile: ./keycloak.Dockerfile
     container_name: keycloak_pinkgreen_mkt
-    volumes:
-      - ./imports:/opt/jboss/keycloak/imports
     environment:
       KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled
       DB_VENDOR: POSTGRES
