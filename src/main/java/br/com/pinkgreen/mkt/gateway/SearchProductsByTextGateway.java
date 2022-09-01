@@ -4,7 +4,7 @@ import br.com.pinkgreen.mkt.domain.ProductDomain;
 
 import java.util.List;
 
-public interface GetAllProductsGateway {
+public interface SearchProductsByTextGateway {
 
-    List<ProductDomain> execute();
+    List<ProductDomain> searchProduct(String text);
 }

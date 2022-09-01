@@ -31,6 +31,7 @@ public class ProductController implements ProductControllerApi {
     private final UpdateProductUseCase updateProductUseCase;
     private final GetProductByCategoryIdUseCase getProductByCategoryIdUseCase;
     private final GetAllProductsByBrandIdUseCase getAllProductsByBrandIdUseCase;
+    private final SearchProductsByTextUseCase searchProductsByTextUseCase;
 
     @Override
     @GetMapping("/{id}")
@@ -55,7 +56,7 @@ public class ProductController implements ProductControllerApi {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> searchProduct(String text) {
         text = URL.decodeParam(text);
-        List<ProductDomain> searchProduct = getAllProductsUseCase.searchProduct(text);
+        List<ProductDomain> searchProduct = searchProductsByTextUseCase.searchProduct(text);
         return ResponseEntity.ok(searchProduct.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
