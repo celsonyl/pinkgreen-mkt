@@ -10,11 +10,15 @@ import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateBrandUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllBrandsUseCase;
 import br.com.pinkgreen.mkt.usecase.GetBrandByIdUseCase;
+import br.com.pinkgreen.mkt.usecase.SearchBrandsByTextUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.security.RolesAllowed;
@@ -30,6 +34,7 @@ public class BrandController implements BrandControllerApi {
     private final CreateBrandUseCase createBrandUseCase;
     private final GetAllBrandsUseCase getAllBrandsUseCase;
     private final GetBrandByIdUseCase getBrandByIdUseCase;
+    private final SearchBrandsByTextUseCase searchBrandsByTextUseCase;
 
     @Override
     @PostMapping
@@ -59,7 +64,7 @@ public class BrandController implements BrandControllerApi {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<BrandResponse>> brandSearch(String text) {
         text = URL.decodeParam(text);
-        List<BrandDomain> searchBrand = getAllBrandsUseCase.searchBrand(text);
+        List<BrandDomain> searchBrand = searchBrandsByTextUseCase.searchBrand(text);
 
         return ResponseEntity.ok(searchBrand.stream()
                 .map(new BrandMapperImpl()::brandDomainToResponse)

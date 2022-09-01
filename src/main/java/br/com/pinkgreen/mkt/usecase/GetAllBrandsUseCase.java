@@ -16,8 +16,4 @@ public class GetAllBrandsUseCase {
     public List<BrandDomain> execute() {
         return getAllBrandsGateway.execute();
     }
-
-    public List<BrandDomain> searchBrand(String text){
-        return getAllBrandsGateway.searchBrand(text);
-    }
 }
