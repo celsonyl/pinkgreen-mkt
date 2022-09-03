@@ -9,3 +9,13 @@ CREATE TABLE orders
     updated_at    timestamptz,
     created_at    timestamptz
 );
+
+CREATE TABLE orders_log
+(
+    id       SERIAL PRIMARY KEY,
+    order_id INTEGER NOT NULL,
+    status   VARCHAR(255),
+    updated_at timestamptz,
+    createdAt timestamptz,
+    FOREIGN KEY (order_id) REFERENCES orders (id)
+)
