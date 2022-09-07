@@ -1,13 +1,19 @@
 # Pinkgreen-mkt
 
----
-## How to build and run the project
-First you need to build service Docker image
-```bash
-docker build -f local.dockerfile -t pinkgreen_mkt:latest .
-```
+### Requirements
+* Java 11
+* Maven
+* Docker
 
-Then you run the application service
-```bash
-docker-compose up -d
-```
+## How to build and run the project
+* First you need to start project dependencies:
+    ```bash
+    docker-compose up -d
+    ```
+* Then you are able to run the project
+    ```bash
+    mvn spring-boot:run -Dspring-boot.run.profiles=local
+    ```
+
+## Swagger UI documentation
+* http://localhost:8181/swagger-ui.html

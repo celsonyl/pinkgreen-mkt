@@ -10,7 +10,7 @@ services:
     volumes:
       - ./psql:/docker-entrypoint-initdb.d
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_USER: local
       POSTGRES_PASSWORD: local
@@ -21,28 +21,17 @@ services:
     image: rabbitmq:3.6.9-management
     container_name: rabbitmq_pinkgreen_mkt
     ports:
-      - 5672:5672
-      - 15672:15672
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - pinkgreen-network
   keycloak:
-    build:
-      context: .
-      dockerfile: ./keycloak.Dockerfile
-    container_name: keycloak_pinkgreen_mkt
-    environment:
-      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: local
-      DB_SCHEMA: public
-      DB_PASSWORD: local
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
+    image: brunovnasci/pinkgreen-mkt-iam:1.0.0
+    container_name: pinkgreen_mkt_iam
+    command:
+      - start-dev
+      - --import-realm
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - pinkgreen-network
-    depends_on:
-      - postgres
