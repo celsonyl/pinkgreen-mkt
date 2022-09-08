@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,6 @@ public class CategoryController implements CategoryControllerApi {
 
     @Override
     @PostMapping
-    @RolesAllowed("admin")
     public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var categoryDomain = new CategoryMapperImpl().categoryRequestToDomain(categoryRequest);
 

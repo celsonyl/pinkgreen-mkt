@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,7 +83,6 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @PostMapping
-    @RolesAllowed("admin")
     public ResponseEntity<Void> createProduct(ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
         var productDomain = new ProductMapperImpl().productRequestToDomain(productRequest);
 
@@ -96,7 +94,6 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @PutMapping("/{id}")
-    @RolesAllowed("admin")
     public ResponseEntity<Void> updateProduct(Integer id, ProductUpdateRequest productUpdateRequest) {
         var productDomain = new ProductMapperImpl().productUpdateRequestToDomain(productUpdateRequest);
 

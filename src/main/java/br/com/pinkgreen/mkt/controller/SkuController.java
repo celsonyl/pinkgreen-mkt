@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +35,6 @@ public class SkuController implements SkuControllerApi {
 
     @Override
     @PostMapping
-    @RolesAllowed("admin")
     public ResponseEntity<Void> createSku(SkuRequest skuRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var skuDomain = new SkuProductMapperImpl().skuRequestToDomain(skuRequest);
         var createSku = createSkuProductUseCase.execute(skuDomain);
@@ -56,7 +54,6 @@ public class SkuController implements SkuControllerApi {
 
     @Override
     @PutMapping(value = "/{code}")
-    @RolesAllowed("admin")
     public ResponseEntity<Void> updateSku(String code, SkuUpdateRequest skuUpdateRequest) {
         var skuMapper = new SkuProductMapperImpl();
 

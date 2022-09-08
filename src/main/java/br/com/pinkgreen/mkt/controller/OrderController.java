@@ -15,12 +15,11 @@ import br.com.pinkgreen.mkt.usecase.UpdateAndPublishOrderEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,13 +38,12 @@ public class OrderController implements OrderControllerApi {
     @Override
     @SneakyThrows
     @PostMapping
-    @RolesAllowed("user")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<CheckoutOrderResponse> checkout(OrderRequest orderRequest, HttpServletRequest request) {
         log.info("[CONTROLLER] Receiving new order request");
         String customerId = orderRequest.getCustomerData().getId();
 
-        getCustomerIdAndValidate((KeycloakAuthenticationToken) request.getUserPrincipal(), customerId);
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), customerId);
 
         var orderDomain = new OrderMapperImpl().orderRequestToOrder(orderRequest);
         OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain);
@@ -59,10 +57,9 @@ public class OrderController implements OrderControllerApi {
     @Override
     @SneakyThrows
     @GetMapping("/{customerId}")
-    @RolesAllowed("user")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getOrdersByCustomerId(String customerId, HttpServletRequest request) {
-        getCustomerIdAndValidate((KeycloakAuthenticationToken) request.getUserPrincipal(), customerId);
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), customerId);
 
         List<OrderDomain> orders = getAllOrdersByCustomerIdUseCase.execute(customerId);
 
@@ -74,7 +71,6 @@ public class OrderController implements OrderControllerApi {
     @Override
     @SneakyThrows
     @GetMapping("/ready-to-ship")
-    @RolesAllowed("admin")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getOrdersReadyToShip() {
         var orders = getAllOrdersReadyToShipUseCase.execute();
@@ -85,15 +81,14 @@ public class OrderController implements OrderControllerApi {
 
     @Override
     @PatchMapping("/{orderId}/update/{orderStatus}")
-    @RolesAllowed("admin")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> updateOrderStatus(String orderId, OrderStatus orderStatus) {
         updateAndPublishOrderEvent.execute(orderId, orderStatus);
         return ResponseEntity.noContent().build();
     }
 
-    private void getCustomerIdAndValidate(KeycloakAuthenticationToken keycloakAuthenticationToken, String customerId) throws InvalidCustomerIdException {
-        String tokenCustomerId = keycloakAuthenticationToken.getAccount().getKeycloakSecurityContext().getToken().getSubject();
+    private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
+        String tokenCustomerId = authenticationToken.getToken().getSubject();
 
         if (!customerId.equals(tokenCustomerId)) {
             throw new InvalidCustomerIdException("[CONTROLLER] Invalid customerId");
