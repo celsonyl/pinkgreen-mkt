@@ -10,7 +10,10 @@ import java.net.URI;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "iam")
-public class IAMProperties {
+@ConfigurationProperties(prefix = "keycloak.realm")
+public class KeycloakRealmProperties {
     private URI url;
+    private String grantType;
+    private String clientId;
+    private String clientSecret;
 }

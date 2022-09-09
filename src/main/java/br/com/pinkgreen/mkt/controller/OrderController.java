@@ -4,9 +4,11 @@ import br.com.pinkgreen.mkt.controller.client.OrderControllerApi;
 import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
+import br.com.pinkgreen.mkt.domain.CustomerDomain;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
+import br.com.pinkgreen.mkt.gateway.FindCustomerById;
 import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
@@ -30,6 +32,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/order")
 public class OrderController implements OrderControllerApi {
 
+    private final FindCustomerById findCustomerById;
     private final CheckoutOrderUseCase checkoutOrderUseCase;
     private final GetAllOrdersByCustomerIdUseCase getAllOrdersByCustomerIdUseCase;
     private final GetAllOrdersReadyToShipUseCase getAllOrdersReadyToShipUseCase;
@@ -41,11 +44,13 @@ public class OrderController implements OrderControllerApi {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<CheckoutOrderResponse> checkout(OrderRequest orderRequest, HttpServletRequest request) {
         log.info("[CONTROLLER] Receiving new order request");
-        String customerId = orderRequest.getCustomerData().getId();
+        String customerId = orderRequest.getCustomerId();
 
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), customerId);
 
+        CustomerDomain customer = findCustomerById.execute(customerId);
         var orderDomain = new OrderMapperImpl().orderRequestToOrder(orderRequest);
+        orderDomain.setCustomerData(customer);
         OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain);
         return ResponseEntity.ok().body(CheckoutOrderResponse.builder()
                 .orderId(orderCreated.getId())

@@ -3,8 +3,10 @@ package br.com.pinkgreen.mkt.controller.model;
 import br.com.pinkgreen.mkt.controller.annotation.ValidPaymentData;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -17,10 +19,10 @@ import java.util.List;
 @EqualsAndHashCode
 public class OrderRequest implements Serializable {
 
-    @Valid
-    @NotNull
-    @ApiModelProperty(value = "Informações do cliente")
-    private CustomerRequest customerData;
+    @NotBlank(message = "CustomerId must not be blank")
+    @Length(min = 2, max = 50, message = "customer must have between 2 and 50 characters")
+    @ApiModelProperty(value = "Id do usuário", required = true, example = "64b5c9e4-8740-41f6-b66f-279631dff64e")
+    private String customerId;
 
     @Valid
     @NotNull

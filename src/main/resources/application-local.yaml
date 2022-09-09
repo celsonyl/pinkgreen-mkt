@@ -23,4 +23,11 @@ spring:
 
 payment.url: http://localhost:4000
 
-iam.url: http://localhost:8080/admin/realms/pinkgreen-mkt
+keycloak:
+  admin:
+    url: http://localhost:8080/admin/realms/pinkgreen-mkt
+  realm:
+    url: http://localhost:8080/realms/pinkgreen-mkt/protocol/openid-connect
+    grant-type: client_credentials
+    client-id: pinkgreen-mkt-service
+    client-secret: adFYuGNAS6C8WNPIbjlaXclqhtIuf5zt
