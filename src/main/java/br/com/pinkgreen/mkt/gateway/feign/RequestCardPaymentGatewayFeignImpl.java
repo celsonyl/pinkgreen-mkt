@@ -3,7 +3,7 @@ package br.com.pinkgreen.mkt.gateway.feign;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.gateway.RequestCardPaymentGateway;
 import br.com.pinkgreen.mkt.gateway.feign.client.RequestCardPaymentFeignApi;
-import br.com.pinkgreen.mkt.gateway.feign.config.BasePaymentProperties;
+import br.com.pinkgreen.mkt.gateway.feign.properties.BasePaymentProperties;
 import br.com.pinkgreen.mkt.gateway.feign.model.RequestCardPaymentModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

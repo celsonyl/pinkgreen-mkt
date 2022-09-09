@@ -1,4 +1,4 @@
-package br.com.pinkgreen.mkt.gateway.feign.config;
+package br.com.pinkgreen.mkt.gateway.feign.properties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.net.URI;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "payment")
-public class BasePaymentProperties {
+@ConfigurationProperties(prefix = "iam")
+public class IAMProperties {
     private URI url;
 }
