@@ -19,7 +19,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+        http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(POST, "/brand").hasAuthority(CREATE_BRAND.toString())
                 .antMatchers(GET, "/brand").permitAll()
                 .antMatchers(GET, "/brand/search").permitAll()
