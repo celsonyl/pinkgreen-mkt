@@ -29,6 +29,7 @@ services:
     image: brunovnasci/pinkgreen-mkt-iam:1.2.0
     container_name: pinkgreen_mkt_iam
     command:
+      - --spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true
       - start-dev
       - --import-realm
     ports:
