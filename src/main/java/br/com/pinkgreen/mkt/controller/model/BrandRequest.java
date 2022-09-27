@@ -22,4 +22,8 @@ public class BrandRequest implements Serializable {
     @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
     @ApiModelProperty(value = "Nome da marca", required = true, example = "Samsung")
     private String name;
+
+    @NotBlank(message = "Field not be null or blank")
+    @ApiModelProperty(value = "Imagem da Marca", required = true, example = "https://brandDomain/path.extension")
+    private String brandImage;
 }

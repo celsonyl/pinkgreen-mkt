@@ -1,53 +1,53 @@
-CREATE TABLE product_brand
+create TABLE PRODUCT_BRAND
 (
-    id   SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    brand_image VARCHAR(255)
+    ID   SERIAL PRIMARY KEY,
+    NAME VARCHAR(255),
+    BRAND_IMAGE VARCHAR(255)
 );
-CREATE UNIQUE INDEX product_brand_name_idx on product_brand (name);
+create unique index PRODUCT_BRAND_NAME_IDX on PRODUCT_BRAND (NAME);
 
-CREATE TABLE product
+create TABLE PRODUCT
 (
-    id               SERIAL PRIMARY KEY,
-    active           BOOLEAN,
-    main_image_url   VARCHAR(255),
-    name             VARCHAR(255),
-    price            DOUBLE PRECISION,
-    product_brand_id INTEGER,
-    FOREIGN KEY (product_brand_id) REFERENCES product_brand (id)
-);
-
-CREATE TABLE product_category
-(
-    id    SERIAL PRIMARY KEY,
-    image VARCHAR(255),
-    name  VARCHAR(255)
-);
-CREATE UNIQUE INDEX product_category_name_idx on product_category (name);
-
-CREATE TABLE product_categories
-(
-    product_id  INTEGER NOT NULL,
-    category_id INTEGER NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES product (id),
-    FOREIGN KEY (category_id) REFERENCES product_category (id)
+    ID               SERIAL PRIMARY KEY,
+    ACTIVE           BOOLEAN,
+    MAIN_IMAGE_URL   VARCHAR(255),
+    NAME             VARCHAR(255),
+    PRICE            DOUBLE PRECISION,
+    PRODUCT_BRAND_ID INTEGER,
+    FOREIGN KEY (PRODUCT_BRAND_ID) REFERENCES PRODUCT_BRAND (ID)
 );
 
-CREATE TABLE product_sku
+create TABLE PRODUCT_CATEGORY
 (
-    id             SERIAL PRIMARY KEY,
-    height         DOUBLE PRECISION,
-    length         DOUBLE PRECISION,
-    main_image_url VARCHAR(255),
-    name           VARCHAR(255),
-    price          jsonb,
-    sku_attributes jsonb,
-    sku_code       VARCHAR(255),
-    stock_quantity INTEGER,
-    url_images     jsonb,
-    weight         DOUBLE PRECISION,
-    width          DOUBLE PRECISION,
-    product_id     INTEGER,
-    FOREIGN KEY (product_id) REFERENCES product (id)
+    ID    SERIAL PRIMARY KEY,
+    IMAGE VARCHAR(255),
+    NAME  VARCHAR(255)
 );
-CREATE UNIQUE INDEX product_sku_code_idx on product_sku (sku_code);
+create unique index PRODUCT_CATEGORY_NAME_IDX on PRODUCT_CATEGORY (NAME);
+
+create TABLE PRODUCT_CATEGORIES
+(
+    PRODUCT_ID  INTEGER NOT NULL,
+    CATEGORY_ID INTEGER NOT NULL,
+    FOREIGN KEY (PRODUCT_ID) REFERENCES product (ID),
+    FOREIGN KEY (CATEGORY_ID) REFERENCES product_category (ID)
+);
+
+create TABLE PRODUCT_SKU
+(
+    ID             SERIAL PRIMARY KEY,
+    HEIGHT         DOUBLE PRECISION,
+    LENGTH         DOUBLE PRECISION,
+    MAIN_IMAGE_URL VARCHAR(255),
+    NAME           VARCHAR(255),
+    PRICE          jsonb,
+    SKU_ATTRIBUTES jsonb,
+    SKU_CODE       VARCHAR(255),
+    STOCK_QUANTITY INTEGER,
+    URL_IMAGES     jsonb,
+    WEIGHT         DOUBLE PRECISION,
+    WIDTH          DOUBLE PRECISION,
+    PRODUCT_ID     INTEGER,
+    FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT (ID)
+);
+create unique index PRODUCT_SKU_CODE_IDX on PRODUCT_SKU (SKU_CODE);

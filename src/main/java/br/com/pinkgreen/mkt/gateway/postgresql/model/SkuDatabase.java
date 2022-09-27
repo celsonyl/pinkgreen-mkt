@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "product_sku")
+@Entity(name = "PRODUCT_SKU")
 @Getter
 @Setter
 @Builder
@@ -27,7 +27,7 @@ public class SkuDatabase implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "PRODUCT_ID")
     private ProductDatabase product;
 
     @Column(unique = true)

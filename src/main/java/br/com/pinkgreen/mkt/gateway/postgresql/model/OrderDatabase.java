@@ -15,7 +15,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "orders")
+@Entity(name = "ORDERS")
 @Getter
 @Setter
 @Builder

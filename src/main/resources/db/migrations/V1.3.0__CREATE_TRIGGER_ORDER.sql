@@ -1,32 +1,32 @@
-CREATE FUNCTION insert_orders_log()
-    RETURNS TRIGGER
+create function INSERT_ORDERS_LOG()
+    RETURNS trigger
     LANGUAGE PLPGSQL
 AS
 $$
-BEGIN
-    SET TIMEZONE TO 'America/Sao_Paulo';
+begin
+    set TIMEZONE TO 'America/Sao_Paulo';
 
-    IF (TG_OP = 'INSERT') THEN
-        INSERT INTO orders_log(order_id, status, updated_at, createdat)
-        VALUES (NEW.id, NEW.status, NOW(), NOW());
+    if (TG_OP = 'INSERT') then
+        insert into ORDERS_LOG(ORDER_ID, STATUS, UPDATED_AT, CREATED_AT)
+        values (NEW.ID, NEW.STATUS, NOW(), NOW());
 
-        RETURN NEW;
-    ELSIF (TG_OP = 'UPDATE') THEN
-        INSERT INTO orders_log(order_id, status, updated_at, createdat)
-        VALUES (OLD.id, NEW.status, NOW(), NOW());
+        return new;
+    elsif (TG_OP = 'UPDATE') then
+        insert into ORDERS_LOG(ORDER_ID, STATUS, UPDATED_AT, CREATED_AT)
+        values (OLD.ID, NEW.STATUS, NEW.UPDATED_AT, NEW.CREATED_AT);
 
-        RETURN NEW;
-    END IF;
-    RETURN NULL;
-END;
+        return new;
+    end if;
+    return null;
+end;
 $$;
-alter function insert_orders_log() owner to local;
+alter function INSERT_ORDERS_LOG() owner to local;
 
 
-CREATE TRIGGER INSERT_ORDERS_LOG
-    AFTER INSERT OR UPDATE
-    ON orders
-    FOR EACH ROW
-EXECUTE PROCEDURE insert_orders_log();
+create trigger INSERT_ORDERS_LOG
+    after insert or update
+    on ORDERS
+    for each row
+EXECUTE procedure INSERT_ORDERS_LOG();
 
 

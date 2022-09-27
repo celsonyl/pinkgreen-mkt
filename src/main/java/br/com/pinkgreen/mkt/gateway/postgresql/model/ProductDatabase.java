@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "product")
+@Entity(name = "PRODUCT")
 @Getter
 @Setter
 @Builder
@@ -27,15 +27,15 @@ public class ProductDatabase implements Serializable {
     private String mainImageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "product_brand_id")
+    @JoinColumn(name = "PRODUCT_BRAND_ID")
     private BrandDatabase brand;
 
     @ManyToMany
     @JsonIgnore
     @JoinTable(
-            name = "product_categories",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
+            name = "PRODUCT_CATEGORIES",
+            joinColumns = @JoinColumn(name = "PRODUCT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID")
     )
     private List<CategoryDatabase> categories = new ArrayList<>();
 

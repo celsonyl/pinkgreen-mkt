@@ -1,21 +1,21 @@
-CREATE TABLE orders
+create TABLE ORDERS
 (
-    id            SERIAL PRIMARY KEY,
-    customer_data jsonb,
-    payment_data  jsonb,
-    product_list  jsonb,
-    shipping_data jsonb,
-    status        VARCHAR(255),
-    updated_at    timestamptz,
-    created_at    timestamptz
+    ID            SERIAL PRIMARY KEY,
+    CUSTOMER_DATA jsonb,
+    PAYMENT_DATA  jsonb,
+    PRODUCT_LIST  jsonb,
+    SHIPPING_DATA jsonb,
+    STATUS        VARCHAR(255),
+    UPDATED_AT    timestamptz,
+    CREATED_AT    timestamptz
 );
 
-CREATE TABLE orders_log
+create TABLE ORDERS_LOG
 (
-    id       SERIAL PRIMARY KEY,
-    order_id INTEGER NOT NULL,
-    status   VARCHAR(255),
-    updated_at timestamptz,
-    createdAt timestamptz,
-    FOREIGN KEY (order_id) REFERENCES orders (id)
+    ID       SERIAL PRIMARY KEY,
+    ORDER_ID INTEGER NOT NULL,
+    STATUS   VARCHAR(255),
+    UPDATED_AT timestamptz,
+    CREATED_AT timestamptz,
+    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS (ID)
 )

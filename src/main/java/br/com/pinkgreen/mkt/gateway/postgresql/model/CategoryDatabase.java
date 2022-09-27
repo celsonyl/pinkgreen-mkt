@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "product_category")
+@Entity(name = "PRODUCT_CATEGORY")
 @Getter
 @Setter
 @Builder

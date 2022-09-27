@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface SkuRepository extends JpaRepository<SkuDatabase,Integer> {
 
-    @Query(value = "SELECT * FROM product_sku WHERE sku_code = :skuCode", nativeQuery = true)
+    @Query(value = "SELECT * FROM PRODUCT_SKU WHERE SKU_CODE = :skuCode", nativeQuery = true)
     Optional<SkuDatabase> findSkuByCode(@Param("skuCode") String code);
 
-    @Query(value = "SELECT * FROM product_sku WHERE product_id = :productId", nativeQuery = true)
+    @Query(value = "SELECT * FROM PRODUCT_SKU WHERE PRODUCT_ID = :productId", nativeQuery = true)
     List<SkuDatabase> findAllByProductId(@Param("productId") Integer productId);
 }

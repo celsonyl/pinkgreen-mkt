@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity(name = "product_brand")
+@Entity(name = "PRODUCT_BRAND")
 @Getter
 @Setter
 @Builder
