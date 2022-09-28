@@ -1,7 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.SkuDomain;
-import br.com.pinkgreen.mkt.gateway.GetAllSkusByProductIdGateway;
+import br.com.pinkgreen.mkt.gateway.GetAllEnabledSkusByProductIdGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.SkuDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.repository.SkuRepository;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class GetAllSkusByProductIdGatewayImpl implements GetAllSkusByProductIdGateway {
+public class GetAllEnabledSkusByProductIdGatewayImpl implements GetAllEnabledSkusByProductIdGateway {
 
     private final SkuRepository skuRepository;
 

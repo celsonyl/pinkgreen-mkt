@@ -4,7 +4,7 @@ import br.com.pinkgreen.mkt.domain.ProductDomain;
 
 import java.util.List;
 
-public interface GetAllProductsGateway {
+public interface GetAllEnabledProductsGateway {
 
     List<ProductDomain> execute();
 }

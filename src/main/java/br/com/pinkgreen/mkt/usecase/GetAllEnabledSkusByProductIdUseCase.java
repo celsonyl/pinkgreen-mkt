@@ -1,7 +1,7 @@
 package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.SkuDomain;
-import br.com.pinkgreen.mkt.gateway.GetAllSkusByProductIdGateway;
+import br.com.pinkgreen.mkt.gateway.GetAllEnabledSkusByProductIdGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +9,11 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class GetAllSkusByProductIdUseCase {
+public class GetAllEnabledSkusByProductIdUseCase {
 
-    private final GetAllSkusByProductIdGateway getAllSkusByProductIdGateway;
+    private final GetAllEnabledSkusByProductIdGateway getAllEnabledSkusByProductIdGateway;
 
     public List<SkuDomain> execute(Integer productId) {
-        return getAllSkusByProductIdGateway.execute(productId);
+        return getAllEnabledSkusByProductIdGateway.execute(productId);
     }
 }

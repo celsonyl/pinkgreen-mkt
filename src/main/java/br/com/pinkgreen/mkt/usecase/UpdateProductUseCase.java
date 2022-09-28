@@ -12,12 +12,12 @@ public class UpdateProductUseCase {
     private final GetProductByIdUseCase getProductByIdUseCase;
     private final UpdateProductGateway updateProductGateway;
 
-    public ProductDomain updateProduct(Integer id, ProductDomain productUpdate) {
+    public void updateProduct(Integer id, ProductDomain productUpdate) {
         ProductDomain productDB = getProductByIdUseCase.findById(id);
 
         populateProductDB(productUpdate, productDB);
 
-        return updateProductGateway.updateProduct(productDB);
+        updateProductGateway.updateProduct(productDB);
     }
 
     private void populateProductDB(ProductDomain productUpdate, ProductDomain productDB) {

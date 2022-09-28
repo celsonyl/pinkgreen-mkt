@@ -22,7 +22,7 @@ import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.ORDER_CREATED;
 @RequiredArgsConstructor
 public class CheckoutOrderUseCase {
 
-    private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase;
+    private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase;
     private final SaveOrderGateway saveOrderGateway;
     private final PublishOrderStatusEvent publishOrderStatusEvent;
 
@@ -66,7 +66,7 @@ public class CheckoutOrderUseCase {
     private void validateReceivedSkus(OrderDomain orderDomain) throws CouldNotCheckoutOrderException {
         var productOrderDomains = orderDomain.getProductList();
         var skuDomainsDB = productOrderDomains.stream()
-                .map(element -> getSkuBySkuCodeUseCase.getSkuBySkuCode(element.getSkuCode()))
+                .map(element -> getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode(element.getSkuCode()))
                 .collect(Collectors.toList());
 
         var validProducts = productOrderDomains.stream().filter(productOrderDomain -> skuDomainsDB.stream()

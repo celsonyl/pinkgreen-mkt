@@ -1,20 +1,19 @@
 package br.com.pinkgreen.mkt.usecase;
 
-import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
+import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.gateway.GetEnabledProductByIdGateway;
-import br.com.pinkgreen.mkt.gateway.GetProductByIdGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class GetProductByIdUseCase {
+public class GetEnabledProductByIdUseCase {
 
-    private final GetProductByIdGateway getProductByIdGateway;
+    private final GetEnabledProductByIdGateway getEnabledProductByIdGateway;
 
     public ProductDomain findById(Integer id) {
-        return getProductByIdGateway.findById(id)
+        return getEnabledProductByIdGateway.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Produto não encontrado: " + id));
     }
 }

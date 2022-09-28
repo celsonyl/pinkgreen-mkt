@@ -26,16 +26,16 @@ class CheckoutOrderUseCaseTest {
     public static final Instant END_DATE = Instant.now().plusSeconds(86400);
     private final ArgumentCaptor<OrderDomain> orderDomainArgument = forClass(OrderDomain.class);
     private final ArgumentCaptor<OrderDomain> publishOrderDomainArgument = forClass(OrderDomain.class);
-    private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase = mock(GetSkuBySkuCodeUseCase.class);
+    private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase = mock(GetEnabledSkuBySkuCodeUseCase.class);
     private final SaveOrderGateway saveOrderGateway = mock(SaveOrderGateway.class);
     private final PublishOrderStatusEvent publishOrderStatusEvent = mock(PublishOrderStatusEvent.class);
-    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(getSkuBySkuCodeUseCase, saveOrderGateway, publishOrderStatusEvent);
+    private final CheckoutOrderUseCase checkoutOrderUseCase = new CheckoutOrderUseCase(getEnabledSkuBySkuCodeUseCase, saveOrderGateway, publishOrderStatusEvent);
 
     @Test
     void shouldCheckoutOrderSuccessfully() throws CouldNotCheckoutOrderException {
         OrderDomain orderDomain = getOrder();
-        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("888888888")).thenReturn(getSku("888888888", false));
-        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", false));
+        when(getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode("888888888")).thenReturn(getSku("888888888", false));
+        when(getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", false));
         when(saveOrderGateway.execute(any())).thenReturn(getPersistedOrder());
 
         checkoutOrderUseCase.execute(orderDomain);
@@ -65,8 +65,8 @@ class CheckoutOrderUseCaseTest {
     @Test
     void shouldThrowCouldNotCheckoutOrderException() {
         OrderDomain orderDomain = getOrder();
-        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("888888888")).thenReturn(getSku("888888888", false));
-        when(getSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", true));
+        when(getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode("888888888")).thenReturn(getSku("888888888", false));
+        when(getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode("999999999")).thenReturn(getSku("999999999", true));
 
         CouldNotCheckoutOrderException couldNotCheckoutOrderException = assertThrows(CouldNotCheckoutOrderException.class,
                 () -> checkoutOrderUseCase.execute(orderDomain));

@@ -4,7 +4,7 @@ import br.com.pinkgreen.mkt.domain.SkuDomain;
 
 import java.util.Optional;
 
-public interface GetSkuBySkuCodeGateway {
+public interface GetEnabledSkuBySkuCodeGateway {
 
     Optional<SkuDomain> getSkuBySkuCode(String code);
 }

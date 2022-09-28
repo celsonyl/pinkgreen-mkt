@@ -1,7 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.ProductDomain;
-import br.com.pinkgreen.mkt.gateway.GetProductByCategoryIdGateway;
+import br.com.pinkgreen.mkt.gateway.GetEnabledProductByCategoryIdGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.repository.ProductRepository;
 import br.com.pinkgreen.mkt.gateway.postgresql.translator.ProductDomainToDatabase;
@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class GetProductByCategoryIdGatewayImpl implements GetProductByCategoryIdGateway {
+public class GetEnabledProductByCategoryIdGatewayImpl implements GetEnabledProductByCategoryIdGateway {
 
     private final ProductRepository productRepository;
 
     @Override
     public List<ProductDomain> execute(Integer id) {
-        var productDatabases = productRepository.findAllByCategoriesId(id);
+        var productDatabases = productRepository.findAllByCategoriesIdAndActiveTrue(id);
         return productDatabases.stream()
                 .filter(ProductDatabase::getActive)
                 .map(new ProductDomainToDatabase()::productDatabaseToDomain)

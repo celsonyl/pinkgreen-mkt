@@ -10,11 +10,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SkuRepository extends JpaRepository<SkuDatabase,Integer> {
+public interface SkuRepository extends JpaRepository<SkuDatabase, Integer> {
 
-    @Query(value = "SELECT * FROM PRODUCT_SKU WHERE SKU_CODE = :skuCode", nativeQuery = true)
+    @Query(value =
+            "SELECT * FROM PRODUCT_SKU PS " +
+                    "INNER JOIN PRODUCT P ON P.ID = PS.PRODUCT_ID " +
+                    "WHERE PS.SKU_CODE = :skuCode " +
+                    "AND P.ACTIVE = true", nativeQuery = true)
     Optional<SkuDatabase> findSkuByCode(@Param("skuCode") String code);
 
-    @Query(value = "SELECT * FROM PRODUCT_SKU WHERE PRODUCT_ID = :productId", nativeQuery = true)
+    @Query(value =
+            "SELECT * FROM PRODUCT_SKU PS " +
+                    "INNER JOIN PRODUCT P ON P.ID = PS.PRODUCT_ID " +
+                    "WHERE PRODUCT_ID = :productId " +
+                    "AND P.ACTIVE = true", nativeQuery = true)
     List<SkuDatabase> findAllByProductId(@Param("productId") Integer productId);
 }

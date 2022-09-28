@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 public class UpdateSkuUseCase {
 
     private final UpdateSkuGatewayImpl updateSkuGateway;
-    private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase;
+    private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase;
 
-    public SkuDomain updateSku(String code, SkuDomain skuUpdate) {
-        SkuDomain skuDB = getSkuBySkuCodeUseCase.getSkuBySkuCode(code);
+    public void updateSku(String code, SkuDomain skuUpdate) {
+        SkuDomain skuDB = getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode(code);
 
         update(skuUpdate, skuDB);
 
-        return updateSkuGateway.updateSku(skuDB);
+        updateSkuGateway.updateSku(skuDB);
     }
 
     private void update(SkuDomain skuUpdate, SkuDomain skuDB) {

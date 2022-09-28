@@ -24,19 +24,19 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/product")
 public class ProductController implements ProductControllerApi {
 
-    private final GetProductByIdUseCase getProductByIdUseCase;
+    private final GetEnabledProductByIdUseCase getEnabledProductByIdUseCase;
     private final CreateProductUseCase createProductUseCase;
-    private final GetAllProductsUseCase getAllProductsUseCase;
+    private final GetAllEnabledProductsUseCase getAllEnabledProductsUseCase;
     private final UpdateProductUseCase updateProductUseCase;
-    private final GetProductByCategoryIdUseCase getProductByCategoryIdUseCase;
-    private final GetAllProductsByBrandIdUseCase getAllProductsByBrandIdUseCase;
-    private final SearchProductsByTextUseCase searchProductsByTextUseCase;
+    private final GetEnabledProductByCategoryIdUseCase getEnabledProductByCategoryIdUseCase;
+    private final GetAllEnabledProductsByBrandIdUseCase getAllEnabledProductsByBrandIdUseCase;
+    private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
 
     @Override
     @GetMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<ProductResponse> findById(Integer id) {
-        var productDomain = getProductByIdUseCase.findById(id);
+        var productDomain = getEnabledProductByIdUseCase.findById(id);
         return ResponseEntity.ok().body(new ProductMapperImpl().productDomainToResponse(productDomain));
     }
 
@@ -44,7 +44,7 @@ public class ProductController implements ProductControllerApi {
     @GetMapping
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> listProducts() {
-        var productsDomain = getAllProductsUseCase.execute();
+        var productsDomain = getAllEnabledProductsUseCase.execute();
         return ResponseEntity.ok().body(productsDomain.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
@@ -55,7 +55,7 @@ public class ProductController implements ProductControllerApi {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> searchProduct(String text) {
         text = URL.decodeParam(text);
-        List<ProductDomain> searchProduct = searchProductsByTextUseCase.searchProduct(text);
+        List<ProductDomain> searchProduct = searchEnabledProductsByTextUseCase.searchProduct(text);
         return ResponseEntity.ok(searchProduct.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
@@ -65,7 +65,7 @@ public class ProductController implements ProductControllerApi {
     @GetMapping("/category/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> findByCategoryId(Integer id) {
-        var products = getProductByCategoryIdUseCase.execute(id);
+        var products = getEnabledProductByCategoryIdUseCase.execute(id);
         return ResponseEntity.ok(products.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
@@ -75,7 +75,7 @@ public class ProductController implements ProductControllerApi {
     @GetMapping("/brand/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductResponse>> listProductsByBrandId(Integer id) {
-        var productsDomain = getAllProductsByBrandIdUseCase.execute(id);
+        var productsDomain = getAllEnabledProductsByBrandIdUseCase.execute(id);
         return ResponseEntity.ok().body(productsDomain.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));

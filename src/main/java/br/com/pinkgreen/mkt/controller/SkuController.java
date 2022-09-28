@@ -9,8 +9,8 @@ import br.com.pinkgreen.mkt.domain.SkuDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateSkuProductUseCase;
-import br.com.pinkgreen.mkt.usecase.GetAllSkusByProductIdUseCase;
-import br.com.pinkgreen.mkt.usecase.GetSkuBySkuCodeUseCase;
+import br.com.pinkgreen.mkt.usecase.GetAllEnabledSkusByProductIdUseCase;
+import br.com.pinkgreen.mkt.usecase.GetEnabledSkuBySkuCodeUseCase;
 import br.com.pinkgreen.mkt.usecase.UpdateSkuUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +29,9 @@ import java.util.stream.Collectors;
 public class SkuController implements SkuControllerApi {
 
     private final CreateSkuProductUseCase createSkuProductUseCase;
-    private final GetSkuBySkuCodeUseCase getSkuBySkuCodeUseCase;
+    private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase;
     private final UpdateSkuUseCase updateSkuUseCase;
-    private final GetAllSkusByProductIdUseCase getAllSkusByProductIdUseCase;
+    private final GetAllEnabledSkusByProductIdUseCase getAllEnabledSkusByProductIdUseCase;
 
     @Override
     @PostMapping
@@ -47,7 +47,7 @@ public class SkuController implements SkuControllerApi {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<SkuResponse> findSku(String code) {
         var skuMapper = new SkuProductMapperImpl();
-        var skuDomain = getSkuBySkuCodeUseCase.getSkuBySkuCode(code);
+        var skuDomain = getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode(code);
 
         return ResponseEntity.ok().body(skuMapper.skuDomainToResponse(skuDomain));
     }
@@ -68,7 +68,7 @@ public class SkuController implements SkuControllerApi {
     public ResponseEntity<List<SkuByProductIdResponse>> findAllSkuByProductId(Integer productId) {
         var skuMapper = new SkuProductMapperImpl();
 
-        List<SkuDomain> skuDomains = getAllSkusByProductIdUseCase.execute(productId);
+        List<SkuDomain> skuDomains = getAllEnabledSkusByProductIdUseCase.execute(productId);
 
         return ResponseEntity.ok().body(skuDomains.stream()
                 .map(skuMapper::skuDomainToSkuByProductIdResponse)

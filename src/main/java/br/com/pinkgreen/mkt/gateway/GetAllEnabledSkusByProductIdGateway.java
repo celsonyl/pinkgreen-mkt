@@ -4,7 +4,7 @@ import br.com.pinkgreen.mkt.domain.SkuDomain;
 
 import java.util.List;
 
-public interface GetAllSkusByProductIdGateway {
+public interface GetAllEnabledSkusByProductIdGateway {
 
     List<SkuDomain> execute(Integer productId);
 }
