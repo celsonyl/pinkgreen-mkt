@@ -34,6 +34,9 @@ public class SkuByProductIdResponse implements Serializable {
     @ApiModelProperty(value = "Peso do produto", required = true, example = "0.600")
     private Double weight;
 
+    @ApiModelProperty(value = "Estado do SKU", required = true, example = "true")
+    private Boolean active;
+
     @ApiModelProperty(value = "Caminho da url que contêm a imagem do produto", required = true, example = "http://img.png")
     private String mainImageUrl;
     private List<String> urlImages;

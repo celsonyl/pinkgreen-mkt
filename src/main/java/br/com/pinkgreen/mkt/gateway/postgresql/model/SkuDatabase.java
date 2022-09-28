@@ -40,6 +40,7 @@ public class SkuDatabase implements Serializable {
     private Double length;
     private Double weight;
     private String mainImageUrl;
+    private Boolean active;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")

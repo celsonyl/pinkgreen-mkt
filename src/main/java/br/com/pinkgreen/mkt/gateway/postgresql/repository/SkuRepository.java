@@ -16,6 +16,7 @@ public interface SkuRepository extends JpaRepository<SkuDatabase, Integer> {
             "SELECT * FROM PRODUCT_SKU PS " +
                     "INNER JOIN PRODUCT P ON P.ID = PS.PRODUCT_ID " +
                     "WHERE PS.SKU_CODE = :skuCode " +
+                    "AND PS.ACTIVE = true " +
                     "AND P.ACTIVE = true", nativeQuery = true)
     Optional<SkuDatabase> findSkuByCode(@Param("skuCode") String code);
 
@@ -23,6 +24,7 @@ public interface SkuRepository extends JpaRepository<SkuDatabase, Integer> {
             "SELECT * FROM PRODUCT_SKU PS " +
                     "INNER JOIN PRODUCT P ON P.ID = PS.PRODUCT_ID " +
                     "WHERE PRODUCT_ID = :productId " +
+                    "AND PS.ACTIVE = true " +
                     "AND P.ACTIVE = true", nativeQuery = true)
     List<SkuDatabase> findAllByProductId(@Param("productId") Integer productId);
 }

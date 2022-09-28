@@ -29,6 +29,10 @@ public class UpdateSkuUseCase {
             skuDB.setHeight(skuUpdate.getHeight());
         }
 
+        if (skuUpdate.getActive() != null) {
+            skuDB.setActive(skuUpdate.getActive());
+        }
+
         if (skuUpdate.getWidth() != null) {
             skuDB.setWidth(skuUpdate.getWidth());
         }

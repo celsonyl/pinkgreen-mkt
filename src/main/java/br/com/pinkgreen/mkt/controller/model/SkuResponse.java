@@ -15,6 +15,7 @@ public class SkuResponse implements Serializable {
     private String skuCode;
     private String name;
     private Integer stockQuantity;
+    private Boolean active;
     private Double height;
     private Double width;
     private Double length;

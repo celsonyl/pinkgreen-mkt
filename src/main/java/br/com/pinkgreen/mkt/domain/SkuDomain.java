@@ -17,6 +17,7 @@ public class SkuDomain implements Serializable {
     private ProductDomain product;
     private String skuCode;
     private String name;
+    private Boolean active;
     private Integer stockQuantity;
     private Double height;
     private Double width;

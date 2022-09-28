@@ -38,6 +38,7 @@ create TABLE PRODUCT_SKU
     ID             SERIAL PRIMARY KEY,
     HEIGHT         DOUBLE PRECISION,
     LENGTH         DOUBLE PRECISION,
+    ACTIVE         BOOLEAN,
     MAIN_IMAGE_URL VARCHAR(255),
     NAME           VARCHAR(255),
     PRICE          jsonb,
