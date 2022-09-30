@@ -8,7 +8,7 @@ begin
 
     if (TG_OP = 'INSERT') then
         insert into ORDERS_LOG(ORDER_ID, STATUS, UPDATED_AT, CREATED_AT)
-        values (NEW.ID, NEW.STATUS, NOW(), NOW());
+        values (NEW.ID, NEW.STATUS, NEW.UPDATED_AT, NEW.CREATED_AT);
 
         return new;
     elsif (TG_OP = 'UPDATE') then
