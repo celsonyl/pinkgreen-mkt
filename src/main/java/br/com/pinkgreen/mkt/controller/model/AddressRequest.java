@@ -15,7 +15,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class AddressRequest implements Serializable {
 
-    public static final String PHONE_REGEX = "^((?:\\+)[0-9]{2}\\s?(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4})$";
+    public static final String PHONE_REGEX = "^(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4}$";
     public static final String ZIPCODE_REGEX = "^([0-9]{2}[0-9]{3}-[0-9]{3})$";
 
     @NotBlank(message = "City must not be blank")
@@ -66,6 +66,6 @@ public class AddressRequest implements Serializable {
             message = "Field phone must be a valid phone"
     )
     @NotBlank(message = "Phone must not be blank")
-    @ApiModelProperty(value = "Numero de contato", required = true, example = "+55 (19) 99999-9999")
+    @ApiModelProperty(value = "Numero de contato", required = true, example = "(19) 99999-9999")
     private String phone;
 }

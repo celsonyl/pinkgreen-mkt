@@ -19,7 +19,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class CustomerRequest implements Serializable {
 
-    public static final String PHONE_REGEX = "^((?:\\+)[0-9]{2}\\s?(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4})$";
+    public static final String PHONE_REGEX = "^(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4}$";
 
     @NotBlank
     @NotNull

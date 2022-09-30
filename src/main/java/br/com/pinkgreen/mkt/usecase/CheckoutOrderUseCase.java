@@ -31,6 +31,7 @@ public class CheckoutOrderUseCase {
         validateReceivedSkus(orderDomain);
         setOrderStatusAndCalculateAmount(orderDomain);
         orderDomain.setCreatedAt(Instant.now());
+        orderDomain.setUpdatedAt(Instant.now());
 
         OrderDomain order = saveOrderGateway.execute(orderDomain);
 
@@ -71,7 +72,8 @@ public class CheckoutOrderUseCase {
 
         var validProducts = productOrderDomains.stream().filter(productOrderDomain -> skuDomainsDB.stream()
                         .anyMatch(skuDomain -> validateProductPrice(productOrderDomain.getPrice(), skuDomain.getPrice())
-                                && skuDomain.getSkuCode().equals(productOrderDomain.getSkuCode())))
+                                && skuDomain.getSkuCode().equals(productOrderDomain.getSkuCode())
+                                && skuDomain.getStockQuantity() > 0))
                 .collect(Collectors.toList());
 
         if (validProducts.size() != skuDomainsDB.size()) {

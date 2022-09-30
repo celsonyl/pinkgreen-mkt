@@ -15,7 +15,7 @@ public class PaymentDataValidator implements ConstraintValidator<ValidPaymentDat
     public static final String VALIDATION_DATE_REGEX = "^(1[0-2]|0[1-9]|\\d)\\/((?!0)\\d|[1-9]\\d)$";
     public static final String CVV_REGEX = "^([0-9]{3})";
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
-    public static final String PHONE_REGEX = "^((?:\\+)[0-9]{2}\\s?(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4})$";
+    public static final String PHONE_REGEX = "^(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4}$";
     public static final String LIMIT_50_CHARACTERS_REGEX = "^.{1,50}";
     private final Map<String, String> requiredCardFields = new HashMap<>();
     private final Map<String, String> requiredBankSlipFields = new HashMap<>();

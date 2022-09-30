@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserRequest {
     public static final String PASSWORD_REGEX = "^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$";
-    public static final String PHONE_REGEX = "^((?:\\+)[0-9]{2}\\s?(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4})$";
+    public static final String PHONE_REGEX = "^(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4}$";
 
     @NotBlank(message = "Name must not be blank")
     @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
