@@ -61,7 +61,7 @@ public class OrderController implements OrderControllerApi {
 
     @Override
     @SneakyThrows
-    @GetMapping("/{customerId}")
+    @GetMapping("/customer/{customerId}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getOrdersByCustomerId(String customerId, HttpServletRequest request) {
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), customerId);
@@ -75,7 +75,7 @@ public class OrderController implements OrderControllerApi {
 
     @Override
     @SneakyThrows
-    @GetMapping("/ready-to-ship")
+    @GetMapping("/state/ready-to-ship")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getOrdersReadyToShip() {
         var orders = getAllOrdersReadyToShipUseCase.execute();

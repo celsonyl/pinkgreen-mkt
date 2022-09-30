@@ -36,3 +36,11 @@ services:
       - "8080:8080"
     networks:
       - pinkgreen-network
+  wiremock:
+    image: wiremock/wiremock:2.34.0
+    container_name: wiremock_pinkgreen
+    command: --local-response-templating
+    volumes:
+      - ./wiremock:/home/wiremock
+    ports:
+      - "9090:8080"

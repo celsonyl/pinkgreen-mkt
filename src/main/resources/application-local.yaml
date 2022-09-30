@@ -21,7 +21,7 @@ spring:
     username: guest
     password: guest
 
-payment.url: http://localhost:4000
+payment.url: http://localhost:9090
 
 keycloak:
   admin:

@@ -5,12 +5,13 @@ import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import br.com.pinkgreen.mkt.gateway.RequestCardPaymentGateway;
 import br.com.pinkgreen.mkt.gateway.SaveOrderGateway;
 import br.com.pinkgreen.mkt.usecase.FindOrderByIdUseCase;
+import br.com.pinkgreen.mkt.usecase.VerifyAndReserveProductStockUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 
-import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.AWAITING_PAYMENT_CONFIRM;
+import static br.com.pinkgreen.mkt.domain.enums.OrderStatus.PAYMENT_CONFIRMED;
 
 @Component
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class RequestPaymentCardStrategy implements RequestPaymentStrategy {
     private final RequestCardPaymentGateway requestCardPaymentGateway;
     private final FindOrderByIdUseCase findOrderByIdUseCase;
     private final SaveOrderGateway saveOrderGateway;
+    private final VerifyAndReserveProductStockUseCase verifyAndReserveProductStockUseCase;
 
     @Override
     public void execute(String orderId, PaymentDomain paymentDomain) {
@@ -27,11 +29,12 @@ public class RequestPaymentCardStrategy implements RequestPaymentStrategy {
 
         var paymentId = requestCardPaymentGateway.execute(orderDomain);
 
-        orderDomain.setStatus(AWAITING_PAYMENT_CONFIRM);
+        orderDomain.setStatus(PAYMENT_CONFIRMED);
         orderDomain.getPaymentData().setPaymentId(paymentId);
         orderDomain.setUpdatedAt(Instant.now());
 
         saveOrderGateway.execute(orderDomain);
+        verifyAndReserveProductStockUseCase.execute(orderDomain);
     }
 
     @Override
