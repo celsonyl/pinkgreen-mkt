@@ -31,6 +31,7 @@ public class ProductController implements ProductControllerApi {
     private final GetEnabledProductByCategoryIdUseCase getEnabledProductByCategoryIdUseCase;
     private final GetAllEnabledProductsByBrandIdUseCase getAllEnabledProductsByBrandIdUseCase;
     private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
+    private final GetAllFavoriteProductsByUserIdUseCase getAllFavoriteProductsByUserIdUseCase;
 
     @Override
     @GetMapping("/{id}")
@@ -99,5 +100,15 @@ public class ProductController implements ProductControllerApi {
 
         updateProductUseCase.updateProduct(id, productDomain);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    @GetMapping("/favorite_products/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<ProductResponse>> getAllFavoriteProductsByUserId(String id) {
+        var productsDomain = getAllFavoriteProductsByUserIdUseCase.execute(id);
+        return ResponseEntity.ok().body(productsDomain.stream()
+                .map(new ProductMapperImpl()::productDomainToResponse)
+                .collect(Collectors.toList()));
     }
 }

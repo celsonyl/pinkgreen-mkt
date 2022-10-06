@@ -6,6 +6,7 @@ import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.repository.ProductRepository;
 import br.com.pinkgreen.mkt.gateway.postgresql.translator.ProductDomainToDatabase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class GetEnabledProductByIdGatewayImpl implements GetEnabledProductByIdGateway {
 
+    @Autowired
     private final ProductRepository productRepository;
 
     @Override

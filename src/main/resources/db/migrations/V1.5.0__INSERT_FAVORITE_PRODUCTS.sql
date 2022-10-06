@@ -1,0 +1,8 @@
+insert into FAVORITE_PRODUCTS (USER_ID, PRODUCT_ID)
+values ('64b5c9e4-8740-41f6-b66f-279631dff64e', 2);
+
+insert into FAVORITE_PRODUCTS (USER_ID, PRODUCT_ID)
+values ('64b5c9e4-8740-41f6-b66f-279631dff64e', 1);
+
+insert into FAVORITE_PRODUCTS (USER_ID, PRODUCT_ID)
+values ('e1503b98-4e3c-41fb-9faf-bc4c80368796', 1);
