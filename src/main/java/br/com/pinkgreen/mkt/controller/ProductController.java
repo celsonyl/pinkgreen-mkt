@@ -6,15 +6,18 @@ import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
+import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +35,7 @@ public class ProductController implements ProductControllerApi {
     private final GetAllEnabledProductsByBrandIdUseCase getAllEnabledProductsByBrandIdUseCase;
     private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
     private final GetAllFavoriteProductsByUserIdUseCase getAllFavoriteProductsByUserIdUseCase;
+    private final DeleteFavoriteProductByUserIdAndProductIdUserCase deleteFavoriteProductByUserIdAndProductIdUserCase;
 
     @Override
     @GetMapping("/{id}")
@@ -105,10 +109,30 @@ public class ProductController implements ProductControllerApi {
     @Override
     @GetMapping("/favorite_products/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<ProductResponse>> getAllFavoriteProductsByUserId(String id) {
+    public ResponseEntity<List<ProductResponse>> getAllFavoriteProductsByUserId(String id, HttpServletRequest request) throws InvalidCustomerIdException {
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), id);
+
         var productsDomain = getAllFavoriteProductsByUserIdUseCase.execute(id);
         return ResponseEntity.ok().body(productsDomain.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    @DeleteMapping("/favorite_products/{productId}/user/{userId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(String userId, Integer productId, HttpServletRequest request) throws InvalidCustomerIdException {
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
+
+        deleteFavoriteProductByUserIdAndProductIdUserCase.execute(userId, productId);
+        return ResponseEntity.noContent().build();
+    }
+
+    private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
+        String tokenCustomerId = authenticationToken.getToken().getSubject();
+
+        if (!customerId.equals(tokenCustomerId)) {
+            throw new InvalidCustomerIdException("[CONTROLLER] Invalid customerId");
+        }
     }
 }

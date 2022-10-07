@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.controller.client;
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
+import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -103,5 +105,15 @@ public interface ProductControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<List<ProductResponse>> getAllFavoriteProductsByUserId(@PathVariable String id);
+    ResponseEntity<List<ProductResponse>> getAllFavoriteProductsByUserId(@PathVariable String id, HttpServletRequest request) throws InvalidCustomerIdException;
+
+    @ApiOperation(value = "Remove um produto favorito do usuário")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
+            @ApiResponse(code = 204, message = "Indica que a operação foi executada!"),
+            @ApiResponse(code = 400, message = "Requisição mal formatada"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(@PathVariable String userId, @PathVariable Integer productId, HttpServletRequest request) throws InvalidCustomerIdException;
 }
