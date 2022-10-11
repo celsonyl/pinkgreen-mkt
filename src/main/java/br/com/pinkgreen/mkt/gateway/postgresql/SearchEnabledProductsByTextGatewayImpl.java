@@ -19,7 +19,7 @@ public class SearchEnabledProductsByTextGatewayImpl implements SearchEnabledProd
 
     @Override
     public List<ProductDomain> searchProduct(String text) {
-        List<ProductDatabase> searchProducts = productRepository.findByNameContainsIgnoreCaseAndActiveTrue(text);
+        List<ProductDatabase> searchProducts = productRepository.findByName(text);
         return searchProducts.stream()
                 .filter(ProductDatabase::getActive)
                 .map(new ProductMapperImpl()::productDatabaseToDomain)

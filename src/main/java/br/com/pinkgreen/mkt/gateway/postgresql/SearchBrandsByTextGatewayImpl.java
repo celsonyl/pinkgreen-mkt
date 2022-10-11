@@ -19,7 +19,7 @@ public class SearchBrandsByTextGatewayImpl implements SearchBrandsByTextGateway 
 
     @Override
     public List<BrandDomain> searchBrand(String text) {
-        List<BrandDatabase> searchBrands = brandRepository.findByNameStartingWithIgnoreCase(text);
+        List<BrandDatabase> searchBrands = brandRepository.findByName(text);
         return searchBrands.stream()
                 .map(new BrandMapperImpl()::brandDatabaseToDomain)
                 .collect(Collectors.toList());

@@ -18,7 +18,8 @@ public interface ProductRepository extends JpaRepository<ProductDatabase, Intege
 
     Optional<ProductDatabase> findByIdAndActiveTrue(Integer id);
 
-    List<ProductDatabase> findByNameContainsIgnoreCaseAndActiveTrue(String text);
+    @Query(value = "SELECT * FROM PRODUCT WHERE unaccent(name) ILIKE ('%' || unaccent(:text) || '%') AND ACTIVE = true", nativeQuery = true)
+    List<ProductDatabase> findByName(@Param("text") String text);
 
     List<ProductDatabase> findAllByCategoriesIdAndActiveTrue(Integer id);
 
