@@ -1,7 +1,10 @@
 package br.com.pinkgreen.mkt.domain;
 
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -10,26 +13,19 @@ import java.util.Map;
 @Setter
 @Builder
 @NoArgsConstructor
-@EqualsAndHashCode
-public class PaymentDomain implements Serializable {
+public class PaymentData implements Serializable {
 
-    private String paymentId;
-    private Double amount;
     private PaymentMethod paymentMethod;
-    private Map<String, String> paymentProperties;
+    private Map<String, String> paymentMethodProperties;
     private AddressDomain paymentAddress;
 
-    public PaymentDomain(
-            String paymentId,
-            Double amount,
+    public PaymentData(
             PaymentMethod paymentMethod,
-            Map<String, String> paymentProperties,
+            Map<String, String> paymentMethodProperties,
             AddressDomain paymentAddress
     ) {
-        this.paymentId = paymentId;
-        this.amount = amount;
         this.paymentMethod = paymentMethod;
-        this.paymentProperties = paymentProperties;
+        this.paymentMethodProperties = paymentMethodProperties;
         this.paymentAddress = paymentAddress;
     }
 }

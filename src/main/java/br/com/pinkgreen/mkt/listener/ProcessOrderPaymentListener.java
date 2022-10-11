@@ -1,6 +1,7 @@
 package br.com.pinkgreen.mkt.listener;
 
 import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.gateway.rabbitmq.model.ProcessOrderCheckoutMessage;
 import br.com.pinkgreen.mkt.usecase.RequestPaymentUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +18,10 @@ public class ProcessOrderPaymentListener {
     private final RequestPaymentUseCase requestPaymentUseCase;
 
     @Bean
-    public Consumer<OrderDomain> processOrderPaymentConsumer() {
+    public Consumer<ProcessOrderCheckoutMessage> processOrderPaymentConsumer() {
         return message -> {
-            log.info("Pedido numero {} recebido para processamento de pagamento", message.getId());
-            requestPaymentUseCase.execute(message.getId(), message.getPaymentData());
+            log.info("Pedido numero {} recebido para processamento de pagamento", message.getOrderId());
+            requestPaymentUseCase.execute(message.getOrderId(), message.getPaymentData());
         };
     }
 }

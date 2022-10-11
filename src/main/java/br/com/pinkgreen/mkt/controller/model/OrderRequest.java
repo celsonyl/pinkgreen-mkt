@@ -1,6 +1,8 @@
 package br.com.pinkgreen.mkt.controller.model;
 
 import br.com.pinkgreen.mkt.controller.annotation.ValidPaymentData;
+import br.com.pinkgreen.mkt.domain.CheckoutOrderData;
+import br.com.pinkgreen.mkt.domain.CustomerDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -38,4 +40,12 @@ public class OrderRequest implements Serializable {
     @ValidPaymentData(message = "propriedades invalidas")
     @ApiModelProperty(value = "Informações de pagamento")
     private PaymentDataRequest paymentData;
+
+    public CheckoutOrderData data(CustomerDomain customer) {
+        return new CheckoutOrderData(
+                customer,
+                shippingData.toDomain(),
+                ProductOrderRequest.toDomain(productList)
+        );
+    }
 }

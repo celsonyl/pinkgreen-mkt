@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.CustomerDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -31,4 +32,15 @@ public class CustomerResponse implements Serializable {
 
     @ApiModelProperty(value = "Número de telefone do cliente", required = true, example = "+55 (19) 99999-9999")
     private String phone;
+
+    public static CustomerResponse fromDomain(CustomerDomain customer) {
+        return (customer == null) ? null : new CustomerResponse(
+                customer.getId(),
+                customer.getName(),
+                customer.getLastname(),
+                customer.getDocument(),
+                customer.getEmail(),
+                customer.getPhone()
+        );
+    }
 }

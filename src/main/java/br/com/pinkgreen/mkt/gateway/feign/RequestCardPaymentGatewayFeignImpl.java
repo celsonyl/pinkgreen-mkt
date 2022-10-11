@@ -1,12 +1,15 @@
 package br.com.pinkgreen.mkt.gateway.feign;
 
-import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.domain.PaymentData;
+import br.com.pinkgreen.mkt.domain.PaymentDomain;
 import br.com.pinkgreen.mkt.gateway.RequestCardPaymentGateway;
 import br.com.pinkgreen.mkt.gateway.feign.client.RequestCardPaymentFeignApi;
-import br.com.pinkgreen.mkt.gateway.feign.properties.BasePaymentProperties;
 import br.com.pinkgreen.mkt.gateway.feign.model.RequestCardPaymentModel;
+import br.com.pinkgreen.mkt.gateway.feign.properties.BasePaymentProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import static br.com.pinkgreen.mkt.gateway.feign.model.RequestCardPaymentModel.request;
 
 @Component
 @RequiredArgsConstructor
@@ -16,20 +19,19 @@ public class RequestCardPaymentGatewayFeignImpl implements RequestCardPaymentGat
     private final BasePaymentProperties basePaymentProperties;
 
     @Override
-    public String execute(OrderDomain orderDomain) {
-        var map = orderDomain.getPaymentData().getPaymentMethodProperties();
-        var paymentCard = RequestCardPaymentModel.builder()
-                .cardNumber(map.get("cardNumber"))
-                .cvv(map.get("cvv"))
-                .validationDate(map.get("validationDate"))
-                .document(map.get("document"))
-                .ownerName(map.get("ownerName"))
-                .phone(map.get("phone"))
-                .email(map.get("email"))
-                .paymentAddress(orderDomain.getPaymentData().getPaymentAddress())
-                .amount(orderDomain.getPaymentData().getAmount())
-                .build();
+    public PaymentDomain execute(Double subtotal, PaymentData paymentData) {
+        RequestCardPaymentModel request = request(subtotal, paymentData);
+        String paymentId = requestCardPaymentFeignApi.execute(
+                basePaymentProperties.getUrl(),
+                request
+        ).getPaymentId();
 
-        return requestCardPaymentFeignApi.execute(basePaymentProperties.getUrl(), paymentCard).getPaymentId();
+        return new PaymentDomain(
+                paymentId,
+                subtotal,
+                paymentData.getPaymentMethod(),
+                request.properties(),
+                paymentData.getPaymentAddress()
+        );
     }
 }

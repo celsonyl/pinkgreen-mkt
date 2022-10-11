@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.ShippingDataDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -20,4 +21,12 @@ public class ShippingDataResponse implements Serializable {
     private Integer deliveryDays;
 
     private AddressResponse address;
+
+    public static ShippingDataResponse fromDomain(ShippingDataDomain shippingData) {
+        return (shippingData == null) ? null : new ShippingDataResponse(
+                shippingData.getFreightPrice(),
+                shippingData.getDeliveryDays(),
+                AddressResponse.fromDomain(shippingData.getAddress())
+        );
+    }
 }

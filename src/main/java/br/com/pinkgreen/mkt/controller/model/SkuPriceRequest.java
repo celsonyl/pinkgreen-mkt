@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.SkuPriceDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -33,4 +34,13 @@ public class SkuPriceRequest implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
     @ApiModelProperty(value = "Data final da promoção")
     private Instant endDate;
+
+    public SkuPriceDomain toDomain() {
+        return new SkuPriceDomain(
+                listPrice,
+                salePrice,
+                startDate,
+                endDate
+        );
+    }
 }

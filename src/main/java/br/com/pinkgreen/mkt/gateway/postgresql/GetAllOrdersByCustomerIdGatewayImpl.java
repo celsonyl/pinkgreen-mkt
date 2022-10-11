@@ -4,12 +4,12 @@ import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.gateway.GetAllOrdersByCustomerIdGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.model.OrderDatabase;
 import br.com.pinkgreen.mkt.gateway.postgresql.repository.OrderRepository;
-import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 @RequiredArgsConstructor
@@ -19,8 +19,9 @@ public class GetAllOrdersByCustomerIdGatewayImpl implements GetAllOrdersByCustom
 
     @Override
     public List<OrderDomain> execute(String customerId) {
-        List<OrderDatabase> ordersDatabase = orderRepository.findAllOrdersByCustomerId(customerId);
-
-        return ordersDatabase.stream().map(new OrderMapperImpl()::orderDatabaseToOrder).collect(Collectors.toList());
+        return orderRepository.findAllOrdersByCustomerId(customerId)
+                .stream()
+                .map(OrderDatabase::toDomain)
+                .collect(toList());
     }
 }

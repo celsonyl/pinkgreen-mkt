@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.controller.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 
 @Getter
@@ -17,7 +18,7 @@ public class CheckoutOrderResponse implements Serializable {
     private String customerId;
 
     @ApiModelProperty(value = "Número do pedido", example = "1036920")
-    private String orderId;
+    private Integer orderId;
 
     @ApiModelProperty(example = "Pedido recebido!")
     private String message;

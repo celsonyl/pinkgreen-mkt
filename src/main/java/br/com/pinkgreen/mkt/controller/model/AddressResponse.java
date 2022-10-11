@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.AddressDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -39,4 +40,18 @@ public class AddressResponse implements Serializable {
 
     @ApiModelProperty(value = "Numero de contato", required = true, example = "+55 (19) 99999-9999")
     private String phone;
+
+    public static AddressResponse fromDomain(AddressDomain address) {
+        return new AddressResponse(
+                address.getCity(),
+                address.getState(),
+                address.getCountry(),
+                address.getNeighborhood(),
+                address.getZipcode(),
+                address.getStreet(),
+                address.getComplement(),
+                address.getNumber(),
+                address.getPhone()
+        );
+    }
 }

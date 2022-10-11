@@ -1,6 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.rabbitmq.supplier;
 
-import br.com.pinkgreen.mkt.gateway.rabbitmq.model.ProcessOrderPaymentMessage;
+import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.gateway.rabbitmq.model.ProcessOrderCheckoutMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
@@ -15,7 +16,7 @@ public class PublishOrderStatusEventSupplier {
     public static final String OUTPUT = "publishOrderStatusEvent-out-0";
 
     @Bean
-    public Supplier<Message<ProcessOrderPaymentMessage>> publishOrderStatusEvent() {
+    public Supplier<Message<OrderDomain>> publishOrderStatusEvent() {
         return () -> null;
     }
 }

@@ -1,15 +1,12 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.OrderControllerApi;
-import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
-import br.com.pinkgreen.mkt.domain.CustomerDomain;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.gateway.FindCustomerById;
-import br.com.pinkgreen.mkt.translator.OrderMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersReadyToShipUseCase;
@@ -24,7 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static br.com.pinkgreen.mkt.controller.model.OrderResponse.response;
+import static java.util.stream.Collectors.toList;
+import static org.springframework.http.ResponseEntity.ok;
 
 @Slf4j
 @Component
@@ -42,21 +42,16 @@ public class OrderController implements OrderControllerApi {
     @SneakyThrows
     @PostMapping
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<CheckoutOrderResponse> checkout(OrderRequest orderRequest, HttpServletRequest request) {
+    public ResponseEntity<OrderResponse> checkout(OrderRequest orderRequest, HttpServletRequest request) {
         log.info("[CONTROLLER] Receiving new order request");
         String customerId = orderRequest.getCustomerId();
-
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), customerId);
+        OrderDomain order = checkoutOrderUseCase.execute(
+                orderRequest.data(findCustomerById.execute(customerId)),
+                orderRequest.getPaymentData().toDomain()
+        );
 
-        CustomerDomain customer = findCustomerById.execute(customerId);
-        var orderDomain = new OrderMapperImpl().orderRequestToOrder(orderRequest);
-        orderDomain.setCustomerData(customer);
-        OrderDomain orderCreated = checkoutOrderUseCase.execute(orderDomain);
-        return ResponseEntity.ok().body(CheckoutOrderResponse.builder()
-                .orderId(orderCreated.getId())
-                .customerId(orderCreated.getCustomerData().getId())
-                .message("Pedido recebido!")
-                .build());
+        return ok(response(order));
     }
 
     @Override
@@ -65,12 +60,11 @@ public class OrderController implements OrderControllerApi {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getOrdersByCustomerId(String customerId, HttpServletRequest request) {
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), customerId);
-
         List<OrderDomain> orders = getAllOrdersByCustomerIdUseCase.execute(customerId);
 
-        List<OrderResponse> orderResponses = orders.stream().map(new OrderMapperImpl()::orderToOrderResponse).collect(Collectors.toList());
-
-        return ResponseEntity.ok(orderResponses);
+        return ok(orders.stream()
+                .map(OrderResponse::response)
+                .collect(toList()));
     }
 
     @Override
@@ -79,15 +73,15 @@ public class OrderController implements OrderControllerApi {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getOrdersReadyToShip() {
         var orders = getAllOrdersReadyToShipUseCase.execute();
-        return ResponseEntity.ok(orders.stream()
-                .map(new OrderMapperImpl()::orderToOrderResponse)
-                .collect(Collectors.toList()));
+        return ok(orders.stream()
+                .map(OrderResponse::response)
+                .collect(toList()));
     }
 
     @Override
     @PatchMapping("/{orderId}/update/{orderStatus}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> updateOrderStatus(String orderId, OrderStatus orderStatus) {
+    public ResponseEntity<Void> updateOrderStatus(Integer orderId, OrderStatus orderStatus) {
         updateAndPublishOrderEvent.execute(orderId, orderStatus);
         return ResponseEntity.noContent().build();
     }

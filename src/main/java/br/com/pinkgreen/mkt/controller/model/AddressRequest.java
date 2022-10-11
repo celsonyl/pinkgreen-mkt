@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.AddressDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -68,4 +69,18 @@ public class AddressRequest implements Serializable {
     @NotBlank(message = "Phone must not be blank")
     @ApiModelProperty(value = "Numero de contato", required = true, example = "(19) 99999-9999")
     private String phone;
+
+    public AddressDomain toDomain() {
+        return new AddressDomain(
+                city,
+                state,
+                country,
+                neighborhood,
+                zipcode,
+                street,
+                complement,
+                number,
+                phone
+        );
+    }
 }

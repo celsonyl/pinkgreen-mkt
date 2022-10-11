@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.PaymentData;
 import br.com.pinkgreen.mkt.domain.enums.PaymentMethod;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -32,4 +33,12 @@ public class PaymentDataRequest implements Serializable {
     @Valid
     @NotNull
     private AddressRequest paymentAddress;
+
+    public PaymentData toDomain() {
+        return new PaymentData(
+                paymentMethod,
+                paymentMethodProperties,
+                paymentAddress.toDomain()
+        );
+    }
 }

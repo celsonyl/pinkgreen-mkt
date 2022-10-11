@@ -30,7 +30,7 @@ public interface OrderControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<CheckoutOrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest, HttpServletRequest request);
+    ResponseEntity<OrderResponse> checkout(@Valid @RequestBody OrderRequest orderRequest, HttpServletRequest request);
 
     @ApiOperation(value = "Retorna todos os pedidos de um cliente")
     @ApiImplicitParams({
@@ -69,5 +69,5 @@ public interface OrderControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> updateOrderStatus(@PathVariable String orderId, @PathVariable OrderStatus orderStatus) throws InvalidStatusTransitionException;
+    ResponseEntity<Void> updateOrderStatus(@PathVariable Integer orderId, @PathVariable OrderStatus orderStatus) throws InvalidStatusTransitionException;
 }

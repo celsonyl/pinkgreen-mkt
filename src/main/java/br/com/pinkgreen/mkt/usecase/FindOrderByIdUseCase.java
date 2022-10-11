@@ -12,8 +12,8 @@ public class FindOrderByIdUseCase {
 
     private final FindOrderByIdGateway findOrderByIdGateway;
 
-    public OrderDomain execute(String orderId) {
-        return findOrderByIdGateway.execute(Integer.parseInt(orderId))
+    public OrderDomain execute(Integer orderId) {
+        return findOrderByIdGateway.execute(orderId)
                 .orElseThrow(() -> new ObjectNotFoundException("[USE_CASE] Order not found - orderId: " + orderId));
     }
 }

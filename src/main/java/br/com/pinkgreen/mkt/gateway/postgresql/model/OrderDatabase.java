@@ -1,6 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
 import br.com.pinkgreen.mkt.domain.CustomerDomain;
+import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.ShippingDataDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
@@ -50,6 +51,31 @@ public class OrderDatabase implements Serializable {
     private Instant createdAt;
     private Instant updatedAt;
 
+    public static OrderDatabase database(OrderDomain order) {
+        return new OrderDatabase(
+                order.getId(),
+                order.getStatus(),
+                order.getCustomerData(),
+                order.getShippingData(),
+                OrderProductDatabase.fromDomain(order.getProductList()),
+                PaymentDatabase.fromDomain(order.getPaymentData()),
+                order.getCreatedAt(),
+                order.getUpdatedAt()
+        );
+    }
+
+    public OrderDomain toDomain() {
+        return new OrderDomain(
+                id,
+                status,
+                customerData,
+                shippingData,
+                OrderProductDatabase.toDomain(productList),
+                (paymentData == null) ? null : paymentData.toDomain(),
+                createdAt,
+                updatedAt
+        );
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
