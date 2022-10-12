@@ -6,6 +6,7 @@ import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
+import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static org.springframework.http.ResponseEntity.notFound;
 
 @ControllerAdvice
 public class RestExceptionHandler {
@@ -36,6 +39,11 @@ public class RestExceptionHandler {
                 .message("CustomerId inválido")
                 .path(request.getRequestURI())
                 .build());
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<Void> orderNotFound(OrderNotFoundException e) {
+        return notFound().build();
     }
 
     @ExceptionHandler(ObjectNotFoundException.class)

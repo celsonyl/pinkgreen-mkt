@@ -6,7 +6,9 @@ import br.com.pinkgreen.mkt.controller.model.OrderResponse;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
+import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.gateway.FindCustomerById;
+import br.com.pinkgreen.mkt.gateway.FindOrderById;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersReadyToShipUseCase;
@@ -34,6 +36,7 @@ public class OrderController implements OrderControllerApi {
 
     private final FindCustomerById findCustomerById;
     private final CheckoutOrderUseCase checkoutOrderUseCase;
+    private final FindOrderById findOrderById;
     private final GetAllOrdersByCustomerIdUseCase getAllOrdersByCustomerIdUseCase;
     private final GetAllOrdersReadyToShipUseCase getAllOrdersReadyToShipUseCase;
     private final UpdateAndPublishOrderEvent updateAndPublishOrderEvent;
@@ -51,6 +54,16 @@ public class OrderController implements OrderControllerApi {
                 orderRequest.getPaymentData().toDomain()
         );
 
+        return ok(response(order));
+    }
+
+    @Override
+    @SneakyThrows
+    @GetMapping("/{orderId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<OrderResponse> getOrdersByCustomerId(Integer orderId, HttpServletRequest request) {
+        OrderDomain order = findOrderById.execute(orderId).orElseThrow(OrderNotFoundException::new);
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), order.getCustomerData().getId());
         return ok(response(order));
     }
 

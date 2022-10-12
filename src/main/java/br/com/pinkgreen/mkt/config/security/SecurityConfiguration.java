@@ -43,6 +43,7 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()
                 .antMatchers(POST, "/order").hasAuthority(CHECKOUT_ORDER.toString())
                 .antMatchers(GET, "/order/customer/{customerId}").hasAuthority(GET_CUSTOMER_ORDERS.toString())
+                .antMatchers(GET, "/order/{orderId}").hasAuthority(GET_CUSTOMER_ORDERS.toString())
                 .antMatchers(GET, "/order/state/ready-to-ship").hasAuthority(GET_ORDERS_READY_TO_SHIP.toString())
                 .antMatchers(PATCH, "/order/{orderId}/update/{orderStatus}").hasAuthority(UPDATE_ORDER_STATUS.toString())
                 .antMatchers(GET, "/actuator").permitAll()
