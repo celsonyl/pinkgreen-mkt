@@ -1,8 +1,10 @@
 package br.com.pinkgreen.mkt.controller.client;
 
+import br.com.pinkgreen.mkt.controller.model.FavoriteProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -116,4 +118,16 @@ public interface ProductControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(@PathVariable String userId, @PathVariable Integer productId, HttpServletRequest request) throws InvalidCustomerIdException;
+
+    @ApiOperation(value = "Criação de produto favorito")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<Void> createFavoriteProduct(@Valid @RequestBody FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException;
 }

@@ -1,11 +1,13 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.ProductControllerApi;
+import br.com.pinkgreen.mkt.controller.model.FavoriteProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
+import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.*;
@@ -36,6 +38,7 @@ public class ProductController implements ProductControllerApi {
     private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
     private final GetAllFavoriteProductsByUserIdUseCase getAllFavoriteProductsByUserIdUseCase;
     private final DeleteFavoriteProductByUserIdAndProductIdUserCase deleteFavoriteProductByUserIdAndProductIdUserCase;
+    private final CreateFavoriteProductUseCase createFavoriteProductUseCase;
 
     @Override
     @GetMapping("/{id}")
@@ -126,6 +129,19 @@ public class ProductController implements ProductControllerApi {
 
         deleteFavoriteProductByUserIdAndProductIdUserCase.execute(userId, productId);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    @PostMapping("/favorite_products")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Void> createFavoriteProduct(FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException {
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), favoriteProductRequest.getUserId());
+
+        var favoriteProductDomain = new ProductMapperImpl().favoriteProductRequestToDomain(favoriteProductRequest);
+        favoriteProductDomain = createFavoriteProductUseCase.execute(favoriteProductDomain);
+        var uri = uriComponentsBuilder.path("product/favorite_products/{id}").buildAndExpand(favoriteProductDomain.getId()).toUri();
+
+        return ResponseEntity.created(uri).build();
     }
 
     private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
