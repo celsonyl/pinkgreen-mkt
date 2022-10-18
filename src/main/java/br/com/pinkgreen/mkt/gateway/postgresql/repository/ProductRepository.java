@@ -1,6 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.repository;
 
 import br.com.pinkgreen.mkt.gateway.postgresql.model.ProductDatabase;
+import br.com.pinkgreen.mkt.gateway.postgresql.model.SkuDatabase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,10 +23,4 @@ public interface ProductRepository extends JpaRepository<ProductDatabase, Intege
     List<ProductDatabase> findAllByCategoriesIdAndActiveTrue(Integer id);
 
     List<ProductDatabase> findAllByBrandIdAndActiveTrue(Integer id);
-
-    @Query(value = "SELECT * FROM PRODUCT P " +
-            "INNER JOIN FAVORITE_PRODUCTS FP ON FP.PRODUCT_ID = P.ID " +
-            " WHERE FP.USER_ID  = :userId " +
-            " AND P.ACTIVE = true ", nativeQuery = true)
-    List<ProductDatabase> getAllByUserId(@Param("userId") String id);
 }

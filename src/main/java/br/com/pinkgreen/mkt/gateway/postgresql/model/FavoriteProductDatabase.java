@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
+import br.com.pinkgreen.mkt.domain.FavoriteProductDomain;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -14,12 +15,19 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class FavoriteProductDatabase implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String userId;
-    private Integer productId;
+    private String skuCode;
+
+    public static FavoriteProductDatabase database(FavoriteProductDomain domain) {
+        return new FavoriteProductDatabase(domain.getId(), domain.getUserId(), domain.getSkuCode());
+    }
+
+    public FavoriteProductDomain domain() {
+        return new FavoriteProductDomain(id, userId, skuCode);
+    }
 }

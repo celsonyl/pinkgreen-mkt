@@ -1,15 +1,13 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.ProductControllerApi;
-import br.com.pinkgreen.mkt.controller.model.FavoriteProductRequest;
-import br.com.pinkgreen.mkt.controller.model.ProductRequest;
-import br.com.pinkgreen.mkt.controller.model.ProductResponse;
-import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
+import br.com.pinkgreen.mkt.controller.model.*;
 import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
+import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +34,7 @@ public class ProductController implements ProductControllerApi {
     private final GetEnabledProductByCategoryIdUseCase getEnabledProductByCategoryIdUseCase;
     private final GetAllEnabledProductsByBrandIdUseCase getAllEnabledProductsByBrandIdUseCase;
     private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
-    private final GetAllFavoriteProductsByUserIdUseCase getAllFavoriteProductsByUserIdUseCase;
+    private final GetAllFavoriteProductsSkuByUserIdUseCase getAllFavoriteProductsSkuByUserIdUseCase;
     private final DeleteFavoriteProductByUserIdAndProductIdUserCase deleteFavoriteProductByUserIdAndProductIdUserCase;
     private final CreateFavoriteProductUseCase createFavoriteProductUseCase;
 
@@ -110,35 +108,34 @@ public class ProductController implements ProductControllerApi {
     }
 
     @Override
-    @GetMapping("/favorite_products/{id}")
+    @GetMapping("/favorite_products/user/{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<ProductResponse>> getAllFavoriteProductsByUserId(String id, HttpServletRequest request) throws InvalidCustomerIdException {
-        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), id);
+    public ResponseEntity<List<SkuResponse>> getAllFavoriteProductsByUserId(String userId, HttpServletRequest request) throws InvalidCustomerIdException {
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
 
-        var productsDomain = getAllFavoriteProductsByUserIdUseCase.execute(id);
+        var productsDomain = getAllFavoriteProductsSkuByUserIdUseCase.execute(userId);
         return ResponseEntity.ok().body(productsDomain.stream()
-                .map(new ProductMapperImpl()::productDomainToResponse)
+                .map(new SkuProductMapperImpl()::skuDomainToResponse)
                 .collect(Collectors.toList()));
     }
 
     @Override
-    @DeleteMapping("/favorite_products/{productId}/user/{userId}")
+    @DeleteMapping("/favorite_products/{skuCode}/user/{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(String userId, Integer productId, HttpServletRequest request) throws InvalidCustomerIdException {
+    public ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(String userId, String skuCode, HttpServletRequest request) throws InvalidCustomerIdException {
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
 
-        deleteFavoriteProductByUserIdAndProductIdUserCase.execute(userId, productId);
+        deleteFavoriteProductByUserIdAndProductIdUserCase.execute(userId, skuCode);
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    @PostMapping("/favorite_products")
+    @PostMapping("/favorite_products/user/{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> createFavoriteProduct(FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException {
-        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), favoriteProductRequest.getUserId());
+    public ResponseEntity<Void> createFavoriteProduct(String userId, FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException {
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
 
-        var favoriteProductDomain = new ProductMapperImpl().favoriteProductRequestToDomain(favoriteProductRequest);
-        favoriteProductDomain = createFavoriteProductUseCase.execute(favoriteProductDomain);
+        var favoriteProductDomain = createFavoriteProductUseCase.execute(favoriteProductRequest.domain(userId));
         var uri = uriComponentsBuilder.path("product/favorite_products/{id}").buildAndExpand(favoriteProductDomain.getId()).toUri();
 
         return ResponseEntity.created(uri).build();

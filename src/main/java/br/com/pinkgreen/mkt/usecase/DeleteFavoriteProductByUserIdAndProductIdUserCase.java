@@ -12,8 +12,8 @@ public class DeleteFavoriteProductByUserIdAndProductIdUserCase {
     @Autowired
     private final DeleteFavoriteProductByUserIdAndProductIdGateway deleteFavoriteProductByUserIdAndProductIdGateway;
 
-    public void execute(String userId, Integer productId) {
-        deleteFavoriteProductByUserIdAndProductIdGateway.execute(userId, productId);
+    public void execute(String userId, String skuCode) {
+        deleteFavoriteProductByUserIdAndProductIdGateway.execute(userId, skuCode);
     }
 
 }

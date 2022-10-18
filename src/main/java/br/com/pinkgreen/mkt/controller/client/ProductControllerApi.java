@@ -1,9 +1,6 @@
 package br.com.pinkgreen.mkt.controller.client;
 
-import br.com.pinkgreen.mkt.controller.model.FavoriteProductRequest;
-import br.com.pinkgreen.mkt.controller.model.ProductRequest;
-import br.com.pinkgreen.mkt.controller.model.ProductResponse;
-import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
+import br.com.pinkgreen.mkt.controller.model.*;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import io.swagger.annotations.*;
@@ -107,7 +104,7 @@ public interface ProductControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<List<ProductResponse>> getAllFavoriteProductsByUserId(@PathVariable String id, HttpServletRequest request) throws InvalidCustomerIdException;
+    ResponseEntity<List<SkuResponse>> getAllFavoriteProductsByUserId(@PathVariable String id, HttpServletRequest request) throws InvalidCustomerIdException;
 
     @ApiOperation(value = "Remove um produto favorito do usuário")
     @ApiResponses(value = {
@@ -117,7 +114,7 @@ public interface ProductControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(@PathVariable String userId, @PathVariable Integer productId, HttpServletRequest request) throws InvalidCustomerIdException;
+    ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(@PathVariable String userId, @PathVariable String skuCode, HttpServletRequest request) throws InvalidCustomerIdException;
 
     @ApiOperation(value = "Criação de produto favorito")
     @ApiImplicitParams({
@@ -129,5 +126,5 @@ public interface ProductControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> createFavoriteProduct(@Valid @RequestBody FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException;
+    ResponseEntity<Void> createFavoriteProduct(@PathVariable String userId, @Valid @RequestBody FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException;
 }

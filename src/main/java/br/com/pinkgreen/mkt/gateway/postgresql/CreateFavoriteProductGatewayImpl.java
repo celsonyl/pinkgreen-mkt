@@ -4,9 +4,12 @@ import br.com.pinkgreen.mkt.domain.FavoriteProductDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.gateway.CreateFavoriteProductGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.repository.FavoriteProductRepository;
-import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+
+import static br.com.pinkgreen.mkt.gateway.postgresql.model.FavoriteProductDatabase.database;
 
 @Component
 @RequiredArgsConstructor
@@ -16,14 +19,13 @@ public class CreateFavoriteProductGatewayImpl implements CreateFavoriteProductGa
 
     @Override
     public FavoriteProductDomain execute(FavoriteProductDomain favoriteProductDomain) throws DataIntegrityException {
-        var favoriteProductList = favoriteProductRepository
-                .getFavoriteProductDatabaseByUserIdAndProductId(favoriteProductDomain.getUserId(), favoriteProductDomain.getProductId());
+        var favoriteProductOpt = Optional.ofNullable(favoriteProductRepository.findByCustomerIdAndSkuCode(
+                favoriteProductDomain.getUserId(),
+                favoriteProductDomain.getSkuCode())
+        );
 
-        if (!favoriteProductList.isEmpty()) {
-            throw new DataIntegrityException("PRODUTO FAVORITO JÁ ADICIONADO");
-        }
+        if (favoriteProductOpt.isPresent()) throw new DataIntegrityException("PRODUTO FAVORITO JÁ ADICIONADO");
 
-        return new ProductMapperImpl()
-                .favoriteProductDatabaseToDomain(favoriteProductRepository.save(new ProductMapperImpl().favoriteProductDomainToDatabase(favoriteProductDomain)));
+        return favoriteProductRepository.save(database(favoriteProductDomain)).domain();
     }
 }
