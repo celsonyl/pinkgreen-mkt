@@ -35,7 +35,7 @@ public class ProductOrderDomain implements Serializable {
         this.weight = sku.getWeight();
         this.mainImageUrl = sku.getMainImageUrl();
         this.urlImages = sku.getUrlImages();
-        this.price = sku.getPrice().getActivePrice();
+        this.price = sku.getPrice().activePrice();
         this.skuAttributes = sku.getSkuAttributes();
         this.quantity = quantity;
     }

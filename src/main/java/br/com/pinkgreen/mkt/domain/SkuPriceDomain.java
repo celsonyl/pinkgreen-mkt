@@ -27,7 +27,7 @@ public class SkuPriceDomain implements Serializable {
         this.endDate = endDate;
     }
 
-    public Double getActivePrice() {
+    public Double activePrice() {
         var now = now();
         if (now.isBefore(getEndDate()) && now.isAfter(getStartDate())) return getSalePrice();
         return getListPrice();
