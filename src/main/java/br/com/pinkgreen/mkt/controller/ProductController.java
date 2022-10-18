@@ -34,9 +34,6 @@ public class ProductController implements ProductControllerApi {
     private final GetEnabledProductByCategoryIdUseCase getEnabledProductByCategoryIdUseCase;
     private final GetAllEnabledProductsByBrandIdUseCase getAllEnabledProductsByBrandIdUseCase;
     private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
-    private final GetAllFavoriteProductsSkuByUserIdUseCase getAllFavoriteProductsSkuByUserIdUseCase;
-    private final DeleteFavoriteProductByUserIdAndProductIdUserCase deleteFavoriteProductByUserIdAndProductIdUserCase;
-    private final CreateFavoriteProductUseCase createFavoriteProductUseCase;
 
     @Override
     @GetMapping("/{id}")
@@ -105,47 +102,5 @@ public class ProductController implements ProductControllerApi {
 
         updateProductUseCase.updateProduct(id, productDomain);
         return ResponseEntity.noContent().build();
-    }
-
-    @Override
-    @GetMapping("/favorite_products/user/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<SkuResponse>> getAllFavoriteProductsByUserId(String userId, HttpServletRequest request) throws InvalidCustomerIdException {
-        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
-
-        var productsDomain = getAllFavoriteProductsSkuByUserIdUseCase.execute(userId);
-        return ResponseEntity.ok().body(productsDomain.stream()
-                .map(new SkuProductMapperImpl()::skuDomainToResponse)
-                .collect(Collectors.toList()));
-    }
-
-    @Override
-    @DeleteMapping("/favorite_products/{skuCode}/user/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> deleteFavoriteProductsByUserIdAndProductId(String userId, String skuCode, HttpServletRequest request) throws InvalidCustomerIdException {
-        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
-
-        deleteFavoriteProductByUserIdAndProductIdUserCase.execute(userId, skuCode);
-        return ResponseEntity.noContent().build();
-    }
-
-    @Override
-    @PostMapping("/favorite_products/user/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> createFavoriteProduct(String userId, FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException {
-        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
-
-        var favoriteProductDomain = createFavoriteProductUseCase.execute(favoriteProductRequest.domain(userId));
-        var uri = uriComponentsBuilder.path("product/favorite_products/{id}").buildAndExpand(favoriteProductDomain.getId()).toUri();
-
-        return ResponseEntity.created(uri).build();
-    }
-
-    private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
-        String tokenCustomerId = authenticationToken.getToken().getSubject();
-
-        if (!customerId.equals(tokenCustomerId)) {
-            throw new InvalidCustomerIdException("[CONTROLLER] Invalid customerId");
-        }
     }
 }
