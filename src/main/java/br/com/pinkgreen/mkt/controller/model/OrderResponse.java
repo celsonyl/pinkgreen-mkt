@@ -31,6 +31,8 @@ public class OrderResponse implements Serializable {
 
     private PaymentDataResponse paymentData;
 
+    private List<OrderHistoryResponse> history;
+
     @ApiModelProperty(value = "Data de criação do pedido")
     private Instant createdAt;
 
@@ -45,6 +47,7 @@ public class OrderResponse implements Serializable {
                 ShippingDataResponse.fromDomain(order.getShippingData()),
                 ProductOrderResponse.fromDomain(order.getProductList()),
                 PaymentDataResponse.fromDomain(order.getPaymentData()),
+                OrderHistoryResponse.fromDomain(order.getHistory()),
                 order.getCreatedAt(),
                 order.getUpdatedAt()
         );

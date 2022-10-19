@@ -72,6 +72,7 @@ public class OrderDatabase implements Serializable {
                 shippingData,
                 OrderProductDatabase.toDomain(productList),
                 (paymentData == null) ? null : paymentData.toDomain(),
+                null,
                 createdAt,
                 updatedAt
         );

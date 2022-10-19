@@ -20,6 +20,7 @@ public class OrderDomain implements Serializable {
     private ShippingDataDomain shippingData;
     private List<ProductOrderDomain> productList;
     private PaymentDomain paymentData;
+    private List<OrderHistoryDomain> history;
     private Instant createdAt;
     private Instant updatedAt;
 
@@ -109,6 +110,14 @@ public class OrderDomain implements Serializable {
 
     public void setPaymentData(PaymentDomain paymentData) {
         this.paymentData = paymentData;
+    }
+
+    public List<OrderHistoryDomain> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<OrderHistoryDomain> history) {
+        this.history = history;
     }
 
     public Instant getCreatedAt() {
