@@ -54,6 +54,12 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/swagger-ui/**").permitAll()
                 .antMatchers(GET, "/api-docs.yaml").permitAll()
                 .antMatchers(GET, "/api-docs/**").permitAll()
+                .antMatchers(GET, "/api-docs/**").permitAll()
+                .antMatchers(GET, "/v2/api-docs").permitAll()
+                .antMatchers(GET, "/configuration/ui").permitAll()
+                .antMatchers(GET, "/swagger-resources/**").permitAll()
+                .antMatchers(GET, "/configuration/security").permitAll()
+                .antMatchers(GET, "/webjars/**").permitAll()
                 .anyRequest().denyAll()
                 .and().oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
         return http.build();
