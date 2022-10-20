@@ -76,8 +76,8 @@ public class AddressRequest implements Serializable {
                 state,
                 country,
                 neighborhood,
-                zipcode,
                 street,
+                zipcode,
                 complement,
                 number,
                 phone
