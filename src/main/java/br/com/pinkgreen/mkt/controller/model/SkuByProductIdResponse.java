@@ -42,5 +42,6 @@ public class SkuByProductIdResponse implements Serializable {
     private List<String> urlImages;
     private SkuPriceResponse price;
     private List<SkuAttributesResponse> skuAttributes;
+    private ProductResponse product;
 
 }

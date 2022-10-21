@@ -1,6 +1,5 @@
 package br.com.pinkgreen.mkt.controller.client;
 
-import br.com.pinkgreen.mkt.controller.model.CheckoutOrderResponse;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
@@ -43,7 +42,7 @@ public interface OrderControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<OrderResponse> getOrdersByCustomerId(@ApiParam(value = "ID do pedido", required = true, example = "1") @PathVariable Integer orderId, HttpServletRequest request);
+    ResponseEntity<OrderResponse> getOrderById(@ApiParam(value = "ID do pedido", required = true, example = "1") @PathVariable Integer orderId, HttpServletRequest request);
 
     @ApiOperation(value = "Retorna todos os pedidos de um cliente")
     @ApiImplicitParams({

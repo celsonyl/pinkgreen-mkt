@@ -61,7 +61,7 @@ public class OrderController implements OrderControllerApi {
     @SneakyThrows
     @GetMapping("/{orderId}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<OrderResponse> getOrdersByCustomerId(Integer orderId, HttpServletRequest request) {
+    public ResponseEntity<OrderResponse> getOrderById(Integer orderId, HttpServletRequest request) {
         OrderDomain order = findOrderById.execute(orderId).orElseThrow(OrderNotFoundException::new);
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), order.getCustomerData().getId());
         return ok(response(order));
