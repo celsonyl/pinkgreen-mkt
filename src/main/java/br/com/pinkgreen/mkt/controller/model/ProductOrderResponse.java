@@ -7,7 +7,6 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -48,6 +47,9 @@ public class ProductOrderResponse implements Serializable {
     @ApiModelProperty(value = "Atributos do produto", required = true)
     private List<SkuAttributesDomain> skuAttributes;
 
+    @ApiModelProperty(value = "Produto do SKU", required = true)
+    private ProductResponse product;
+
     @ApiModelProperty(value = "Quantidade de itens do produto", required = true, example = "1")
     private Integer quantity;
 
@@ -63,6 +65,7 @@ public class ProductOrderResponse implements Serializable {
                 product.getUrlImages(),
                 product.getPrice(),
                 product.getSkuAttributes(),
+                ProductResponse.fromDomain(product.getProduct()),
                 product.getQuantity()
         );
     }

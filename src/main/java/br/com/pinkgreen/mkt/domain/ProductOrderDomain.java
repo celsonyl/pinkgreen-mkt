@@ -23,6 +23,7 @@ public class ProductOrderDomain implements Serializable {
     private List<String> urlImages;
     private Double price;
     private List<SkuAttributesDomain> skuAttributes;
+    private ProductDomain product;
     private Integer quantity;
 
     public ProductOrderDomain(SkuDomain sku, Integer quantity) {
@@ -37,6 +38,7 @@ public class ProductOrderDomain implements Serializable {
         this.urlImages = sku.getUrlImages();
         this.price = sku.getPrice().activePrice();
         this.skuAttributes = sku.getSkuAttributes();
+        this.product = sku.getProduct();
         this.quantity = quantity;
     }
 }

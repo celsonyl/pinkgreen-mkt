@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.ProductDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -34,4 +35,16 @@ public class ProductResponse implements Serializable {
 
     @ApiModelProperty(value = "Categorias do produto", required = true, example = "[ { \"id\": \"1\", \"name\": \"Eletronicos\" }, { \"id\": \"2\", \"name\": \"Celulares e smartphones\" } ]")
     private List<CategoryResponse> categories;
+
+    public static ProductResponse fromDomain(ProductDomain product) {
+        return new ProductResponse(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getActive(),
+                product.getMainImageUrl(),
+                BrandResponse.fromDomain(product.getBrand()),
+                CategoryResponse.fromDomain(product.getCategories())
+        );
+    }
 }

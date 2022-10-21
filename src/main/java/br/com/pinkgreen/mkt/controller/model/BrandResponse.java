@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.BrandDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -21,4 +22,12 @@ public class BrandResponse implements Serializable {
 
     @ApiModelProperty(value = "Imagem da marca", required = true, example = "https://imageDomain/path.extension")
     private String brandImage;
+
+    public static BrandResponse fromDomain(BrandDomain brand) {
+        return new BrandResponse(
+                brand.getId(),
+                brand.getName(),
+                brand.getBrandImage()
+        );
+    }
 }

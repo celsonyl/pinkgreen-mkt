@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.gateway.postgresql.model;
 
+import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.domain.ProductOrderDomain;
 import br.com.pinkgreen.mkt.domain.SkuAttributesDomain;
 import lombok.*;
@@ -27,6 +28,7 @@ public class OrderProductDatabase implements Serializable {
     private List<String> urlImages;
     private Double price;
     private List<SkuAttributesDomain> skuAttributes;
+    private ProductDomain product;
     private Integer quantity;
 
     public static OrderProductDatabase fromDomain(ProductOrderDomain products) {
@@ -42,6 +44,7 @@ public class OrderProductDatabase implements Serializable {
                 products.getUrlImages(),
                 products.getPrice(),
                 products.getSkuAttributes(),
+                products.getProduct(),
                 products.getQuantity()
         );
     }
@@ -65,6 +68,7 @@ public class OrderProductDatabase implements Serializable {
                 urlImages,
                 price,
                 skuAttributes,
+                product,
                 quantity
         );
     }
