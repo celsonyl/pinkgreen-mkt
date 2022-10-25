@@ -27,7 +27,7 @@ public interface FavoriteControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<Void> createFavoriteProduct(@PathVariable String userId, @Valid @RequestBody FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException;
+    ResponseEntity<Void> createFavoriteProduct(@PathVariable String userId, @PathVariable String skuCode, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException;
 
     @ApiOperation(value = "Lista todos os produtos favoritos do usuário")
     @ApiResponses(value = {

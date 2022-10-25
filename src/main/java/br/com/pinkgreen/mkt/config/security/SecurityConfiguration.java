@@ -25,7 +25,7 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/brand/search").permitAll()
                 .antMatchers(GET, "/brand/{id}").permitAll()
                 .antMatchers(GET, "/favorite/user/{userId}").hasAuthority(GET_CUSTOMER_FAVORITE_PRODUCTS.toString())
-                .antMatchers(POST, "/favorite/user/{userId}").hasAuthority(ADD_CUSTOMER_FAVORITE_PRODUCT.toString())
+                .antMatchers(POST, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(ADD_CUSTOMER_FAVORITE_PRODUCT.toString())
                 .antMatchers(GET, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(GET_CUSTOMER_FAVORITE_PRODUCTS.toString())
                 .antMatchers(DELETE, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(DELETE_CUSTOMER_FAVORITE_PRODUCT.toString())
                 .antMatchers(POST, "/category").hasAuthority(CREATE_CATEGORY.toString())

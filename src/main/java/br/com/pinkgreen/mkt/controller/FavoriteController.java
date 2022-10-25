@@ -1,7 +1,6 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.FavoriteControllerApi;
-import br.com.pinkgreen.mkt.controller.model.FavoriteProductRequest;
 import br.com.pinkgreen.mkt.controller.model.SkuResponse;
 import br.com.pinkgreen.mkt.domain.FavoriteProductDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
@@ -70,12 +69,12 @@ public class FavoriteController implements FavoriteControllerApi {
     }
 
     @Override
-    @PostMapping("/user/{userId}")
+    @PostMapping("/product/{skuCode}/user/{userId}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> createFavoriteProduct(String userId, FavoriteProductRequest favoriteProductRequest, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException {
+    public ResponseEntity<Void> createFavoriteProduct(String userId, String skuCode, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException {
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
 
-        var favoriteProductDomain = createFavoriteProductUseCase.execute(favoriteProductRequest.domain(userId));
+        var favoriteProductDomain = createFavoriteProductUseCase.execute(new FavoriteProductDomain(userId, skuCode));
         var uri = uriComponentsBuilder.path("product/favorite_products/{id}").buildAndExpand(favoriteProductDomain.getId()).toUri();
 
         return created(uri).build();

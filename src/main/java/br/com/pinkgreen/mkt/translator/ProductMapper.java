@@ -1,6 +1,5 @@
 package br.com.pinkgreen.mkt.translator;
 
-import br.com.pinkgreen.mkt.controller.model.FavoriteProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
@@ -22,8 +21,6 @@ public interface ProductMapper {
     ProductDomain productDatabaseToDomain(ProductDatabase productDatabase);
 
     ProductDatabase productDomainToDatabase(ProductDomain productDomain);
-
-    FavoriteProductDomain favoriteProductRequestToDomain(FavoriteProductRequest favoriteProductRequest);
 
     FavoriteProductDatabase favoriteProductDomainToDatabase(FavoriteProductDomain favoriteProductDomain);
 
