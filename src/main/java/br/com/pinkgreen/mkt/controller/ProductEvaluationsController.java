@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static br.com.pinkgreen.mkt.controller.model.ProductEvaluationResponse.response;
+import static br.com.pinkgreen.mkt.controller.util.VerifyCustomerId.getCustomerIdAndValidate;
 import static org.springframework.http.ResponseEntity.created;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -76,13 +77,5 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
     @Override
     public ResponseEntity<List<ProductEvaluationResponse>> orderEvaluations(Integer orderId, HttpServletRequest request) {
         return null;
-    }
-
-    private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
-        String tokenCustomerId = authenticationToken.getToken().getSubject();
-
-        if (!customerId.equals(tokenCustomerId)) {
-            throw new InvalidCustomerIdException("[CONTROLLER] Invalid customerId");
-        }
     }
 }

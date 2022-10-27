@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.pinkgreen.mkt.controller.util.VerifyCustomerId.getCustomerIdAndValidate;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.*;
 
@@ -78,13 +79,5 @@ public class FavoriteController implements FavoriteControllerApi {
         var uri = uriComponentsBuilder.path("product/favorite_products/{id}").buildAndExpand(favoriteProductDomain.getId()).toUri();
 
         return created(uri).build();
-    }
-
-    private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
-        String tokenCustomerId = authenticationToken.getToken().getSubject();
-
-        if (!customerId.equals(tokenCustomerId)) {
-            throw new InvalidCustomerIdException("[CONTROLLER] Invalid customerId");
-        }
     }
 }

@@ -5,7 +5,6 @@ import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
-import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.gateway.FindCustomerById;
 import br.com.pinkgreen.mkt.gateway.FindOrderById;
@@ -25,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static br.com.pinkgreen.mkt.controller.model.OrderResponse.response;
+import static br.com.pinkgreen.mkt.controller.util.VerifyCustomerId.getCustomerIdAndValidate;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -99,12 +99,5 @@ public class OrderController implements OrderControllerApi {
         return ResponseEntity.noContent().build();
     }
 
-    private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
-        String tokenCustomerId = authenticationToken.getToken().getSubject();
-
-        if (!customerId.equals(tokenCustomerId)) {
-            throw new InvalidCustomerIdException("[CONTROLLER] Invalid customerId");
-        }
-    }
 }
 
