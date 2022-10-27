@@ -72,5 +72,5 @@ public interface ProductEvaluationsControllerApi {
     ResponseEntity<List<ProductEvaluationResponse>> orderEvaluations(
             @PathVariable Integer orderId,
             HttpServletRequest request
-    );
+    ) throws InvalidCustomerIdException;
 }

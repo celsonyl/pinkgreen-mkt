@@ -42,6 +42,7 @@ public class SecurityConfiguration {
                 .antMatchers(POST, "/evaluations/order/{orderId}/product/{skuCode}").hasAuthority(ADD_PRODUCT_EVALUATION.toString())
                 .antMatchers(GET, "/evaluations/product/{skuCode}").permitAll()
                 .antMatchers(GET, "/evaluations/customer/{customerId}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
+                .antMatchers(GET, "/evaluations/order/{orderId}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
                 .antMatchers(PUT, "/sku/{code}").hasAuthority(UPDATE_SKU.toString())
                 .antMatchers(GET, "/sku/{code}").permitAll()
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()

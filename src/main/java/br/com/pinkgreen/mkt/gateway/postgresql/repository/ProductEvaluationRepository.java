@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProductEvaluationRepository extends JpaRepository<ProductEvaluationDatabase, Integer> {
     List<ProductEvaluationDatabase> findAllBySkuCode(String skuCode);
     List<ProductEvaluationDatabase> findAllByCustomerId(String customerId);
+    List<ProductEvaluationDatabase> findAllByOrderId(Integer orderId);
 }

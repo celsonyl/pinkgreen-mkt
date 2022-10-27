@@ -37,6 +37,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
     private final GetProductEvaluationBySkuCode getProductEvaluationBySkuCode;
     private final FindCustomerById findCustomerById;
     private final GetProductEvaluationByCustomerId getProductEvaluationByCustomerId;
+    private final GetProductEvaluationByOrderId getProductEvaluationByOrderId;
 
     @Override
     @PostMapping("/order/{orderId}/product/{skuCode}")
@@ -89,7 +90,18 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
     }
 
     @Override
-    public ResponseEntity<List<ProductEvaluationResponse>> orderEvaluations(Integer orderId, HttpServletRequest request) {
-        return null;
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<List<ProductEvaluationResponse>> orderEvaluations(
+            Integer orderId,
+            HttpServletRequest request
+    ) throws InvalidCustomerIdException {
+        OrderDomain order = findOrderById.execute(orderId).orElseThrow(OrderNotFoundException::new);
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), order.getCustomerData().getId());
+        List<ProductEvaluationDomain> evaluations = getProductEvaluationByOrderId.execute(orderId);
+        evaluations.forEach(it -> {
+            CustomerDomain customer = findCustomerById.execute(it.getCustomer().getId());
+            it.setCustomer(customer);
+        });
+        return ok(response(evaluations));
     }
 }
