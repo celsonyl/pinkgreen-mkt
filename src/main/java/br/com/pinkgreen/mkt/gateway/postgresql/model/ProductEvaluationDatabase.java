@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.Instant;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity(name = "PRODUCT_EVALUATIONS")
 public class ProductEvaluationDatabase {
@@ -70,6 +73,12 @@ public class ProductEvaluationDatabase {
                 this.evaluation,
                 this.createdAt
         );
+    }
+
+    public static List<ProductEvaluationDomain> domain(List<ProductEvaluationDatabase> evaluations) {
+        return evaluations.stream()
+                .map(ProductEvaluationDatabase::domain)
+                .collect(toList());
     }
 
     public void setId(Integer id) {

@@ -39,6 +39,12 @@ public class CustomerResponse implements Serializable {
     @ApiModelProperty(value = "Número de telefone do cliente", required = true, example = "+55 (19) 99999-9999")
     private String phone;
 
+    public CustomerResponse(String id, String name, String lastname) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+    }
+
     public static CustomerResponse fromDomain(CustomerDomain customer) {
         return (customer == null) ? null : new CustomerResponse(
                 customer.getId(),

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Getter
 @Setter
 @Builder
@@ -51,5 +53,11 @@ public class OrderResponse implements Serializable {
                 order.getCreatedAt(),
                 order.getUpdatedAt()
         );
+    }
+
+    public static List<OrderResponse> response(List<OrderDomain> order) {
+        return order.stream()
+                .map(OrderResponse::response)
+                .collect(toList());
     }
 }

@@ -3,15 +3,20 @@ package br.com.pinkgreen.mkt.controller;
 import br.com.pinkgreen.mkt.controller.client.ProductEvaluationsControllerApi;
 import br.com.pinkgreen.mkt.controller.model.ProductEvaluationRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductEvaluationResponse;
+import br.com.pinkgreen.mkt.domain.CustomerDomain;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.domain.ProductEvaluationDomain;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.exception.SkuNotContainedOnOrderException;
 import br.com.pinkgreen.mkt.gateway.CreateProductEvaluationGateway;
+import br.com.pinkgreen.mkt.gateway.FindCustomerById;
 import br.com.pinkgreen.mkt.gateway.FindOrderById;
+import br.com.pinkgreen.mkt.gateway.GetProductEvaluationBySkuCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +25,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static br.com.pinkgreen.mkt.controller.model.ProductEvaluationResponse.response;
+import static org.springframework.http.ResponseEntity.created;
+import static org.springframework.http.ResponseEntity.ok;
+
 @RestController
 @RequestMapping("/evaluations")
 @RequiredArgsConstructor
@@ -27,6 +36,8 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
 
     private final FindOrderById findOrderById;
     private final CreateProductEvaluationGateway createProductEvaluationGateway;
+    private final GetProductEvaluationBySkuCode getProductEvaluationBySkuCode;
+    private final FindCustomerById findCustomerById;
 
     @Override
     @PostMapping("/order/{orderId}/product/{skuCode}")
@@ -43,12 +54,18 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
 
         var uri = uriComponentsBuilder.path("/product/{SkuCode}").buildAndExpand(productEvaluationCreated.getSkuCode()).toUri();
 
-        return ResponseEntity.created(uri).build();
+        return created(uri).build();
     }
 
     @Override
+    @GetMapping("/product/{skuCode}")
     public ResponseEntity<List<ProductEvaluationResponse>> productEvaluations(String skuCode) {
-        return null;
+        List<ProductEvaluationDomain> evaluations = getProductEvaluationBySkuCode.execute(skuCode);
+        evaluations.forEach(it -> {
+            CustomerDomain customer = findCustomerById.execute(it.getCustomer().getId());
+            it.setCustomer(customer);
+        });
+        return ok(response(evaluations));
     }
 
     @Override
@@ -60,7 +77,6 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
     public ResponseEntity<List<ProductEvaluationResponse>> orderEvaluations(Integer orderId, HttpServletRequest request) {
         return null;
     }
-
 
     private void getCustomerIdAndValidate(JwtAuthenticationToken authenticationToken, String customerId) throws InvalidCustomerIdException {
         String tokenCustomerId = authenticationToken.getToken().getSubject();

@@ -1,6 +1,11 @@
 package br.com.pinkgreen.mkt.controller.model;
 
+import br.com.pinkgreen.mkt.domain.ProductEvaluationDomain;
+
 import java.time.Instant;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class ProductEvaluationResponse {
     private final Integer id;
@@ -29,6 +34,29 @@ public class ProductEvaluationResponse {
         this.title = title;
         this.evaluation = evaluation;
         this.createdAt = createdAt;
+    }
+
+    public static ProductEvaluationResponse response(ProductEvaluationDomain productEvaluation) {
+        return new ProductEvaluationResponse(
+                productEvaluation.getId(),
+                productEvaluation.getOrderId(),
+                new CustomerResponse(
+                        productEvaluation.getCustomer().getId(),
+                        productEvaluation.getCustomer().getName(),
+                        productEvaluation.getCustomer().getLastname()
+                ),
+                productEvaluation.getSkuCode(),
+                productEvaluation.getStars(),
+                productEvaluation.getTitle(),
+                productEvaluation.getEvaluation(),
+                productEvaluation.getCreatedAt()
+        );
+    }
+
+    public static List<ProductEvaluationResponse> response(List<ProductEvaluationDomain> order) {
+        return order.stream()
+                .map(ProductEvaluationResponse::response)
+                .collect(toList());
     }
 
     public Integer getId() {

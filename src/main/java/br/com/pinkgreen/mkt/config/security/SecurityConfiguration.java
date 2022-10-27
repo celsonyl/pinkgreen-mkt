@@ -40,6 +40,7 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/product/brand/{id}").permitAll()
                 .antMatchers(POST, "/sku").hasAuthority(CREATE_SKU.toString())
                 .antMatchers(POST, "/evaluations/order/{orderId}/product/{skuCode}").hasAuthority(ADD_PRODUCT_EVALUATION.toString())
+                .antMatchers(GET, "/evaluations/product/{skuCode}").permitAll()
                 .antMatchers(PUT, "/sku/{code}").hasAuthority(UPDATE_SKU.toString())
                 .antMatchers(GET, "/sku/{code}").permitAll()
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()
