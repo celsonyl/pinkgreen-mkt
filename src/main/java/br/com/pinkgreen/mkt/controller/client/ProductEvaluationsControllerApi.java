@@ -59,7 +59,7 @@ public interface ProductEvaluationsControllerApi {
     ResponseEntity<List<ProductEvaluationResponse>> customerEvaluations(
             @PathVariable String customerId,
             HttpServletRequest request
-    );
+    ) throws InvalidCustomerIdException;
 
     @ApiOperation(value = "Consulta as avalições de um pedido")
     @ApiResponses(value = {
