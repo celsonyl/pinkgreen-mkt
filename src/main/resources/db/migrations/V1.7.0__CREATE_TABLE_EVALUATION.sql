@@ -1,0 +1,14 @@
+create TABLE PRODUCT_EVALUATIONS
+(
+    ID                  SERIAL,
+    CUSTOMER_ID         VARCHAR(255)    NOT NULL,
+    ORDER_ID            INTEGER         NOT NULL,
+    STARS               NUMERIC(12, 1)  NOT NULL,
+    TITLE               VARCHAR(50)    NOT NULL,
+    EVALUATION          VARCHAR(255)    NOT NULL,
+    SKU_CODE            VARCHAR(255)    NOT NULL,
+    CREATED_AT          timestamptz,
+    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS (ID),
+    FOREIGN KEY (SKU_CODE) REFERENCES PRODUCT_SKU (SKU_CODE),
+    PRIMARY KEY (ORDER_ID, SKU_CODE)
+);

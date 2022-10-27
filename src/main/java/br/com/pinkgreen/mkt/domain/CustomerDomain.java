@@ -18,4 +18,8 @@ public class CustomerDomain implements Serializable {
     private String document;
     private String email;
     private String phone;
+
+    public CustomerDomain(String id) {
+        this.id = id;
+    }
 }

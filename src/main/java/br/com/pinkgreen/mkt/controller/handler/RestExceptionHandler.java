@@ -7,6 +7,7 @@ import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
+import br.com.pinkgreen.mkt.exception.SkuNotContainedOnOrderException;
 import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,14 @@ public class RestExceptionHandler {
     public ResponseEntity<StandardError> invalidCustomerId(HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(StandardError.builder()
                 .message("CustomerId inválido")
+                .path(request.getRequestURI())
+                .build());
+    }
+
+    @ExceptionHandler(SkuNotContainedOnOrderException.class)
+    public ResponseEntity<StandardError> invalidSkuCode(HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(StandardError.builder()
+                .message("Sku code invalid!")
                 .path(request.getRequestURI())
                 .build());
     }

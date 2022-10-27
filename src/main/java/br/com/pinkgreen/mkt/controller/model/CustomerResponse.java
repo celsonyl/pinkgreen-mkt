@@ -1,10 +1,13 @@
 package br.com.pinkgreen.mkt.controller.model;
 
 import br.com.pinkgreen.mkt.domain.CustomerDomain;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import java.io.Serializable;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @Getter
 @Setter
@@ -24,12 +27,15 @@ public class CustomerResponse implements Serializable {
     @ApiModelProperty(value = "Sobrenome do cliente", required = true, example = "Luna Rocha")
     private String lastname;
 
+    @JsonInclude(NON_NULL)
     @ApiModelProperty(value = "CPF do cliente", required = true, example = "947.229.723-46")
     private String document;
 
+    @JsonInclude(NON_NULL)
     @ApiModelProperty(value = "E-mail do cliente", required = true, example = "test@test.com.br")
     private String email;
 
+    @JsonInclude(NON_NULL)
     @ApiModelProperty(value = "Número de telefone do cliente", required = true, example = "+55 (19) 99999-9999")
     private String phone;
 
