@@ -13,10 +13,7 @@ import br.com.pinkgreen.mkt.gateway.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +38,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
 
     @Override
     @PostMapping("/order/{orderId}/product/{skuCode}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> evaluate(
             Integer orderId,
             String skuCode,
@@ -65,6 +63,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
 
     @Override
     @GetMapping("/product/{skuCode}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductEvaluationResponse>> productEvaluations(String skuCode) {
         List<ProductEvaluationDomain> evaluations = getProductEvaluationBySkuCode.execute(skuCode);
         evaluations.forEach(it -> {
@@ -76,6 +75,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
 
     @Override
     @GetMapping("/customer/{customerId}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductEvaluationResponse>> customerEvaluations(
             String customerId,
             HttpServletRequest request
@@ -91,6 +91,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
 
     @Override
     @GetMapping("/order/{orderId}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<ProductEvaluationResponse>> orderEvaluations(
             Integer orderId,
             HttpServletRequest request
