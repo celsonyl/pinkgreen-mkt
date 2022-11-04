@@ -48,6 +48,7 @@ public class RequestCardPaymentModel implements Serializable {
         paymentProperties.put("document", document);
         paymentProperties.put("phone", phone);
         paymentProperties.put("email", email);
+        paymentProperties.put("ownerName", ownerName);
 
         return paymentProperties;
     }

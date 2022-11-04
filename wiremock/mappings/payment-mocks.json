@@ -14,6 +14,24 @@
           "paymentId": 1
         }
       }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/payments/bank_slip"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": {
+          "paymentId": 1,
+          "barcode": "03399557345480000000998765401025954420000030050",
+          "dueDate": "{{jsonPath request.body '$.dueDate'}}"
+        },
+        "transformers": ["response-template"]
+      }
     }
   ]
 }
