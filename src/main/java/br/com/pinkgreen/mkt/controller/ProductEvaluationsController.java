@@ -21,6 +21,7 @@ import java.util.List;
 
 import static br.com.pinkgreen.mkt.controller.model.ProductEvaluationResponse.response;
 import static br.com.pinkgreen.mkt.controller.util.VerifyCustomerId.getCustomerIdAndValidate;
+import static br.com.pinkgreen.mkt.exception.SkuOrderEvaluationNotFoundException.evaluationNotFound;
 import static org.springframework.http.ResponseEntity.created;
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -32,6 +33,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
     private final FindOrderById findOrderById;
     private final CreateProductEvaluationGateway createProductEvaluationGateway;
     private final GetProductEvaluationBySkuCode getProductEvaluationBySkuCode;
+    private final GetProductEvaluationByOrderIdAndSkuCode getProductEvaluationByOrderIdAndSkuCode;
     private final FindCustomerById findCustomerById;
     private final GetProductEvaluationByCustomerId getProductEvaluationByCustomerId;
     private final GetProductEvaluationByOrderId getProductEvaluationByOrderId;
@@ -49,6 +51,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
         OrderDomain order = findOrderById.execute(orderId).orElseThrow(OrderNotFoundException::new);
 
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), order.getCustomerData().getId());
+
         boolean containsSku = order.getProductList().stream().anyMatch(p -> p.getSkuCode().equals(skuCode));
         if (!containsSku) throw new SkuNotContainedOnOrderException(skuCode);
 
@@ -59,6 +62,33 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
         var uri = uriComponentsBuilder.path("/product/{SkuCode}").buildAndExpand(productEvaluationCreated.getSkuCode()).toUri();
 
         return created(uri).build();
+    }
+
+    @Override
+    @GetMapping("/order/{orderId}/product/{skuCode}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<ProductEvaluationResponse> productOrderEvaluation(
+            Integer orderId,
+            String skuCode,
+            HttpServletRequest request
+    ) throws InvalidCustomerIdException {
+        OrderDomain order = findOrderById.execute(orderId).orElseThrow(OrderNotFoundException::new);
+
+        getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), order.getCustomerData().getId());
+
+        boolean containsSku = order.getProductList().stream().anyMatch(p -> p.getSkuCode().equals(skuCode));
+        if (!containsSku) throw new SkuNotContainedOnOrderException(skuCode);
+
+        var evaluation = getProductEvaluationByOrderIdAndSkuCode.execute(orderId, skuCode)
+                .map(it -> {
+                    CustomerDomain customer = findCustomerById.execute(it.getCustomer().getId());
+                    it.setCustomer(customer);
+                    return it;
+                })
+                .map(ProductEvaluationResponse::response)
+                .orElseThrow(evaluationNotFound(orderId, skuCode));
+
+        return ok(evaluation);
     }
 
     @Override

@@ -36,6 +36,20 @@ public interface ProductEvaluationsControllerApi {
             UriComponentsBuilder uriComponentsBuilder
     ) throws InvalidCustomerIdException;
 
+    @ApiOperation(value = "Avaliação de um produto em um pedido")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Indica que a avaliação foi retornada com sucesso!"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<ProductEvaluationResponse> productOrderEvaluation(
+            @PathVariable Integer orderId,
+            @PathVariable String skuCode,
+            HttpServletRequest request
+    ) throws InvalidCustomerIdException;
+
     @ApiOperation(value = "Consulta todas as avalições de um produto")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Avaliações retornadas com sucesso!"),
