@@ -1,10 +1,12 @@
 package br.com.pinkgreen.mkt.controller;
 
+import br.com.pinkgreen.mkt.controller.model.ProductEvaluationBySkuResponse;
 import br.com.pinkgreen.mkt.controller.client.ProductEvaluationsControllerApi;
 import br.com.pinkgreen.mkt.controller.model.ProductEvaluationRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductEvaluationResponse;
 import br.com.pinkgreen.mkt.domain.CustomerDomain;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
+import br.com.pinkgreen.mkt.domain.ProductEvaluationBySkuCode;
 import br.com.pinkgreen.mkt.domain.ProductEvaluationDomain;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
@@ -94,13 +96,13 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
     @Override
     @GetMapping("/product/{skuCode}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<ProductEvaluationResponse>> productEvaluations(String skuCode) {
-        List<ProductEvaluationDomain> evaluations = getProductEvaluationBySkuCode.execute(skuCode);
-        evaluations.forEach(it -> {
+    public ResponseEntity<ProductEvaluationBySkuResponse> productEvaluations(String skuCode) {
+        ProductEvaluationBySkuCode evaluations = getProductEvaluationBySkuCode.execute(skuCode);
+        evaluations.getData().forEach(it -> {
             CustomerDomain customer = findCustomerById.execute(it.getCustomer().getId());
             it.setCustomer(customer);
         });
-        return ok(response(evaluations));
+        return ok(ProductEvaluationBySkuResponse.response(evaluations));
     }
 
     @Override

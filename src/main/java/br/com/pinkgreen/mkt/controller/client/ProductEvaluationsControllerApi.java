@@ -1,5 +1,6 @@
 package br.com.pinkgreen.mkt.controller.client;
 
+import br.com.pinkgreen.mkt.controller.model.ProductEvaluationBySkuResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductEvaluationRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductEvaluationResponse;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
@@ -58,7 +59,7 @@ public interface ProductEvaluationsControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<List<ProductEvaluationResponse>> productEvaluations(
+    ResponseEntity<ProductEvaluationBySkuResponse> productEvaluations(
             @PathVariable String skuCode
     );
 
