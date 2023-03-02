@@ -8,10 +8,7 @@ import br.com.pinkgreen.mkt.controller.model.SkuUpdateRequest;
 import br.com.pinkgreen.mkt.domain.SkuDomain;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
-import br.com.pinkgreen.mkt.usecase.CreateSkuProductUseCase;
-import br.com.pinkgreen.mkt.usecase.GetAllEnabledSkusByProductIdUseCase;
-import br.com.pinkgreen.mkt.usecase.GetEnabledSkuBySkuCodeUseCase;
-import br.com.pinkgreen.mkt.usecase.UpdateSkuUseCase;
+import br.com.pinkgreen.mkt.usecase.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +29,7 @@ public class SkuController implements SkuControllerApi {
     private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase;
     private final UpdateSkuUseCase updateSkuUseCase;
     private final GetAllEnabledSkusByProductIdUseCase getAllEnabledSkusByProductIdUseCase;
+    private final GetAllSkusUseCase getAllSkusUseCase;
 
     @Override
     @PostMapping
@@ -50,6 +48,18 @@ public class SkuController implements SkuControllerApi {
         var skuDomain = getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode(code);
 
         return ResponseEntity.ok().body(skuMapper.skuDomainToResponse(skuDomain));
+    }
+
+    @Override
+    @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<SkuResponse>> findAllSkus() {
+        var skuMapper = new SkuProductMapperImpl();
+        var skusDomain = getAllSkusUseCase.execute();
+
+        return ResponseEntity.ok().body(skusDomain.stream()
+                .map(skuMapper::skuDomainToResponse)
+                .collect(Collectors.toList()));
     }
 
     @Override

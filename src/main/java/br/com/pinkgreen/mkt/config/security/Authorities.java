@@ -15,7 +15,8 @@ public enum Authorities {
     ADD_PRODUCT_EVALUATION,
     GET_CUSTOMER_PRODUCTS_EVALUATIONS,
     DELETE_CUSTOMER_FAVORITE_PRODUCT,
-    UPDATE_ORDER_STATUS;
+    UPDATE_ORDER_STATUS,
+    GET_ALL_SKUS;
 
     @Override
     public String toString() {
