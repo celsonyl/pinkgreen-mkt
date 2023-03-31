@@ -22,7 +22,7 @@ import static java.util.stream.Collectors.toList;
 public class ProductOrderRequest implements Serializable {
 
     @NotBlank
-    @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "Name must have between 2 and 200 characters")
     @ApiModelProperty(value = "Cod do Sku", required = true, example = "CELPHX06")
     private String skuCode;
 
