@@ -4,21 +4,21 @@ import br.com.pinkgreen.mkt.controller.client.OrderControllerApi;
 import br.com.pinkgreen.mkt.controller.model.OrderRequest;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
 import br.com.pinkgreen.mkt.domain.OrderDomain;
-import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.gateway.FindCustomerById;
 import br.com.pinkgreen.mkt.gateway.FindOrderById;
 import br.com.pinkgreen.mkt.usecase.CheckoutOrderUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersByCustomerIdUseCase;
-import br.com.pinkgreen.mkt.usecase.GetAllOrdersReadyToShipUseCase;
-import br.com.pinkgreen.mkt.usecase.UpdateAndPublishOrderEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -38,8 +38,6 @@ public class OrderController implements OrderControllerApi {
     private final CheckoutOrderUseCase checkoutOrderUseCase;
     private final FindOrderById findOrderById;
     private final GetAllOrdersByCustomerIdUseCase getAllOrdersByCustomerIdUseCase;
-    private final GetAllOrdersReadyToShipUseCase getAllOrdersReadyToShipUseCase;
-    private final UpdateAndPublishOrderEvent updateAndPublishOrderEvent;
 
     @Override
     @SneakyThrows
@@ -78,25 +76,6 @@ public class OrderController implements OrderControllerApi {
         return ok(orders.stream()
                 .map(OrderResponse::response)
                 .collect(toList()));
-    }
-
-    @Override
-    @SneakyThrows
-    @GetMapping("/state/ready-to-ship")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<OrderResponse>> getOrdersReadyToShip() {
-        var orders = getAllOrdersReadyToShipUseCase.execute();
-        return ok(orders.stream()
-                .map(OrderResponse::response)
-                .collect(toList()));
-    }
-
-    @Override
-    @PatchMapping("/{orderId}/update/{orderStatus}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> updateOrderStatus(Integer orderId, OrderStatus orderStatus) {
-        updateAndPublishOrderEvent.execute(orderId, orderStatus);
-        return ResponseEntity.noContent().build();
     }
 
 }

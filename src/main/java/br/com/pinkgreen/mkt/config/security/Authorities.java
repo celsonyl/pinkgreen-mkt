@@ -1,22 +1,22 @@
 package br.com.pinkgreen.mkt.config.security;
 
 public enum Authorities {
-    CREATE_CATEGORY,
-    CREATE_BRAND,
-    CREATE_PRODUCT,
-    UPDATE_PRODUCT,
-    CREATE_SKU,
-    UPDATE_SKU,
-    CHECKOUT_ORDER,
-    GET_CUSTOMER_ORDERS,
-    GET_ORDERS_READY_TO_SHIP,
-    GET_CUSTOMER_FAVORITE_PRODUCTS,
-    ADD_CUSTOMER_FAVORITE_PRODUCT,
-    ADD_PRODUCT_EVALUATION,
-    GET_CUSTOMER_PRODUCTS_EVALUATIONS,
-    DELETE_CUSTOMER_FAVORITE_PRODUCT,
-    UPDATE_ORDER_STATUS,
-    GET_ALL_SKUS;
+    CREATE_CATEGORY, // Catalog Admin
+    CREATE_BRAND, // Catalog Admin
+    CREATE_PRODUCT, // Catalog Admin
+    UPDATE_PRODUCT, // Catalog Admin
+    CREATE_SKU, // Catalog Admin
+    UPDATE_SKU, // Catalog Admin
+    GET_ALL_SKUS, // Catalog Admin
+    CHECKOUT_ORDER, // User
+    GET_CUSTOMER_ORDERS, // User
+    GET_CUSTOMER_FAVORITE_PRODUCTS, // User
+    ADD_CUSTOMER_FAVORITE_PRODUCT, // User
+    DELETE_CUSTOMER_FAVORITE_PRODUCT, // User
+    ADD_PRODUCT_EVALUATION, // User
+    GET_CUSTOMER_PRODUCTS_EVALUATIONS, // User
+    GET_ALL_ORDERS, // Order administration
+    UPDATE_ORDER_STATUS;  // Order administration
 
     @Override
     public String toString() {
