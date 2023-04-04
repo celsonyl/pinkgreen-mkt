@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public interface OrderAdministrationControllerApi {
 
-    @ApiOperation(value = "Retorna todos os pedidos prontos para o envio")
+    @ApiOperation(value = "Procurar todos os pedidos feitos na plataforma")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
@@ -27,7 +27,21 @@ public interface OrderAdministrationControllerApi {
     })
     ResponseEntity<List<OrderResponse>> getAllOrders();
 
-    @ApiOperation(value = "Atualização de status de pedido")
+
+    @ApiOperation(value = "Procurar pedido por ID")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<OrderResponse> getOrderById(@ApiParam(value = "ID do pedido", required = true, example = "1") @PathVariable Integer orderId);
+
+    @ApiOperation(value = "Atualiza o status do pedido informado")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })

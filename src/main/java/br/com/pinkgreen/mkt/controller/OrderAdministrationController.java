@@ -2,7 +2,10 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.OrderAdministrationControllerApi;
 import br.com.pinkgreen.mkt.controller.model.OrderResponse;
+import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
+import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
+import br.com.pinkgreen.mkt.gateway.FindOrderById;
 import br.com.pinkgreen.mkt.usecase.GetAllOrdersUseCase;
 import br.com.pinkgreen.mkt.usecase.UpdateAndPublishOrderEvent;
 import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+import static br.com.pinkgreen.mkt.controller.model.OrderResponse.response;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.noContent;
 import static org.springframework.http.ResponseEntity.ok;
@@ -28,6 +32,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/order-administration")
 public class OrderAdministrationController implements OrderAdministrationControllerApi {
 
+    private final FindOrderById findOrderById;
     private final GetAllOrdersUseCase getAllOrdersUseCase;
     private final UpdateAndPublishOrderEvent updateAndPublishOrderEvent;
 
@@ -40,6 +45,15 @@ public class OrderAdministrationController implements OrderAdministrationControl
         return ok(orders.stream()
                 .map(OrderResponse::response)
                 .collect(toList()));
+    }
+
+    @Override
+    @SneakyThrows
+    @GetMapping("/order/{orderId}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<OrderResponse> getOrderById(Integer orderId) {
+        OrderDomain order = findOrderById.execute(orderId).orElseThrow(OrderNotFoundException::new);
+        return ok(response(order));
     }
 
     @Override

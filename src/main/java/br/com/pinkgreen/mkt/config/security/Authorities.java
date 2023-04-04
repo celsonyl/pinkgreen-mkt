@@ -16,6 +16,7 @@ public enum Authorities {
     ADD_PRODUCT_EVALUATION, // User
     GET_CUSTOMER_PRODUCTS_EVALUATIONS, // User
     GET_ALL_ORDERS, // Order administration
+    GET_ORDER_BY_ID, // Order administration
     UPDATE_ORDER_STATUS;  // Order administration
 
     @Override

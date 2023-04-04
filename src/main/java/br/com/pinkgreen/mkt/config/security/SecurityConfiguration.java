@@ -52,6 +52,7 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/order/customer/{customerId}").hasAuthority(GET_CUSTOMER_ORDERS.toString())
                 .antMatchers(GET, "/order/{orderId}").hasAuthority(GET_CUSTOMER_ORDERS.toString())
                 .antMatchers(GET, "/order-administration/order").hasAuthority(GET_ALL_ORDERS.toString())
+                .antMatchers(GET, "/order-administration/order/{orderId}").hasAuthority(GET_ORDER_BY_ID.toString())
                 .antMatchers(PATCH, "/order-administration/order/{orderId}/update/{orderStatus}").hasAuthority(UPDATE_ORDER_STATUS.toString())
                 .antMatchers(GET, "/actuator").permitAll()
                 .antMatchers(GET, "/actuator/health").permitAll()
