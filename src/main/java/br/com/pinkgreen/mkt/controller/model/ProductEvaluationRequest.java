@@ -16,7 +16,7 @@ public class ProductEvaluationRequest {
     private Double stars;
 
     @NotBlank
-    @Size(min = 5, max = 50)
+    @Size(min = 2, max = 50)
     private String title;
 
     @Size(max = 255)
