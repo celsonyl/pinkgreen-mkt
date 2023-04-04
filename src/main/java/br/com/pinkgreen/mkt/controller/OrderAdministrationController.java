@@ -6,7 +6,7 @@ import br.com.pinkgreen.mkt.domain.OrderDomain;
 import br.com.pinkgreen.mkt.domain.enums.OrderStatus;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.gateway.FindOrderById;
-import br.com.pinkgreen.mkt.usecase.GetAllOrdersUseCase;
+import br.com.pinkgreen.mkt.gateway.GetAllOrdersGateway;
 import br.com.pinkgreen.mkt.usecase.UpdateAndPublishOrderEvent;
 import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ import static org.springframework.http.ResponseEntity.ok;
 public class OrderAdministrationController implements OrderAdministrationControllerApi {
 
     private final FindOrderById findOrderById;
-    private final GetAllOrdersUseCase getAllOrdersUseCase;
+    private final GetAllOrdersGateway getAllOrders;
     private final UpdateAndPublishOrderEvent updateAndPublishOrderEvent;
 
     @Override
@@ -41,7 +41,7 @@ public class OrderAdministrationController implements OrderAdministrationControl
     @GetMapping("/order")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
-        var orders = getAllOrdersUseCase.execute();
+        var orders = getAllOrders.execute();
         return ok(orders.stream()
                 .map(OrderResponse::response)
                 .collect(toList()));
