@@ -33,6 +33,7 @@ public class SkuController implements SkuControllerApi {
 
     @Override
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> createSku(SkuRequest skuRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var skuDomain = new SkuProductMapperImpl().skuRequestToDomain(skuRequest);
         var createSku = createSkuProductUseCase.execute(skuDomain);
@@ -64,6 +65,7 @@ public class SkuController implements SkuControllerApi {
 
     @Override
     @PutMapping(value = "/{code}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> updateSku(String code, SkuUpdateRequest skuUpdateRequest) {
         var skuMapper = new SkuProductMapperImpl();
 

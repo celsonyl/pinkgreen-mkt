@@ -34,6 +34,7 @@ public class CategoryController implements CategoryControllerApi {
 
     @Override
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var categoryDomain = new CategoryMapperImpl().categoryRequestToDomain(categoryRequest);
 

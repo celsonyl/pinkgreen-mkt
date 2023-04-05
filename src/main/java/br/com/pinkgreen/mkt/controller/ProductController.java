@@ -83,6 +83,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> createProduct(ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
         var productDomain = new ProductMapperImpl().productRequestToDomain(productRequest);
 
@@ -94,6 +95,7 @@ public class ProductController implements ProductControllerApi {
 
     @Override
     @PutMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> updateProduct(Integer id, ProductUpdateRequest productUpdateRequest) {
         var productDomain = new ProductMapperImpl().productUpdateRequestToDomain(productUpdateRequest);
 
