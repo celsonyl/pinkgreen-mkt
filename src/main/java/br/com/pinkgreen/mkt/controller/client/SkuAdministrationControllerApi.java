@@ -1,6 +1,7 @@
 package br.com.pinkgreen.mkt.controller.client;
 
 import br.com.pinkgreen.mkt.controller.model.SkuRequest;
+import br.com.pinkgreen.mkt.controller.model.SkuResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuUpdateRequest;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import io.swagger.annotations.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
@@ -50,4 +52,13 @@ public interface SkuAdministrationControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<Void> deleteByCode(@PathVariable String code);
+
+    @ApiOperation(value = "Retorna todos SKUs")
+    @ApiResponses(value = {
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<List<SkuResponse>> findAllSkus();
 }

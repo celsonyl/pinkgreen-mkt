@@ -2,11 +2,13 @@ package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.SkuAdministrationControllerApi;
 import br.com.pinkgreen.mkt.controller.model.SkuRequest;
+import br.com.pinkgreen.mkt.controller.model.SkuResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuUpdateRequest;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.gateway.DeleteSkuByCodeGateway;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateSkuProductUseCase;
+import br.com.pinkgreen.mkt.usecase.GetAllSkusUseCase;
 import br.com.pinkgreen.mkt.usecase.UpdateSkuUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.noContent;
 
@@ -26,6 +31,7 @@ public class SkuAdministrationController implements SkuAdministrationControllerA
     private final CreateSkuProductUseCase createSkuProductUseCase;
     private final UpdateSkuUseCase updateSkuUseCase;
     private final DeleteSkuByCodeGateway deleteSkuByCode;
+    private final GetAllSkusUseCase getAllSkusUseCase;
 
     @Override
     @PostMapping("/sku")
@@ -54,5 +60,17 @@ public class SkuAdministrationController implements SkuAdministrationControllerA
     public ResponseEntity<Void> deleteByCode(String code) {
         deleteSkuByCode.execute(code);
         return noContent().build();
+    }
+
+    @Override
+    @GetMapping("/sku")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<SkuResponse>> findAllSkus() {
+        var skuMapper = new SkuProductMapperImpl();
+        var skusDomain = getAllSkusUseCase.execute();
+
+        return ResponseEntity.ok().body(skusDomain.stream()
+                .map(skuMapper::skuDomainToResponse)
+                .collect(Collectors.toList()));
     }
 }

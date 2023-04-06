@@ -20,23 +20,24 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(POST, "/brand").hasAuthority(CREATE_BRAND.toString())
+                .antMatchers(POST, "/brand-administration/brand").hasAuthority(CREATE_BRAND.toString())
+                .antMatchers(DELETE, "/brand-administration/brand/{id}").permitAll() // TODO: Add permissao
                 .antMatchers(GET, "/brand").permitAll()
                 .antMatchers(GET, "/brand/search").permitAll()
                 .antMatchers(GET, "/brand/{id}").permitAll()
-                .antMatchers(DELETE, "/brand/{id}").permitAll() // TODO: Add permissao
                 .antMatchers(GET, "/favorite/user/{userId}").hasAuthority(GET_CUSTOMER_FAVORITE_PRODUCTS.toString())
                 .antMatchers(POST, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(ADD_CUSTOMER_FAVORITE_PRODUCT.toString())
                 .antMatchers(GET, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(GET_CUSTOMER_FAVORITE_PRODUCTS.toString())
                 .antMatchers(DELETE, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(DELETE_CUSTOMER_FAVORITE_PRODUCT.toString())
-                .antMatchers(POST, "/category").hasAuthority(CREATE_CATEGORY.toString())
+                .antMatchers(POST, "/category-administration/category").hasAuthority(CREATE_CATEGORY.toString())
+                .antMatchers(DELETE, "/category-administration/category/{id}").permitAll()  // TODO: Add permissao
                 .antMatchers(GET, "/category").permitAll()
                 .antMatchers(GET, "/category/{id}").permitAll()
-                .antMatchers(DELETE, "/category/{id}").permitAll()  // TODO: Add permissao
-                .antMatchers(POST, "/product").hasAuthority(CREATE_PRODUCT.toString())
-                .antMatchers(PUT, "/product/{id}").hasAuthority(UPDATE_PRODUCT.toString())
+                .antMatchers(POST, "/product-administration/product").hasAuthority(CREATE_PRODUCT.toString())
+                .antMatchers(GET, "/product-administration/product").permitAll() // TODO: Add permissao
+                .antMatchers(PUT, "/product-administration/product/{id}").hasAuthority(UPDATE_PRODUCT.toString())
+                .antMatchers(DELETE, "/product-administration/product/{id}").permitAll()  // TODO: Add permissao
                 .antMatchers(GET, "/product/{id}").permitAll()
-                .antMatchers(DELETE, "/product/{id}").permitAll()  // TODO: Add permissao
                 .antMatchers(GET, "/product").permitAll()
                 .antMatchers(GET, "/product/search").permitAll()
                 .antMatchers(GET, "/product/category/{id}").permitAll()
@@ -47,10 +48,10 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/evaluations/product/{skuCode}").permitAll()
                 .antMatchers(GET, "/evaluations/customer/{customerId}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
                 .antMatchers(GET, "/evaluations/order/{orderId}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
-                .antMatchers(PUT, "/sku/{code}").hasAuthority(UPDATE_SKU.toString())
+                .antMatchers(PUT, "/sku-administration/sku/{code}").hasAuthority(UPDATE_SKU.toString())
+                .antMatchers(DELETE, "/sku-administration/sku/{code}").permitAll()  // TODO: Add permissao
+                .antMatchers(GET, "/sku-administration/sku").hasAuthority(GET_ALL_SKUS.toString())
                 .antMatchers(GET, "/sku/{code}").permitAll()
-                .antMatchers(DELETE, "/sku/{code}").permitAll()  // TODO: Add permissao
-                .antMatchers(GET, "/sku").hasAuthority(GET_ALL_SKUS.toString())
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()
                 .antMatchers(POST, "/order").hasAuthority(CHECKOUT_ORDER.toString())
                 .antMatchers(GET, "/order/customer/{customerId}").hasAuthority(GET_CUSTOMER_ORDERS.toString())

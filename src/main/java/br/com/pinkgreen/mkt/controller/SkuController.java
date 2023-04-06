@@ -6,7 +6,6 @@ import br.com.pinkgreen.mkt.controller.model.SkuResponse;
 import br.com.pinkgreen.mkt.domain.SkuDomain;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.GetAllEnabledSkusByProductIdUseCase;
-import br.com.pinkgreen.mkt.usecase.GetAllSkusUseCase;
 import br.com.pinkgreen.mkt.usecase.GetEnabledSkuBySkuCodeUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +26,6 @@ public class SkuController implements SkuControllerApi {
 
     private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase;
     private final GetAllEnabledSkusByProductIdUseCase getAllEnabledSkusByProductIdUseCase;
-    private final GetAllSkusUseCase getAllSkusUseCase;
 
     @Override
     @GetMapping(value = "/{code}")
@@ -37,18 +35,6 @@ public class SkuController implements SkuControllerApi {
         var skuDomain = getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode(code);
 
         return ResponseEntity.ok().body(skuMapper.skuDomainToResponse(skuDomain));
-    }
-
-    @Override
-    @GetMapping
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<List<SkuResponse>> findAllSkus() {
-        var skuMapper = new SkuProductMapperImpl();
-        var skusDomain = getAllSkusUseCase.execute();
-
-        return ResponseEntity.ok().body(skusDomain.stream()
-                .map(skuMapper::skuDomainToResponse)
-                .collect(Collectors.toList()));
     }
 
     @Override
