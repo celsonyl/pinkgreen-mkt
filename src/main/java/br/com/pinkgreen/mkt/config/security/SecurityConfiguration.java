@@ -24,6 +24,7 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/brand").permitAll()
                 .antMatchers(GET, "/brand/search").permitAll()
                 .antMatchers(GET, "/brand/{id}").permitAll()
+                .antMatchers(DELETE, "/brand/{id}").permitAll() // TODO: Add permissao
                 .antMatchers(GET, "/favorite/user/{userId}").hasAuthority(GET_CUSTOMER_FAVORITE_PRODUCTS.toString())
                 .antMatchers(POST, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(ADD_CUSTOMER_FAVORITE_PRODUCT.toString())
                 .antMatchers(GET, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(GET_CUSTOMER_FAVORITE_PRODUCTS.toString())
@@ -31,9 +32,11 @@ public class SecurityConfiguration {
                 .antMatchers(POST, "/category").hasAuthority(CREATE_CATEGORY.toString())
                 .antMatchers(GET, "/category").permitAll()
                 .antMatchers(GET, "/category/{id}").permitAll()
+                .antMatchers(DELETE, "/category/{id}").permitAll()  // TODO: Add permissao
                 .antMatchers(POST, "/product").hasAuthority(CREATE_PRODUCT.toString())
                 .antMatchers(PUT, "/product/{id}").hasAuthority(UPDATE_PRODUCT.toString())
                 .antMatchers(GET, "/product/{id}").permitAll()
+                .antMatchers(DELETE, "/product/{id}").permitAll()  // TODO: Add permissao
                 .antMatchers(GET, "/product").permitAll()
                 .antMatchers(GET, "/product/search").permitAll()
                 .antMatchers(GET, "/product/category/{id}").permitAll()
@@ -46,6 +49,7 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/evaluations/order/{orderId}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
                 .antMatchers(PUT, "/sku/{code}").hasAuthority(UPDATE_SKU.toString())
                 .antMatchers(GET, "/sku/{code}").permitAll()
+                .antMatchers(DELETE, "/sku/{code}").permitAll()  // TODO: Add permissao
                 .antMatchers(GET, "/sku").hasAuthority(GET_ALL_SKUS.toString())
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()
                 .antMatchers(POST, "/order").hasAuthority(CHECKOUT_ORDER.toString())

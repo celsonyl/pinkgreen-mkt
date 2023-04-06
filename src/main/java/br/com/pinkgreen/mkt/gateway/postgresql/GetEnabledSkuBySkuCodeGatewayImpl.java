@@ -19,7 +19,7 @@ public class GetEnabledSkuBySkuCodeGatewayImpl implements GetEnabledSkuBySkuCode
     @Override
     public Optional<SkuDomain> getSkuBySkuCode(String code) {
         SkuProductMapper skuMapper = new SkuProductMapperImpl();
-        return skuRepository.findSkuByCode(code)
+        return skuRepository.findActiveSkuByCode(code)
                 .map(skuMapper::skuDatabaseToDomain);
     }
 }

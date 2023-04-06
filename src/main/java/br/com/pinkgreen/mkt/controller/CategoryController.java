@@ -1,12 +1,9 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.CategoryControllerApi;
-import br.com.pinkgreen.mkt.controller.model.CategoryRequest;
 import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
 import br.com.pinkgreen.mkt.domain.CategoryDomain;
-import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.translator.CategoryMapperImpl;
-import br.com.pinkgreen.mkt.usecase.CreateCategoryUseCase;
 import br.com.pinkgreen.mkt.usecase.GetAllCategoriesUseCase;
 import br.com.pinkgreen.mkt.usecase.GetCategoryByIdUseCase;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,21 +23,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/category")
 public class CategoryController implements CategoryControllerApi {
 
-    private final CreateCategoryUseCase productCategoryUseCase;
     private final GetAllCategoriesUseCase getAllCategoriesUseCase;
     private final GetCategoryByIdUseCase getCategoryByIdUseCase;
-
-    @Override
-    @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
-        var categoryDomain = new CategoryMapperImpl().categoryRequestToDomain(categoryRequest);
-
-        var productCategoryDomain = productCategoryUseCase.execute(categoryDomain);
-
-        var uri = uriComponentsBuilder.path("category/{id}").buildAndExpand(productCategoryDomain.getId()).toUri();
-        return ResponseEntity.created(uri).build();
-    }
 
     @Override
     @GetMapping

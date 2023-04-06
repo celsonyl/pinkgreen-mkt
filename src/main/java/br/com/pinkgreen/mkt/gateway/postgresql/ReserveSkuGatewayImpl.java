@@ -19,7 +19,7 @@ public class ReserveSkuGatewayImpl implements ReserveSkuGateway {
     @Override
     public boolean execute(List<ProductOrderDomain> products) {
         var skus = products.parallelStream()
-                .map(product -> skuRepository.findSkuByCode(product.getSkuCode()).orElseThrow())
+                .map(product -> skuRepository.findActiveSkuByCode(product.getSkuCode()).orElseThrow())
                 .collect(Collectors.toMap(SkuDatabase::getSkuCode, skuDatabase -> skuDatabase));
 
         var skuStockUpdated = products.parallelStream().map(product -> {

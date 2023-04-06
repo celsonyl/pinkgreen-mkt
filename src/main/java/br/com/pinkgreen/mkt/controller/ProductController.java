@@ -1,9 +1,7 @@
 package br.com.pinkgreen.mkt.controller;
 
 import br.com.pinkgreen.mkt.controller.client.ProductControllerApi;
-import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
-import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
 import br.com.pinkgreen.mkt.controller.util.URL;
 import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
@@ -12,8 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,9 +24,7 @@ import java.util.stream.Collectors;
 public class ProductController implements ProductControllerApi {
 
     private final GetEnabledProductByIdUseCase getEnabledProductByIdUseCase;
-    private final CreateProductUseCase createProductUseCase;
     private final GetAllEnabledProductsUseCase getAllEnabledProductsUseCase;
-    private final UpdateProductUseCase updateProductUseCase;
     private final GetEnabledProductByCategoryIdUseCase getEnabledProductByCategoryIdUseCase;
     private final GetAllEnabledProductsByBrandIdUseCase getAllEnabledProductsByBrandIdUseCase;
     private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
@@ -79,27 +76,5 @@ public class ProductController implements ProductControllerApi {
         return ResponseEntity.ok().body(productsDomain.stream()
                 .map(new ProductMapperImpl()::productDomainToResponse)
                 .collect(Collectors.toList()));
-    }
-
-    @Override
-    @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> createProduct(ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
-        var productDomain = new ProductMapperImpl().productRequestToDomain(productRequest);
-
-        var productCreateDomain = createProductUseCase.execute(productDomain);
-        var uri = uriComponentsBuilder.path("product/{id}").buildAndExpand(productCreateDomain.getId()).toUri();
-
-        return ResponseEntity.created(uri).build();
-    }
-
-    @Override
-    @PutMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<Void> updateProduct(Integer id, ProductUpdateRequest productUpdateRequest) {
-        var productDomain = new ProductMapperImpl().productUpdateRequestToDomain(productUpdateRequest);
-
-        updateProductUseCase.updateProduct(id, productDomain);
-        return ResponseEntity.noContent().build();
     }
 }

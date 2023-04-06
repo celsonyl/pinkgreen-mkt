@@ -6,6 +6,7 @@ import br.com.pinkgreen.mkt.domain.exception.CouldNotCheckoutOrderException;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
+import br.com.pinkgreen.mkt.exception.BrandIsNotAbleToBeDeletedException;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.exception.SkuNotContainedOnOrderException;
 import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
@@ -32,6 +33,14 @@ public class RestExceptionHandler {
             err.addError(x.getField(), x.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+    }
+
+    @ExceptionHandler(BrandIsNotAbleToBeDeletedException.class)
+    public ResponseEntity<StandardError> brandNotAbleToBeDeletedException(HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(StandardError.builder()
+                .message("Você não pode deletar uma marca com produtos ativos/relacionados")
+                .path(request.getRequestURI())
+                .build());
     }
 
     @ExceptionHandler(InvalidCustomerIdException.class)

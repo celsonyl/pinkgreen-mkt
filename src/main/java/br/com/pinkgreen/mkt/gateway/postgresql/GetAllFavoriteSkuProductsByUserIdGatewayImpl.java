@@ -26,7 +26,7 @@ public class GetAllFavoriteSkuProductsByUserIdGatewayImpl implements GetAllFavor
     public List<SkuDomain> execute(String customerId) {
         return repository.findAllByUserId(customerId)
                 .stream()
-                .map(it -> skuRepository.findSkuByCode(it.getSkuCode()))
+                .map(it -> skuRepository.findActiveSkuByCode(it.getSkuCode()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(new SkuProductMapperImpl()::skuDatabaseToDomain)

@@ -1,8 +1,6 @@
 package br.com.pinkgreen.mkt.controller.client;
 
-import br.com.pinkgreen.mkt.controller.model.SkuByProductIdResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuRequest;
-import br.com.pinkgreen.mkt.controller.model.SkuResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuUpdateRequest;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import io.swagger.annotations.*;
@@ -13,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-public interface SkuControllerApi {
+public interface SkuAdministrationControllerApi {
 
     @ApiOperation(value = "Criação de SKU")
     @ApiImplicitParams({
@@ -32,24 +29,6 @@ public interface SkuControllerApi {
     })
     ResponseEntity<Void> createSku(@Valid @RequestBody SkuRequest skuRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException;
 
-    @ApiOperation(value = "Procurando SKU por código")
-    @ApiResponses(value = {
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<SkuResponse> findSku(@PathVariable String code);
-
-    @ApiOperation(value = "Retorna todos SKUs")
-    @ApiResponses(value = {
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<List<SkuResponse>> findAllSkus();
-
     @ApiOperation(value = "Atualizar SKU por code")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
@@ -62,16 +41,6 @@ public interface SkuControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<Void> updateSku(@PathVariable String code, @Valid @RequestBody SkuUpdateRequest skuUpdateRequest);
-
-    @ApiOperation(value = "Procurando todos os SKUs de um produto")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<List<SkuByProductIdResponse>> findAllSkuByProductId(@PathVariable Integer productId);
 
     @ApiOperation(value = "Remover SKU por código")
     @ApiResponses(value = {

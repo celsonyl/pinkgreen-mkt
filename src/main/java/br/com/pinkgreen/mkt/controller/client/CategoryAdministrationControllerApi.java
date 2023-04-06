@@ -15,7 +15,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 @RestController
-public interface CategoryControllerApi {
+public interface CategoryAdministrationControllerApi {
 
     @ApiOperation(value = "Cria uma Categoria de Produto")
     @ApiImplicitParams({
@@ -29,29 +29,6 @@ public interface CategoryControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<Void> createCategory(@Valid @RequestBody CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException;
-
-    @ApiOperation(value = "Lista todas Categorias")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
-            @ApiResponse(code = 400, message = "Requisição mal formatada"),
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<List<CategoryResponse>> listCategories();
-
-    @ApiOperation(value = "Procura uma Categoria por id")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
-            @ApiResponse(code = 400, message = "Requisição mal formatada"),
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 404, message = "Categoria não existe"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<CategoryResponse> findById(@PathVariable Integer id);
 
     @ApiOperation(value = "Deleta uma Categoria por id")
     @ApiResponses(value = {

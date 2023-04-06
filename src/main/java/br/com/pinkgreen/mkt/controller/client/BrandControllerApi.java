@@ -3,6 +3,7 @@ package br.com.pinkgreen.mkt.controller.client;
 import br.com.pinkgreen.mkt.controller.model.BrandRequest;
 import br.com.pinkgreen.mkt.controller.model.BrandResponse;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
+import br.com.pinkgreen.mkt.exception.BrandIsNotAbleToBeDeletedException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,18 +18,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 @RestController
 public interface BrandControllerApi {
-
-    @ApiOperation(value = "Criar marca de Produto")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
-    })
-    @ApiResponses(value = {
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<Void> createBrand(@Valid @RequestBody BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException;
 
     @ApiOperation(value = "Lista todas as marcas")
     @ApiResponses(value = {
@@ -58,5 +47,5 @@ public interface BrandControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<List<BrandResponse>> brandSearch(@RequestParam(value = "text",defaultValue = "") String text);
+    ResponseEntity<List<BrandResponse>> brandSearch(@RequestParam(value = "text", defaultValue = "") String text);
 }

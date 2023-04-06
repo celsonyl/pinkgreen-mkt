@@ -29,7 +29,7 @@ public interface ProductControllerApi {
     })
     ResponseEntity<ProductResponse> findById(@PathVariable Integer id);
 
-    @ApiOperation(value = "Lista todos os produtos")
+    @ApiOperation(value = "Lista todos os produtos ativos")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),
@@ -40,32 +40,7 @@ public interface ProductControllerApi {
     })
     ResponseEntity<List<ProductResponse>> listProducts();
 
-    @ApiOperation(value = "Criação de produto")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
-    })
-    @ApiResponses(value = {
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<Void> createProduct(@Valid @RequestBody ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder);
-
-    @ApiOperation(value = "Atualizar produto")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
-    })
-    @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "No content"),
-            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 422, message = "Erro de validação"),
-            @ApiResponse(code = 500, message = "Erro de servidor"),
-    })
-    ResponseEntity<Void> updateProduct(@PathVariable Integer id, @Valid @RequestBody ProductUpdateRequest productUpdateRequest);
-
-    @ApiOperation(value = "Consulta produto")
+    @ApiOperation(value = "Consulta produto ativo")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token")
     })
@@ -79,7 +54,7 @@ public interface ProductControllerApi {
     })
     ResponseEntity<List<ProductResponse>> searchProduct(@RequestParam(value = "text", defaultValue = "") String text);
 
-    @ApiOperation(value = "Lista todos os produtos por ID de categoria")
+    @ApiOperation(value = "Lista todos os produtos ativos por ID de categoria")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),
@@ -88,7 +63,7 @@ public interface ProductControllerApi {
     })
     ResponseEntity<List<ProductResponse>> findByCategoryId(@PathVariable Integer id);
 
-    @ApiOperation(value = "Lista todos os produtos pelo ID da Marca")
+    @ApiOperation(value = "Lista todos os produtos ativos pelo ID da Marca")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
             @ApiResponse(code = 400, message = "Requisição mal formatada"),
