@@ -7,7 +7,7 @@ import br.com.pinkgreen.mkt.controller.model.SkuUpdateRequest;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
 import br.com.pinkgreen.mkt.gateway.DeleteSkuByCodeGateway;
-import br.com.pinkgreen.mkt.gateway.FindSkuByIdGateway;
+import br.com.pinkgreen.mkt.gateway.FindSkuByCodeGateway;
 import br.com.pinkgreen.mkt.gateway.FindSkusByProductIdGateway;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateSkuProductUseCase;
@@ -36,7 +36,7 @@ public class SkuAdministrationController implements SkuAdministrationControllerA
     private final UpdateSkuUseCase updateSkuUseCase;
     private final DeleteSkuByCodeGateway deleteSkuByCode;
     private final GetAllSkusUseCase getAllSkusUseCase;
-    private final FindSkuByIdGateway findSkuById;
+    private final FindSkuByCodeGateway findSkuByCode;
     private final FindSkusByProductIdGateway findSkusByProductId;
 
     @Override
@@ -84,7 +84,7 @@ public class SkuAdministrationController implements SkuAdministrationControllerA
     @GetMapping(value = "/sku/{code}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<SkuResponse> findByCode(String code) {
-        SkuResponse sku = findSkuById.execute(code)
+        SkuResponse sku = findSkuByCode.execute(code)
                 .map(it -> new SkuProductMapperImpl().skuDomainToResponse(it))
                 .orElseThrow(() -> new ObjectNotFoundException("SKU não encontrado: " + code));
         return ok(sku);

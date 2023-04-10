@@ -4,6 +4,6 @@ import br.com.pinkgreen.mkt.domain.SkuDomain;
 
 import java.util.Optional;
 
-public interface FindSkuByIdGateway {
+public interface FindSkuByCodeGateway {
     Optional<SkuDomain> execute(String code);
 }

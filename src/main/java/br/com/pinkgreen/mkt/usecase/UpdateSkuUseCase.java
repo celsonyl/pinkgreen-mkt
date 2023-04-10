@@ -1,6 +1,8 @@
 package br.com.pinkgreen.mkt.usecase;
 
 import br.com.pinkgreen.mkt.domain.SkuDomain;
+import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
+import br.com.pinkgreen.mkt.gateway.FindSkuByCodeGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.UpdateSkuGatewayImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,10 +12,11 @@ import org.springframework.stereotype.Component;
 public class UpdateSkuUseCase {
 
     private final UpdateSkuGatewayImpl updateSkuGateway;
-    private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase;
+    private final FindSkuByCodeGateway findSkuByCode;
 
     public void updateSku(String code, SkuDomain skuUpdate) {
-        SkuDomain skuDB = getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode(code);
+        SkuDomain skuDB = findSkuByCode.execute(code)
+                .orElseThrow(() -> new ObjectNotFoundException("Sku não encontrado: " + code));
 
         update(skuUpdate, skuDB);
 

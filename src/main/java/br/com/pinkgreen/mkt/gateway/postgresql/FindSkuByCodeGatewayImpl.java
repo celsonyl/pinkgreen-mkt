@@ -1,7 +1,7 @@
 package br.com.pinkgreen.mkt.gateway.postgresql;
 
 import br.com.pinkgreen.mkt.domain.SkuDomain;
-import br.com.pinkgreen.mkt.gateway.FindSkuByIdGateway;
+import br.com.pinkgreen.mkt.gateway.FindSkuByCodeGateway;
 import br.com.pinkgreen.mkt.gateway.postgresql.repository.SkuRepository;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class FindSkuByIdGatewayImpl implements FindSkuByIdGateway {
+public class FindSkuByCodeGatewayImpl implements FindSkuByCodeGateway {
 
     private final SkuRepository repository;
 
