@@ -33,6 +33,10 @@ public class UpdateSkuUseCase {
             skuDB.setActive(skuUpdate.getActive());
         }
 
+        if (skuUpdate.getStockQuantity() != null) {
+            skuDB.setStockQuantity(skuUpdate.getStockQuantity());
+        }
+
         if (skuUpdate.getWidth() != null) {
             skuDB.setWidth(skuUpdate.getWidth());
         }

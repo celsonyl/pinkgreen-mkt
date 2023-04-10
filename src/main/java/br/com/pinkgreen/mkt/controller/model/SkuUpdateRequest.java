@@ -18,6 +18,7 @@ public class SkuUpdateRequest implements Serializable {
     private double length;
     private double weight;
     private Boolean active;
+    private Integer stockQuantity;
     private String mainImageUrl;
     private List<String> urlImages;
     private SkuPriceRequest price;
