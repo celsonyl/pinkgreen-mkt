@@ -42,7 +42,7 @@ public class ProductEvaluationsController implements ProductEvaluationsControlle
 
     @Override
     @PostMapping("/order/{orderId}/product/{skuCode}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Location")
     public ResponseEntity<Void> evaluate(
             Integer orderId,
             String skuCode,

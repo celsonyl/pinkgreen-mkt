@@ -41,7 +41,7 @@ public class SkuAdministrationController implements SkuAdministrationControllerA
 
     @Override
     @PostMapping("/sku")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Location")
     public ResponseEntity<Void> createSku(SkuRequest skuRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var skuDomain = new SkuProductMapperImpl().skuRequestToDomain(skuRequest);
         var createSku = createSkuProductUseCase.execute(skuDomain);

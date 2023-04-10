@@ -38,7 +38,7 @@ public class ProductAdministrationController implements ProductAdministrationCon
 
     @Override
     @PostMapping("/product")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Location")
     public ResponseEntity<Void> createProduct(ProductRequest productRequest, UriComponentsBuilder uriComponentsBuilder) {
         var productDomain = new ProductMapperImpl().productRequestToDomain(productRequest);
 

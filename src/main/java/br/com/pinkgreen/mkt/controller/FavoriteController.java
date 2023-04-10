@@ -71,7 +71,7 @@ public class FavoriteController implements FavoriteControllerApi {
 
     @Override
     @PostMapping("/product/{skuCode}/user/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Location")
     public ResponseEntity<Void> createFavoriteProduct(String userId, String skuCode, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) throws InvalidCustomerIdException, DataIntegrityException {
         getCustomerIdAndValidate((JwtAuthenticationToken) request.getUserPrincipal(), userId);
 

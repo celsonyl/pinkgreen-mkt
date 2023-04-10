@@ -30,7 +30,7 @@ public class BrandAdministrationController implements BrandAdministrationControl
 
     @Override
     @PostMapping("/brand")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Location")
     public ResponseEntity<Void> createBrand(BrandRequest brandRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var brandDomain = new BrandMapperImpl().brandRequestToDomain(brandRequest);
 

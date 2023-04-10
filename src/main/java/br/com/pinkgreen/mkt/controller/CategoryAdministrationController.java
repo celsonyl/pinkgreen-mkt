@@ -29,7 +29,7 @@ public class CategoryAdministrationController implements CategoryAdministrationC
 
     @Override
     @PostMapping("/category")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", exposedHeaders = "Location")
     public ResponseEntity<Void> createCategory(CategoryRequest categoryRequest, UriComponentsBuilder uriComponentsBuilder) throws DataIntegrityException {
         var categoryDomain = new CategoryMapperImpl().categoryRequestToDomain(categoryRequest);
 
