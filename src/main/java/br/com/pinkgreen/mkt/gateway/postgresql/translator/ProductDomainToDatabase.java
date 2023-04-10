@@ -27,6 +27,7 @@ public class ProductDomainToDatabase {
                 .id(productDomain.getId())
                 .name(productDomain.getName())
                 .price(productDomain.getPrice())
+                .mainImageUrl(productDomain.getMainImageUrl())
                 .brand(brandDatabase)
                 .categories(categories)
                 .active(productDomain.getActive()).build();
