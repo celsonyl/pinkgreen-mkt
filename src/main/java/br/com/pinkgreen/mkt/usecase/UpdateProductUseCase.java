@@ -32,5 +32,13 @@ public class UpdateProductUseCase {
         if (productUpdate.getActive() != null) {
             productDB.setActive(productUpdate.getActive());
         }
+
+        if (productUpdate.getBrand() != null) {
+            productDB.setBrand(productUpdate.getBrand());
+        }
+
+        if (productUpdate.getCategories() != null) {
+            productDB.setCategories(productUpdate.getCategories());
+        }
     }
 }
