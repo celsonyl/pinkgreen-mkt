@@ -9,6 +9,7 @@ import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
 import br.com.pinkgreen.mkt.exception.BrandIsNotAbleToBeDeletedException;
 import br.com.pinkgreen.mkt.exception.OrderNotFoundException;
 import br.com.pinkgreen.mkt.exception.SkuNotContainedOnOrderException;
+import br.com.pinkgreen.mkt.exception.SkuOrderEvaluationNotFoundException;
 import br.com.pinkgreen.mkt.usecase.exception.InvalidStatusTransitionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +67,12 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException error, HttpServletRequest request) {
+        var standardError = new StandardError(error.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
+    }
+
+    @ExceptionHandler(SkuOrderEvaluationNotFoundException.class)
+    public ResponseEntity<StandardError> orderEvaluationtNotFound(SkuOrderEvaluationNotFoundException error, HttpServletRequest request) {
         var standardError = new StandardError(error.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
     }
