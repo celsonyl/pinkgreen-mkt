@@ -21,7 +21,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(POST, "/brand-administration/brand").hasAuthority(CREATE_BRAND.toString())
-                .antMatchers(DELETE, "/brand-administration/brand/{id}").permitAll() // TODO: Add permissao
+                .antMatchers(DELETE, "/brand-administration/brand/{id}").hasAuthority(CREATE_BRAND.toString()) // TODO: Add permissao
                 .antMatchers(GET, "/brand").permitAll()
                 .antMatchers(GET, "/brand/search").permitAll()
                 .antMatchers(GET, "/brand/{id}").permitAll()
@@ -30,26 +30,29 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(GET_CUSTOMER_FAVORITE_PRODUCTS.toString())
                 .antMatchers(DELETE, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(DELETE_CUSTOMER_FAVORITE_PRODUCT.toString())
                 .antMatchers(POST, "/category-administration/category").hasAuthority(CREATE_CATEGORY.toString())
-                .antMatchers(DELETE, "/category-administration/category/{id}").permitAll()  // TODO: Add permissao
+                .antMatchers(DELETE, "/category-administration/category/{id}").hasAuthority(CREATE_CATEGORY.toString())  // TODO: Add permissao
                 .antMatchers(GET, "/category").permitAll()
                 .antMatchers(GET, "/category/{id}").permitAll()
                 .antMatchers(POST, "/product-administration/product").hasAuthority(CREATE_PRODUCT.toString())
-                .antMatchers(GET, "/product-administration/product").permitAll() // TODO: Add permissao
+                .antMatchers(GET, "/product-administration/product").hasAuthority(CREATE_PRODUCT.toString()) // TODO: Add permissao
                 .antMatchers(PUT, "/product-administration/product/{id}").hasAuthority(UPDATE_PRODUCT.toString())
-                .antMatchers(DELETE, "/product-administration/product/{id}").permitAll()  // TODO: Add permissao
+                .antMatchers(DELETE, "/product-administration/product/{id}").hasAuthority(CREATE_PRODUCT.toString())  // TODO: Add permissao
+                .antMatchers(GET, "/product-administration/product/{id}").hasAuthority(CREATE_PRODUCT.toString())  // TODO: Add permissao
                 .antMatchers(GET, "/product/{id}").permitAll()
                 .antMatchers(GET, "/product").permitAll()
                 .antMatchers(GET, "/product/search").permitAll()
                 .antMatchers(GET, "/product/category/{id}").permitAll()
                 .antMatchers(GET, "/product/brand/{id}").permitAll()
-                .antMatchers(POST, "/sku").hasAuthority(CREATE_SKU.toString())
                 .antMatchers(POST, "/evaluations/order/{orderId}/product/{skuCode}").hasAuthority(ADD_PRODUCT_EVALUATION.toString())
                 .antMatchers(GET, "/evaluations/order/{orderId}/product/{skuCode}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
                 .antMatchers(GET, "/evaluations/product/{skuCode}").permitAll()
                 .antMatchers(GET, "/evaluations/customer/{customerId}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
                 .antMatchers(GET, "/evaluations/order/{orderId}").hasAuthority(GET_CUSTOMER_PRODUCTS_EVALUATIONS.toString())
+                .antMatchers(POST, "/sku-administration/sku").hasAuthority(CREATE_SKU.toString())
                 .antMatchers(PUT, "/sku-administration/sku/{code}").hasAuthority(UPDATE_SKU.toString())
-                .antMatchers(DELETE, "/sku-administration/sku/{code}").permitAll()  // TODO: Add permissao
+                .antMatchers(DELETE, "/sku-administration/sku/{code}").hasAuthority(CREATE_SKU.toString())  // TODO: Add permissao
+                .antMatchers(GET, "/sku-administration/sku/{code}").hasAuthority(CREATE_SKU.toString())  // TODO: Add permissao
+                .antMatchers(GET, "/sku-administration/sku/product/{id}").hasAuthority(CREATE_SKU.toString())  // TODO: Add permissao
                 .antMatchers(GET, "/sku-administration/sku").hasAuthority(GET_ALL_SKUS.toString())
                 .antMatchers(GET, "/sku/{code}").permitAll()
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()

@@ -61,4 +61,22 @@ public interface SkuAdministrationControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<List<SkuResponse>> findAllSkus();
+
+    @ApiOperation(value = "Procura SKU por código")
+    @ApiResponses(value = {
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<SkuResponse> findByCode(@PathVariable String code);
+
+    @ApiOperation(value = "Retorna SKUs por ID de Produto")
+    @ApiResponses(value = {
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<List<SkuResponse>> findSkusByProductId(@PathVariable Integer id);
 }

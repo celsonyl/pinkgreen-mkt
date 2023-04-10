@@ -7,7 +7,6 @@ import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -64,4 +63,12 @@ public interface ProductAdministrationControllerApi {
     })
     ResponseEntity<List<ProductResponse>> listProducts();
 
+    @ApiOperation(value = "Procura produto por ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
+            @ApiResponse(code = 400, message = "Requisição mal formatada"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<ProductResponse> findProductById(@PathVariable Integer id);
 }

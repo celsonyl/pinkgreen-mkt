@@ -4,8 +4,10 @@ import br.com.pinkgreen.mkt.controller.client.ProductAdministrationControllerApi
 import br.com.pinkgreen.mkt.controller.model.ProductRequest;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductUpdateRequest;
+import br.com.pinkgreen.mkt.domain.exception.ObjectNotFoundException;
 import br.com.pinkgreen.mkt.gateway.DeleteProductByIdGateway;
 import br.com.pinkgreen.mkt.gateway.FindAllProductsGateway;
+import br.com.pinkgreen.mkt.gateway.FindProductByIdGateway;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.CreateProductUseCase;
 import br.com.pinkgreen.mkt.usecase.UpdateProductUseCase;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.noContent;
@@ -34,6 +34,7 @@ public class ProductAdministrationController implements ProductAdministrationCon
     private final UpdateProductUseCase updateProductUseCase;
     private final DeleteProductByIdGateway deleteProductById;
     private final FindAllProductsGateway findAllProducts;
+    private final FindProductByIdGateway findProductByIdGateway;
 
     @Override
     @PostMapping("/product")
@@ -73,5 +74,15 @@ public class ProductAdministrationController implements ProductAdministrationCon
                 .map(it -> new ProductMapperImpl().productDomainToResponse(it))
                 .collect(toList());
         return ok(products);
+    }
+
+    @Override
+    @GetMapping("/product/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<ProductResponse> findProductById(Integer id) {
+        ProductResponse product = findProductByIdGateway.execute(id)
+                .map(it -> new ProductMapperImpl().productDomainToResponse(it))
+                .orElseThrow(() -> new ObjectNotFoundException("Produto não encontrado: " + id));
+        return ok(product);
     }
 }

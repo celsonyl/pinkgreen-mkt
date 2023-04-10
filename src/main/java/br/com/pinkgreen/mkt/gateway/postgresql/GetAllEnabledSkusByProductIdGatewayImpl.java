@@ -21,7 +21,7 @@ public class GetAllEnabledSkusByProductIdGatewayImpl implements GetAllEnabledSku
     public List<SkuDomain> execute(Integer productId) {
         var skuMapper = new SkuProductMapperImpl();
 
-        List<SkuDatabase> skuDatabases = skuRepository.findAllByProductId(productId);
+        List<SkuDatabase> skuDatabases = skuRepository.findAllActiveSkuByProductId(productId);
         return skuDatabases.stream()
                 .map(skuMapper::skuDatabaseToDomain)
                 .collect(Collectors.toList());
