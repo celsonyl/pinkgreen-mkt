@@ -4,16 +4,14 @@ import br.com.pinkgreen.mkt.controller.client.BrandAdministrationControllerApi;
 import br.com.pinkgreen.mkt.controller.model.BrandRequest;
 import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.exception.BrandIsNotAbleToBeDeletedException;
+import br.com.pinkgreen.mkt.gateway.UpdateBrandByIdGateway;
 import br.com.pinkgreen.mkt.translator.BrandMapperImpl;
 import br.com.pinkgreen.mkt.usecase.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import static org.springframework.http.ResponseEntity.noContent;
@@ -27,6 +25,7 @@ public class BrandAdministrationController implements BrandAdministrationControl
 
     private final CreateBrandUseCase createBrandUseCase;
     private final DeleteBrandByIdUseCase deleteBrandById;
+    private final UpdateBrandByIdGateway updateBrandById;
 
     @Override
     @PostMapping("/brand")
@@ -45,6 +44,14 @@ public class BrandAdministrationController implements BrandAdministrationControl
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Void> deleteById(Integer id) throws BrandIsNotAbleToBeDeletedException {
         deleteBrandById.execute(id);
+        return noContent().build();
+    }
+
+    @Override
+    @PutMapping("/brand/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Void> updateById(Integer id, BrandRequest brandRequest) {
+        updateBrandById.execute(id, new BrandMapperImpl().brandRequestToDomain(brandRequest));
         return noContent().build();
     }
 }

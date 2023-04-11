@@ -22,6 +22,7 @@ public class SecurityConfiguration {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(POST, "/brand-administration/brand").hasAuthority(CREATE_BRAND.toString())
                 .antMatchers(DELETE, "/brand-administration/brand/{id}").hasAuthority(CREATE_BRAND.toString()) // TODO: Add permissao
+                .antMatchers(PUT, "/brand-administration/brand/{id}").hasAuthority(CREATE_BRAND.toString()) // TODO: Add permissao
                 .antMatchers(GET, "/brand").permitAll()
                 .antMatchers(GET, "/brand/search").permitAll()
                 .antMatchers(GET, "/brand/{id}").permitAll()
@@ -31,6 +32,7 @@ public class SecurityConfiguration {
                 .antMatchers(DELETE, "/favorite/product/{skuCode}/user/{userId}").hasAuthority(DELETE_CUSTOMER_FAVORITE_PRODUCT.toString())
                 .antMatchers(POST, "/category-administration/category").hasAuthority(CREATE_CATEGORY.toString())
                 .antMatchers(DELETE, "/category-administration/category/{id}").hasAuthority(CREATE_CATEGORY.toString())  // TODO: Add permissao
+                .antMatchers(PUT, "/category-administration/category/{id}").hasAuthority(CREATE_CATEGORY.toString())  // TODO: Add permissao
                 .antMatchers(GET, "/category").permitAll()
                 .antMatchers(GET, "/category/{id}").permitAll()
                 .antMatchers(POST, "/product-administration/product").hasAuthority(CREATE_PRODUCT.toString())
