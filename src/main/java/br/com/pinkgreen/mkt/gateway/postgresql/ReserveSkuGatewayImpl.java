@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 @Component
 @RequiredArgsConstructor
@@ -20,21 +22,17 @@ public class ReserveSkuGatewayImpl implements ReserveSkuGateway {
     public boolean execute(List<ProductOrderDomain> products) {
         var skus = products.parallelStream()
                 .map(product -> skuRepository.findActiveSkuByCode(product.getSkuCode()).orElseThrow())
-                .collect(Collectors.toMap(SkuDatabase::getSkuCode, skuDatabase -> skuDatabase));
+                .collect(toMap(SkuDatabase::getSkuCode, skuDatabase -> skuDatabase));
+
+        if (!skus.values().stream().allMatch(it -> it.getStockQuantity() > 0)) return false;
 
         var skuStockUpdated = products.parallelStream().map(product -> {
             var sku = skus.get(product.getSkuCode());
             sku.setStockQuantity(sku.getStockQuantity() - product.getQuantity());
             return sku;
-        }).collect(Collectors.toList());
+        }).collect(toList());
 
-       var stockAvailable = skuStockUpdated.parallelStream().allMatch(product -> product.getStockQuantity() >= 0);
-
-        if (stockAvailable) {
-            skuRepository.saveAll(skuStockUpdated);
-            return true;
-        } else {
-            return false;
-        }
+        skuRepository.saveAll(skuStockUpdated);
+        return true;
     }
 }

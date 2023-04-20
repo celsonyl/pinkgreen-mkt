@@ -36,6 +36,7 @@ public class CheckoutOrderUseCase {
         var productData = data.getProductList().stream().collect(toMap(CheckoutOrderProductData::getSkuCode, it -> it));
         List<ProductOrderDomain> products = data.getProductList().stream()
                 .map(element -> getEnabledSkuBySkuCodeUseCase.getSkuBySkuCode(element.getSkuCode()))
+                .filter(it -> it.getStockQuantity() > 0)
                 .filter(it -> productData.get(it.getSkuCode()).getPrice().equals(it.getPrice()))
                 .map(it -> new ProductOrderDomain(it, productData.get(it.getSkuCode()).getQuantity()))
                 .collect(toList());
