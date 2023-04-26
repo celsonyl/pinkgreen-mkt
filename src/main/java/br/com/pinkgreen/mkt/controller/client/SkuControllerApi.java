@@ -33,4 +33,15 @@ public interface SkuControllerApi {
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
     ResponseEntity<List<SkuByProductIdResponse>> findAllSkuByProductId(@PathVariable Integer productId);
+
+    @ApiOperation(value = "Lista produtos mais vendidos")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Indica que a requisição foi bem sucedida!"),
+            @ApiResponse(code = 400, message = "Requisição mal formatada"),
+            @ApiResponse(code = 401, message = "Você não possui credenciais válidas para acessar este recurso, portanto será necessário autenticar-se novamente"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 422, message = "Erro de validação"),
+            @ApiResponse(code = 500, message = "Erro de servidor"),
+    })
+    ResponseEntity<List<SkuResponse>> listMostSelledProducts();
 }

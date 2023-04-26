@@ -4,6 +4,7 @@ import br.com.pinkgreen.mkt.controller.client.SkuControllerApi;
 import br.com.pinkgreen.mkt.controller.model.SkuByProductIdResponse;
 import br.com.pinkgreen.mkt.controller.model.SkuResponse;
 import br.com.pinkgreen.mkt.domain.SkuDomain;
+import br.com.pinkgreen.mkt.gateway.GetMostSelledProductsGateway;
 import br.com.pinkgreen.mkt.translator.SkuProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.GetAllEnabledSkusByProductIdUseCase;
 import br.com.pinkgreen.mkt.usecase.GetEnabledSkuBySkuCodeUseCase;
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 @Slf4j
@@ -26,6 +28,7 @@ public class SkuController implements SkuControllerApi {
 
     private final GetEnabledSkuBySkuCodeUseCase getEnabledSkuBySkuCodeUseCase;
     private final GetAllEnabledSkusByProductIdUseCase getAllEnabledSkusByProductIdUseCase;
+    private final GetMostSelledProductsGateway getMostSelledProductsGateway;
 
     @Override
     @GetMapping(value = "/{code}")
@@ -47,6 +50,15 @@ public class SkuController implements SkuControllerApi {
 
         return ResponseEntity.ok().body(skuDomains.stream()
                 .map(skuMapper::skuDomainToSkuByProductIdResponse)
-                .collect(Collectors.toList()));
+                .collect(toList()));
+    }
+
+    @Override
+    @GetMapping("/most-selled")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<SkuResponse>> listMostSelledProducts() {
+        return ResponseEntity.ok().body(getMostSelledProductsGateway.execute().stream()
+                .map(new SkuProductMapperImpl()::skuDomainToResponse)
+                .collect(toList()));
     }
 }

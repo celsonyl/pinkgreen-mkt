@@ -56,6 +56,7 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/sku-administration/sku/{code}").hasAuthority(CREATE_SKU.toString())  // TODO: Add permissao
                 .antMatchers(GET, "/sku-administration/sku/product/{id}").hasAuthority(CREATE_SKU.toString())  // TODO: Add permissao
                 .antMatchers(GET, "/sku-administration/sku").hasAuthority(GET_ALL_SKUS.toString())
+                .antMatchers(GET, "/sku/most-selled").permitAll()
                 .antMatchers(GET, "/sku/{code}").permitAll()
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()
                 .antMatchers(POST, "/order").hasAuthority(CHECKOUT_ORDER.toString())
