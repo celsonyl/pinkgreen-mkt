@@ -2,6 +2,7 @@ package br.com.pinkgreen.mkt.gateway.postgresql.repository;
 
 import br.com.pinkgreen.mkt.gateway.postgresql.model.SkuDatabase;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -43,4 +44,8 @@ public interface SkuRepository extends JpaRepository<SkuDatabase, Integer> {
             "GROUP BY P.\"skuCode\" " +
             "ORDER BY SUM(p.\"quantity\") DESC)", nativeQuery = true)
     List<SkuDatabase> findMostSelled();
+
+    @Modifying
+    @Query(value = "UPDATE PRODUCT_SKU SET STOCK_QUANTITY = STOCK_QUANTITY + :quantity WHERE SKU_CODE = :skuCode", nativeQuery = true)
+    void appendStockQuantityBySkuCode(@Param("skuCode") String code, @Param("quantity") Integer quantity);
 }

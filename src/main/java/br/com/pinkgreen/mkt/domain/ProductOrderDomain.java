@@ -4,6 +4,9 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
 
 @Getter
 @Setter
@@ -40,5 +43,9 @@ public class ProductOrderDomain implements Serializable {
         this.skuAttributes = sku.getSkuAttributes();
         this.product = sku.getProduct();
         this.quantity = quantity;
+    }
+
+    public static Map<String, Integer> getProductInfo(List<ProductOrderDomain> products) {
+        return products.stream().collect(toMap(ProductOrderDomain::getSkuCode, ProductOrderDomain::getQuantity));
     }
 }
