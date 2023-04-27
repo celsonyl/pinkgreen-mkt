@@ -22,7 +22,7 @@ public class ProductRequest implements Serializable {
     private Integer id;
 
     @NotBlank(message = "Field not be null or blank")
-    @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "Name must have between 2 and 50 characters")
     @ApiModelProperty(value = "Nome do Produto", required = true, example = "Samsung Galaxy S21 Cinza")
     private String name;
 

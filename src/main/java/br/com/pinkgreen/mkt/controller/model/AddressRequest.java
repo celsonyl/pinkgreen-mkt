@@ -20,17 +20,17 @@ public class AddressRequest implements Serializable {
     public static final String ZIPCODE_REGEX = "^([0-9]{2}[0-9]{3}-[0-9]{3})$";
 
     @NotBlank(message = "City must not be blank")
-    @Length(min = 2, max = 60, message = "City name must have between 10 and 60 characters")
+    @Length(min = 2, max = 200, message = "City name must have between 10 and 60 characters")
     @ApiModelProperty(value = "Cidade de entrega", required = true, example = "Limeira")
     private String city;
 
     @NotBlank(message = "State must not be blank")
-    @Length(min = 2, max = 50, message = "State must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "State must have between 2 and 50 characters")
     @ApiModelProperty(value = "Estado de entrega", required = true, example = "SP")
     private String state;
 
     @NotBlank(message = "Country must not be blank")
-    @Length(min = 2, max = 50, message = "Country must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "Country must have between 2 and 50 characters")
     @ApiModelProperty(value = "País de entrega", required = true, example = "Brasil")
     private String country;
 
@@ -47,7 +47,7 @@ public class AddressRequest implements Serializable {
     private String zipcode;
 
     @NotBlank(message = "Street must not be blank")
-    @Length(min = 2, max = 60, message = "Street must have between 2 and 60 characters")
+    @Length(min = 2, max = 200, message = "Street must have between 2 and 60 characters")
     @ApiModelProperty(value = "Rua de entrega", required = true, example = "R. Boa Morte")
     private String street;
 

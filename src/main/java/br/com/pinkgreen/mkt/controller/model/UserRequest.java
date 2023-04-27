@@ -21,12 +21,12 @@ public class UserRequest {
     public static final String PHONE_REGEX = "^(?:\\()[0-9]{2}(?:\\))\\s?[0-9]{4,5}(?:-)[0-9]{4}$";
 
     @NotBlank(message = "Name must not be blank")
-    @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "Name must have between 2 and 50 characters")
     @ApiModelProperty(value = "Primeiro nome do cliente", required = true, example = "Elza")
     private String firstName;
 
     @NotBlank(message = "Lastname must not be blank")
-    @Length(min = 2, max = 50, message = "lastname must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "lastname must have between 2 and 50 characters")
     @ApiModelProperty(value = "Sobrenome do cliente", required = true, example = "Luna Rocha")
     private String lastName;
 

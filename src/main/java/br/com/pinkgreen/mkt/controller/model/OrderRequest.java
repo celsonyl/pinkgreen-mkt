@@ -22,7 +22,7 @@ import java.util.List;
 public class OrderRequest implements Serializable {
 
     @NotBlank(message = "CustomerId must not be blank")
-    @Length(min = 2, max = 50, message = "customer must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "customer must have between 2 and 50 characters")
     @ApiModelProperty(value = "Id do usuário", required = true, example = "64b5c9e4-8740-41f6-b66f-279631dff64e")
     private String customerId;
 

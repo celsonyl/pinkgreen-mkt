@@ -27,12 +27,12 @@ public class CustomerRequest implements Serializable {
     private String id;
 
     @NotBlank(message = "Name must not be blank")
-    @Length(min = 2, max = 50, message = "Name must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "Name must have between 2 and 50 characters")
     @ApiModelProperty(value = "Primeiro nome do cliente", required = true, example = "Elza")
     private String name;
 
     @NotBlank(message = "Lastname must not be blank")
-    @Length(min = 2, max = 50, message = "lastname must have between 2 and 50 characters")
+    @Length(min = 2, max = 200, message = "lastname must have between 2 and 50 characters")
     @ApiModelProperty(value = "Sobrenome do cliente", required = true, example = "Luna Rocha")
     private String lastname;
 
