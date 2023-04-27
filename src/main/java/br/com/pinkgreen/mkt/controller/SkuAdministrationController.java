@@ -22,6 +22,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.noContent;
 import static org.springframework.http.ResponseEntity.ok;
@@ -96,6 +97,7 @@ public class SkuAdministrationController implements SkuAdministrationControllerA
     public ResponseEntity<List<SkuResponse>> findSkusByProductId(Integer id) {
         List<SkuResponse> skus = findSkusByProductId.execute(id).stream()
                 .map(it -> new SkuProductMapperImpl().skuDomainToResponse(it))
+                .sorted(comparingInt(SkuResponse::getIndex))
                 .collect(toList());
         return ok(skus);
     }

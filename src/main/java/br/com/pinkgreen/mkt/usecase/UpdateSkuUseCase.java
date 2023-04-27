@@ -56,6 +56,10 @@ public class UpdateSkuUseCase {
             skuDB.setMainImageUrl(skuUpdate.getMainImageUrl());
         }
 
+        if (skuUpdate.getIndex() != null) {
+            skuDB.setIndex(skuUpdate.getIndex());
+        }
+
         if (skuUpdate.getUrlImages() != null) {
             skuDB.setUrlImages(skuUpdate.getUrlImages());
         }

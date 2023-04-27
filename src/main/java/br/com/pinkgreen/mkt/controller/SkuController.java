@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 
 @Component
@@ -50,6 +51,7 @@ public class SkuController implements SkuControllerApi {
 
         return ResponseEntity.ok().body(skuDomains.stream()
                 .map(skuMapper::skuDomainToSkuByProductIdResponse)
+                .sorted(comparingInt(SkuByProductIdResponse::getIndex))
                 .collect(toList()));
     }
 

@@ -24,6 +24,7 @@ public class SkuDomain implements Serializable {
     private Double length;
     private Double weight;
     private String mainImageUrl;
+    private Integer index;
     private List<String> urlImages;
     private SkuPriceDomain price;
     private List<SkuAttributesDomain> skuAttributes;

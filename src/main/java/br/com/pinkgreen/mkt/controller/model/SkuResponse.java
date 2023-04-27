@@ -21,6 +21,7 @@ public class SkuResponse implements Serializable {
     private Double length;
     private Double weight;
     private String mainImageUrl;
+    private Integer index;
     private List<String> urlImages;
     private SkuPriceResponse price;
     private List<SkuAttributesResponse> skuAttributes;

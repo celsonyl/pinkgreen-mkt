@@ -39,6 +39,7 @@ public class SkuByProductIdResponse implements Serializable {
 
     @ApiModelProperty(value = "Caminho da url que contêm a imagem do produto", required = true, example = "http://img.png")
     private String mainImageUrl;
+    private Integer index;
     private List<String> urlImages;
     private SkuPriceResponse price;
     private List<SkuAttributesResponse> skuAttributes;

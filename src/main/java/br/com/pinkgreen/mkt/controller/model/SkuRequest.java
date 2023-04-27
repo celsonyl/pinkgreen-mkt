@@ -49,8 +49,14 @@ public class SkuRequest implements Serializable {
 
     @ApiModelProperty(value = "Estado do SKU", required = true, example = "true")
     private Boolean active = false;
+
     @ApiModelProperty(value = "Caminho da url que contêm a imagem do produto", required = true, example = "http://img.png")
     private String mainImageUrl;
+
+    @PositiveOrZero
+    @ApiModelProperty(value = "Índice do SKU", required = true, example = "1")
+    private Integer index;
+
     private List<String> urlImages;
     private SkuPriceRequest price;
     private List<SkuAttributesRequest> skuAttributes;
