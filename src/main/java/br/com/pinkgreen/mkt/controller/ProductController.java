@@ -39,7 +39,7 @@ public class ProductController implements ProductControllerApi {
     @SneakyThrows
     @Override
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = {"*"})
     public ResponseEntity<ProductResponse> findById(Integer id, String customerId, HttpServletRequest request) {
         JwtAuthenticationToken userPrincipal = (JwtAuthenticationToken) request.getUserPrincipal();
         if (customerId != null && userPrincipal == null) return status(HttpStatus.UNAUTHORIZED).build();
