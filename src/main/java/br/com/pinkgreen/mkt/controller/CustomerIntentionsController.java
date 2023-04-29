@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,6 +26,7 @@ public class CustomerIntentionsController implements CustomerIntentionsControlle
     private final GetProductsFromCustomerIntentions getProductsFromCustomerIntentions;
 
     @Override
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{customerId}")
     public ResponseEntity<List<ProductResponse>> getProdutIntention(String customerId) {
         return ok(getProductsFromCustomerIntentions.execute(customerId).stream()
