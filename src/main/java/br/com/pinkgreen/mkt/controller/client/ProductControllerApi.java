@@ -5,10 +5,8 @@ import br.com.pinkgreen.mkt.domain.exception.DataIntegrityException;
 import br.com.pinkgreen.mkt.domain.exception.InvalidCustomerIdException;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +25,7 @@ public interface ProductControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<ProductResponse> findById(@PathVariable Integer id);
+    ResponseEntity<ProductResponse> findById(@PathVariable Integer id, @RequestHeader(value = "customerId", required = false) String customerId, HttpServletRequest request);
 
     @ApiOperation(value = "Lista todos os produtos ativos")
     @ApiResponses(value = {

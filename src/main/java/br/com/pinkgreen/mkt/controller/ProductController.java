@@ -7,15 +7,22 @@ import br.com.pinkgreen.mkt.domain.ProductDomain;
 import br.com.pinkgreen.mkt.translator.ProductMapperImpl;
 import br.com.pinkgreen.mkt.usecase.*;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static br.com.pinkgreen.mkt.controller.util.VerifyCustomerId.getCustomerIdAndValidate;
+import static org.springframework.http.ResponseEntity.status;
 
 @Component
 @Slf4j
@@ -29,11 +36,15 @@ public class ProductController implements ProductControllerApi {
     private final GetAllEnabledProductsByBrandIdUseCase getAllEnabledProductsByBrandIdUseCase;
     private final SearchEnabledProductsByTextUseCase searchEnabledProductsByTextUseCase;
 
+    @SneakyThrows
     @Override
     @GetMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<ProductResponse> findById(Integer id) {
-        var productDomain = getEnabledProductByIdUseCase.findById(id);
+    public ResponseEntity<ProductResponse> findById(Integer id, String customerId, HttpServletRequest request) {
+        JwtAuthenticationToken userPrincipal = (JwtAuthenticationToken) request.getUserPrincipal();
+        if (customerId != null && userPrincipal == null) return status(HttpStatus.UNAUTHORIZED).build();
+        if (customerId != null) getCustomerIdAndValidate(userPrincipal, customerId);
+        var productDomain = getEnabledProductByIdUseCase.findById(id, customerId);
         return ResponseEntity.ok().body(new ProductMapperImpl().productDomainToResponse(productDomain));
     }
 
