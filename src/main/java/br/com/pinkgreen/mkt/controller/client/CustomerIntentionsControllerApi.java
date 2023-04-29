@@ -1,9 +1,9 @@
 package br.com.pinkgreen.mkt.controller.client;
 
-import br.com.pinkgreen.mkt.controller.model.CategoryResponse;
 import br.com.pinkgreen.mkt.controller.model.ProductResponse;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,6 +24,6 @@ public interface CustomerIntentionsControllerApi {
             @ApiResponse(code = 422, message = "Erro de validação"),
             @ApiResponse(code = 500, message = "Erro de servidor"),
     })
-    ResponseEntity<List<ProductResponse>> getProdutIntention();
+    ResponseEntity<List<ProductResponse>> getProdutIntention(@PathVariable String customerId);
 
 }
