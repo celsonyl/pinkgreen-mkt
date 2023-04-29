@@ -59,7 +59,8 @@ public class SecurityConfiguration {
                 .antMatchers(GET, "/sku/most-selled").permitAll()
                 .antMatchers(GET, "/sku/{code}").permitAll()
                 .antMatchers(GET, "/sku/product_skus/{productId}").permitAll()
-                .antMatchers(GET, "/customer-intentions/{customerId}").hasAuthority(CHECKOUT_ORDER.toString())
+                .antMatchers(GET, "/customer-intentions/{customerId}").hasAuthority(CHECKOUT_ORDER.toString())  // TODO: Add permissao
+                .antMatchers(GET, "/customer-product-access-historical/{customerId}").hasAuthority(CHECKOUT_ORDER.toString())  // TODO: Add permissao
                 .antMatchers(POST, "/order").hasAuthority(CHECKOUT_ORDER.toString())
                 .antMatchers(GET, "/order/customer/{customerId}").hasAuthority(GET_CUSTOMER_ORDERS.toString())
                 .antMatchers(GET, "/order/{orderId}").hasAuthority(GET_CUSTOMER_ORDERS.toString())
