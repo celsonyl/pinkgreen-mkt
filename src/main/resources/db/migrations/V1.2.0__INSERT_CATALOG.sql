@@ -1,33 +1,105 @@
-insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Acer', 'https://i.imgur.com/6wTcxmU.png');
-insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Apple', 'https://i.imgur.com/JdtpxX9.png');
-insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Samsung', 'https://i.imgur.com/OkgdSou.png');
-insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Electrolux', 'https://i.imgur.com/FNvvjre.png');
-insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Esmaltec', 'https://i.imgur.com/xrv55JQ.png');
-insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Xiaomi', 'https://i.imgur.com/7N2QBR1.png');
+insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Acer', 'https://i.imgur.com/6wTcxmU.png'); -- ID: 1
+insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Apple', 'https://i.imgur.com/JdtpxX9.png'); -- ID: 2
+insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Samsung', 'https://i.imgur.com/OkgdSou.png'); -- ID: 3
+insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Electrolux', 'https://i.imgur.com/FNvvjre.png'); -- ID: 4
+insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Esmaltec', 'https://i.imgur.com/xrv55JQ.png'); -- ID: 5
+insert into PRODUCT_BRAND (NAME, BRAND_IMAGE) values ('Xiaomi', 'https://i.imgur.com/7N2QBR1.png'); -- ID: 6
 
-insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Informatica', 'https://i.imgur.com/PchRPP7.png');
-insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Eletrodomésticos', 'https://i.imgur.com/hXDg30e.png');
-insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Celulares e smartphones', 'https://i.imgur.com/m6VyNEE.png');
+insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Informatica', 'https://i.imgur.com/PchRPP7.png'); -- ID: 1
+insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Eletrodomésticos', 'https://i.imgur.com/hXDg30e.png'); -- ID: 2
+insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Celulares e smartphones', 'https://i.imgur.com/m6VyNEE.png'); -- ID: 3
+insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Smart Watches', 'https://i.imgur.com/s5KC2FN.jpg'); -- ID: 4
+insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Áudio', 'https://i.imgur.com/u5RWOh8.jpg'); -- ID: 5
+insert into PRODUCT_CATEGORY (NAME, IMAGE) values ('Eletroportáteis', 'https://i.imgur.com/hXDg30e.png'); -- ID: 6
 
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook Aspire 5', 3099.99, true, 'https://i.imgur.com/ZwzTflF.png', 1);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Galaxy S10e', 2999.00, true, 'https://i.imgur.com/dkR4vDn.png', 3);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Xiaomi MI 9', 1200.0, true, 'https://i.imgur.com/Bcme7Vy.png', 6);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Smart TV Samsung 50"', 2999.00, true, 'https://i.imgur.com/Ic0KAXB.png', 3);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook Samsung Book', 4299.00, true, 'https://i.imgur.com/fzo9SWr.png', 3);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Samsung Galaxy A11', 999.00, true, 'https://i.imgur.com/b6XTUFP.png', 3);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('iPhone 12 Pro Max', 9499.00, true, 'https://i.imgur.com/m6VyNEE.png', 2);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Micro-ondas Electrolux Prata Efficient 23L', 1819.00, true, 'https://i.imgur.com/hXDg30e.png', 4);
-insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Fogão de Piso 4 Bocas', 430.00, true, 'https://i.imgur.com/UGbiTod.png', 5);
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook Aspire 5', 3099.99, true, 'https://i.imgur.com/ZwzTflF.png', 1); -- ID: 1
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Galaxy S10e', 2999.00, true, 'https://i.imgur.com/dkR4vDn.png', 3); -- ID: 2
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Xiaomi MI 9', 1200.0, true, 'https://i.imgur.com/Bcme7Vy.png', 6); -- ID: 3
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Smart TV Samsung 50"', 2999.00, true, 'https://i.imgur.com/Ic0KAXB.png', 3); -- ID: 4
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook Samsung Book', 4299.00, true, 'https://i.imgur.com/fzo9SWr.png', 3); -- ID: 5
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Samsung Galaxy A11', 999.00, true, 'https://i.imgur.com/b6XTUFP.png', 3); -- ID: 6
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('iPhone 12 Pro Max', 9499.00, true, 'https://i.imgur.com/m6VyNEE.png', 2); -- ID: 7
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Micro-ondas Electrolux Prata Efficient 23L', 1819.00, true, 'https://i.imgur.com/hXDg30e.png', 4); -- ID: 8
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Fogão de Piso 4 Bocas', 430.00, true, 'https://i.imgur.com/UGbiTod.png', 5); -- ID: 9
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Celular genérico 1', 1000.00, true, 'https://i.imgur.com/LkVgmMc.jpg', 2); -- ID: 10
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Celular genérico 2', 2000.00, true, 'https://i.imgur.com/XPlfWag.jpg', 2); -- ID: 11
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Celular genérico 3', 3000.00, true, 'https://i.imgur.com/c4loPSt.jpg', 2); -- ID: 12
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Celular genérico 4', 4000.00, true, 'https://i.imgur.com/ocXPyPw.jpg', 2); -- ID: 13
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Celular genérico 5', 5000.00, true, 'https://i.imgur.com/x7ykrn9.jpg', 2); -- ID: 14
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook genérico 1', 1000.00, true, 'https://i.imgur.com/w7BEpcK.jpg', 1); -- ID: 15
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook genérico 2', 2000.00, true, 'https://i.imgur.com/9i03jS9.jpg', 1); -- ID: 16
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook genérico 3', 3000.00, true, 'https://i.imgur.com/CjdB1VB.jpg', 1); -- ID: 17
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook genérico 4', 4000.00, true, 'https://i.imgur.com/FZGkoIE.jpg', 1); -- ID: 18
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Notebook genérico 5', 5000.00, true, 'https://i.imgur.com/ULBL1sq.jpg', 1); -- ID: 19
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Apple Watch Series 8', 5000.00, true, 'https://i.imgur.com/s5KC2FN.jpg', 2); -- ID: 20
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Apple Watch SE 2ª geração', 4000.00, true, 'https://i.imgur.com/pij9CJc.jpg', 2); -- ID: 21
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Samsung Galaxy Watch 5', 1600.00, true, 'https://i.imgur.com/ZX70Kxv.jpg', 3); -- ID: 22
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Samsung Galaxy Watch 4', 1800.00, true, 'https://i.imgur.com/eBsoewh.jpg', 3); -- ID: 23
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Samsung Galaxy Watch 3', 2000.00, true, 'https://i.imgur.com/7qUF1Yz.jpg', 3); -- ID: 24
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Xiaomi Band 7', 500.00, true, 'https://i.imgur.com/rEI7wfK.jpg', 6); -- ID: 25
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Xiaomi Band 6', 450.00, true, 'https://i.imgur.com/06VGKjc.jpg', 6); -- ID: 26
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Xiaomi Band 5', 400.00, true, 'https://i.imgur.com/YI6Nu62.jpg', 6); -- ID: 27
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Xiaomi Air Dots 2', 100.00, true, 'https://i.imgur.com/u5RWOh8.jpg', 6); -- ID: 28
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Xiaomi Air Dots 3', 200.00, true, 'https://i.imgur.com/CvdTQ4Q.jpg', 6); -- ID: 29
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Apple Air Pods', 800.00, true, 'https://i.imgur.com/5hnWdx8.jpg', 2); -- ID: 30
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Samsung Galaxy Buds 2', 400.00, true, 'https://i.imgur.com/SUEBItc.jpg', 3); -- ID: 31
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Samsung Galaxy Buds 2 Pro', 1200.00, true, 'https://i.imgur.com/QK4FAZK.jpg', 3); -- ID: 32
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Liquidificador Electrolux Expert 1200w', 700.00, true, 'https://i.imgur.com/WwsIZDg.jpg', 4); -- ID: 33
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Aspirador de pó Electrolux PowerSpeed 1000w', 200.00, true, 'https://i.imgur.com/nEKSHin.jpg', 4); -- ID: 34
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Purificador de água Electrolux Pure', 800.00, true, 'https://i.imgur.com/er8O7Zq.jpg', 4); -- ID: 35
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Robô Aspirador Elétrico Robot Mop 3C', 4000.00, true, 'https://i.imgur.com/kLrsKva.jpg', 4); -- ID: 36
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Robô Aspirador Automático Anti-Enrolamento de Fios e Pelos', 6000.00, true, 'https://i.imgur.com/RgwxjZW.jpg', 4); -- ID: 37
+insert into PRODUCT (NAME, PRICE, ACTIVE, MAIN_IMAGE_URL, PRODUCT_BRAND_ID) values ('Lavadora e Secadora Samsung WD17T 17KG 110V', 6000.00, true, 'https://i.imgur.com/MYEDw1I.jpg', 3); -- ID: 38
 
+-- Informática
 insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (1, 1);
-insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (2, 3);
-insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (3, 3);
-insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (4, 2);
 insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (5, 1);
-insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (6, 3);
-insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (7, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (15, 1);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (16, 1);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (17, 1);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (18, 1);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (19, 1);
+
+-- Eletrodomésticos
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (4, 2);
 insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (8, 2);
 insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (9, 2);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (38, 2);
+
+-- Celulares e smartphones
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (2, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (3, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (6, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (7, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (10, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (11, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (12, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (13, 3);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (14, 3);
+
+-- Smart Watches
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (20, 4);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (21, 4);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (22, 4);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (23, 4);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (24, 4);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (25, 4);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (26, 4);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (27, 4);
+
+-- Audio
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (28, 5);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (29, 5);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (30, 5);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (31, 5);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (32, 5);
+
+-- Eletroportáteis
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (33, 6);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (34, 6);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (35, 6);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (36, 6);
+insert into PRODUCT_CATEGORIES (PRODUCT_ID, CATEGORY_ID) values (37, 6);
 
 insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (1, 'https://i.imgur.com/ZwzTflF.png', 'Notebook Aspire 5 - Intel Core i3 - 4GB RAM 256GB SSD','{"endDate": 1661996659.2356095, "listPrice": 3099.99, "salePrice": 2479.99, "startDate": 1661219059.2356095}', '[{"type": "cpu", "label": "Processador", "value": "Intel® Core™ i3"}, {"type": "gpu", "label": "Placa de vídeo", "value": "Intel® UHD Graphics de 10th"}, {"type": "memory", "label": "Memória RAM", "value": "4GB"}, {"type": "ssd", "label": "Capacidade do SSD", "value": "256 GB"}, {"type": "os", "label": "Sistema operacional", "value": "Windows 10 Home 32-bit"}, {"type": "screenSize", "label": "Tamanho da Tela", "value": "15,6”"}, {"type": "keyboard", "label": "Teclado", "value": "Português do Brasil no padrão ABNT 2"}, {"type": "observation", "label": "Observação", "value": "Este produto não possui leitor de CD/DVD<br>GPU e CPU são soldadas na máquina."}, {"type": "included", "label": "Conteúdo da Embalagem", "value": "Notebook Acer Aspire 5<br>Fonte carregadora do notebook<br>Manual em português<br>Termo de garantia"}]', 'acer-aspire-5-core-i3-256gb-4gb-ram', 10, '["https://i.imgur.com/dywTwwz.png", "https://i.imgur.com/NUHgUIM.png", "https://i.imgur.com/8twbuLG.png", "https://i.imgur.com/5YKqfAN.png"]', 1800, 1.79, 36.34, 25.05, true, 1);
 insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (1, 'https://i.imgur.com/ZwzTflF.png', 'Notebook Aspire 5 - Intel Core i5 - 8GB RAM 256GB SSD', '{"endDate": 1623726000, "listPrice": 3799.00, "salePrice": 2759.08, "startDate": 1623726000}', '[{"type": "cpu", "label": "Processador", "value": "Intel® Core™ i5"}, {"type": "gpu", "label": "Placa de vídeo", "value": "Intel® UHD Graphics de 10th"}, {"type": "memory", "label": "Memória RAM", "value": "8GB"}, {"type": "ssd", "label": "Capacidade do SSD", "value": "256GB"}, {"type": "os", "label": "Sistema operacional", "value": "Windows 10 Home 64-bit"}, {"type": "screenSize", "label": "Tamanho da Tela", "value": "15,6”"}, {"type": "keyboard", "label": "Teclado", "value": "Português do Brasil no padrão ABNT 2"}, {"type": "observation", "label": "Observação", "value": "Este produto não possui leitor de CD/DVD<br>GPU e CPU são soldadas na máquina."}, {"type": "included", "label": "Conteúdo da Embalagem", "value": "Notebook Acer Aspire 5<br>Fonte carregadora do notebook<br>Manual em português<br>Termo de garantia"}]', 'acer-aspire-5-core-i5-256gb-8gb-ram', 10, '["https://i.imgur.com/dywTwwz.png", "https://i.imgur.com/NUHgUIM.png", "https://i.imgur.com/8twbuLG.png", "https://i.imgur.com/5YKqfAN.png"]', 1800, 1.79, 36.34, 25.05, true, 2);
@@ -44,3 +116,61 @@ insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES
 insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (8, 'https://i.imgur.com/hXDg30e.png', 'Micro-ondas Electrolux Prata Efficient - 23L 110V', '{"endDate": 1661391855.383617, "listPrice": 1819.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[{"type": "type", "label": "Tipo", "value": "Micro-ondas de Bancada"}, {"type": "features", "label": "Funções", "value": "Derreter.<br>Desidratar.<br>Cozinhar Rápido.<br>Cozinhar Delicado"}, {"type": "capacity", "label": "Capacidade", "value": "23L"}, {"type": "power", "label": "Potência", "value": "1100W"}, {"type": "voltage", "label": "Voltagem", "value": "110V"}, {"type": "included", "label": "Conteúdo da Embalagem", "value": "- 1 Micro-ondas"}]', 'elektrolux-micro-ondas-prata-efficient-23l-110v', 10, '["https://i.imgur.com/EdLbaDC.png", "https://imgur.com/InVwysg.png", "https://i.imgur.com/UjaGvHa.png", "https://i.imgur.com/aSBCLvE.png", "https://i.imgur.com/9UTm245.png"]', 1150, 29, 46.1, 35.2, true, 1);
 insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (8, 'https://i.imgur.com/hXDg30e.png', 'Micro-ondas Electrolux Prata Efficient - 23L 220V', '{"endDate": 1661391855.383617, "listPrice": 1819.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[{"type": "type", "label": "Tipo", "value": "Micro-ondas de Bancada"}, {"type": "features", "label": "Funções", "value": "Derreter.<br>Desidratar.<br>Cozinhar Rápido.<br>Cozinhar Delicado"}, {"type": "capacity", "label": "Capacidade", "value": "23L"}, {"type": "power", "label": "Potência", "value": "1100W"}, {"type": "voltage", "label": "Voltagem", "value": "220V"}, {"type": "included", "label": "Conteúdo da Embalagem", "value": "- 1 Micro-ondas"}]', 'elektrolux-micro-ondas-prata-efficient-23l-220v', 5, '["https://i.imgur.com/EdLbaDC.png", "https://imgur.com/InVwysg.png", "https://i.imgur.com/UjaGvHa.png", "https://i.imgur.com/aSBCLvE.png", "https://i.imgur.com/9UTm245.png"]', 1150, 29, 46.1, 35.2, true, 2);
 insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (9, 'https://i.imgur.com/UGbiTod.png', 'Fogão de Piso 4 Bocas Esmaltec', '{"endDate": 1661391855.383617, "listPrice": 430.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[{"type": "material", "label": "Material", "value": "Aço"}, {"type": "tableMaterial", "label": "Material da mesa", "value": "Vidro temperado"}, {"type": "type", "label": "Tipo", "value": "Piso"}, {"type": "stoveBurnerQtd", "label": "Quantidade de bocas", "value": "4"}, {"type": "typeOfFuel", "label": "Alimentação", "value": "A Gás GLP"}, {"type": "ovenSize", "label": "Capacidade do forno", "value": "53,2L"}, {"type": "ovenTempeture", "label": "Temperatura do forno", "value": "160°C a 270°C"}, {"type": "power", "label": "Potência", "value": "9,6kW"}, {"type": "voltage", "label": "Voltagem", "value": "Bivolt"}, {"type": "included", "label": "Conteúdo da Embalagem", "value": "- 1 Fogão"}]', 'esmaltec-fogao-de-piso-4-bocas-preto', 10, '["https://i.imgur.com/yjW2gU6.png", "https://i.imgur.com/nscWWmo.png", "https://i.imgur.com/QdLLUEt.png", "https://i.imgur.com/7zAceyi.png"]', 2130, 88, 51, 57.3, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (10, 'https://i.imgur.com/LkVgmMc.jpg', 'Celular genérico 1 - 64GB Preto', '{"endDate": 1661391855.383617, "listPrice": 1000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'celular-generico-1-64gb-preto', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (11, 'https://i.imgur.com/XPlfWag.jpg', 'Celular genérico 2 - 64GB Preto', '{"endDate": 1661391855.383617, "listPrice": 2000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'celular-generico-2-64gb-preto', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (12, 'https://i.imgur.com/c4loPSt.jpg', 'Celular genérico 3 - 64GB Preto', '{"endDate": 1661391855.383617, "listPrice": 3000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'celular-generico-3-64gb-preto', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (13, 'https://i.imgur.com/ocXPyPw.jpg', 'Celular genérico 4 - 64GB Preto', '{"endDate": 1661391855.383617, "listPrice": 4000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'celular-generico-4-64gb-preto', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (14, 'https://i.imgur.com/x7ykrn9.jpg', 'Celular genérico 5 - 64GB Preto', '{"endDate": 1661391855.383617, "listPrice": 5000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'celular-generico-5-64gb-preto', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (15, 'https://i.imgur.com/w7BEpcK.jpg', 'Notebook genérico 1 - 2GB RAM 512GB', '{"endDate": 1661391855.383617, "listPrice": 1000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'notebook-generico-1-512gb-2gb-ram', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (16, 'https://i.imgur.com/9i03jS9.jpg', 'Notebook genérico 2 - 4GB RAM 512GB', '{"endDate": 1661391855.383617, "listPrice": 2000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'notebook-generico-2-512gb-4gb-ram', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (17, 'https://i.imgur.com/CjdB1VB.jpg', 'Notebook genérico 3 - 8GB RAM 512GB', '{"endDate": 1661391855.383617, "listPrice": 3000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'notebook-generico-3-512gb-8gb-ram', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (18, 'https://i.imgur.com/FZGkoIE.jpg', 'Notebook genérico 4 - 16GB RAM 512GB', '{"endDate": 1661391855.383617, "listPrice": 4000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'notebook-generico-4-512gb-16gb-ram', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (19, 'https://i.imgur.com/ULBL1sq.jpg', 'Notebook genérico 5 - 32GB RAM 512GB', '{"endDate": 1661391855.383617, "listPrice": 5000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'notebook-generico-5-512gb-32gb-ram', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (20, 'https://i.imgur.com/s5KC2FN.jpg', 'Apple Watch Series 8', '{"endDate": 1661391855.383617, "listPrice": 5000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'apple-watch-8', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (21, 'https://i.imgur.com/pij9CJc.jpg', 'Apple Watch SE 2ª geração', '{"endDate": 1661391855.383617, "listPrice": 4000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'apple-watch-se-2', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (22, 'https://i.imgur.com/ZX70Kxv.jpg', 'Samsung Galaxy Watch 5', '{"endDate": 1661391855.383617, "listPrice": 1600.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'samsung-galaxy-watch-5', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (23, 'https://i.imgur.com/eBsoewh.jpg', 'Samsung Galaxy Watch 4', '{"endDate": 1661391855.383617, "listPrice": 1800.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'samsung-galaxy-watch-4', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (24, 'https://i.imgur.com/7qUF1Yz.jpg', 'Samsung Galaxy Watch 3', '{"endDate": 1661391855.383617, "listPrice": 2000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'samsung-galaxy-watch-3', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (25, 'https://i.imgur.com/rEI7wfK.jpg', 'Xiaomi Band 7', '{"endDate": 1661391855.383617, "listPrice": 500.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'xiaomi-band-7', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (26, 'https://i.imgur.com/06VGKjc.jpg', 'Xiaomi Band 6', '{"endDate": 1661391855.383617, "listPrice": 450.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'xiaomi-band-6', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (27, 'https://i.imgur.com/YI6Nu62.jpg', 'Xiaomi Band 5', '{"endDate": 1661391855.383617, "listPrice": 400.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'xiaomi-band-5', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (28, 'https://i.imgur.com/u5RWOh8.jpg', 'Xiaomi Air Dots 2', '{"endDate": 1661391855.383617, "listPrice": 100.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'xiaomi-air-dots-2', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (29, 'https://i.imgur.com/CvdTQ4Q.jpg', 'Xiaomi Air Dots 3', '{"endDate": 1661391855.383617, "listPrice": 200.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'xiaomi-air-dots-3', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (30, 'https://i.imgur.com/5hnWdx8.jpg', 'Apple Air Pods', '{"endDate": 1661391855.383617, "listPrice": 800.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'apple-air-pods', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (31, 'https://i.imgur.com/SUEBItc.jpg', 'Samsung Galaxy Buds 2', '{"endDate": 1661391855.383617, "listPrice": 400.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'samsung-galaxy-buds-2', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (32, 'https://i.imgur.com/QK4FAZK.jpg', 'Samsung Galaxy Buds 2 Pro', '{"endDate": 1661391855.383617, "listPrice": 1200.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'samsung-galaxy-buds-2-pro', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (33, 'https://i.imgur.com/WwsIZDg.jpg', 'Liquidificador Electrolux Expert 1200w', '{"endDate": 1661391855.383617, "listPrice": 700.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'electrolux-liquidificador-expert-1200w', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (34, 'https://i.imgur.com/nEKSHin.jpg', 'Aspirador de pó Electrolux PowerSpeed 1000w', '{"endDate": 1661391855.383617, "listPrice": 200.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'electrolux-aspirador-de-po-powerspeed-1000w', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (35, 'https://i.imgur.com/er8O7Zq.jpg', 'Purificador de água Electrolux Pure', '{"endDate": 1661391855.383617, "listPrice": 800.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'electrolux-purificador-de-agua-pure', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (36, 'https://i.imgur.com/kLrsKva.jpg', 'Robô Aspirador Elétrico Robot Mop 3C', '{"endDate": 1661391855.383617, "listPrice": 4000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'xiaomi-robo-aspirador-robot-mop-3c', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (37, 'https://i.imgur.com/RgwxjZW.jpg', 'Robô Aspirador Automático Anti-Enrolamento de Fios e Pelos', '{"endDate": 1661391855.383617, "listPrice": 6000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'xiaomi-robo-aspirador-anti-enrolamento-de-fios', 10, '[]', 1, 1, 1, 1, true, 1);
+
+insert into PRODUCT_SKU (PRODUCT_ID, MAIN_IMAGE_URL, NAME, PRICE, SKU_ATTRIBUTES, SKU_CODE, STOCK_QUANTITY, URL_IMAGES, WEIGHT, HEIGHT, LENGTH, WIDTH, ACTIVE, INDEX) values (38, 'https://i.imgur.com/MYEDw1I.jpg', 'Lavadora e Secadora Samsung WD17T 17KG 110V', '{"endDate": 1661391855.383617, "listPrice": 6000.00, "salePrice": 0.0, "startDate": 1661391855.383617}', '[]', 'samsung-lava-e-seca-wd17t-17kg-110v', 10, '[]', 1, 1, 1, 1, true, 1);
