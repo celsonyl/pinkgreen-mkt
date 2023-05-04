@@ -38,11 +38,10 @@ public interface SkuRepository extends JpaRepository<SkuDatabase, Integer> {
                     "AND P.ACTIVE = true", nativeQuery = true)
     List<SkuDatabase> findAllActiveSkuByProductId(@Param("productId") Integer productId);
 
-    @Query(value = "SELECT * FROM PRODUCT_SKU PS WHERE PS.SKU_CODE IN (" +
-            "SELECT P.\"skuCode\" FROM ORDERS O " +
+    @Query(value = "SELECT * FROM PRODUCT_SKU PS INNER JOIN (" +
+            "SELECT P.\"skuCode\" AS SKU_CODE, SUM(P.\"quantity\") AS QUANTITY FROM ORDERS O " +
             "JOIN LATERAL jsonb_to_recordset(O.PRODUCT_LIST) AS P(\"skuCode\" TEXT, \"quantity\" INTEGER) ON TRUE " +
-            "GROUP BY P.\"skuCode\" " +
-            "ORDER BY SUM(p.\"quantity\") DESC)", nativeQuery = true)
+            "GROUP BY P.\"skuCode\") AS SKU ON PS.SKU_CODE = SKU.SKU_CODE ORDER BY SKU.QUANTITY DESC", nativeQuery = true)
     List<SkuDatabase> findMostSelled();
 
     @Modifying
